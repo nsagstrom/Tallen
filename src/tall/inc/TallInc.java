@@ -17,6 +17,7 @@ public class TallInc {
         // TODO code application logic here
         //HEJ TALLINC
         //aaa
+        //All makt åt tengil
     }
     
 }
