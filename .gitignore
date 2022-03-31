@@ -41,3 +41,13 @@ build/
 # virtual machine crash logs
 
 hs_err_pid*
+
+
+
+# Mobile Tools for Java (J2ME)
+
+.mtj.tmp/
+build/built-jar.properties
+build/built-jar.properties
+*.properties
+build/built-jar.properties
