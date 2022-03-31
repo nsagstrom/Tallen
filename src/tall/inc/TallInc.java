@@ -31,6 +31,7 @@ public class TallInc {
         //uiagtr
         //asa
         //KAI
+        //Hej ala nu er jak her
     }
     
 }
