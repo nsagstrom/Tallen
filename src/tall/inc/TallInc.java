@@ -20,6 +20,7 @@ public class TallInc {
         //All makt åt tengil
         //Hello Estland
         //Hello World
+        // Vår befriare
     }
     
 }
