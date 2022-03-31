@@ -32,6 +32,7 @@ public class TallInc {
         //asa
         //KAI
         //Hej ala nu er jak her
+        // Hej igen eheh
     }
     
 }
