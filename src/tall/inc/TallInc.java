@@ -23,6 +23,7 @@ public class TallInc {
         // Vår befriare
         // eeee
         //Djuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+        //Det går aldrig
     }
     
 }
