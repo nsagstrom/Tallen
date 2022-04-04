@@ -4,17 +4,26 @@
  */
 package tall.inc;
 
+import oru.inf.InfDB;
+
 /**
  *
  * @author gewe_
  */
 public class Startsida extends javax.swing.JFrame {
 
+    private final InfDB idb;
+
     /**
      * Creates new form Startsida
      */
-    public Startsida() {
+    public Startsida(InfDB idb) {
         initComponents();
+        this.idb = idb;
+    }
+
+    private Startsida() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -39,12 +48,32 @@ public class Startsida extends javax.swing.JFrame {
         lblValkommen.setText("Välkommen!");
 
         btnSkapaNyOrder.setText("Skapa ny order");
+        btnSkapaNyOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkapaNyOrderActionPerformed(evt);
+            }
+        });
 
         btnLoggaUt.setText("Logga ut");
+        btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoggaUtActionPerformed(evt);
+            }
+        });
 
         btnSeOrderStatus.setText("Se orderstatus");
+        btnSeOrderStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeOrderStatusActionPerformed(evt);
+            }
+        });
 
         btnSokArtikel.setText("Sök artikel");
+        btnSokArtikel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokArtikelActionPerformed(evt);
+            }
+        });
 
         btnSkapaNyArtikel.setText("Skapa ny artikel");
 
@@ -99,6 +128,23 @@ public class Startsida extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSkapaNyOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNyOrderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSkapaNyOrderActionPerformed
+
+    private void btnSeOrderStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeOrderStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeOrderStatusActionPerformed
+
+    private void btnSokArtikelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokArtikelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSokArtikelActionPerformed
+
+    private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
+   new Inloggningssida(idb).setVisible(true);
+        dispose();
+         }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     /**
      * @param args the command line arguments
