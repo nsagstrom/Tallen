@@ -1,6 +1,5 @@
 package tall.inc;
 
-
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
@@ -10,7 +9,6 @@ import oru.inf.InfException;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author patrickkreek
@@ -18,7 +16,7 @@ import oru.inf.InfException;
 public class Inloggningssida extends javax.swing.JFrame {
 
     private static InfDB idb;
-    
+
     /**
      * Creates new form Inloggningssida
      */
@@ -144,17 +142,24 @@ public class Inloggningssida extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loggaIn() {
+        String anvandarNamn = txtInloggAnvandare.getText();
+        String losenordet = new String(pswInloggLosen.getPassword());
+    }
+
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-        
+
+        if (okUppgifter()) {
+        }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     private void pswInloggLosenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswInloggLosenKeyPressed
-       //Gör att man kan klicka på enter för att logga in
+        //Gör att man kan klicka på enter för att logga in
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
             btnLoggaIn.doClick();
         }
-       
+
     }//GEN-LAST:event_pswInloggLosenKeyPressed
 
     private void txtInloggAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInloggAnvandareActionPerformed
@@ -164,6 +169,21 @@ public class Inloggningssida extends javax.swing.JFrame {
     private void pswInloggLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswInloggLosenActionPerformed
         // Textruta för lösenord
     }//GEN-LAST:event_pswInloggLosenActionPerformed
+
+    private boolean okUppgifter() {
+        boolean ok = true;
+        if (!ValideringsKlass.txtFaltHarVarde(txtInloggAnvandare)) {
+            ok = false;
+            JOptionPane.showMessageDialog(null, "Ange användarnamn");
+            txtInloggAnvandare.requestFocus();
+        } else if (!ValideringsKlass.txtFaltHarVarde(pswInloggLosen)) {
+            ok = false;
+            JOptionPane.showMessageDialog(null, "Ange lösenord");
+            pswInloggLosen.requestFocus();
+        }
+
+        return ok;
+    }
 
     /**
      * @param args the command line arguments
