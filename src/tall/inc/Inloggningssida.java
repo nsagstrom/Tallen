@@ -144,8 +144,13 @@ public class Inloggningssida extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
+    private void loggaIn(){
         
+    }
+    
+    private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
+                if(okUppgifter()){
+                }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     private void pswInloggLosenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswInloggLosenKeyPressed
@@ -165,6 +170,20 @@ public class Inloggningssida extends javax.swing.JFrame {
         // Textruta för lösenord
     }//GEN-LAST:event_pswInloggLosenActionPerformed
 
+    private boolean okUppgifter(){
+        boolean ok = true;
+        if(!ValideringsKlass.txtFaltHarVarde(txtInloggAnvandare)){
+            ok = false;
+            JOptionPane.showMessageDialog(null, "Ange användarnamn");
+            txtInloggAnvandare.requestFocus();
+        } else if(!ValideringsKlass.txtFaltHarVarde(pswInloggLosen)){
+            ok = false;
+            JOptionPane.showMessageDialog(null, "Ange lösenord");
+            pswInloggLosen.requestFocus();
+        }
+        
+        return ok;
+    }
     /**
      * @param args the command line arguments
      */
