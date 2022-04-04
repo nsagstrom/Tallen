@@ -13,7 +13,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author noahjarvback
+ * @author patrickkreek
  */
 public class Inloggningssida extends javax.swing.JFrame {
 
@@ -149,7 +149,7 @@ public class Inloggningssida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     private void pswInloggLosenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswInloggLosenKeyPressed
-       //GÃ¶r att man kan klicka pÃ¥ enter fÃ¶r att logga in nÃ¤r man Ã¤r i lÃ¶senordsfÃ¤ltet
+       //Gör att man kan klicka på enter för att logga in
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
             btnLoggaIn.doClick();
@@ -158,11 +158,11 @@ public class Inloggningssida extends javax.swing.JFrame {
     }//GEN-LAST:event_pswInloggLosenKeyPressed
 
     private void txtInloggAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInloggAnvandareActionPerformed
-        // Textruta fÃ¶r anvÃ¤ndare
+        // Textruta för användare
     }//GEN-LAST:event_txtInloggAnvandareActionPerformed
 
     private void pswInloggLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswInloggLosenActionPerformed
-        // Textruta fÃ¶r lÃ¶senord
+        // Textruta för lösenord
     }//GEN-LAST:event_pswInloggLosenActionPerformed
 
     /**
