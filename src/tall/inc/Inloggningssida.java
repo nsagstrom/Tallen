@@ -145,11 +145,13 @@ public class Inloggningssida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loggaIn(){
-        
+        String anvandarNamn = txtInloggAnvandare.getText();
+        String losenordet = new String(pswInloggLosen.getPassword());  
     }
     
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-                if(okUppgifter()){
+      
+        if(okUppgifter()){
                 }
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
