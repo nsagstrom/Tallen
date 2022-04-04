@@ -19,6 +19,7 @@ public class Start {
     public static void main(String[] args) {
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
+            new Inloggningssida(idb).setVisible(true);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -26,9 +27,6 @@ public class Start {
         //Anropar metoden i klassen SqlFragor f√∂r att tilldela referensen till databasen
         //Alla v√•ra SQL-fr√•gor behandlas av klassen SqlFragor
         SqlFragor.setDatabas(idb);
-        
-        //KOD F÷R ATT STARTA F÷NSTER HƒR
-        JOptionPane.showMessageDialog(null, "hej");
-        
+                
     }
 }

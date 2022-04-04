@@ -166,5 +166,21 @@ public class SqlFragor {
         }
         return lyckades;
     }
+    /**
+     * Hämtar nästa tillgängliga ID
+     * @param tabell
+     * @param kolumn
+     * @return 
+     */
+    public static String nyID(String tabell, String kolumn) {
+
+        String svar = "";
+        try {
+            svar = idb.getAutoIncrement(tabell, kolumn);
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "JÄVLA PAPPSKALLE8");
+        }
+        return svar;
+    }
     
 }
