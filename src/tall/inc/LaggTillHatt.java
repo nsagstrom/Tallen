@@ -94,14 +94,20 @@ public class LaggTillHatt extends javax.swing.JFrame {
 
     private void skapaHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skapaHattBtnActionPerformed
         // TODO add your handling code here:
-        String hattID = SqlFragor.nyID("standardhatt", "HattID");
+
+
+        String hattID = SqlFragor.nyID("hatt", "HattID");
+        System.out.println(hattID);
+        String anvandarID = Startsida.getAnvandare();
+        
+        String namn = namnTextField.getText();
 
         String tyg = tygCmb.getSelectedItem().toString();
         String tygQuery = "Select tygID From tyg where namn = '" + tyg + "'";
         String tygID = SqlFragor.getEttVarde(tygQuery);
 
         String genre = genreCmb.getSelectedItem().toString();
-        String genreQuery = "Select genreID From tyg where namn = '" + genre + "'";
+        String genreQuery = "Select genreID From genre where namn = '" + genre + "'";
         String genreID = SqlFragor.getEttVarde(genreQuery);
 
         String pris = prisTextField.getText();
@@ -109,16 +115,29 @@ public class LaggTillHatt extends javax.swing.JFrame {
 
         String farg = fargCmb.getSelectedItem().toString();
         String fargQuery = "Select fargID From farg where namn = '" + farg + "'";
-        String fargID = SqlFragor.getEttVarde(fargQuery);
-
+        
+        String fargID = SqlFragor.getEttVarde(fargQuery);        
+        String query = "INSERT INTO standardhatt (hattID, Namn, FargID,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','1', '" + storlek + "')";
+        SqlFragor.addToDatabasen(query);
+        
+        String hattQuery = "INSERT INTO hatt (HattID) VALUES ('"+hattID+"')";
+        SqlFragor.addToDatabasen(hattQuery);
+        
         List<String> dek = dekList.getSelectedValuesList();
         for (String dekoration : dek) {
-            String dekQuery = "SELECT dekorationID FROM dekoration WHERE namn = '" + dekoration + "'";
+            String dekQuery = "SELECT dekorationID FROM dekorationer WHERE namn = '" + dekoration + "'";
             String dekID = SqlFragor.getEttVarde(dekQuery);
-            String insertQuery = "INSERT INTO dekorationStandardHatt (dekorationID, hattID) VALUES ('" + dekID + "', '" + hattID + "')";
+                    System.out.println(dekID);
+                            System.out.println(dekQuery);
+
+
+            String insertQuery = "INSERT INTO dekorationerstandardhatt (hattID,dekorationID) VALUES ('" + hattID + "','" + dekID + "')";
+                                        System.out.println(insertQuery);
+
+            SqlFragor.addToDatabasen(insertQuery);
         }
 
-        String query = "INSERT INTO standardhatt (hattID, Namn, FargID,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "', '" + storlek + "')";
+
     }//GEN-LAST:event_skapaHattBtnActionPerformed
 
     /**
@@ -213,6 +232,11 @@ public class LaggTillHatt extends javax.swing.JFrame {
         skapaHattBtn.setBackground(new java.awt.Color(255, 255, 255));
         skapaHattBtn.setForeground(new java.awt.Color(0, 0, 0));
         skapaHattBtn.setText("Skapa hatt");
+        skapaHattBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                skapaHattBtnActionPerformed(evt);
+            }
+        });
 
         avbrytBtn.setBackground(new java.awt.Color(255, 255, 255));
         avbrytBtn.setForeground(new java.awt.Color(0, 0, 0));

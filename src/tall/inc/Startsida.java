@@ -25,7 +25,7 @@ public class Startsida extends javax.swing.JFrame {
         this.losenord = losenord;
     }
     
-    public String getAnvandare()
+    public static String getAnvandare()
     {
         String anvandare = anvandarnamn;
         return anvandare;
