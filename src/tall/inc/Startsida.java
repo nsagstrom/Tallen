@@ -132,7 +132,7 @@ public class Startsida extends javax.swing.JFrame {
 
     private void btnSkapaNyOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNyOrderActionPerformed
         // TODO add your handling code here:
-        new SkapaNyOrder();
+        new SkapaNyOrder().setVisible(true);
     }//GEN-LAST:event_btnSkapaNyOrderActionPerformed
 
     /**
