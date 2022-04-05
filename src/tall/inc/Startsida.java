@@ -43,6 +43,11 @@ public class Startsida extends javax.swing.JFrame {
         lblValkommen.setText("Välkommen!");
 
         btnSkapaNyOrder.setText("Skapa ny order");
+        btnSkapaNyOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkapaNyOrderActionPerformed(evt);
+            }
+        });
 
         btnLoggaUt.setText("Logga ut");
         btnLoggaUt.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +129,11 @@ public class Startsida extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_btnSkapaNyArtikelActionPerformed
+
+    private void btnSkapaNyOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNyOrderActionPerformed
+        // TODO add your handling code here:
+        new SkapaNyOrder();
+    }//GEN-LAST:event_btnSkapaNyOrderActionPerformed
 
     /**
      * @param args the command line arguments
