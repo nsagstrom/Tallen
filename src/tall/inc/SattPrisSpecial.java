@@ -142,7 +142,6 @@ public class SattPrisSpecial extends javax.swing.JFrame {
                 + "JOIN tyg t on t.TygID = specialhatt.TygID\n"
                 + "WHERE Status = 'Öppen' OR Status = 'Pågående';";
         allInfo = SqlFragor.getFleraRader(fraga);
-
         String rubrik = " Hatt ID:"
                 + "\t" + "Färg:"
                 + "\t" + "Tyg:"
@@ -184,7 +183,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
                 + "WHERE Status = 'Öppen' OR Status = 'Pågående';");
 
         boolean finnsID = aktuellaID.contains(txtID.getText());
-
+        
         if (!ValideringsKlass.taltest(txtID)) {
             ok = false;
             JOptionPane.showMessageDialog(null, "Ange ID");
@@ -198,7 +197,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ID existerar inte");
             txtID.requestFocus();
         }
-        return ok;
+        return ok;  
     }
 
 
