@@ -56,6 +56,11 @@ public class Startsida extends javax.swing.JFrame {
         btnSokArtikel.setText("Sök artikel");
 
         btnSkapaNyArtikel.setText("Skapa ny artikel");
+        btnSkapaNyArtikel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkapaNyArtikelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,6 +119,11 @@ public class Startsida extends javax.swing.JFrame {
         new Inloggningssida().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLoggaUtActionPerformed
+
+    private void btnSkapaNyArtikelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNyArtikelActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnSkapaNyArtikelActionPerformed
 
     /**
      * @param args the command line arguments
