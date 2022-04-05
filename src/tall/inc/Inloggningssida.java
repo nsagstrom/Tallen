@@ -143,9 +143,7 @@ public class Inloggningssida extends javax.swing.JFrame {
         String anvandarNamn = txtInloggAnvandare.getText();
         String losenordet = new String(pswInloggLosen.getPassword());
         String query = "SELECT AnvandarID FROM anvandare where Losenord = '" + losenordet + "'" + " and ForNamn = '" + anvandarNamn + "'";
-        System.out.println(query);
         String hamtaUser = SqlFragor.getEttVarde(query);
-        System.out.println(hamtaUser);
         if(hamtaUser != null){
             new Startsida().setVisible(true);
             dispose();
