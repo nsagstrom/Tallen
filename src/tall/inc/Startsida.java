@@ -4,17 +4,20 @@
  */
 package tall.inc;
 
+
 /**
  *
  * @author gewe_
  */
 public class Startsida extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Startsida
-     */
-    public Startsida() {
+    private static String anvandarnamn;
+    private static String losenord;
+    
+    public Startsida(String anvandarnamn, String losenord) {
         initComponents();
+        this.anvandarnamn = anvandarnamn;
+        this.losenord = losenord;
     }
 
     /**
@@ -139,7 +142,7 @@ public class Startsida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Startsida().setVisible(true);
+                new Startsida(anvandarnamn, losenord).setVisible(true);
             }
         });
     }

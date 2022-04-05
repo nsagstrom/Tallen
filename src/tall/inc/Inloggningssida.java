@@ -44,7 +44,7 @@ public class Inloggningssida extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(33, 31, 31));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         lblRubrik.setFont(new java.awt.Font("Apple SD Gothic Neo", 1, 24)); // NOI18N
         lblRubrik.setForeground(new java.awt.Color(255, 255, 255));
@@ -142,15 +142,29 @@ public class Inloggningssida extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loggaIn() {
+    public void loggaIn() {
         String anvandarNamn = txtInloggAnvandare.getText();
         String losenordet = new String(pswInloggLosen.getPassword());
+        try {String query = "SELECT Losenord FROM MIB.Anvandare WHERE Losenord = '" + losenordet + "'" + "ForNamn = '" + anvandarNamn + "'";
+        System.out.println(query);
+        String hamtaUser = idb.fetchSingle(query);
+        System.out.println(hamtaUser);
+        if(hamtaUser != null){
+            new Startsida(anvandarNamn, losenordet, idb).setVisible(true);
+            dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Användarnamn eller lösenord stämmer inte");
+        }
+        }
+        
+        catch (InfException e) {
+                JOptionPane.showMessageDialog(null, "Något gick fel " + e);
+        }
     }
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-
-        if (okUppgifter()) {
-        }
+        loggaIn();
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     private void pswInloggLosenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswInloggLosenKeyPressed
