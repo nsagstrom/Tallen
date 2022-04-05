@@ -46,14 +46,18 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblKundinfo" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField8" min="-2" pref="63" max="-2" attributes="0"/>
-                          <Component id="lblTelefon" min="-2" pref="43" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblVarOrderNummer" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblKundinfo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField8" min="-2" pref="63" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblVarOrderNummer" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="lblTelefon" min="-2" pref="92" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
@@ -222,7 +226,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblTelefon">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Telefon"/>
+        <Property name="text" type="java.lang.String" value="Telefonnummer"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">

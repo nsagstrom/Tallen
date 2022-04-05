@@ -1,10 +1,13 @@
 package tall.inc;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -25,6 +28,9 @@ public class LaggTillHatt extends javax.swing.JFrame {
         initComponents();
 
         fillGenreCmb();
+        fillTygCmb();
+        fillDekList1();
+        fillFargCmb();
 
     }
 
@@ -36,6 +42,14 @@ public class LaggTillHatt extends javax.swing.JFrame {
         }
     }
 
+    public void fillFargCmb() {
+        String query = "SELECT namn FROM farg";
+        ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
+        for (String farg : fargLista) {
+            fargCmb.addItem(farg);
+        }
+    }
+
     public void fillTygCmb() {
         String query = "SELECT namn FROM tyg";
         ArrayList<String> tygLista = SqlFragor.getEnKolumn(query);
@@ -43,18 +57,69 @@ public class LaggTillHatt extends javax.swing.JFrame {
             tygCmb.addItem(tyg);
         }
     }
-    public void fillDekList(){
+
+    /*public void fillDekList() {
         String query = "SELECT namn FROM dekoration";
         ArrayList<String> dekLista = SqlFragor.getEnKolumn(query);
         DefaultListModel m = new DefaultListModel();
         dekList.setModel(m);
-        for(String dek: dekLista){
-        m.addElement(dek);
-        
+        for (String dek : dekLista) {
+            m.addElement(dek);
+
         }
-        
+
+    }*/
+    public void fillDekList1() {
+
+        dekList.setSelectionModel(new DefaultListSelectionModel() {
+            public void setSelectionInterval(int index0, int index1) {
+                if (isSelectedIndex(index0)) {
+                    super.removeSelectionInterval(index0, index1);
+                } else {
+                    super.addSelectionInterval(index0, index1);
+                }
+            }
+        });
+        String query = "SELECT namn FROM dekorationer";
+        ArrayList<String> dekLista = SqlFragor.getEnKolumn(query);
+        DefaultListModel model = new DefaultListModel();
+        for (String dek : dekLista) {
+            model.addElement(dek);
+  
+
+            dekList.setModel(model);
+        }
 
     }
+
+    private void skapaHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skapaHattBtnActionPerformed
+        // TODO add your handling code here:
+        String hattID = SqlFragor.nyID("standardhatt", "HattID");
+
+        String tyg = tygCmb.getSelectedItem().toString();
+        String tygQuery = "Select tygID From tyg where namn = '" + tyg + "'";
+        String tygID = SqlFragor.getEttVarde(tygQuery);
+
+        String genre = genreCmb.getSelectedItem().toString();
+        String genreQuery = "Select genreID From tyg where namn = '" + genre + "'";
+        String genreID = SqlFragor.getEttVarde(genreQuery);
+
+        String pris = prisTextField.getText();
+        String storlek = storlekCmb.getSelectedItem().toString();
+
+        String farg = fargCmb.getSelectedItem().toString();
+        String fargQuery = "Select fargID From farg where namn = '" + farg + "'";
+        String fargID = SqlFragor.getEttVarde(fargQuery);
+
+        List<String> dek = dekList.getSelectedValuesList();
+        for (String dekoration : dek) {
+            String dekQuery = "SELECT dekorationID FROM dekoration WHERE namn = '" + dekoration + "'";
+            String dekID = SqlFragor.getEttVarde(dekQuery);
+            String insertQuery = "INSERT INTO dekorationStandardHatt (dekorationID, hattID) VALUES ('" + dekID + "', '" + hattID + "')";
+        }
+
+        String query = "INSERT INTO standardhatt (hattID, Namn, FargID,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "', '" + storlek + "')";
+    }//GEN-LAST:event_skapaHattBtnActionPerformed
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,9 +145,10 @@ public class LaggTillHatt extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dekList = new javax.swing.JList<>();
+        dekList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         skapaHattBtn = new javax.swing.JButton();
         avbrytBtn = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        fargCmb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,7 +170,6 @@ public class LaggTillHatt extends javax.swing.JFrame {
 
         tygCmb.setBackground(new java.awt.Color(255, 255, 255));
         tygCmb.setForeground(new java.awt.Color(0, 0, 0));
-        tygCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,7 +185,6 @@ public class LaggTillHatt extends javax.swing.JFrame {
 
         genreCmb.setBackground(new java.awt.Color(255, 255, 255));
         genreCmb.setForeground(new java.awt.Color(0, 0, 0));
-        genreCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -159,9 +223,8 @@ public class LaggTillHatt extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        fargCmb.setBackground(new java.awt.Color(255, 255, 255));
+        fargCmb.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,7 +261,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
                                         .addComponent(avbrytBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(prisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(fargCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap(66, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -229,7 +292,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fargCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -259,8 +322,8 @@ public class LaggTillHatt extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton avbrytBtn;
     private javax.swing.JList<String> dekList;
+    private javax.swing.JComboBox<String> fargCmb;
     private javax.swing.JComboBox<String> genreCmb;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
