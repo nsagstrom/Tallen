@@ -2,7 +2,6 @@ package tall.inc;
 
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /*
@@ -15,14 +14,13 @@ import oru.inf.InfException;
  */
 public class Inloggningssida extends javax.swing.JFrame {
 
-    private static InfDB idb;
+
 
     /**
      * Creates new form Inloggningssida
      */
-    public Inloggningssida(InfDB idb) {
+    public Inloggningssida() {
         initComponents();
-        this.idb = idb;
     }
 
     /**
@@ -145,27 +143,23 @@ public class Inloggningssida extends javax.swing.JFrame {
     public void loggaIn() {
         String anvandarNamn = txtInloggAnvandare.getText();
         String losenordet = new String(pswInloggLosen.getPassword());
-        try {String query = "SELECT Losenord FROM MIB.Anvandare WHERE Losenord = '" + losenordet + "'" + "ForNamn = '" + anvandarNamn + "'";
+        String query = "SELECT Losenord FROM MIB.Anvandare WHERE Losenord = '" + losenordet + "'" + "ForNamn = '" + anvandarNamn + "'";
         System.out.println(query);
-        String hamtaUser = idb.fetchSingle(query);
+        String hamtaUser = SqlFragor.getEttVarde(query);
         System.out.println(hamtaUser);
         if(hamtaUser != null){
-            new Startsida(anvandarNamn, losenordet, idb).setVisible(true);
+            new Startsida(anvandarNamn, losenordet).setVisible(true);
             dispose();
         }
         else{
             JOptionPane.showMessageDialog(null, "Användarnamn eller lösenord stämmer inte");
         }
         }
-        
-        catch (InfException e) {
-                JOptionPane.showMessageDialog(null, "Något gick fel " + e);
-        }
-    }
+
+    
 
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         loggaIn();
-        
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     private void pswInloggLosenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswInloggLosenKeyPressed
@@ -230,7 +224,7 @@ public class Inloggningssida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inloggningssida(idb).setVisible(true);
+                new Inloggningssida().setVisible(true);
             }
         });
     }
