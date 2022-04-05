@@ -142,7 +142,7 @@ public class Inloggningssida extends javax.swing.JFrame {
     public void loggaIn() {
         String anvandarNamn = txtInloggAnvandare.getText();
         String losenordet = new String(pswInloggLosen.getPassword());
-        String query = "SELECT AnvandarID FROM MIB.Anvandare where Losenord = '" + losenordet + "'" + " and ForNamn = '" + anvandarNamn;
+        String query = "SELECT AnvandarID FROM anvandare where Losenord = '" + losenordet + "'" + " and ForNamn = '" + anvandarNamn + "'";
         System.out.println(query);
         String hamtaUser = SqlFragor.getEttVarde(query);
         System.out.println(hamtaUser);
