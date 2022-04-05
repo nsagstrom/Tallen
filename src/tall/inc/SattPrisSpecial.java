@@ -18,7 +18,6 @@ public class SattPrisSpecial extends javax.swing.JFrame {
     public SattPrisSpecial() {
         initComponents();
         fyllHattLista();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -130,7 +129,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void txtPrisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrisKeyPressed
-               if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnAndra.doClick();
         }
     }//GEN-LAST:event_txtPrisKeyPressed
@@ -170,7 +169,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
             SqlFragor.uppdatera("UPDATE specialhatt\n"
                     + "SET pris = " + txtPris.getText() + "\n"
                     + "WHERE HattID = " + txtID.getText() + " ;");
-            
+
             txtHattLista.setText("");
             fyllHattLista();
         }
@@ -178,12 +177,12 @@ public class SattPrisSpecial extends javax.swing.JFrame {
 
     public boolean okUppgifter() {
         boolean ok = true;
-        
+
         ArrayList<String> aktuellaID = SqlFragor.getEnKolumn("SELECT HattID FROM specialhatt\n"
                 + "JOIN farg f on specialhatt.FargID = f.FargID\n"
                 + "JOIN tyg t on t.TygID = specialhatt.TygID\n"
                 + "WHERE Status = 'Öppen' OR Status = 'Pågående';");
-    
+
         boolean finnsID = aktuellaID.contains(txtID.getText());
 
         if (!ValideringsKlass.taltest(txtID)) {
