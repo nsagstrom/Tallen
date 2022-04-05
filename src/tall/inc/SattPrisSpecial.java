@@ -40,30 +40,23 @@ public class SattPrisSpecial extends javax.swing.JFrame {
         btnTillbaka = new javax.swing.JButton();
         btnAndra = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
 
         jLabel1.setText("Ändra Pris ");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(51, 52, 70, 30);
 
         txtPris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPrisActionPerformed(evt);
             }
         });
-        getContentPane().add(txtPris);
-        txtPris.setBounds(290, 160, 71, 22);
 
+        txtHattLista.setEditable(false);
         txtHattLista.setColumns(20);
         txtHattLista.setRows(5);
         jScrollPane1.setViewportView(txtHattLista);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(51, 234, 610, 177);
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -71,8 +64,6 @@ public class SattPrisSpecial extends javax.swing.JFrame {
                 btnTillbakaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTillbaka);
-        btnTillbaka.setBounds(530, 50, 75, 22);
 
         btnAndra.setText("Ändra");
         btnAndra.addActionListener(new java.awt.event.ActionListener() {
@@ -85,24 +76,65 @@ public class SattPrisSpecial extends javax.swing.JFrame {
                 btnAndraKeyPressed(evt);
             }
         });
-        getContentPane().add(btnAndra);
-        btnAndra.setBounds(480, 160, 75, 22);
 
         jLabel2.setText("Pris");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(290, 140, 18, 16);
+
+        jLabel3.setText("ID");
 
         txtID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIDActionPerformed(evt);
             }
         });
-        getContentPane().add(txtID);
-        txtID.setBounds(60, 160, 64, 22);
 
-        jLabel3.setText("ID");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(60, 140, 40, 16);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(118, 118, 118)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPris, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAndra, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTillbaka))
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAndra)
+                    .addComponent(txtPris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -111,12 +143,10 @@ public class SattPrisSpecial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrisActionPerformed
 
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
-
     private void btnAndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraActionPerformed
         AndraPris();
+        txtHattLista.setText("");
+        fyllHattLista();
     }//GEN-LAST:event_btnAndraActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
@@ -130,6 +160,10 @@ public class SattPrisSpecial extends javax.swing.JFrame {
             btnAndra.doClick();
         }
     }//GEN-LAST:event_btnAndraKeyPressed
+
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIDActionPerformed
 
     private void fyllHattLista() {
         ArrayList<HashMap<String, String>> allInfo;
@@ -162,9 +196,12 @@ public class SattPrisSpecial extends javax.swing.JFrame {
     }
     
     public void AndraPris(){
+        
         SqlFragor.uppdatera("UPDATE specialhatt\n" +
                 "SET pris = " + txtPris.getText() + "\n" +
-                "WHERE HattID = " + txtID.getText() + " ;)");
+                "WHERE HattID = " + txtID.getText() + " ;");
+        
+        
               
     }
 
