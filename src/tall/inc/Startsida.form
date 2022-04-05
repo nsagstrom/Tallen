@@ -97,9 +97,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Skapa ny order"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkapaNyOrderActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLoggaUt">
       <Properties>
@@ -113,22 +110,19 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Se orderstatus"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeOrderStatusActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSokArtikel">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#xf6;k artikel"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSokArtikelActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSkapaNyArtikel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Skapa ny artikel"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkapaNyArtikelActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
