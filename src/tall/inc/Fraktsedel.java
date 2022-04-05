@@ -7,8 +7,6 @@ package tall.inc;
 
 import java.io.OutputStream;
 import javax.swing.text.Document;
-import com.itextpdf.text.pdf.PdfWriter;
-
 
 
 /**
@@ -18,5 +16,4 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class Fraktsedel {
     OutputStream outPut;
     Document document;
-    PdfWriter writer;
 }
