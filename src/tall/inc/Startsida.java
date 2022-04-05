@@ -4,6 +4,10 @@
  */
 package tall.inc;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oru.inf.InfException;
+
  
 
 /**
@@ -139,8 +143,12 @@ public class Startsida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     private void btnSkapaNyArtikelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNyArtikelActionPerformed
-        // TODO add your handling code here:
-        
+        try {
+            // TODO add your handling code here:
+            new LaggTillHatt().setVisible(true);
+        } catch (InfException ex) {
+            Logger.getLogger(Startsida.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSkapaNyArtikelActionPerformed
 
 
