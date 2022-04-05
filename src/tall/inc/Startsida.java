@@ -4,17 +4,23 @@
  */
 package tall.inc;
 
+import oru.inf.InfDB;
+
 /**
  *
  * @author gewe_
  */
 public class Startsida extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Startsida
-     */
-    public Startsida() {
+    private static String anvandarnamn;
+    private static String losenord;
+    private static InfDB idb;
+    
+    public Startsida(String anvandarnamn, String losenord, InfDB idb) {
         initComponents();
+        this.anvandarnamn = anvandarnamn;
+        this.losenord = losenord;
+        this.idb = idb;
     }
 
     /**
@@ -139,7 +145,7 @@ public class Startsida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Startsida().setVisible(true);
+                new Startsida(anvandarnamn, losenord, idb).setVisible(true);
             }
         });
     }
