@@ -21,13 +21,13 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     private void skapaOrderNummer()
     {
         int ordernummer = taFramMaxId()+1;
-        String order = String.valueOf(ordernummer);
+        String order = Integer.toString(ordernummer);
         lblVarOrderNummer.setText(order);
     }
     
         public int taFramMaxId()
     {
-        int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(BestID) FROM Bestallning;"));
+        int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(BestID) FROM Bestallning"));
         return maxId;
     }
 
