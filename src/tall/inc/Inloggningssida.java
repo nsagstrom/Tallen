@@ -147,7 +147,7 @@ public class Inloggningssida extends javax.swing.JFrame {
         String hamtaUser = SqlFragor.getEttVarde(query);
         System.out.println(hamtaUser);
         if(hamtaUser != null){
-            new Startsida(anvandarNamn, losenordet).setVisible(true);
+            new Startsida().setVisible(true);
             dispose();
         }
         else{

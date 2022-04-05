@@ -20,11 +20,10 @@ public class SattPrisSpecial extends javax.swing.JFrame {
     /**
      * Creates new form SattPrisSpecial
      */
-    public SattPrisSpecial(String anvandarnamn, String losenord) {
+    public SattPrisSpecial() {
         initComponents();
         fyllHattLista();
-        this.anvandarnamn = anvandarnamn;
-        this.losenord = losenord;
+
     }
 
     /**
@@ -121,7 +120,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAndraActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        new Startsida(anvandarnamn, losenord).setVisible(true);
+        new Startsida().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
@@ -152,8 +151,8 @@ public class SattPrisSpecial extends javax.swing.JFrame {
 
         for (HashMap<String, String> info : allInfo) {
             txtHattLista.append(info.get("HattID")
-                    + "\t" + info.get("f.Namn")
-                    + "\t" + info.get("t.Namn")
+                    + "\t" + info.get("Namn")
+                    + "\t" + info.get("Namn")
                     + "\t" + info.get("Status")
                     + "\t" + info.get("pris")
                     + "\t" + info.get("KundID")
@@ -163,7 +162,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
     }
     
     public void AndraPris(){
-        SqlFragor.uppdatering("UPDATE specialhatt\n" +
+        SqlFragor.uppdatera("UPDATE specialhatt\n" +
                 "SET pris = " + txtPris.getText() + "\n" +
                 "WHERE HattID = " + txtID.getText() + " ;)");
               

@@ -120,18 +120,12 @@ public class SqlFragor {
      * @param fraga En SQL-fråga
      * @return True om frågan fungerade
      */
-    public static void uppdatering(String fraga) {
-        
-
+    public static void uppdatera(String fraga) {
         try {
             idb.update(fraga);
-            
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Databasfel");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel");
+            JOptionPane.showMessageDialog(null, "J�VLA PAPPSKALLE6");
         }
-        
     }
 
     /**

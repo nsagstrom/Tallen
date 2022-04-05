@@ -15,7 +15,7 @@ public class Startsida extends javax.swing.JFrame {
     private static String anvandarnamn;
     private static String losenord;
     
-    public Startsida(String anvandarnamn, String losenord) {
+    public Startsida() {
         initComponents();
         this.anvandarnamn = anvandarnamn;
         this.losenord = losenord;
@@ -150,7 +150,7 @@ public class Startsida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSkapaNyOrderActionPerformed
 
     private void btnAndraPrisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraPrisActionPerformed
-        new SattPrisSpecial(anvandarnamn, losenord).setVisible(true);
+        new SattPrisSpecial().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAndraPrisActionPerformed
 
@@ -185,7 +185,7 @@ public class Startsida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Startsida(anvandarnamn, losenord).setVisible(true);
+                new Startsida().setVisible(true);
             }
         });
     }
