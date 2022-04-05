@@ -4,6 +4,8 @@
  */
 package tall.inc;
 
+import oru.inf.InfDB;
+ 
 
 /**
  *
@@ -13,11 +15,13 @@ public class Startsida extends javax.swing.JFrame {
 
     private static String anvandarnamn;
     private static String losenord;
+    private static InfDB idb;
     
-    public Startsida(String anvandarnamn, String losenord) {
+    public Startsida(String anvandarnamn, String losenord, InfDB idb) {
         initComponents();
         this.anvandarnamn = anvandarnamn;
         this.losenord = losenord;
+        this.idb = idb;
     }
 
     /**
@@ -110,6 +114,8 @@ public class Startsida extends javax.swing.JFrame {
 
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
         // TODO add your handling code here:
+        new Inloggningssida(idb).setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     /**
@@ -142,7 +148,7 @@ public class Startsida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Startsida(anvandarnamn, losenord).setVisible(true);
+                new Startsida(anvandarnamn, losenord, idb).setVisible(true);
             }
         });
     }
