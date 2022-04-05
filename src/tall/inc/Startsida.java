@@ -5,6 +5,7 @@
 package tall.inc;
 
 import oru.inf.InfDB;
+ 
 
 /**
  *
@@ -113,6 +114,8 @@ public class Startsida extends javax.swing.JFrame {
 
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
         // TODO add your handling code here:
+        new Inloggningssida(idb).setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     /**
