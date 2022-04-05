@@ -156,8 +156,6 @@ public class Inloggningssida extends javax.swing.JFrame {
         }
         }
 
-    
-
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         loggaIn();
     }//GEN-LAST:event_btnLoggaInActionPerformed
