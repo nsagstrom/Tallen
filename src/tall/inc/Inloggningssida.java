@@ -13,13 +13,14 @@ import javax.swing.JOptionPane;
  */
 public class Inloggningssida extends javax.swing.JFrame {
 
-
+private static String hamtaUser;
 
     /**
      * Creates new form Inloggningssida
      */
     public Inloggningssida() {
         initComponents();
+        
     }
 
     /**
@@ -141,13 +142,17 @@ public class Inloggningssida extends javax.swing.JFrame {
         String anvandarNamn = txtInloggAnvandare.getText();
         String losenordet = new String(pswInloggLosen.getPassword());
         String query = "SELECT AnvandarID FROM anvandare where Losenord = '" + losenordet + "'" + " and ForNamn = '" + anvandarNamn + "'";
-        String hamtaUser = SqlFragor.getEttVarde(query);
+        hamtaUser = SqlFragor.getEttVarde(query);
         if (hamtaUser != null) {
             new Startsida().setVisible(true);
             dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Användarnamn eller lösenord stämmer inte");
         }
+    }
+    
+        public static String getAnvandarID() {
+        return hamtaUser;
     }
     
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed

@@ -19,10 +19,13 @@ public class Startsida extends javax.swing.JFrame {
     private static String anvandarnamn;
     private static String losenord;
     
+    String anvandarID;
+    
     public Startsida() {
         initComponents();
         this.anvandarnamn = anvandarnamn;
         this.losenord = losenord;
+        anvandarID = Inloggningssida.getAnvandarID();
     }
     
     public static String getAnvandare()
