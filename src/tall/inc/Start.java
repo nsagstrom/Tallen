@@ -19,7 +19,7 @@ public class Start {
     public static void main(String[] args) {
         try {
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
-            new Inloggningssida(idb).setVisible(true);
+            new Inloggningssida().setVisible(true);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, e);
         }
