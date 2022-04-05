@@ -153,6 +153,11 @@ public class LaggTillHatt extends javax.swing.JFrame {
         avbrytBtn.setBackground(new java.awt.Color(255, 255, 255));
         avbrytBtn.setForeground(new java.awt.Color(0, 0, 0));
         avbrytBtn.setText("Avbryt");
+        avbrytBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                avbrytBtnActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
@@ -242,6 +247,10 @@ public class LaggTillHatt extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void avbrytBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avbrytBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_avbrytBtnActionPerformed
 
     /**
      * @param args the command line arguments

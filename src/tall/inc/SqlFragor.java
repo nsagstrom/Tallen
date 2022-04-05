@@ -120,18 +120,18 @@ public class SqlFragor {
      * @param fraga En SQL-fråga
      * @return True om frågan fungerade
      */
-    public static boolean uppdatering(String fraga) {
-        boolean lyckades = false;
+    public static void uppdatering(String fraga) {
+        
 
         try {
             idb.update(fraga);
-            lyckades = true;
+            
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Databasfel");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Något gick fel");
         }
-        return lyckades;
+        
     }
 
     /**

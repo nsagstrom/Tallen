@@ -36,6 +36,7 @@ public class Startsida extends javax.swing.JFrame {
         btnSeOrderStatus = new javax.swing.JButton();
         btnSokArtikel = new javax.swing.JButton();
         btnSkapaNyArtikel = new javax.swing.JButton();
+        btnAndraPris = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,13 +68,27 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
+        btnAndraPris.setText("Ändra Pris Specialhatt");
+        btnAndraPris.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraPrisActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addComponent(lblValkommen)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAndraPris)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -90,10 +105,6 @@ public class Startsida extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSkapaNyArtikel)
                         .addGap(51, 51, 51))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addComponent(lblValkommen)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +123,9 @@ public class Startsida extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSeOrderStatus)
-                            .addComponent(btnSokArtikel))))
+                            .addComponent(btnSokArtikel))
+                        .addGap(29, 29, 29)
+                        .addComponent(btnAndraPris)))
                 .addContainerGap())
         );
 
@@ -130,10 +143,17 @@ public class Startsida extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnSkapaNyArtikelActionPerformed
 
+<<<<<<< Updated upstream
     private void btnSkapaNyOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNyOrderActionPerformed
         // TODO add your handling code here:
         new SkapaNyOrder().setVisible(true);
     }//GEN-LAST:event_btnSkapaNyOrderActionPerformed
+=======
+    private void btnAndraPrisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraPrisActionPerformed
+        new SattPrisSpecial(anvandarnamn, losenord).setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnAndraPrisActionPerformed
+>>>>>>> Stashed changes
 
     /**
      * @param args the command line arguments
@@ -171,6 +191,7 @@ public class Startsida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAndraPris;
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnSeOrderStatus;
     private javax.swing.JButton btnSkapaNyArtikel;
