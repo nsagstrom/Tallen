@@ -150,7 +150,7 @@ public class Inloggningssida extends javax.swing.JFrame {
         String hamtaUser = idb.fetchSingle(query);
         System.out.println(hamtaUser);
         if(hamtaUser != null){
-            new Startsida(anvandarNamn, losenordet, idb).setVisible(true);
+            new Startsida(anvandarNamn, losenordet).setVisible(true);
             dispose();
         }
         else{
