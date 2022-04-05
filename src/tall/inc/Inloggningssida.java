@@ -2,7 +2,6 @@ package tall.inc;
 
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import oru.inf.InfException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -143,7 +142,7 @@ public class Inloggningssida extends javax.swing.JFrame {
     public void loggaIn() {
         String anvandarNamn = txtInloggAnvandare.getText();
         String losenordet = new String(pswInloggLosen.getPassword());
-        String query = "SELECT Losenord FROM MIB.Anvandare WHERE Losenord = '" + losenordet + "'" + "ForNamn = '" + anvandarNamn + "'";
+        String query = "SELECT AnvandarID FROM MIB.Anvandare where Losenord = '" + losenordet + "'" + " and ForNamn = '" + anvandarNamn;
         System.out.println(query);
         String hamtaUser = SqlFragor.getEttVarde(query);
         System.out.println(hamtaUser);
@@ -195,37 +194,7 @@ public class Inloggningssida extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inloggningssida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Inloggningssida().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoggaIn;

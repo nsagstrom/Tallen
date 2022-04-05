@@ -6,8 +6,12 @@
 package tall.inc;
 
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.codec.Base64.OutputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import javax.swing.JOptionPane;
+
 
 
 
@@ -20,7 +24,29 @@ public class Fraktsedel {
     Document document;
     PdfWriter writer;
     
+    private String file = "FirstPdf.pdf";
+   
+    
     public Fraktsedel(){
-       
+       skapaFraktsedel();
     }
+    
+    public void skapaFraktsedel(){
+        try{
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(file));
+            document.open();
+            Paragraph preface = new Paragraph();
+            preface.add(new Paragraph("Title of fkn document"));
+            document.add(preface);
+            document.addTitle("pffff");
+        
+            document.close();
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    
+    
 }
