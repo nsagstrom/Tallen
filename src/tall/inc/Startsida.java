@@ -143,17 +143,17 @@ public class Startsida extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnSkapaNyArtikelActionPerformed
 
-<<<<<<< Updated upstream
+
     private void btnSkapaNyOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNyOrderActionPerformed
         // TODO add your handling code here:
         new SkapaNyOrder().setVisible(true);
     }//GEN-LAST:event_btnSkapaNyOrderActionPerformed
-=======
+
     private void btnAndraPrisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraPrisActionPerformed
         new SattPrisSpecial(anvandarnamn, losenord).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAndraPrisActionPerformed
->>>>>>> Stashed changes
+
 
     /**
      * @param args the command line arguments
