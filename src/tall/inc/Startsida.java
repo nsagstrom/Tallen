@@ -24,6 +24,12 @@ public class Startsida extends javax.swing.JFrame {
         this.anvandarnamn = anvandarnamn;
         this.losenord = losenord;
     }
+    
+    public String getAnvandare()
+    {
+        String anvandare = anvandarnamn;
+        return anvandare;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
