@@ -15,6 +15,7 @@ import oru.inf.InfException;
 public class Start {
     
     private static InfDB idb;
+    private static Fraktsedel fraktsedel;
     
     public static void main(String[] args) {
         try {
@@ -28,5 +29,6 @@ public class Start {
         //Alla våra SQL-frågor behandlas av klassen SqlFragor
         SqlFragor.setDatabas(idb);
                 
+        //fraktsedel = new Fraktsedel();
     }
 }
