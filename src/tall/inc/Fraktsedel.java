@@ -6,6 +6,7 @@
 package tall.inc;
 
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
@@ -36,8 +37,12 @@ public class Fraktsedel {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
-            Paragraph preface = new Paragraph();
-            preface.add(new Paragraph("hej"));
+            Paragraph preface = new Paragraph("heheh");
+            
+            //preface.add(new Paragraph("hej!"));
+            preface.setAlignment(Element.ALIGN_RIGHT);
+            addEmptyLine(preface, 1);
+            preface.add(new Paragraph("Ordernummer"));
             document.add(preface);
             document.addTitle("pffff");
             
@@ -45,6 +50,12 @@ public class Fraktsedel {
            // JOptionPane.showMessageDialog(null, "Fraktsedel skapad");
         } catch (Exception e) {
              JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    private static void addEmptyLine(Paragraph paragraph, int number) {
+        for (int i = 0; i < number; i++) {
+            paragraph.add(new Paragraph(" "));
         }
     }
     
