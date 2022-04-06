@@ -61,14 +61,14 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        txtangivetFornamn = new javax.swing.JTextField();
+        txtangivetEfternamn = new javax.swing.JTextField();
+        txtangivetAdress = new javax.swing.JTextField();
+        txtangivetTelefonnummer = new javax.swing.JTextField();
+        lblOrdernummer = new javax.swing.JLabel();
         lblVarOrderNummer = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblLagerartikel = new javax.swing.JLabel();
+        lblSpecialartikel = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -77,6 +77,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         jTextField11 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnLaggTillKund = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -101,14 +102,14 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
         lblTelefon.setText("Telefonnummer");
 
-        jLabel1.setText("Ordernummer");
+        lblOrdernummer.setText("Ordernummer");
 
         lblVarOrderNummer.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblVarOrderNummer.setText("\"ordernr\"");
 
-        jLabel2.setText("Lagerartikel");
+        lblLagerartikel.setText("Lagerartikel");
 
-        jLabel3.setText("Specialartikel");
+        lblSpecialartikel.setText("Specialartikel");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -119,6 +120,13 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         jButton1.setText("Lägg till");
 
         jButton2.setText("Lägg till");
+
+        btnLaggTillKund.setText("Lägg till");
+        btnLaggTillKund.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaggTillKundActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,39 +139,41 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblFornamn))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblEfternamn))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblAdress)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblKundinfo)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(18, 18, 18))
+                                    .addComponent(txtangivetFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblFornamn))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtangivetEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEfternamn))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtangivetAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblAdress))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtangivetTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(119, 119, 119)
-                                .addComponent(lblNyOrder)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblKundinfo)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(119, 119, 119)
+                                        .addComponent(lblNyOrder)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88)
+                                .addGap(127, 127, 127)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
+                                    .addComponent(lblOrdernummer)
                                     .addComponent(lblVarOrderNummer)))
-                            .addComponent(lblTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(118, 118, 118)
+                                .addComponent(btnLaggTillKund)))
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
+                            .addComponent(lblLagerartikel)
+                            .addComponent(lblSpecialartikel)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblArtikelnummer)
@@ -199,7 +209,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(29, 29, 29))))
+                        .addGap(27, 27, 27))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +217,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNyOrder)
-                    .addComponent(jLabel1))
+                    .addComponent(lblOrdernummer))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblKundinfo, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -220,12 +230,13 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                     .addComponent(lblEfternamn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82)
-                .addComponent(jLabel2)
+                    .addComponent(txtangivetFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtangivetEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtangivetAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtangivetTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLaggTillKund))
+                .addGap(80, 80, 80)
+                .addComponent(lblLagerartikel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAntal)
@@ -240,7 +251,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(27, 27, 27)
-                .addComponent(jLabel3)
+                .addComponent(lblSpecialartikel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -252,11 +263,22 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLaggTillKundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillKundActionPerformed
+        String fornamn = txtangivetFornamn.getText();
+        String efternamn = txtangivetEfternamn.getText();
+        String adress = txtangivetAdress.getText();
+        String telefonnummer = txtangivetTelefonnummer.getText();
+        
+        // Kollar om angivet telefonnummer är godkänt
+        boolean isTelefonnummer = ValideringsKlass.testaTeleNmrString(telefonnummer);
+        
+    }//GEN-LAST:event_btnLaggTillKundActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,12 +286,10 @@ public class SkapaNyOrder extends javax.swing.JFrame {
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLaggTillKund;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField1;
@@ -278,10 +298,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lblAdress;
     private javax.swing.JLabel lblAntal;
@@ -291,8 +307,15 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     private javax.swing.JLabel lblFarg;
     private javax.swing.JLabel lblFornamn;
     private javax.swing.JLabel lblKundinfo;
+    private javax.swing.JLabel lblLagerartikel;
     private javax.swing.JLabel lblNyOrder;
+    private javax.swing.JLabel lblOrdernummer;
+    private javax.swing.JLabel lblSpecialartikel;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JLabel lblVarOrderNummer;
+    private javax.swing.JTextField txtangivetAdress;
+    private javax.swing.JTextField txtangivetEfternamn;
+    private javax.swing.JTextField txtangivetFornamn;
+    private javax.swing.JTextField txtangivetTelefonnummer;
     // End of variables declaration//GEN-END:variables
 }
