@@ -77,7 +77,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
     private void fyllOrderLista() {
 
         ArrayList<HashMap<String, String>> allInfo;
-        String fraga = "SELECT HattID, Status, pris, KundID FROM specialhatt\n"
+        String fraga = "SELECT HattID,Status,pris,KundID FROM specialhatt\n"
                 + "WHERE Status = 'Öppen' OR Status = 'Pågående';";
 
         allInfo = SqlFragor.getFleraRader(fraga);
@@ -91,12 +91,9 @@ public class SeOrderStatus extends javax.swing.JFrame {
 
         for (HashMap<String, String> info : allInfo) {
             txtOrderLista.append(info.get("HattID")
-                    + "\t" + info.get("Namn")
-                    + "\t" + info.get("Namn")
                     + "\t" + info.get("Status")
                     + "\t" + info.get("pris")
-                    + "\t" + info.get("KundID")
-                    + "\t" + info.get("AnvandarID") + "\n");
+                    + "\t" + info.get("KundID") + "\n");
         }
     }
 
