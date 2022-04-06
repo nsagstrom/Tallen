@@ -94,11 +94,10 @@ public class LaggTillHatt extends javax.swing.JFrame {
 
     private void skapaHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skapaHattBtnActionPerformed
         // TODO add your handling code here:
+        String anvandarID = Inloggningssida.getAnvandarID();
 
 
         String hattID = SqlFragor.nyID("hatt", "HattID");
-        System.out.println(hattID);
-        String anvandarID = Startsida.getAnvandare();
         
         String namn = namnTextField.getText();
 
@@ -117,7 +116,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
         String fargQuery = "Select fargID From farg where namn = '" + farg + "'";
         
         String fargID = SqlFragor.getEttVarde(fargQuery);        
-        String query = "INSERT INTO standardhatt (hattID, Namn, FargID,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','1', '" + storlek + "')";
+        String query = "INSERT INTO standardhatt (hattID, Namn, FargID,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','"+anvandarID+"', '" + storlek + "')";
         SqlFragor.addToDatabasen(query);
         
         String hattQuery = "INSERT INTO hatt (HattID) VALUES ('"+hattID+"')";
