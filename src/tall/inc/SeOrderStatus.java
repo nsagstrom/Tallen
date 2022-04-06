@@ -18,6 +18,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
      */
     public SeOrderStatus() {
         initComponents();
+        fyllOrderLista();
     }
 
     /**
