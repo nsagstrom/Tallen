@@ -18,6 +18,13 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         skapaOrderNummer();
     }
     
+    public String getNuvarandeOrderNummer()
+    {
+        String nuvarandeOrderNummer = lblVarOrderNummer.getText();
+        
+        return nuvarandeOrderNummer;
+    }
+    
     private void skapaOrderNummer()
     {
         int ordernummer = taFramMaxId()+1;
@@ -202,8 +209,8 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                     .addComponent(lblNyOrder)
                     .addComponent(jLabel1))
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblKundinfo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblKundinfo, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblVarOrderNummer))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
