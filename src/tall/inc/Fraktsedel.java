@@ -28,6 +28,14 @@ public class Fraktsedel {
     Document document;
     PdfWriter writer;
     
+    private int orderNummer;
+    private String forNamn;
+    private String efterNamn;
+    private String kundAdress;
+    private String telefonNummer;
+    private int artikelNummer;
+            
+    
     private String file = "Fraktsedel.pdf";
    
     
@@ -40,6 +48,12 @@ public class Fraktsedel {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
+            Paragraph foretagsNamn = new Paragraph();
+            foretagsNamn.add(new Paragraph("Hattmakaren"));
+            document.add(foretagsNamn);
+            Paragraph foretagsAdress = new Paragraph();
+            foretagsAdress.add(new Paragraph("Åstadalsvägen 1E"));
+            document.add(foretagsAdress);
             Paragraph preface = new Paragraph("heheh");
             
             //preface.add(new Paragraph("hej!"));
@@ -64,7 +78,7 @@ public class Fraktsedel {
         }
     }
     public void nyFraktsedel(int orderNummer,String forNamn, String efterNamn, String kundAdress, String telefonNummer, int artikelNummer){
-        
+       
     }
     
     public void visaFraktsedel(){
