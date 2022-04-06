@@ -48,20 +48,57 @@ public class Fraktsedel {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
-            Paragraph foretagsNamn = new Paragraph();
-            foretagsNamn.add(new Paragraph("Hattmakaren"));
+            Paragraph foretagsNamn = new Paragraph("Hattmakaren");
+            foretagsNamn.add(new Paragraph());
             document.add(foretagsNamn);
-            Paragraph foretagsAdress = new Paragraph();
-            foretagsAdress.add(new Paragraph("Åstadalsvägen 1E"));
-            document.add(foretagsAdress);
-            Paragraph preface = new Paragraph("heheh");
             
-            //preface.add(new Paragraph("hej!"));
-            preface.setAlignment(Element.ALIGN_RIGHT);
-            addEmptyLine(preface, 1);
-            preface.add(new Paragraph("Ordernummer"));
-            document.add(preface);
-            document.addTitle("pffff");
+            Paragraph foretagsAdress = new Paragraph("Åstadalsvägen 1E");
+            foretagsAdress.add(new Paragraph());
+            document.add(foretagsAdress);
+            
+            Paragraph foretagsOrt = new Paragraph("SE - 702 81 Örebro");
+            addEmptyLine(foretagsOrt, 1);
+            foretagsOrt.add(new Paragraph());
+            document.add(foretagsOrt);
+            
+            Paragraph orgNummer = new Paragraph("Org Nr: 111003332821");
+            orgNummer.setAlignment(Element.ALIGN_RIGHT);
+            orgNummer.add(new Paragraph());
+            document.add(orgNummer);
+            
+            Paragraph kontakt = new Paragraph("Kontakt: Otto & Judith");
+            kontakt.setAlignment(Element.ALIGN_RIGHT);
+            kontakt.add(new Paragraph());
+            document.add(kontakt);
+            
+            Paragraph foretagsTelNr = new Paragraph("Tel: +46 76 058 9805");
+            addEmptyLine(foretagsTelNr, 1);
+            foretagsTelNr.add(new Paragraph());
+            document.add(foretagsTelNr);
+            
+            Paragraph tillKund = new Paragraph("Till: \n");
+            tillKund.add(new Paragraph());
+            document.add(tillKund);
+            
+            Paragraph portKod = new Paragraph("Portkod:");
+            portKod.setAlignment(Element.ALIGN_RIGHT);
+            portKod.add(new Paragraph());
+            document.add(portKod);
+            
+            Paragraph kundKontakt = new Paragraph("Kontakt:");
+            kundKontakt.setAlignment(Element.ALIGN_RIGHT);
+            kundKontakt.add(new Paragraph());
+            document.add(kundKontakt);
+            
+            Paragraph inneHall = new Paragraph("Innehåll:");
+            inneHall.setAlignment(Element.ALIGN_RIGHT);
+            inneHall.add(new Paragraph());
+            document.add(inneHall);
+            
+            Paragraph kundTelNr = new Paragraph("Tel:");
+            kundTelNr.setAlignment(Element.ALIGN_RIGHT);
+            kundTelNr.add(new Paragraph());
+            document.add(kundTelNr);
             
             document.close();
            // JOptionPane.showMessageDialog(null, "Fraktsedel skapad");
