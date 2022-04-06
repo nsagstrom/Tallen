@@ -4,6 +4,8 @@
  */
 package tall.inc;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gewe_
@@ -17,37 +19,32 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         initComponents();
         skapaOrderNummer();
     }
-    
-    public String getNuvarandeOrderNummer()
-    {
+
+    public String getNuvarandeOrderNummer() {
         String nuvarandeOrderNummer = lblVarOrderNummer.getText();
-        
+
         return nuvarandeOrderNummer;
     }
-    
-    private void skapaOrderNummer()
-    {
-        int ordernummer = taFramMaxBestId()+1;
+
+    private void skapaOrderNummer() {
+        int ordernummer = taFramMaxBestId() + 1;
         String order = Integer.toString(ordernummer);
         lblVarOrderNummer.setText(order);
     }
-    
-    private int skapaKundnummer()
-    {
-        int kundNummer = taFramMaxKundId()+1;
+
+    private int skapaKundnummer() {
+        int kundNummer = taFramMaxKundId() + 1;
         String kundNr = Integer.toString(kundNummer);
-        
+
         return kundNummer;
     }
-    
-    public int taFramMaxBestId()
-    {
+
+    public int taFramMaxBestId() {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(BestID) FROM Bestallning"));
         return maxId;
     }
-    
-    public int taFramMaxKundId()
-    {
+
+    public int taFramMaxKundId() {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(KundID) FROM Kund"));
         return maxId;
     }
@@ -284,22 +281,27 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLaggTillKundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillKundActionPerformed
+
+        laggTillNyKund();
+
+    }//GEN-LAST:event_btnLaggTillKundActionPerformed
+
+    private void laggTillNyKund() {
         String fornamn = txtangivetFornamn.getText();
         String efternamn = txtangivetEfternamn.getText();
         String adress = txtangivetAdress.getText();
         String telefonnummer = txtangivetTelefonnummer.getText();
         int kNr = skapaKundnummer();
-        
-        String fraga = "INSERT INTO agent (KundID, Fornamn, Efternamn, Adress, Tel) VALUES (" + kNr + ", '" + fornamn + "', '" + efternamn + "', '" + adress + "', '" + telefonnummer + ");";
-        
-        SqlFragor.addToDatabasen(fraga);
-        
-    }//GEN-LAST:event_btnLaggTillKundActionPerformed
 
+        String fraga = "INSERT INTO kund (KundID, Fornamn, Efternamn, Adress, Tel) VALUES (" + kNr + ", '" + fornamn + "', '" + efternamn + "', '" + adress + "', '" + telefonnummer + "');";
+        SqlFragor.addToDatabasen(fraga);
+
+        JOptionPane.showMessageDialog(null, "Ny kund tillagd!");
+    }
     /**
      * @param args the command line arguments
      */
- 
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaggTillKund;
