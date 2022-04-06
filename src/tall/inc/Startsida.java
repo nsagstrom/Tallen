@@ -50,6 +50,7 @@ public class Startsida extends javax.swing.JFrame {
         btnSokArtikel = new javax.swing.JButton();
         btnSkapaNyArtikel = new javax.swing.JButton();
         btnAndraPris = new javax.swing.JButton();
+        btnOrderLista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +89,13 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
+        btnOrderLista.setText("Se Ordrar");
+        btnOrderLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrderListaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,9 +107,6 @@ public class Startsida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAndraPris)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -117,7 +122,12 @@ public class Startsida extends javax.swing.JFrame {
                         .addComponent(btnSkapaNyOrder)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSkapaNyArtikel)
-                        .addGap(51, 51, 51))))
+                        .addGap(51, 51, 51))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAndraPris)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnOrderLista)
+                        .addGap(89, 89, 89))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +148,9 @@ public class Startsida extends javax.swing.JFrame {
                             .addComponent(btnSeOrderStatus)
                             .addComponent(btnSokArtikel))
                         .addGap(29, 29, 29)
-                        .addComponent(btnAndraPris)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAndraPris)
+                            .addComponent(btnOrderLista))))
                 .addContainerGap())
         );
 
@@ -171,6 +183,11 @@ public class Startsida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnAndraPrisActionPerformed
 
+    private void btnOrderListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderListaActionPerformed
+        new SeOrderStatus().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnOrderListaActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -180,6 +197,7 @@ public class Startsida extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraPris;
     private javax.swing.JButton btnLoggaUt;
+    private javax.swing.JButton btnOrderLista;
     private javax.swing.JButton btnSeOrderStatus;
     private javax.swing.JButton btnSkapaNyArtikel;
     private javax.swing.JButton btnSkapaNyOrder;
