@@ -77,21 +77,30 @@ public class Fraktsedel {
             paragraph.add(new Paragraph(" "));
         }
     }
+    
     public void nyFraktsedel(int orderNummer,String forNamn, String efterNamn, String kundAdress, String telefonNummer, int artikelNummer){
-       
+        this.orderNummer = orderNummer;
+        this.forNamn = forNamn;
+        this.efterNamn = efterNamn;
+        this.kundAdress = kundAdress;
+        this.telefonNummer = telefonNummer;
+        this.artikelNummer = artikelNummer;
+        skapaFraktsedel();
     }
     
-    public void visaFraktsedel(){
+    public void visaFraktsedel() {
         if (Desktop.isDesktopSupported()) {
-    try {
-        File myFile = new File("Fraktsedel.pdf");
-        Desktop.getDesktop().open(myFile);
-    } catch (IOException ex) {
-        // no application registered for PDFs
-    }
-}
+            try {
+                File myFile = new File("Fraktsedel.pdf");
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+                // no application registered for PDFs
+            }
+        }
     }
     
-    
+    private void test(){
+        nyFraktsedel(12345678, "Förnamn", "Efternamn", "Gatan 7", "073-123456", 11111111);
+    }
     
 }
