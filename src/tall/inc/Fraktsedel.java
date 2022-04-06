@@ -63,6 +63,9 @@ public class Fraktsedel {
             paragraph.add(new Paragraph(" "));
         }
     }
+    public void nyFraktsedel(int orderNummer,String forNamn, String efterNamn, String kundAdress, String telefonNummer, int artikelNummer){
+        
+    }
     
     public void visaFraktsedel(){
         if (Desktop.isDesktopSupported()) {
