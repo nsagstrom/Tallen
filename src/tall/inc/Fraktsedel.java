@@ -9,7 +9,10 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import javax.swing.JOptionPane;
 
@@ -51,12 +54,25 @@ public class Fraktsedel {
         } catch (Exception e) {
              JOptionPane.showMessageDialog(null, e);
         }
+        
+        visaFraktsedel();
     }
     
-    private static void addEmptyLine(Paragraph paragraph, int number) {
+    private void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
             paragraph.add(new Paragraph(" "));
         }
+    }
+    
+    public void visaFraktsedel(){
+        if (Desktop.isDesktopSupported()) {
+    try {
+        File myFile = new File("Fraktsedel.pdf");
+        Desktop.getDesktop().open(myFile);
+    } catch (IOException ex) {
+        // no application registered for PDFs
+    }
+}
     }
     
     
