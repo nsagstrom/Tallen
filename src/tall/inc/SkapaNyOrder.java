@@ -27,14 +27,28 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     
     private void skapaOrderNummer()
     {
-        int ordernummer = taFramMaxId()+1;
+        int ordernummer = taFramMaxBestId()+1;
         String order = Integer.toString(ordernummer);
         lblVarOrderNummer.setText(order);
     }
     
-        public int taFramMaxId()
+    private int skapaKundnummer()
+    {
+        int kundNummer = taFramMaxKundId()+1;
+        String kundNr = Integer.toString(kundNummer);
+        
+        return kundNummer;
+    }
+    
+    public int taFramMaxBestId()
     {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(BestID) FROM Bestallning"));
+        return maxId;
+    }
+    
+    public int taFramMaxKundId()
+    {
+        int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(KundID) FROM Kund"));
         return maxId;
     }
 
@@ -274,9 +288,11 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         String efternamn = txtangivetEfternamn.getText();
         String adress = txtangivetAdress.getText();
         String telefonnummer = txtangivetTelefonnummer.getText();
+        int kNr = skapaKundnummer();
         
-        // Kollar om angivet telefonnummer är godkänt
-        boolean isTelefonnummer = ValideringsKlass.testaTeleNmrString(telefonnummer);
+        String fraga = "INSERT INTO agent (KundID, Fornamn, Efternamn, Adress, Tel) VALUES (" + kNr + ", '" + fornamn + "', '" + efternamn + "', '" + adress + "', '" + telefonnummer + ");";
+        
+        SqlFragor.addToDatabasen(fraga);
         
     }//GEN-LAST:event_btnLaggTillKundActionPerformed
 
