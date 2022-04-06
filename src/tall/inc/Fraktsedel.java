@@ -24,7 +24,7 @@ public class Fraktsedel {
     Document document;
     PdfWriter writer;
     
-    private String file = "FirstPdf.pdf";
+    private String file = "Fraktsedel.pdf";
    
     
     public Fraktsedel(){
@@ -37,11 +37,12 @@ public class Fraktsedel {
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
             Paragraph preface = new Paragraph();
-            preface.add(new Paragraph("Title of fkn document"));
+            preface.add(new Paragraph("hej"));
             document.add(preface);
             document.addTitle("pffff");
-        
+            
             document.close();
+           // JOptionPane.showMessageDialog(null, "Fraktsedel skapad");
         } catch (Exception e) {
              JOptionPane.showMessageDialog(null, e);
         }
