@@ -44,7 +44,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblArtikelnummer" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
+                          <Component id="txtSpecialartikelFarg" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
                           <Component id="jComboBox1" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -57,19 +57,22 @@
                               <Component id="jTextField4" min="-2" pref="63" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="jTextField9" min="-2" pref="63" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField10" min="-2" pref="69" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jTextField11" min="-2" pref="69" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
                               <Component id="lblBenamning" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               <Component id="lblFarg" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                               <Component id="lblAntal" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblSpecialartikelTyg" min="-2" pref="63" max="-2" attributes="0"/>
+                                  <Component id="txtSpecialartikelTyg" min="-2" pref="63" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jTextField10" min="-2" pref="69" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jTextField11" min="-2" pref="69" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
@@ -86,13 +89,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblLagerartikel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblSpecialartikel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel4" min="-2" pref="78" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" pref="63" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblSpecialartikelFarg" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="27" pref="399" max="32767" attributes="0"/>
+                      <EmptySpace min="102" pref="475" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -169,13 +168,13 @@
               <Component id="lblSpecialartikel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSpecialartikelFarg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSpecialartikelTyg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSpecialartikelFarg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSpecialartikelTyg" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField11" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLaggTillSpHatt" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -240,7 +239,7 @@
         <Property name="text" type="java.lang.String" value="Telefonnummer"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txtSpecialartikelFarg">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField2">
     </Component>
@@ -294,17 +293,17 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="lblSpecialartikelFarg">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Artikelnummer"/>
+        <Property name="text" type="java.lang.String" value="F&#xe4;rg"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="lblSpecialartikelTyg">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ben&#xe4;mning"/>
+        <Property name="text" type="java.lang.String" value="Tyg"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField9">
+    <Component class="javax.swing.JTextField" name="txtSpecialartikelTyg">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField10">
     </Component>
