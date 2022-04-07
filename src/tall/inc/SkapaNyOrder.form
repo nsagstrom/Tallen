@@ -44,8 +44,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblArtikelnummer" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSpecialartikelFarg" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
                           <Component id="jComboBox1" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
+                          <Component id="CBoxSpecialartikelFarg" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -64,12 +64,7 @@
                               <Component id="lblAntal" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lblSpecialartikelTyg" min="-2" pref="63" max="-2" attributes="0"/>
-                                  <Component id="txtSpecialartikelTyg" min="-2" pref="63" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                               <Component id="jTextField10" min="-2" pref="69" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jTextField11" min="-2" pref="69" max="-2" attributes="0"/>
@@ -89,9 +84,16 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblLagerartikel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblSpecialartikel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSpecialartikelFarg" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblSpecialartikelFarg" min="-2" pref="78" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="CBoxSpecialartikelTyg" min="-2" pref="61" max="-2" attributes="0"/>
+                                  <Component id="lblSpecialartikelTyg" min="-2" pref="63" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace min="102" pref="475" max="32767" attributes="0"/>
+                      <EmptySpace min="102" pref="400" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -173,12 +175,12 @@
               </Group>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtSpecialartikelFarg" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtSpecialartikelTyg" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField11" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnLaggTillSpHatt" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTillbaka" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CBoxSpecialartikelFarg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CBoxSpecialartikelTyg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
@@ -238,8 +240,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Telefonnummer"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtSpecialartikelFarg">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField2">
     </Component>
@@ -303,8 +303,6 @@
         <Property name="text" type="java.lang.String" value="Tyg"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtSpecialartikelTyg">
-    </Component>
     <Component class="javax.swing.JTextField" name="jTextField10">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField11">
@@ -334,6 +332,38 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="CBoxSpecialartikelFarg">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="CBoxSpecialartikelTyg">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
