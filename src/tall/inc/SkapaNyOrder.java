@@ -57,6 +57,18 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
         return kundNummer;
     }
+    
+        private int skapaHattId() {
+        int hattId = taFramMaxHattId() + 1;
+        String kundNr = Integer.toString(hattId);
+
+        return hattId;
+    }
+        
+        public int taFramMaxHattId() {
+        int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(HattID) FROM hatt"));
+        return maxId;
+    }
 
     public int taFramMaxBestId() {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(BestID) FROM Bestallning"));
@@ -151,6 +163,11 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         btnLaggTillHatt.setText("Lägg till");
 
         btnLaggTillSpHatt.setText("Lägg till");
+        btnLaggTillSpHatt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaggTillSpHattActionPerformed(evt);
+            }
+        });
 
         btnLaggTillKund.setText("Lägg till");
         btnLaggTillKund.addActionListener(new java.awt.event.ActionListener() {
@@ -320,6 +337,12 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void btnLaggTillSpHattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillSpHattActionPerformed
+       int hattId = skapaHattId();
+       System.out.println(hattId);
+       
+    }//GEN-LAST:event_btnLaggTillSpHattActionPerformed
 
     private void laggTillNyKund() {
         String fornamn = txtangivetFornamn.getText();
