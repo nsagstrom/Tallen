@@ -20,6 +20,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         initComponents();
         skapaOrderNummer();
         fillFargCmb();
+        fillTygCmb();
     }
 
     public String getNuvarandeOrderNummer() {
