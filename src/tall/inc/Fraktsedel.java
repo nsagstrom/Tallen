@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package tall.inc;
 
 import com.itextpdf.text.BaseColor;
@@ -19,125 +18,141 @@ import java.io.OutputStream;
 import javax.swing.JOptionPane;
 import javax.swing.text.StyleConstants.FontConstants;
 
-
-
-
 /**
  *
  * @author timme
  */
 public class Fraktsedel {
+
     OutputStream outPut;
     Document document;
     PdfWriter writer;
-    
+
     private int orderNummer;
     private String forNamn;
     private String efterNamn;
     private String kundAdress;
     private String telefonNummer;
     private int artikelNummer;
-            
-    
+
     private String file = "Fraktsedel.pdf";
-   
-    
-    public Fraktsedel(){
-       skapaFraktsedel();
+
+    public Fraktsedel() {
+        skapaFraktsedel();
     }
-    
-    public void skapaFraktsedel(){
-        try{
+
+    public void skapaFraktsedel() {
+        try {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
-            
-            Paragraph foretagsNamn = new Paragraph("Hattmakaren", storFont);
+
+            Paragraph fran = new Paragraph("Från", litenFont);
+            fran.add(new Paragraph());
+            document.add(fran);
+
+            Paragraph foretagsNamn = new Paragraph("Hattmakaren", titleFont);
             foretagsNamn.add(new Paragraph());
             document.add(foretagsNamn);
-            
-            Paragraph foretagsAdress = new Paragraph("Åstadalsvägen 1E", litenFont);
+
+            Paragraph foretagsAdress = new Paragraph("Åstadalsvägen 1E", titleFont);
             foretagsAdress.add(new Paragraph());
             document.add(foretagsAdress);
-            
-            Paragraph foretagsOrt = new Paragraph("SE - 702 81 Örebro", litenFont);
+
+            Paragraph foretagsOrt = new Paragraph("SE - 702 81 Örebro", titleFont);
             addEmptyLine(foretagsOrt, 1);
             foretagsOrt.add(new Paragraph());
             document.add(foretagsOrt);
-            
+
+            Paragraph testLinje = new Paragraph("__________________________________________________________", storFont);
+            testLinje.add(new Paragraph());
+            document.add(testLinje);
+
             Paragraph orgNummer = new Paragraph("Org Nr: 111003332821", litenFont);
             orgNummer.setAlignment(Element.ALIGN_RIGHT);
             orgNummer.add(new Paragraph());
             document.add(orgNummer);
-            
-            Paragraph kontakt = new Paragraph("Kontakt: Otto&Judith@gmail.com", litenFont );
+
+            Paragraph kontakt = new Paragraph("Kontakt: Otto&Judith@gmail.com", litenFont);
             kontakt.setAlignment(Element.ALIGN_RIGHT);
             kontakt.add(new Paragraph());
             document.add(kontakt);
-            
+
             Paragraph foretagsTelNr = new Paragraph("Tel: +46 76 058 9805", litenFont);
             addEmptyLine(foretagsTelNr, 1);
             foretagsTelNr.add(new Paragraph());
             document.add(foretagsTelNr);
-            
+
             Paragraph tillKund = new Paragraph("Till: \n", litenFont);
             tillKund.add(new Paragraph());
             document.add(tillKund);
-            
+
             Paragraph portKod = new Paragraph("Portkod:", litenFont);
             portKod.setAlignment(Element.ALIGN_RIGHT);
             portKod.add(new Paragraph());
             document.add(portKod);
-            
+
             Paragraph kundKontakt = new Paragraph("Kontakt:", litenFont);
             kundKontakt.setAlignment(Element.ALIGN_RIGHT);
             kundKontakt.add(new Paragraph());
             document.add(kundKontakt);
-            
+
             Paragraph inneHall = new Paragraph("Innehåll:", litenFont);
             inneHall.setAlignment(Element.ALIGN_RIGHT);
             inneHall.add(new Paragraph());
             document.add(inneHall);
-            
+
             Paragraph kundTelNr = new Paragraph("Tel:", litenFont);
             kundTelNr.setAlignment(Element.ALIGN_RIGHT);
             kundTelNr.add(new Paragraph());
             document.add(kundTelNr);
             
+            Paragraph testLinje2 = new Paragraph("__________________________________________________________", storFont);
+            testLinje2.add(new Paragraph());
+            document.add(testLinje2);
+
             Paragraph posten = new Paragraph("PostNord", postFont);
             addEmptyLine(posten, 1);
             posten.add(new Paragraph());
             document.add(posten);
+
+            Paragraph varuKod = new Paragraph("Varukod: ", litenFont);
+            varuKod.add(new Paragraph());
+            document.add(varuKod);
+
+            Paragraph moms = new Paragraph("Moms: ", litenFont);
+            moms.add(new Paragraph());
+            document.add(moms);
+
+            Paragraph attaSiffrig = new Paragraph("Varudeklaration: ", litenFont);
+            addEmptyLine(attaSiffrig, 1);
+            attaSiffrig.add(new Paragraph());
+            document.add(attaSiffrig);
             
             Paragraph vikt = new Paragraph("Vikt:", litenFont);
             vikt.add(new Paragraph());
             document.add(vikt);
             
-            Paragraph varuKod = new Paragraph("Varukod:", litenFont);
-            varuKod.add(new Paragraph());
-            document.add(varuKod);
-            
-            Paragraph moms = new Paragraph("Moms:", litenFont);
-            moms.add(new Paragraph());
-            document.add(moms);
-            
-            
+            Paragraph testLinje3 = new Paragraph("__________________________________________________________", storFont);
+            testLinje3.add(new Paragraph());
+            document.add(testLinje3);
+
             document.close();
-           // JOptionPane.showMessageDialog(null, "Fraktsedel skapad");
+            // JOptionPane.showMessageDialog(null, "Fraktsedel skapad");
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e);
         }
-        
+
         visaFraktsedel();
     }
-    
+
     private void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
             paragraph.add(new Paragraph(" "));
         }
     }
-    
-    public void nyFraktsedel(int orderNummer,String forNamn, String efterNamn, String kundAdress, String telefonNummer, int artikelNummer){
+
+    public void nyFraktsedel(int orderNummer, String forNamn, String efterNamn, String kundAdress, String telefonNummer, int artikelNummer) {
         this.orderNummer = orderNummer;
         this.forNamn = forNamn;
         this.efterNamn = efterNamn;
@@ -146,7 +161,7 @@ public class Fraktsedel {
         this.artikelNummer = artikelNummer;
         skapaFraktsedel();
     }
-    
+
     public void visaFraktsedel() {
         if (Desktop.isDesktopSupported()) {
             try {
@@ -157,19 +172,17 @@ public class Fraktsedel {
             }
         }
     }
-    
-    private void test(){
+
+    private void test() {
         nyFraktsedel(12345678, "Förnamn", "Efternamn", "Gatan 7", "073-123456", 11111111);
     }
-    
-    private static Font storFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
-    
+
+    private static Font storFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
+
+    private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL);
+
     private static Font litenFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
-    
-    private static Font postFont = new Font(Font.FontFamily.COURIER, 16, Font.BOLD, BaseColor.BLUE);
-  
-    
-    
-      
-    
+
+    private static Font postFont = new Font(Font.FontFamily.COURIER, 18, Font.BOLD, BaseColor.BLUE);
+
 }
