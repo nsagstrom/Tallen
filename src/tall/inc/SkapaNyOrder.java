@@ -21,6 +21,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         skapaOrderNummer();
         fillFargCmb();
         fillTygCmb();
+        fillGenreCmb();
     }
 
     public String getNuvarandeOrderNummer() {
@@ -86,6 +87,14 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(KundID) FROM Kund"));
         return maxId;
     }
+    
+    public void fillGenreCmb() {
+        String query = "SELECT genrenamn FROM genre";
+        ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
+        for (String genre : genreLista) {
+            CBoxSpecialartikelGenre.addItem(genre);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,7 +130,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         lblSpecialartikelFarg = new javax.swing.JLabel();
         lblSpecialartikelTyg = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
         btnLaggTillHatt = new javax.swing.JButton();
         btnLaggTillSpHatt = new javax.swing.JButton();
         btnLaggTillKund = new javax.swing.JButton();
@@ -129,6 +137,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         CBoxSpecialartikelFarg = new javax.swing.JComboBox<>();
         CBoxSpecialartikelTyg = new javax.swing.JComboBox<>();
         cbxLagerFarg = new javax.swing.JComboBox<>();
+        lblSpecialartikelBenamning = new javax.swing.JLabel();
+        lblSpecialartikelGenre = new javax.swing.JLabel();
+        CBoxSpecialartikelGenre = new javax.swing.JComboBox<>();
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,9 +229,12 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             }
         });
 
-        CBoxSpecialartikelFarg.setSelectedIndex(-1);
+        lblSpecialartikelBenamning.setText("Benamning");
 
-        CBoxSpecialartikelTyg.setSelectedIndex(-1);
+        lblSpecialartikelGenre.setText("Genre");
+
+        CBoxSpecialartikelGenre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CBoxSpecialartikelGenre.setSelectedIndex(-1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -248,23 +262,18 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbxLagerFarg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblBenamning)
                                 .addGap(21, 21, 21)
-                                .addComponent(lblFarg)
-                                .addGap(58, 58, 58)
-                                .addComponent(lblAntal))
+                                .addComponent(lblFarg))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(35, 35, 35)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbxLagerFarg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAntal))
+                        .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnLaggTillHatt)
                             .addComponent(btnLaggTillSpHatt)
@@ -278,11 +287,21 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                             .addComponent(lblSpecialartikel)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblSpecialartikelFarg, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSpecialartikelBenamning))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CBoxSpecialartikelTyg, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblSpecialartikelTyg, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(102, 400, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(CBoxSpecialartikelTyg, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(CBoxSpecialartikelGenre, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblSpecialartikelTyg, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblSpecialartikelGenre, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(236, 242, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtangivetFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -345,15 +364,17 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSpecialartikelFarg)
-                    .addComponent(lblSpecialartikelTyg))
+                    .addComponent(lblSpecialartikelTyg)
+                    .addComponent(lblSpecialartikelBenamning)
+                    .addComponent(lblSpecialartikelGenre))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLaggTillSpHatt)
                     .addComponent(btnTillbaka)
                     .addComponent(CBoxSpecialartikelFarg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBoxSpecialartikelTyg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBoxSpecialartikelTyg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBoxSpecialartikelGenre, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -443,6 +464,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CBoxSpecialartikelFarg;
+    private javax.swing.JComboBox<String> CBoxSpecialartikelGenre;
     private javax.swing.JComboBox<String> CBoxSpecialartikelTyg;
     private javax.swing.JButton btnLaggTillHatt;
     private javax.swing.JButton btnLaggTillKund;
@@ -451,7 +473,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxLagerFarg;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -467,7 +488,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     private javax.swing.JLabel lblNyOrder;
     private javax.swing.JLabel lblOrdernummer;
     private javax.swing.JLabel lblSpecialartikel;
+    private javax.swing.JLabel lblSpecialartikelBenamning;
     private javax.swing.JLabel lblSpecialartikelFarg;
+    private javax.swing.JLabel lblSpecialartikelGenre;
     private javax.swing.JLabel lblSpecialartikelTyg;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JLabel lblVarOrderNummer;
