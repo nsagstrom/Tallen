@@ -78,6 +78,11 @@ public class Startsida extends javax.swing.JFrame {
         });
 
         btnSokArtikel.setText("Sök artikel");
+        btnSokArtikel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokArtikelActionPerformed(evt);
+            }
+        });
 
         btnSkapaNyArtikel.setText("Skapa ny artikel");
         btnSkapaNyArtikel.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +185,11 @@ public class Startsida extends javax.swing.JFrame {
         new SeOrderStatus().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnSeOrderStatusActionPerformed
+
+    private void btnSokArtikelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokArtikelActionPerformed
+        // TODO add your handling code here:
+        new SokHatt().setVisible(true);
+    }//GEN-LAST:event_btnSokArtikelActionPerformed
 
 
     /**

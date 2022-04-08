@@ -80,7 +80,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
                 }
             }
         });
-        String query = "SELECT namn FROM dekorationer";
+        String query = "SELECT DekoratioNamn FROM dekorationer";
         ArrayList<String> dekLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String dek : dekLista) {
@@ -126,12 +126,9 @@ public class LaggTillHatt extends javax.swing.JFrame {
         for (String dekoration : dek) {
             String dekQuery = "SELECT dekorationID FROM dekorationer WHERE namn = '" + dekoration + "'";
             String dekID = SqlFragor.getEttVarde(dekQuery);
-                    System.out.println(dekID);
-                            System.out.println(dekQuery);
 
 
             String insertQuery = "INSERT INTO dekorationerstandardhatt (hattID,dekorationID) VALUES ('" + hattID + "','" + dekID + "')";
-                                        System.out.println(insertQuery);
 
             SqlFragor.addToDatabasen(insertQuery);
         }
