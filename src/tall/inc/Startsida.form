@@ -54,9 +54,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnAndraPris" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnOrderLista" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                      <EmptySpace min="89" pref="220" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -84,10 +82,7 @@
                           <Component id="btnSokArtikel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnAndraPris" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnOrderLista" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnAndraPris" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -124,6 +119,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Se orderstatus"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeOrderStatusActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSokArtikel">
       <Properties>
@@ -144,14 +142,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAndraPrisActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnOrderLista">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Se Ordrar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrderListaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
