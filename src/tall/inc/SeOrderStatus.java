@@ -104,6 +104,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
         String status = cmbStatus.getSelectedItem().toString();
         String fraga3 = "Select BestID, Status, KundID, TullID, Prio FROM bestallning where Status like '" + status + "'";
         filter = SqlFragor.getFleraRader(fraga3);
+        int i = cmbStatus.getSelectedIndex();
         if (filter != null) {
             txtOrderLista.setText("");
             String rubrik2 = " BeställningsID:"
@@ -121,7 +122,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
                 + "\t" + info.get("Prio") + "\n");
                 
             }
-        } else {
+        } else if (i == 0){
             fyllOrderLista();
         }
 
