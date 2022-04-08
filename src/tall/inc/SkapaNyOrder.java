@@ -374,7 +374,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
     private void btnLaggTillSpHattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillSpHattActionPerformed
         int hattId = skapaHattId();
-        System.out.println(hattId);
 
     }//GEN-LAST:event_btnLaggTillSpHattActionPerformed
 
