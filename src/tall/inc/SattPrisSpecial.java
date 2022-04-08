@@ -137,35 +137,37 @@ public class SattPrisSpecial extends javax.swing.JFrame {
     private void fyllHattLista() {
 
         ArrayList<HashMap<String, String>> allInfo;
-        String fraga = "SELECT HattID, f.Namn, t.Namn, Status, pris, KundID,AnvandarID FROM specialhatt\n"
-                + "JOIN farg f on specialhatt.FargID = f.FargID\n"
-                + "JOIN tyg t on t.TygID = specialhatt.TygID\n"
-                + "WHERE Status = 'Öppen' OR Status = 'Pågående';";
+        String fraga = "SELECT s.HattID, Farg, Tyg, pris, AnvandarID FROM hatt\n"
+                + "JOIN specialhatt s on hatt.HattID = s.HattID\n"
+                + "JOIN farg f on hatt.FargID = f.FargID\n"
+                + "JOIN genre g on g.GenreID = hatt.GenreID\n"
+                + "JOIN tyg t on hatt.TygID = t.TygID\n"
+                + "ORDER BY HattID;";
+
+
+        
         allInfo = SqlFragor.getFleraRader(fraga);
+        
         String rubrik = " Hatt ID:"
                 + "\t" + "Färg:"
                 + "\t" + "Tyg:"
-                + "\t" + "Status:"
                 + "\t" + "Pris:"
-                + "\t" + "Kund ID:"
                 + "\t" + "Användare:" + "\n";
 
         txtHattLista.append(rubrik);
 
         for (HashMap<String, String> info : allInfo) {
             txtHattLista.append(info.get("HattID")
-                    + "\t" + info.get("Namn")
-                    + "\t" + info.get("Namn")
-                    + "\t" + info.get("Status")
+                    + "\t" + info.get("Farg")
+                    + "\t" + info.get("Tyg")
                     + "\t" + info.get("pris")
-                    + "\t" + info.get("KundID")
                     + "\t" + info.get("AnvandarID") + "\n");
         }
     }
 
     public void AndraPris() {
         if (okUppgifter()) {
-            SqlFragor.uppdatera("UPDATE specialhatt\n"
+            SqlFragor.uppdatera("UPDATE hatt\n"
                     + "SET pris = " + txtPris.getText() + "\n"
                     + "WHERE HattID = " + txtID.getText() + " ;");
 
@@ -177,13 +179,14 @@ public class SattPrisSpecial extends javax.swing.JFrame {
     public boolean okUppgifter() {
         boolean ok = true;
 
-        ArrayList<String> aktuellaID = SqlFragor.getEnKolumn("SELECT HattID FROM specialhatt\n"
-                + "JOIN farg f on specialhatt.FargID = f.FargID\n"
-                + "JOIN tyg t on t.TygID = specialhatt.TygID\n"
-                + "WHERE Status = 'Öppen' OR Status = 'Pågående';");
+        ArrayList<String> aktuellaID = SqlFragor.getEnKolumn("SELECT s.HattID, Farg, Tyg, pris, AnvandarID FROM hatt\n"
+                + "JOIN specialhatt s on hatt.HattID = s.HattID\n"
+                + "JOIN farg f on hatt.FargID = f.FargID\n"
+                + "JOIN genre g on g.GenreID = hatt.GenreID\n"
+                + "JOIN tyg t on hatt.TygID = t.TygID;");
 
         boolean finnsID = aktuellaID.contains(txtID.getText());
-        
+
         if (!ValideringsKlass.taltest(txtID)) {
             ok = false;
             JOptionPane.showMessageDialog(null, "Ange ID");
@@ -197,7 +200,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ID existerar inte");
             txtID.requestFocus();
         }
-        return ok;  
+        return ok;
     }
 
 
