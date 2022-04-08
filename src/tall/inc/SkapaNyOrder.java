@@ -72,12 +72,14 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(HattID) FROM hatt"));
         return maxId;
     }
-
+        
+        //Hämtar och returnerar högsta BestID som finns i databasen
     public int taFramMaxBestId() {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(BestID) FROM Bestallning"));
         return maxId;
     }
 
+        //Hämtar och returnerar högsta KundID som finns i databasen
     public int taFramMaxKundId() {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(KundID) FROM Kund"));
         return maxId;
