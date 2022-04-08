@@ -125,7 +125,7 @@ public class Fraktsedel {
             document.add(moms);
 
             Paragraph attaSiffrig = new Paragraph("Varudeklaration: ", litenFont);
-            addEmptyLine(attaSiffrig, 4);
+            addEmptyLine(attaSiffrig, 1);
             attaSiffrig.add(new Paragraph());
             document.add(attaSiffrig);
             
