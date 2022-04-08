@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -338,6 +339,8 @@ public class SokHatt extends javax.swing.JFrame {
             SqlFragor.addToDatabasen(updateDekQuery);
             
         }
+        JOptionPane.showMessageDialog(null, "Hatten har blivit uppdaterad!");
+        dispose();
         
 
 

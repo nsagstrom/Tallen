@@ -124,6 +124,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
             
         }
         JOptionPane.showMessageDialog(null, "Hatten tillagd!");
+        dispose();
 
 
     }//GEN-LAST:event_skapaHattBtnActionPerformed
@@ -154,7 +155,6 @@ public class LaggTillHatt extends javax.swing.JFrame {
         dekList = new javax.swing.JList<>();
         dekList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         skapaHattBtn = new javax.swing.JButton();
-        avbrytBtn = new javax.swing.JButton();
         fargCmb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -226,15 +226,6 @@ public class LaggTillHatt extends javax.swing.JFrame {
             }
         });
 
-        avbrytBtn.setBackground(new java.awt.Color(255, 255, 255));
-        avbrytBtn.setForeground(new java.awt.Color(0, 0, 0));
-        avbrytBtn.setText("Avbryt");
-        avbrytBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                avbrytBtnActionPerformed(evt);
-            }
-        });
-
         fargCmb.setBackground(new java.awt.Color(255, 255, 255));
         fargCmb.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -267,10 +258,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(skapaHattBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(avbrytBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(skapaHattBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(prisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(fargCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -314,25 +302,18 @@ public class LaggTillHatt extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(skapaHattBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(avbrytBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(skapaHattBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void avbrytBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avbrytBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_avbrytBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton avbrytBtn;
     private javax.swing.JList<String> dekList;
     private javax.swing.JComboBox<String> fargCmb;
     private javax.swing.JComboBox<String> genreCmb;
