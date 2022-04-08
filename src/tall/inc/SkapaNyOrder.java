@@ -28,15 +28,16 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
         return nuvarandeOrderNummer;
     }
-    
+
     public void fillFargCmb() {
         String query = "SELECT namn FROM farg";
         ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
         for (String farg : fargLista) {
             CBoxSpecialartikelFarg.addItem(farg);
+            cbxLagerFarg.addItem(farg);
         }
     }
-        
+
     public void fillTygCmb() {
         String query = "SELECT namn FROM tyg";
         ArrayList<String> tygLista = SqlFragor.getEnKolumn(query);
@@ -44,14 +45,14 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             CBoxSpecialartikelTyg.addItem(tyg);
         }
     }
-    
+
     //Skapar "nästa" ordernummer (BestID) baserat på det högsta ID:t som finns i databasen.
     private void skapaOrderNummer() {
         int ordernummer = taFramMaxBestId() + 1;
         String order = Integer.toString(ordernummer);
         lblVarOrderNummer.setText(order);
     }
-    
+
     //Skapar "nästa" KundID baserat på det högsta ID:t som finns i databasen.
     private int skapaKundnummer() {
         int kundNummer = taFramMaxKundId() + 1;
@@ -59,16 +60,17 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
         return kundNummer;
     }
-    
-        //Skapar "nästa" HattID baserat på det högsta värdet som finns i databasen.
-        private int skapaHattId() {
+
+    //Skapar "nästa" HattID baserat på det högsta värdet som finns i databasen.
+    private int skapaHattId() {
         int hattId = taFramMaxHattId() + 1;
         String kundNr = Integer.toString(hattId);
 
         return hattId;
     }
-        // Hämtar det högsta HattID:t som finns i databasen
-        public int taFramMaxHattId() {
+    // Hämtar det högsta HattID:t som finns i databasen
+
+    public int taFramMaxHattId() {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(HattID) FROM hatt"));
         return maxId;
     }
@@ -94,6 +96,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField3 = new javax.swing.JTextField();
         lblNyOrder = new javax.swing.JLabel();
         lblFarg = new javax.swing.JLabel();
         lblAntal = new javax.swing.JLabel();
@@ -105,7 +108,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         lblAdress = new javax.swing.JLabel();
         lblTelefon = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         txtangivetFornamn = new javax.swing.JTextField();
         txtangivetEfternamn = new javax.swing.JTextField();
@@ -126,6 +128,13 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         btnTillbaka = new javax.swing.JButton();
         CBoxSpecialartikelFarg = new javax.swing.JComboBox<>();
         CBoxSpecialartikelTyg = new javax.swing.JComboBox<>();
+        cbxLagerFarg = new javax.swing.JComboBox<>();
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -150,6 +159,24 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
         lblTelefon.setText("Telefonnummer");
 
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        txtangivetFornamn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtangivetFornamnActionPerformed(evt);
+            }
+        });
+
+        txtangivetEfternamn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtangivetEfternamnActionPerformed(evt);
+            }
+        });
+
         lblOrdernummer.setText("Ordernummer");
 
         lblVarOrderNummer.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -159,13 +186,16 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
         lblSpecialartikel.setText("Specialartikel");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         lblSpecialartikelFarg.setText("Färg");
 
         lblSpecialartikelTyg.setText("Tyg");
 
         btnLaggTillHatt.setText("Lägg till");
+        btnLaggTillHatt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaggTillHattActionPerformed(evt);
+            }
+        });
 
         btnLaggTillSpHatt.setText("Lägg till");
         btnLaggTillSpHatt.addActionListener(new java.awt.event.ActionListener() {
@@ -188,10 +218,8 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             }
         });
 
-        CBoxSpecialartikelFarg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CBoxSpecialartikelFarg.setSelectedIndex(-1);
 
-        CBoxSpecialartikelTyg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CBoxSpecialartikelTyg.setSelectedIndex(-1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -221,9 +249,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbxLagerFarg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15)
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblBenamning)
@@ -309,9 +337,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLaggTillHatt))
+                    .addComponent(btnLaggTillHatt)
+                    .addComponent(cbxLagerFarg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(lblSpecialartikel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -334,8 +362,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
     private void btnLaggTillKundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillKundActionPerformed
 
-        laggTillNyKund();
-
+        if (valideringMetod() == false) {
+            laggTillNyKund();
+        }
     }//GEN-LAST:event_btnLaggTillKundActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
@@ -344,10 +373,30 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnLaggTillSpHattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillSpHattActionPerformed
-       int hattId = skapaHattId();
-       System.out.println(hattId);
-       
+        int hattId = skapaHattId();
+        System.out.println(hattId);
+
     }//GEN-LAST:event_btnLaggTillSpHattActionPerformed
+
+    private void txtangivetFornamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtangivetFornamnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtangivetFornamnActionPerformed
+
+    private void txtangivetEfternamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtangivetEfternamnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtangivetEfternamnActionPerformed
+
+    private void btnLaggTillHattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillHattActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLaggTillHattActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void laggTillNyKund() {
         String fornamn = txtangivetFornamn.getText();
@@ -361,12 +410,37 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(null, "Ny kund tillagd!");
     }
-    
-    
+        //
+    private boolean valideringMetod() {
+        boolean ok = false;
+        if (ValideringsKlass.stringHarVarde(txtangivetFornamn.getText()) == false) {
+            ok = true;
+            JOptionPane.showMessageDialog(null, "Vänligen ange förnamn i rutan");
+        }
+
+        if (ValideringsKlass.stringHarVarde(txtangivetEfternamn.getText()) == false) {
+            ok = true;
+            JOptionPane.showMessageDialog(null, "Vänligen ange efternamn i rutan");
+        }
+        if (ValideringsKlass.stringHarVarde(txtangivetAdress.getText()) == false) {
+            ok = true;
+            JOptionPane.showMessageDialog(null, "Vänligen ange adress i rutan");
+        }
+        if (ValideringsKlass.stringHarVarde(txtangivetTelefonnummer.getText()) == false) {
+            ok = true;
+            JOptionPane.showMessageDialog(null, "Vänligen ange telefonnummer i rutan");
+        }
+        if (ValideringsKlass.testaTeleNmrString(txtangivetTelefonnummer.getText()) == false) {
+            ok = true;
+            JOptionPane.showMessageDialog(null, "Telefonnummer kan inte innehålla bokstäver");
+        }
+
+        return ok;
+    }
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CBoxSpecialartikelFarg;
@@ -375,6 +449,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     private javax.swing.JButton btnLaggTillKund;
     private javax.swing.JButton btnLaggTillSpHatt;
     private javax.swing.JButton btnTillbaka;
+    private javax.swing.JComboBox<String> cbxLagerFarg;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
