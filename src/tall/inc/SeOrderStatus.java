@@ -52,7 +52,6 @@ public class SeOrderStatus extends javax.swing.JFrame {
             }
         });
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj" }));
         cmbStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbStatusActionPerformed(evt);
@@ -122,7 +121,8 @@ public class SeOrderStatus extends javax.swing.JFrame {
                 + "\t" + info.get("Prio") + "\n");
                 
             }
-        } else if (i == 0){
+        }
+        else if(filter == null){
             fyllOrderLista();
         }
 
