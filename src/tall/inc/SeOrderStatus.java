@@ -13,6 +13,7 @@ import java.util.HashMap;
  */
 public class SeOrderStatus extends javax.swing.JFrame {
 
+    private static String filter;
     /**
      * Creates new form SeOrderStatus
      */
@@ -95,7 +96,14 @@ public class SeOrderStatus extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void cmbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStatusActionPerformed
-        // TODO add your handling code here:
+        String status = cmbStatus.getSelectedItem().toString();
+        String fraga3 = "Select BestID, Status, KundID, TullID, Prio FROM bestallning where Status = '" + status + "'";
+        filter = SqlFragor.getEttVarde(fraga3);
+        if(filter == status){
+            txtOrderLista.setText("");
+        }
+        
+        
     }//GEN-LAST:event_cmbStatusActionPerformed
 
     private void fyllOrderLista() {
