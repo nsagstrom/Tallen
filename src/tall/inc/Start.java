@@ -29,6 +29,6 @@ public class Start {
         //Alla våra SQL-frågor behandlas av klassen SqlFragor
         SqlFragor.setDatabas(idb);
                 
-        //fraktsedel = new Fraktsedel();
+        fraktsedel = new Fraktsedel();
     }
 }
