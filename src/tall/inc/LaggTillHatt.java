@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -35,7 +36,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
     }
 
     public void fillGenreCmb() {
-        String query = "SELECT namn FROM genre";
+        String query = "SELECT Genre FROM genre";
         ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
         for (String genre : genreLista) {
             genreCmb.addItem(genre);
@@ -43,7 +44,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
     }
 
     public void fillFargCmb() {
-        String query = "SELECT namn FROM farg";
+        String query = "SELECT Farg FROM farg";
         ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
         for (String farg : fargLista) {
             fargCmb.addItem(farg);
@@ -51,7 +52,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
     }
 
     public void fillTygCmb() {
-        String query = "SELECT namn FROM tyg";
+        String query = "SELECT Tyg FROM tyg";
         ArrayList<String> tygLista = SqlFragor.getEnKolumn(query);
         for (String tyg : tygLista) {
             tygCmb.addItem(tyg);
@@ -80,7 +81,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
                 }
             }
         });
-        String query = "SELECT DekoratioNamn FROM dekorationer";
+        String query = "SELECT Dekoration FROM dekorationer";
         ArrayList<String> dekLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String dek : dekLista) {
@@ -102,36 +103,38 @@ public class LaggTillHatt extends javax.swing.JFrame {
         String namn = namnTextField.getText();
 
         String tyg = tygCmb.getSelectedItem().toString();
-        String tygQuery = "Select tygID From tyg where namn = '" + tyg + "'";
+        String tygQuery = "Select tygID From tyg where tyg = '" + tyg + "'";
         String tygID = SqlFragor.getEttVarde(tygQuery);
 
         String genre = genreCmb.getSelectedItem().toString();
-        String genreQuery = "Select genreID From genre where namn = '" + genre + "'";
+        String genreQuery = "Select genreID From genre where genre = '" + genre + "'";
         String genreID = SqlFragor.getEttVarde(genreQuery);
 
         String pris = prisTextField.getText();
         String storlek = storlekCmb.getSelectedItem().toString();
 
         String farg = fargCmb.getSelectedItem().toString();
-        String fargQuery = "Select fargID From farg where namn = '" + farg + "'";
+        String fargQuery = "Select fargID From farg where farg = '" + farg + "'";
         
         String fargID = SqlFragor.getEttVarde(fargQuery);        
-        String query = "INSERT INTO standardhatt (hattID, Namn, FargID,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','"+anvandarID+"', '" + storlek + "')";
+        String query = "INSERT INTO hatt (hattID, beskrivning, FargID,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','"+anvandarID+"', '" + storlek + "')";
         SqlFragor.addToDatabasen(query);
         
-        String hattQuery = "INSERT INTO hatt (HattID) VALUES ('"+hattID+"')";
+        String hattQuery = "INSERT INTO standardhatt (HattID) VALUES ('"+hattID+"')";
         SqlFragor.addToDatabasen(hattQuery);
         
         List<String> dek = dekList.getSelectedValuesList();
         for (String dekoration : dek) {
-            String dekQuery = "SELECT dekorationID FROM dekorationer WHERE namn = '" + dekoration + "'";
+            String dekQuery = "SELECT dekorationID FROM dekorationer WHERE dekoration = '" + dekoration + "'";
             String dekID = SqlFragor.getEttVarde(dekQuery);
 
 
             String insertQuery = "INSERT INTO dekorationerstandardhatt (hattID,dekorationID) VALUES ('" + hattID + "','" + dekID + "')";
 
             SqlFragor.addToDatabasen(insertQuery);
+            
         }
+        JOptionPane.showMessageDialog(null, "Hatten tillagd!");
 
 
     }//GEN-LAST:event_skapaHattBtnActionPerformed
