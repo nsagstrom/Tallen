@@ -44,13 +44,15 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             CBoxSpecialartikelTyg.addItem(tyg);
         }
     }
-
+    
+    //Skapar "nästa" ordernummer (BestID) baserat på det högsta ID:t som finns i databasen.
     private void skapaOrderNummer() {
         int ordernummer = taFramMaxBestId() + 1;
         String order = Integer.toString(ordernummer);
         lblVarOrderNummer.setText(order);
     }
-
+    
+    //Skapar "nästa" KundID baserat på det högsta ID:t som finns i databasen.
     private int skapaKundnummer() {
         int kundNummer = taFramMaxKundId() + 1;
         String kundNr = Integer.toString(kundNummer);
@@ -58,13 +60,14 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         return kundNummer;
     }
     
+        //Skapar "nästa" HattID baserat på det högsta värdet som finns i databasen.
         private int skapaHattId() {
         int hattId = taFramMaxHattId() + 1;
         String kundNr = Integer.toString(hattId);
 
         return hattId;
     }
-        
+        // Hämtar det högsta HattID:t som finns i databasen
         public int taFramMaxHattId() {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(HattID) FROM hatt"));
         return maxId;
