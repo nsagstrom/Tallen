@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -298,47 +299,61 @@ public class SokHatt extends javax.swing.JFrame {
         String hattID = hattIDTextfield.getText();
 
         String namn = namnTextfield.getText();
-        String updateNamnQuery = "update Hatt set beskrivning = '" + namn + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateNamnQuery);
-        //
         String pris = prisTextfield.getText();
-        String updatePrisQuery = "update Hatt set Pris = '" + pris + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updatePrisQuery);
-        //
-        String farg = fargCmb.getSelectedItem().toString();
-        String fargQuery = "SELECT fargID FROM farg where farg = '" + farg + "'";
-        String fargID = SqlFragor.getEttVarde(fargQuery);
-        String updateFargQuery = "update Hatt set FargID = '" + fargID + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateFargQuery);
-        //
-        String genre = genreCmb.getSelectedItem().toString();
-        String genreQuery = "SELECT genreID FROM genre where genre = '" + genre + "'";
-        String genreID = SqlFragor.getEttVarde(genreQuery);
-        String updateGenreQuery = "update Hatt set GenreID = '" + genreID + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateGenreQuery);
-        //
-        String tyg = tygCmb.getSelectedItem().toString();
-        String tygQuery = "SELECT tygID FROM tyg where tyg = '" + tyg + "'";
-        String tygID = SqlFragor.getEttVarde(tygQuery);
-        String updateTygQuery = "update hatt set TygID = '" + tygID + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateTygQuery);
-        //
-        String storlek = storlekCmb.getSelectedItem().toString();
-        String updateStorlekQuery = "update hatt set storlek = '" + storlek + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateStorlekQuery);
-        //
-        String deleteDekQuery = "DELETE FROM dekorationerstandardhatt WHERE hattID = '"+hattID+"'";
-        SqlFragor.deleteFranDatabasen(deleteDekQuery);
-        //
-        List<String> dek = dekList.getSelectedValuesList();
-        for (String dekoration : dek) {
-            String dekQuery = "SELECT dekorationID FROM dekorationer WHERE dekoration = '" + dekoration + "'";
-            String dekID = SqlFragor.getEttVarde(dekQuery); 
-            String updateDekQuery = "INSERT INTO dekorationerstandardhatt (HattID,DekorationID) VALUES ('"+hattID+"', '"+dekID+"')";
-            SqlFragor.addToDatabasen(updateDekQuery);
+        boolean namnStringTest = ValideringsKlass.stringHarVarde(namn);
+        boolean prisStringTest = ValideringsKlass.stringHarVarde(pris);
+        boolean prisIntTest = ValideringsKlass.taltest(prisTextfield);
+
+        if (namnStringTest == true && prisStringTest == true && prisIntTest == true) {
+            String updateNamnQuery = "update Hatt set beskrivning = '" + namn + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateNamnQuery);
+            String updatePrisQuery = "update Hatt set Pris = '" + pris + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updatePrisQuery);
+
+            //
+            //
+            String farg = fargCmb.getSelectedItem().toString();
+            String fargQuery = "SELECT fargID FROM farg where farg = '" + farg + "'";
+            String fargID = SqlFragor.getEttVarde(fargQuery);
+            String updateFargQuery = "update Hatt set FargID = '" + fargID + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateFargQuery);
+            //
+            String genre = genreCmb.getSelectedItem().toString();
+            String genreQuery = "SELECT genreID FROM genre where genre = '" + genre + "'";
+            String genreID = SqlFragor.getEttVarde(genreQuery);
+            String updateGenreQuery = "update Hatt set GenreID = '" + genreID + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateGenreQuery);
+            //
+            String tyg = tygCmb.getSelectedItem().toString();
+            String tygQuery = "SELECT tygID FROM tyg where tyg = '" + tyg + "'";
+            String tygID = SqlFragor.getEttVarde(tygQuery);
+            String updateTygQuery = "update hatt set TygID = '" + tygID + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateTygQuery);
+            //
+            String storlek = storlekCmb.getSelectedItem().toString();
+            String updateStorlekQuery = "update hatt set storlek = '" + storlek + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateStorlekQuery);
+            //
+            String deleteDekQuery = "DELETE FROM dekorationerstandardhatt WHERE hattID = '" + hattID + "'";
+            SqlFragor.deleteFranDatabasen(deleteDekQuery);
+            //
+            List<String> dek = dekList.getSelectedValuesList();
+            for (String dekoration : dek) {
+                String dekQuery = "SELECT dekorationID FROM dekorationer WHERE dekoration = '" + dekoration + "'";
+                String dekID = SqlFragor.getEttVarde(dekQuery);
+                String updateDekQuery = "INSERT INTO dekorationerstandardhatt (HattID,DekorationID) VALUES ('" + hattID + "', '" + dekID + "')";
+                SqlFragor.addToDatabasen(updateDekQuery);
+
+            }
+            JOptionPane.showMessageDialog(null, "Hatten uppdaterad!");
             
+        } else if (prisIntTest == false) {
+            JOptionPane.showMessageDialog(null, "Priset kan endast bestå av siffror!");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Du måste fylla i alla fält!");
+
         }
-        
 
 
     }//GEN-LAST:event_uppdateraButtonActionPerformed
