@@ -100,6 +100,24 @@ public class Fraktsedel {
             kundTelNr.add(new Paragraph());
             document.add(kundTelNr);
             
+            Paragraph posten = new Paragraph("Posten");
+            addEmptyLine(posten, 1);
+            posten.add(new Paragraph());
+            document.add(posten);
+            
+            Paragraph vikt = new Paragraph("Vikt:");
+            vikt.add(new Paragraph());
+            document.add(vikt);
+            
+            Paragraph varuKod = new Paragraph("Varukod:");
+            varuKod.add(new Paragraph());
+            document.add(varuKod);
+            
+            Paragraph moms = new Paragraph("Moms:");
+            moms.add(new Paragraph());
+            document.add(moms);
+            
+            
             document.close();
            // JOptionPane.showMessageDialog(null, "Fraktsedel skapad");
         } catch (Exception e) {
