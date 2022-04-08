@@ -5,8 +5,10 @@
 
 package tall.inc;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
@@ -15,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import javax.swing.JOptionPane;
+import javax.swing.text.StyleConstants.FontConstants;
 
 
 
@@ -48,72 +51,73 @@ public class Fraktsedel {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
-            Paragraph foretagsNamn = new Paragraph("Hattmakaren");
+            
+            Paragraph foretagsNamn = new Paragraph("Hattmakaren", storFont);
             foretagsNamn.add(new Paragraph());
             document.add(foretagsNamn);
             
-            Paragraph foretagsAdress = new Paragraph("Åstadalsvägen 1E");
+            Paragraph foretagsAdress = new Paragraph("Åstadalsvägen 1E", litenFont);
             foretagsAdress.add(new Paragraph());
             document.add(foretagsAdress);
             
-            Paragraph foretagsOrt = new Paragraph("SE - 702 81 Örebro");
+            Paragraph foretagsOrt = new Paragraph("SE - 702 81 Örebro", litenFont);
             addEmptyLine(foretagsOrt, 1);
             foretagsOrt.add(new Paragraph());
             document.add(foretagsOrt);
             
-            Paragraph orgNummer = new Paragraph("Org Nr: 111003332821");
+            Paragraph orgNummer = new Paragraph("Org Nr: 111003332821", litenFont);
             orgNummer.setAlignment(Element.ALIGN_RIGHT);
             orgNummer.add(new Paragraph());
             document.add(orgNummer);
             
-            Paragraph kontakt = new Paragraph("Kontakt: Otto & Judith");
+            Paragraph kontakt = new Paragraph("Kontakt: Otto&Judith@gmail.com", litenFont );
             kontakt.setAlignment(Element.ALIGN_RIGHT);
             kontakt.add(new Paragraph());
             document.add(kontakt);
             
-            Paragraph foretagsTelNr = new Paragraph("Tel: +46 76 058 9805");
+            Paragraph foretagsTelNr = new Paragraph("Tel: +46 76 058 9805", litenFont);
             addEmptyLine(foretagsTelNr, 1);
             foretagsTelNr.add(new Paragraph());
             document.add(foretagsTelNr);
             
-            Paragraph tillKund = new Paragraph("Till: \n");
+            Paragraph tillKund = new Paragraph("Till: \n", litenFont);
             tillKund.add(new Paragraph());
             document.add(tillKund);
             
-            Paragraph portKod = new Paragraph("Portkod:");
+            Paragraph portKod = new Paragraph("Portkod:", litenFont);
             portKod.setAlignment(Element.ALIGN_RIGHT);
             portKod.add(new Paragraph());
             document.add(portKod);
             
-            Paragraph kundKontakt = new Paragraph("Kontakt:");
+            Paragraph kundKontakt = new Paragraph("Kontakt:", litenFont);
             kundKontakt.setAlignment(Element.ALIGN_RIGHT);
             kundKontakt.add(new Paragraph());
             document.add(kundKontakt);
             
-            Paragraph inneHall = new Paragraph("Innehåll:");
+            Paragraph inneHall = new Paragraph("Innehåll:", litenFont);
             inneHall.setAlignment(Element.ALIGN_RIGHT);
             inneHall.add(new Paragraph());
             document.add(inneHall);
             
-            Paragraph kundTelNr = new Paragraph("Tel:");
+            Paragraph kundTelNr = new Paragraph("Tel:", litenFont);
             kundTelNr.setAlignment(Element.ALIGN_RIGHT);
             kundTelNr.add(new Paragraph());
             document.add(kundTelNr);
             
-            Paragraph posten = new Paragraph("Posten");
+            Paragraph posten = new Paragraph("PostNord", postFont);
             addEmptyLine(posten, 1);
             posten.add(new Paragraph());
             document.add(posten);
             
-            Paragraph vikt = new Paragraph("Vikt:");
+            Paragraph vikt = new Paragraph("Vikt:", litenFont);
             vikt.add(new Paragraph());
             document.add(vikt);
             
-            Paragraph varuKod = new Paragraph("Varukod:");
+            Paragraph varuKod = new Paragraph("Varukod:", litenFont);
             varuKod.add(new Paragraph());
             document.add(varuKod);
             
-            Paragraph moms = new Paragraph("Moms:");
+            Paragraph moms = new Paragraph("Moms:", litenFont);
             moms.add(new Paragraph());
             document.add(moms);
             
@@ -157,5 +161,15 @@ public class Fraktsedel {
     private void test(){
         nyFraktsedel(12345678, "Förnamn", "Efternamn", "Gatan 7", "073-123456", 11111111);
     }
+    
+    private static Font storFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
+    
+    private static Font litenFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
+    
+    private static Font postFont = new Font(Font.FontFamily.COURIER, 16, Font.BOLD, BaseColor.BLUE);
+  
+    
+    
+      
     
 }
