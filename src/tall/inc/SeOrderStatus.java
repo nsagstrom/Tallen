@@ -77,23 +77,24 @@ public class SeOrderStatus extends javax.swing.JFrame {
     private void fyllOrderLista() {
 
         ArrayList<HashMap<String, String>> allInfo;
-        String fraga = "SELECT HattID,Status,pris,KundID FROM specialhatt\n"
-                + "WHERE Status = 'Öppen' OR Status = 'Pågående';";
+        String fraga = "SELECT BestID, Status, KundID, TullID, Prio FROM bestallning";
 
         allInfo = SqlFragor.getFleraRader(fraga);
 
-        String rubrik = " Hatt ID:"
+        String rubrik = " BeställningsID:"
                 + "\t" + "Status:"
-                + "\t" + "Pris:"
-                + "\t" + "Kund ID:" + "\n";
+                + "\t" + "Kund ID"
+                + "\t" + "TullID:"
+                + "\t" + "Prio:" + "\n";
 
         txtOrderLista.append(rubrik);
 
         for (HashMap<String, String> info : allInfo) {
-            txtOrderLista.append(info.get("HattID")
+            txtOrderLista.append(info.get("BestID")
                     + "\t" + info.get("Status")
-                    + "\t" + info.get("pris")
-                    + "\t" + info.get("KundID") + "\n");
+                    + "\t" + info.get("KundID")
+                    + "\t" + info.get("TullID")
+                    + "\t" + info.get("Prio") + "\n");
         }
     }
 
