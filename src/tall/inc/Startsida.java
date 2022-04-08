@@ -77,7 +77,7 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
-        btnSokArtikel.setText("Sök artikel");
+        btnSokArtikel.setText("Administrera artikel");
         btnSokArtikel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSokArtikelActionPerformed(evt);
@@ -116,18 +116,18 @@ public class Startsida extends javax.swing.JFrame {
                                 .addComponent(btnLoggaUt))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnSeOrderStatus)
-                                .addGap(100, 100, 100)
-                                .addComponent(btnSokArtikel)
-                                .addGap(0, 67, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAndraPris)
+                        .addGap(89, 220, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnSkapaNyOrder)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSkapaNyArtikel)
-                        .addGap(51, 51, 51))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAndraPris)
-                        .addGap(89, 220, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSkapaNyArtikel)
+                            .addComponent(btnSokArtikel))
+                        .addGap(51, 51, 51))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
