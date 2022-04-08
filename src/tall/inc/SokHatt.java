@@ -335,7 +335,7 @@ public class SokHatt extends javax.swing.JFrame {
             String dekQuery = "SELECT dekorationID FROM dekorationer WHERE dekoration = '" + dekoration + "'";
             String dekID = SqlFragor.getEttVarde(dekQuery); 
             String updateDekQuery = "INSERT INTO dekorationerstandardhatt (HattID,DekorationID) VALUES ('"+hattID+"', '"+dekID+"')";
-            SqlFragor.uppdatera(updateDekQuery);
+            SqlFragor.addToDatabasen(updateDekQuery);
             
         }
         

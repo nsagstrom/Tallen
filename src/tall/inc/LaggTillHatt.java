@@ -59,17 +59,6 @@ public class LaggTillHatt extends javax.swing.JFrame {
         }
     }
 
-    /*public void fillDekList() {
-        String query = "SELECT namn FROM dekoration";
-        ArrayList<String> dekLista = SqlFragor.getEnKolumn(query);
-        DefaultListModel m = new DefaultListModel();
-        dekList.setModel(m);
-        for (String dek : dekLista) {
-            m.addElement(dek);
-
-        }
-
-    }*/
     public void fillDekList1() {
 
         dekList.setSelectionModel(new DefaultListSelectionModel() {
