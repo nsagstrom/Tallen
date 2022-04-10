@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -35,7 +36,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
     }
 
     public void fillGenreCmb() {
-        String query = "SELECT namn FROM genre";
+        String query = "SELECT Genre FROM genre";
         ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
         for (String genre : genreLista) {
             genreCmb.addItem(genre);
@@ -43,7 +44,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
     }
 
     public void fillFargCmb() {
-        String query = "SELECT namn FROM farg";
+        String query = "SELECT Farg FROM farg";
         ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
         for (String farg : fargLista) {
             fargCmb.addItem(farg);
@@ -51,24 +52,13 @@ public class LaggTillHatt extends javax.swing.JFrame {
     }
 
     public void fillTygCmb() {
-        String query = "SELECT namn FROM tyg";
+        String query = "SELECT Tyg FROM tyg";
         ArrayList<String> tygLista = SqlFragor.getEnKolumn(query);
         for (String tyg : tygLista) {
             tygCmb.addItem(tyg);
         }
     }
 
-    /*public void fillDekList() {
-        String query = "SELECT namn FROM dekoration";
-        ArrayList<String> dekLista = SqlFragor.getEnKolumn(query);
-        DefaultListModel m = new DefaultListModel();
-        dekList.setModel(m);
-        for (String dek : dekLista) {
-            m.addElement(dek);
-
-        }
-
-    }*/
     public void fillDekList1() {
 
         dekList.setSelectionModel(new DefaultListSelectionModel() {
@@ -80,7 +70,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
                 }
             }
         });
-        String query = "SELECT DekoratioNamn FROM dekorationer";
+        String query = "SELECT Dekoration FROM dekorationer";
         ArrayList<String> dekLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String dek : dekLista) {
@@ -102,36 +92,39 @@ public class LaggTillHatt extends javax.swing.JFrame {
         String namn = namnTextField.getText();
 
         String tyg = tygCmb.getSelectedItem().toString();
-        String tygQuery = "Select tygID From tyg where namn = '" + tyg + "'";
+        String tygQuery = "Select tygID From tyg where tyg = '" + tyg + "'";
         String tygID = SqlFragor.getEttVarde(tygQuery);
 
         String genre = genreCmb.getSelectedItem().toString();
-        String genreQuery = "Select genreID From genre where namn = '" + genre + "'";
+        String genreQuery = "Select genreID From genre where genre = '" + genre + "'";
         String genreID = SqlFragor.getEttVarde(genreQuery);
 
         String pris = prisTextField.getText();
         String storlek = storlekCmb.getSelectedItem().toString();
 
         String farg = fargCmb.getSelectedItem().toString();
-        String fargQuery = "Select fargID From farg where namn = '" + farg + "'";
+        String fargQuery = "Select fargID From farg where farg = '" + farg + "'";
         
         String fargID = SqlFragor.getEttVarde(fargQuery);        
-        String query = "INSERT INTO standardhatt (hattID, Namn, FargID,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','"+anvandarID+"', '" + storlek + "')";
+        String query = "INSERT INTO hatt (hattID, beskrivning, FargID,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','"+anvandarID+"', '" + storlek + "')";
         SqlFragor.addToDatabasen(query);
         
-        String hattQuery = "INSERT INTO hatt (HattID) VALUES ('"+hattID+"')";
+        String hattQuery = "INSERT INTO standardhatt (HattID) VALUES ('"+hattID+"')";
         SqlFragor.addToDatabasen(hattQuery);
         
         List<String> dek = dekList.getSelectedValuesList();
         for (String dekoration : dek) {
-            String dekQuery = "SELECT dekorationID FROM dekorationer WHERE namn = '" + dekoration + "'";
+            String dekQuery = "SELECT dekorationID FROM dekorationer WHERE dekoration = '" + dekoration + "'";
             String dekID = SqlFragor.getEttVarde(dekQuery);
 
 
             String insertQuery = "INSERT INTO dekorationerstandardhatt (hattID,dekorationID) VALUES ('" + hattID + "','" + dekID + "')";
 
             SqlFragor.addToDatabasen(insertQuery);
+            
         }
+        JOptionPane.showMessageDialog(null, "Hatten tillagd!");
+        dispose();
 
 
     }//GEN-LAST:event_skapaHattBtnActionPerformed
@@ -162,8 +155,8 @@ public class LaggTillHatt extends javax.swing.JFrame {
         dekList = new javax.swing.JList<>();
         dekList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         skapaHattBtn = new javax.swing.JButton();
-        avbrytBtn = new javax.swing.JButton();
         fargCmb = new javax.swing.JComboBox<>();
+        tillbakaButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -192,7 +185,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
 
         storlekCmb.setBackground(new java.awt.Color(255, 255, 255));
         storlekCmb.setForeground(new java.awt.Color(0, 0, 0));
-        storlekCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj storlek:", "S", "M", "L", "XL" }));
+        storlekCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S", "M", "L", "XL" }));
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -234,17 +227,17 @@ public class LaggTillHatt extends javax.swing.JFrame {
             }
         });
 
-        avbrytBtn.setBackground(new java.awt.Color(255, 255, 255));
-        avbrytBtn.setForeground(new java.awt.Color(0, 0, 0));
-        avbrytBtn.setText("Avbryt");
-        avbrytBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                avbrytBtnActionPerformed(evt);
-            }
-        });
-
         fargCmb.setBackground(new java.awt.Color(255, 255, 255));
         fargCmb.setForeground(new java.awt.Color(0, 0, 0));
+
+        tillbakaButton.setBackground(new java.awt.Color(255, 255, 255));
+        tillbakaButton.setForeground(new java.awt.Color(0, 0, 0));
+        tillbakaButton.setText("Tillbaka");
+        tillbakaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tillbakaButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -254,39 +247,41 @@ public class LaggTillHatt extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel8))
-                                .addGap(45, 45, 45)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(genreCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(storlekCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tygCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(namnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(6, 6, 6))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(jLabel7))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(skapaHattBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(avbrytBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(prisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fargCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap(66, Short.MAX_VALUE))
+                                    .addComponent(storlekCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(genreCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tygCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(namnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(60, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fargCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(skapaHattBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tillbakaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(prisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(59, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,25 +317,25 @@ public class LaggTillHatt extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(skapaHattBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(avbrytBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tillbakaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void avbrytBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avbrytBtnActionPerformed
+    private void tillbakaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillbakaButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_avbrytBtnActionPerformed
+        dispose();
+    }//GEN-LAST:event_tillbakaButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton avbrytBtn;
     private javax.swing.JList<String> dekList;
     private javax.swing.JComboBox<String> fargCmb;
     private javax.swing.JComboBox<String> genreCmb;
@@ -357,6 +352,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
     private javax.swing.JTextField prisTextField;
     private javax.swing.JButton skapaHattBtn;
     private javax.swing.JComboBox<String> storlekCmb;
+    private javax.swing.JButton tillbakaButton;
     private javax.swing.JComboBox<String> tygCmb;
     // End of variables declaration//GEN-END:variables
 }

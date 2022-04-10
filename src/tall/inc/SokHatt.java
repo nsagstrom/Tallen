@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,7 +31,7 @@ public class SokHatt extends javax.swing.JFrame {
     }
 
     public void fillHattList() {
-        String query = "SELECT hattnamn FROM standardhatt";
+        String query = "SELECT Beskrivning FROM hatt";
         ArrayList<String> hattar = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattar) {
@@ -40,7 +41,7 @@ public class SokHatt extends javax.swing.JFrame {
     }
 
     public void fillGenreCmb() {
-        String query = "SELECT genrenamn FROM genre";
+        String query = "SELECT genre FROM genre";
         ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
         for (String genre : genreLista) {
             genreCmb.addItem(genre);
@@ -48,7 +49,7 @@ public class SokHatt extends javax.swing.JFrame {
     }
 
     public void fillFargCmb() {
-        String query = "SELECT fargnamn FROM farg";
+        String query = "SELECT farg FROM farg";
         ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
         for (String farg : fargLista) {
             fargCmb.addItem(farg);
@@ -56,7 +57,7 @@ public class SokHatt extends javax.swing.JFrame {
     }
 
     public void fillTygCmb() {
-        String query = "SELECT tygnamn FROM tyg";
+        String query = "SELECT tyg FROM tyg";
         ArrayList<String> tygLista = SqlFragor.getEnKolumn(query);
         for (String tyg : tygLista) {
             tygCmb.addItem(tyg);
@@ -74,7 +75,7 @@ public class SokHatt extends javax.swing.JFrame {
                 }
             }
         });
-        String query = "SELECT DekorationNamn FROM dekorationer";
+        String query = "SELECT Dekoration FROM dekorationer";
         ArrayList<String> dekLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String dek : dekLista) {
@@ -115,6 +116,7 @@ public class SokHatt extends javax.swing.JFrame {
         dekList = new javax.swing.JList<>();
         jLabel8 = new javax.swing.JLabel();
         hattIDTextfield = new javax.swing.JTextField();
+        tillbakaButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,14 +146,8 @@ public class SokHatt extends javax.swing.JFrame {
             }
         });
 
-        fargCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Färg" }));
-
-        storlekCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Storlek", "S", "M", "L", "XL" }));
+        storlekCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S", "M", "L", "XL" }));
         storlekCmb.setToolTipText("");
-
-        genreCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Genre" }));
-
-        tygCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Tyg" }));
 
         jLabel7.setText("Tyg:");
 
@@ -164,6 +160,13 @@ public class SokHatt extends javax.swing.JFrame {
 
         jLabel8.setText("Dekorationer:");
 
+        tillbakaButton.setText("Tillbaka");
+        tillbakaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tillbakaButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,34 +174,30 @@ public class SokHatt extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(valjButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(39, 39, 39)
-                            .addComponent(jLabel4)
-                            .addGap(18, 18, 18))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addGap(35, 35, 35))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel6))
-                            .addGap(19, 19, 19)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 78, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel3))
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tillbakaButton)
+                            .addComponent(valjButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
                     .addComponent(uppdateraButton)
@@ -240,28 +239,23 @@ public class SokHatt extends javax.swing.JFrame {
                             .addComponent(tygCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(prisTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel8))))
+                            .addComponent(prisTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(valjButton)
-                        .addGap(33, 33, 33))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(uppdateraButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(valjButton)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(uppdateraButton)
+                    .addComponent(tillbakaButton))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pack();
@@ -270,12 +264,12 @@ public class SokHatt extends javax.swing.JFrame {
     private void valjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valjButtonActionPerformed
         // TODO add your handling code here:
         String valdHatt = hattList.getSelectedValue();
-        String hattQuery = "SELECT hattID FROM standardhatt where hattnamn = '" + valdHatt + "'";
+        String hattQuery = "SELECT hattID FROM hatt where beskrivning = '" + valdHatt + "'";
         String hattID = SqlFragor.getEttVarde(hattQuery);
         hattIDTextfield.setText(hattID);
 
-        String query = "SELECT HattNamn, Pris, storlek, FargNamn, GenreNamn, TygNamn FROM standardhatt inner join Farg on StandardHatt.FargID = Farg.FargID inner join Genre on StandardHatt.GenreID = Genre.GenreID inner join Tyg on StandardHatt.TygID = Tyg.TygID WHERE standardhatt.HattID = '" + hattID + "'";
-        String dekorationQuery = "SELECT d.DekorationNamn FROM dekorationerstandardhatt inner join dekorationer d on dekorationerstandardhatt.dekorationID = d.DekorationID where dekorationerstandardhatt.HattID = '" + hattID + "';";
+        String query = "SELECT beskrivning, Pris, storlek, Farg, Genre, Tyg FROM hatt inner join Farg on hatt.FargID = Farg.FargID inner join Genre on hatt.GenreID = Genre.GenreID inner join Tyg on hatt.TygID = Tyg.TygID WHERE hatt.HattID = '" + hattID + "'";
+        String dekorationQuery = "SELECT d.Dekoration FROM dekorationerstandardhatt inner join dekorationer d on dekorationerstandardhatt.dekorationID = d.DekorationID where dekorationerstandardhatt.HattID = '" + hattID + "';";
         HashMap<String, String> hattMap = SqlFragor.getEnRad(query);
         ArrayList<String> dekorationList = SqlFragor.getEnKolumn(dekorationQuery);
         //cleara listan innan den fylls igen
@@ -286,11 +280,11 @@ public class SokHatt extends javax.swing.JFrame {
         }
 
         storlekCmb.setSelectedItem(hattMap.get("storlek"));
-        fargCmb.setSelectedItem(hattMap.get("FargNamn"));
-        genreCmb.setSelectedItem(hattMap.get("GenreNamn"));
-        tygCmb.setSelectedItem(hattMap.get("TygNamn"));
+        fargCmb.setSelectedItem(hattMap.get("Farg"));
+        genreCmb.setSelectedItem(hattMap.get("Genre"));
+        tygCmb.setSelectedItem(hattMap.get("Tyg"));
         prisTextfield.setText(hattMap.get("Pris"));
-        namnTextfield.setText(hattMap.get("HattNamn"));
+        namnTextfield.setText(hattMap.get("beskrivning"));
     }//GEN-LAST:event_valjButtonActionPerformed
 
     private void uppdateraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uppdateraButtonActionPerformed
@@ -298,46 +292,70 @@ public class SokHatt extends javax.swing.JFrame {
         String hattID = hattIDTextfield.getText();
 
         String namn = namnTextfield.getText();
-        String updateNamnQuery = "update StandardHatt set HattNamn = '" + namn + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateNamnQuery);
-        //
         String pris = prisTextfield.getText();
-        String updatePrisQuery = "update StandardHatt set Pris = '" + pris + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updatePrisQuery);
-        //
-        String farg = fargCmb.getSelectedItem().toString();
-        String fargQuery = "SELECT fargID FROM farg where fargNamn = '" + farg + "'";
-        String fargID = SqlFragor.getEttVarde(fargQuery);
-        String updateFargQuery = "update StandardHatt set FargID = '" + fargID + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateFargQuery);
-        //
-        String genre = genreCmb.getSelectedItem().toString();
-        String genreQuery = "SELECT genreID FROM genre where genreNamn = '" + genre + "'";
-        String genreID = SqlFragor.getEttVarde(genreQuery);
-        String updateGenreQuery = "update StandardHatt set GenreID = '" + genreID + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateGenreQuery);
-        //
-        String tyg = tygCmb.getSelectedItem().toString();
-        String tygQuery = "SELECT tygID FROM tyg where tygNamn = '" + tyg + "'";
-        String tygID = SqlFragor.getEttVarde(tygQuery);
-        String updateTygQuery = "update StandardHatt set TygID = '" + tygID + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateTygQuery);
-        //
-        String storlek = storlekCmb.getSelectedItem().toString();
-        String updateStorlekQuery = "update StandardHatt set storlek = '" + storlek + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateStorlekQuery);
-        //
-        List<String> dek = dekList.getSelectedValuesList();
-        for (String dekoration : dek) {
-            String dekQuery = "SELECT dekorationID FROM dekorationer WHERE namn = '" + dekoration + "'";
-            String dekID = SqlFragor.getEttVarde(dekQuery);            
-            String updateDekQuery = "UPDATE dekorationerstandardhatt set dekorationID = '"+dekID+"' where HattId = '"+hattID+"'";
-            SqlFragor.uppdatera(updateDekQuery);
+        boolean namnStringTest = ValideringsKlass.stringHarVarde(namn);
+        boolean prisStringTest = ValideringsKlass.stringHarVarde(pris);
+        boolean prisIntTest = ValideringsKlass.taltest(prisTextfield);
+
+        if (namnStringTest == true && prisStringTest == true) {
+            String updateNamnQuery = "update Hatt set beskrivning = '" + namn + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateNamnQuery);
+            String updatePrisQuery = "update Hatt set Pris = '" + pris + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updatePrisQuery);
+
+            //
+            //
+            String farg = fargCmb.getSelectedItem().toString();
+            String fargQuery = "SELECT fargID FROM farg where farg = '" + farg + "'";
+            String fargID = SqlFragor.getEttVarde(fargQuery);
+            String updateFargQuery = "update Hatt set FargID = '" + fargID + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateFargQuery);
+            //
+            String genre = genreCmb.getSelectedItem().toString();
+            String genreQuery = "SELECT genreID FROM genre where genre = '" + genre + "'";
+            String genreID = SqlFragor.getEttVarde(genreQuery);
+            String updateGenreQuery = "update Hatt set GenreID = '" + genreID + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateGenreQuery);
+            //
+            String tyg = tygCmb.getSelectedItem().toString();
+            String tygQuery = "SELECT tygID FROM tyg where tyg = '" + tyg + "'";
+            String tygID = SqlFragor.getEttVarde(tygQuery);
+            String updateTygQuery = "update hatt set TygID = '" + tygID + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateTygQuery);
+            //
+            String storlek = storlekCmb.getSelectedItem().toString();
+            String updateStorlekQuery = "update hatt set storlek = '" + storlek + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateStorlekQuery);
+            //
+            String deleteDekQuery = "DELETE FROM dekorationerstandardhatt WHERE hattID = '" + hattID + "'";
+            SqlFragor.deleteFranDatabasen(deleteDekQuery);
+            //
+            List<String> dek = dekList.getSelectedValuesList();
+            for (String dekoration : dek) {
+                String dekQuery = "SELECT dekorationID FROM dekorationer WHERE dekoration = '" + dekoration + "'";
+                String dekID = SqlFragor.getEttVarde(dekQuery);
+                String updateDekQuery = "INSERT INTO dekorationerstandardhatt (HattID,DekorationID) VALUES ('" + hattID + "', '" + dekID + "')";
+                SqlFragor.addToDatabasen(updateDekQuery);
+
+            }
+            JOptionPane.showMessageDialog(null, "Hatten uppdaterad!");
+            dispose();
             
+        } else if (prisIntTest == false) {
+            JOptionPane.showMessageDialog(null, "Priset kan endast bestå av siffror!");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Du måste fylla i alla fält!");
+
         }
 
 
     }//GEN-LAST:event_uppdateraButtonActionPerformed
+
+    private void tillbakaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillbakaButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_tillbakaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -362,6 +380,7 @@ public class SokHatt extends javax.swing.JFrame {
     private javax.swing.JTextField namnTextfield;
     private javax.swing.JTextField prisTextfield;
     private javax.swing.JComboBox<String> storlekCmb;
+    private javax.swing.JButton tillbakaButton;
     private javax.swing.JComboBox<String> tygCmb;
     private javax.swing.JButton uppdateraButton;
     private javax.swing.JButton valjButton;
