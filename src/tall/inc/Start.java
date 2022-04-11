@@ -31,6 +31,6 @@ public class Start {
                 
         //fraktsedel = new Fraktsedel();
         
-        new TestBest().setVisible(true);
+        //new TestBest().setVisible(true);
     }
 }
