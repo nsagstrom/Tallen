@@ -13,8 +13,6 @@ import java.util.HashMap;
  */
 public class SeOrderStatus extends javax.swing.JFrame {
 
-    private static String filter;
-
     /**
      * Creates new form SeOrderStatus
      */
@@ -52,6 +50,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
             }
         });
 
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla" }));
         cmbStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbStatusActionPerformed(evt);
@@ -122,7 +121,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
                 
             }
         }
-        else if(filter == null){
+        else if (cmbStatus.equals(i)){
             fyllOrderLista();
         }
 
