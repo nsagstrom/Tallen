@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,7 +31,7 @@ public class SokHatt extends javax.swing.JFrame {
     }
 
     public void fillHattList() {
-        String query = "SELECT hattnamn FROM standardhatt";
+        String query = "SELECT Beskrivning FROM hatt";
         ArrayList<String> hattar = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattar) {
@@ -40,7 +41,7 @@ public class SokHatt extends javax.swing.JFrame {
     }
 
     public void fillGenreCmb() {
-        String query = "SELECT genrenamn FROM genre";
+        String query = "SELECT genre FROM genre";
         ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
         for (String genre : genreLista) {
             genreCmb.addItem(genre);
@@ -48,7 +49,7 @@ public class SokHatt extends javax.swing.JFrame {
     }
 
     public void fillFargCmb() {
-        String query = "SELECT fargnamn FROM farg";
+        String query = "SELECT farg FROM farg";
         ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
         for (String farg : fargLista) {
             fargCmb.addItem(farg);
@@ -56,7 +57,7 @@ public class SokHatt extends javax.swing.JFrame {
     }
 
     public void fillTygCmb() {
-        String query = "SELECT tygnamn FROM tyg";
+        String query = "SELECT tyg FROM tyg";
         ArrayList<String> tygLista = SqlFragor.getEnKolumn(query);
         for (String tyg : tygLista) {
             tygCmb.addItem(tyg);
@@ -74,7 +75,7 @@ public class SokHatt extends javax.swing.JFrame {
                 }
             }
         });
-        String query = "SELECT DekorationNamn FROM dekorationer";
+        String query = "SELECT Dekoration FROM dekorationer";
         ArrayList<String> dekLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String dek : dekLista) {
@@ -270,12 +271,12 @@ public class SokHatt extends javax.swing.JFrame {
     private void valjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valjButtonActionPerformed
         // TODO add your handling code here:
         String valdHatt = hattList.getSelectedValue();
-        String hattQuery = "SELECT hattID FROM standardhatt where hattnamn = '" + valdHatt + "'";
+        String hattQuery = "SELECT hattID FROM hatt where beskrivning = '" + valdHatt + "'";
         String hattID = SqlFragor.getEttVarde(hattQuery);
         hattIDTextfield.setText(hattID);
 
-        String query = "SELECT HattNamn, Pris, storlek, FargNamn, GenreNamn, TygNamn FROM standardhatt inner join Farg on StandardHatt.FargID = Farg.FargID inner join Genre on StandardHatt.GenreID = Genre.GenreID inner join Tyg on StandardHatt.TygID = Tyg.TygID WHERE standardhatt.HattID = '" + hattID + "'";
-        String dekorationQuery = "SELECT d.DekorationNamn FROM dekorationerstandardhatt inner join dekorationer d on dekorationerstandardhatt.dekorationID = d.DekorationID where dekorationerstandardhatt.HattID = '" + hattID + "';";
+        String query = "SELECT beskrivning, Pris, storlek, Farg, Genre, Tyg FROM hatt inner join Farg on hatt.FargID = Farg.FargID inner join Genre on hatt.GenreID = Genre.GenreID inner join Tyg on hatt.TygID = Tyg.TygID WHERE hatt.HattID = '" + hattID + "'";
+        String dekorationQuery = "SELECT d.Dekoration FROM dekorationerstandardhatt inner join dekorationer d on dekorationerstandardhatt.dekorationID = d.DekorationID where dekorationerstandardhatt.HattID = '" + hattID + "';";
         HashMap<String, String> hattMap = SqlFragor.getEnRad(query);
         ArrayList<String> dekorationList = SqlFragor.getEnKolumn(dekorationQuery);
         //cleara listan innan den fylls igen
@@ -286,11 +287,11 @@ public class SokHatt extends javax.swing.JFrame {
         }
 
         storlekCmb.setSelectedItem(hattMap.get("storlek"));
-        fargCmb.setSelectedItem(hattMap.get("FargNamn"));
-        genreCmb.setSelectedItem(hattMap.get("GenreNamn"));
-        tygCmb.setSelectedItem(hattMap.get("TygNamn"));
+        fargCmb.setSelectedItem(hattMap.get("Farg"));
+        genreCmb.setSelectedItem(hattMap.get("Genre"));
+        tygCmb.setSelectedItem(hattMap.get("Tyg"));
         prisTextfield.setText(hattMap.get("Pris"));
-        namnTextfield.setText(hattMap.get("HattNamn"));
+        namnTextfield.setText(hattMap.get("beskrivning"));
     }//GEN-LAST:event_valjButtonActionPerformed
 
     private void uppdateraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uppdateraButtonActionPerformed
@@ -298,42 +299,61 @@ public class SokHatt extends javax.swing.JFrame {
         String hattID = hattIDTextfield.getText();
 
         String namn = namnTextfield.getText();
-        String updateNamnQuery = "update StandardHatt set HattNamn = '" + namn + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateNamnQuery);
-        //
         String pris = prisTextfield.getText();
-        String updatePrisQuery = "update StandardHatt set Pris = '" + pris + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updatePrisQuery);
-        //
-        String farg = fargCmb.getSelectedItem().toString();
-        String fargQuery = "SELECT fargID FROM farg where fargNamn = '" + farg + "'";
-        String fargID = SqlFragor.getEttVarde(fargQuery);
-        String updateFargQuery = "update StandardHatt set FargID = '" + fargID + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateFargQuery);
-        //
-        String genre = genreCmb.getSelectedItem().toString();
-        String genreQuery = "SELECT genreID FROM genre where genreNamn = '" + genre + "'";
-        String genreID = SqlFragor.getEttVarde(genreQuery);
-        String updateGenreQuery = "update StandardHatt set GenreID = '" + genreID + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateGenreQuery);
-        //
-        String tyg = tygCmb.getSelectedItem().toString();
-        String tygQuery = "SELECT tygID FROM tyg where tygNamn = '" + tyg + "'";
-        String tygID = SqlFragor.getEttVarde(tygQuery);
-        String updateTygQuery = "update StandardHatt set TygID = '" + tygID + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateTygQuery);
-        //
-        String storlek = storlekCmb.getSelectedItem().toString();
-        String updateStorlekQuery = "update StandardHatt set storlek = '" + storlek + "' where HattID = '" + hattID + "'";
-        SqlFragor.uppdatera(updateStorlekQuery);
-        //
-        List<String> dek = dekList.getSelectedValuesList();
-        for (String dekoration : dek) {
-            String dekQuery = "SELECT dekorationID FROM dekorationer WHERE namn = '" + dekoration + "'";
-            String dekID = SqlFragor.getEttVarde(dekQuery);            
-            String updateDekQuery = "UPDATE dekorationerstandardhatt set dekorationID = '"+dekID+"' where HattId = '"+hattID+"'";
-            SqlFragor.uppdatera(updateDekQuery);
+        boolean namnStringTest = ValideringsKlass.stringHarVarde(namn);
+        boolean prisStringTest = ValideringsKlass.stringHarVarde(pris);
+        boolean prisIntTest = ValideringsKlass.taltest(prisTextfield);
+
+        if (namnStringTest == true && prisStringTest == true) {
+            String updateNamnQuery = "update Hatt set beskrivning = '" + namn + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateNamnQuery);
+            String updatePrisQuery = "update Hatt set Pris = '" + pris + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updatePrisQuery);
+
+            //
+            //
+            String farg = fargCmb.getSelectedItem().toString();
+            String fargQuery = "SELECT fargID FROM farg where farg = '" + farg + "'";
+            String fargID = SqlFragor.getEttVarde(fargQuery);
+            String updateFargQuery = "update Hatt set FargID = '" + fargID + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateFargQuery);
+            //
+            String genre = genreCmb.getSelectedItem().toString();
+            String genreQuery = "SELECT genreID FROM genre where genre = '" + genre + "'";
+            String genreID = SqlFragor.getEttVarde(genreQuery);
+            String updateGenreQuery = "update Hatt set GenreID = '" + genreID + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateGenreQuery);
+            //
+            String tyg = tygCmb.getSelectedItem().toString();
+            String tygQuery = "SELECT tygID FROM tyg where tyg = '" + tyg + "'";
+            String tygID = SqlFragor.getEttVarde(tygQuery);
+            String updateTygQuery = "update hatt set TygID = '" + tygID + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateTygQuery);
+            //
+            String storlek = storlekCmb.getSelectedItem().toString();
+            String updateStorlekQuery = "update hatt set storlek = '" + storlek + "' where HattID = '" + hattID + "'";
+            SqlFragor.uppdatera(updateStorlekQuery);
+            //
+            String deleteDekQuery = "DELETE FROM dekorationerstandardhatt WHERE hattID = '" + hattID + "'";
+            SqlFragor.deleteFranDatabasen(deleteDekQuery);
+            //
+            List<String> dek = dekList.getSelectedValuesList();
+            for (String dekoration : dek) {
+                String dekQuery = "SELECT dekorationID FROM dekorationer WHERE dekoration = '" + dekoration + "'";
+                String dekID = SqlFragor.getEttVarde(dekQuery);
+                String updateDekQuery = "INSERT INTO dekorationerstandardhatt (HattID,DekorationID) VALUES ('" + hattID + "', '" + dekID + "')";
+                SqlFragor.addToDatabasen(updateDekQuery);
+
+            }
+            JOptionPane.showMessageDialog(null, "Hatten uppdaterad!");
+            dispose();
             
+        } else if (prisIntTest == false) {
+            JOptionPane.showMessageDialog(null, "Priset kan endast bestå av siffror!");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Du måste fylla i alla fält!");
+
         }
 
 
