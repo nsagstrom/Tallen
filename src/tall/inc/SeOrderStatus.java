@@ -98,36 +98,54 @@ public class SeOrderStatus extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void cmbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStatusActionPerformed
+        knapp();
+    }//GEN-LAST:event_cmbStatusActionPerformed
+
+    private void knapp() {
+        switch (cmbStatus.getSelectedIndex()) {
+            case 0:
+                txtOrderLista.setText("");
+                fyllOrderLista();
+                break;
+            case 1:
+                fyllListaUrval();
+                break;
+            case 2:
+                fyllListaUrval();
+                break;
+            case 3:
+                fyllListaUrval();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void fyllListaUrval() {
         ArrayList<HashMap<String, String>> filter;
         String status = cmbStatus.getSelectedItem().toString();
         String fraga3 = "Select BestID, Status, KundID, TullID, Prio FROM bestallning where Status like '" + status + "'";
         filter = SqlFragor.getFleraRader(fraga3);
         int i = cmbStatus.getSelectedIndex();
-        if (filter != null) {
-            txtOrderLista.setText("");
-            String rubrik2 = " BeställningsID:"
+
+        txtOrderLista.setText("");
+        String rubrik2 = " BeställningsID:"
                 + "\t" + "Status:"
                 + "\t" + "Kund ID"
                 + "\t" + "TullID:"
                 + "\t" + "Prio:" + "\n";
-            txtOrderLista.append(rubrik2);
-            
-            for(HashMap<String, String> info : filter){
-                txtOrderLista.append(info.get("BestID")
-                + "\t" + info.get("Status")
-                + "\t" + info.get("KundID")
-                + "\t" + info.get("TullID")
-                + "\t" + info.get("Prio") + "\n");
-                
-            }
-        }
-        else if (cmbStatus.equals(i)){
-            fyllOrderLista();
-        }
+        txtOrderLista.append(rubrik2);
 
-    }//GEN-LAST:event_cmbStatusActionPerformed
+        for (HashMap<String, String> info : filter) {
+            txtOrderLista.append(info.get("BestID")
+                    + "\t" + info.get("Status")
+                    + "\t" + info.get("KundID")
+                    + "\t" + info.get("TullID")
+                    + "\t" + info.get("Prio") + "\n");
 
-            
+        }
+    }
+
     private void fyllOrderLista() {
 
         ArrayList<HashMap<String, String>> allInfo;
