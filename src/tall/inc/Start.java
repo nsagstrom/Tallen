@@ -30,5 +30,7 @@ public class Start {
         SqlFragor.setDatabas(idb);
                 
         //fraktsedel = new Fraktsedel();
+        
+        new TestBest().setVisible(true);
     }
 }
