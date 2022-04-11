@@ -56,3 +56,4 @@ build/built-jar.properties
 *.properties
 Fraktsedel.pdf
 nbproject/private/private.xml
+*.xml
