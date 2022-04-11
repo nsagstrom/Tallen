@@ -162,12 +162,7 @@ public class Startsida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     private void btnSkapaNyArtikelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNyArtikelActionPerformed
-        try {
-            // TODO add your handling code here:
-            new LaggTillHatt().setVisible(true);
-        } catch (InfException ex) {
-            Logger.getLogger(Startsida.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new LaggTillHatt().setVisible(true);
     }//GEN-LAST:event_btnSkapaNyArtikelActionPerformed
 
 

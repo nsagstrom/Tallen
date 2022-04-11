@@ -2,15 +2,11 @@ package tall.inc;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
-import oru.inf.InfDB;
-import oru.inf.InfException;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -25,7 +21,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
     /**
      * Creates new form LaggTillHatt
      */
-    public LaggTillHatt() throws InfException {
+    public LaggTillHatt()   {
         initComponents();
 
         fillGenreCmb();
