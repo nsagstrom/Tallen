@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author nsags
  */
-public class SattPrisSpecial extends javax.swing.JFrame implements BestTest {
+public class SattPrisSpecial extends javax.swing.JFrame {
 
     public SattPrisSpecial() {
         initComponents();

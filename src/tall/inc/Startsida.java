@@ -50,6 +50,7 @@ public class Startsida extends javax.swing.JFrame {
         btnSokArtikel = new javax.swing.JButton();
         btnSkapaNyArtikel = new javax.swing.JButton();
         btnAndraPris = new javax.swing.JButton();
+        btnBestTest = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +99,13 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
+        btnBestTest.setText("BestTest");
+        btnBestTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBestTestActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,6 +129,7 @@ public class Startsida extends javax.swing.JFrame {
                                 .addGap(0, 67, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
+<<<<<<< Updated upstream
                         .addComponent(btnSkapaNyOrder)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSkapaNyArtikel)
@@ -128,16 +137,34 @@ public class Startsida extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAndraPris)
                         .addGap(89, 220, Short.MAX_VALUE))))
+=======
+                        .addComponent(btnAndraPris)
+                        .addGap(89, 220, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnBestTest))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSkapaNyOrder)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSkapaNyArtikel)
+                                    .addComponent(btnSokArtikel))))
+                        .addGap(51, 51, 51))))
+>>>>>>> Stashed changes
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(lblValkommen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSkapaNyOrder)
-                    .addComponent(btnSkapaNyArtikel))
+                .addGap(14, 14, 14)
+                .addComponent(btnBestTest)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSkapaNyArtikel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSkapaNyOrder))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(126, 126, 126)
@@ -191,6 +218,10 @@ public class Startsida extends javax.swing.JFrame {
         new SokHatt().setVisible(true);
     }//GEN-LAST:event_btnSokArtikelActionPerformed
 
+    private void btnBestTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBestTestActionPerformed
+        new BestBestBestTest().setVisible(true);
+    }//GEN-LAST:event_btnBestTestActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -199,6 +230,7 @@ public class Startsida extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraPris;
+    private javax.swing.JButton btnBestTest;
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnSeOrderStatus;
     private javax.swing.JButton btnSkapaNyArtikel;
