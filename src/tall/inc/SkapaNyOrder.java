@@ -32,113 +32,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         for (int i = hattTbl.getRowCount() - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-
-    }
-
-    public String getNuvarandeOrderNummer() {
-        String nuvarandeOrderNummer = lblVarOrderNummer.getText();
-
-        return nuvarandeOrderNummer;
-    }
-
-    public void fillFargCmb() {
-        String query = "SELECT farg FROM farg";
-        ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
-        for (String farg : fargLista) {
-            CBoxSpecialartikelFarg.addItem(farg);
-        }
-    }
-
-    public void fillDekList() {
-
-        dekList.setSelectionModel(new DefaultListSelectionModel() {
-            public void setSelectionInterval(int index0, int index1) {
-                if (isSelectedIndex(index0)) {
-                    super.removeSelectionInterval(index0, index1);
-                } else {
-                    super.addSelectionInterval(index0, index1);
-                }
-            }
-        });
-        String query = "SELECT Dekoration FROM dekorationer";
-        ArrayList<String> dekLista = SqlFragor.getEnKolumn(query);
-        DefaultListModel model = new DefaultListModel();
-        for (String dek : dekLista) {
-            model.addElement(dek);
-
-            dekList.setModel(model);
-        }
-
-    }
-
-    public void fillStandardHattCmb() {
-
-        String query = "SELECT HattID FROM standardhatt";
-        ArrayList<String> hattIdLista = SqlFragor.getEnKolumn(query);
-        for (String hatt : hattIdLista) {
-            String beskrivningQuery = "SELECT beskrivning from Hatt inner join StandardHatt SH on Hatt.HattID = SH.HattID where SH.HattID = '" + hatt + "'";
-            String hattBes = SqlFragor.getEttVarde(beskrivningQuery);
-            standardHattCmb.addItem(hattBes);
-        }
-    }
-
-    public void fillGenreCmb() {
-        String query = "SELECT Genre FROM genre";
-        ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
-        for (String genre : genreLista) {
-            genreCmb.addItem(genre);
-
-        }
-
-    }
-
-    public void fillTygCmb() {
-        String query = "SELECT tyg FROM tyg";
-        ArrayList<String> tygLista = SqlFragor.getEnKolumn(query);
-        for (String tyg : tygLista) {
-            tygCmb.addItem(tyg);
-        }
-    }
-
-    //Skapar "nästa" ordernummer (BestID) baserat på det högsta ID:t som finns i databasen.
-    private void skapaOrderNummer() {
-        int ordernummer = taFramMaxBestId() + 1;
-        String order = Integer.toString(ordernummer);
-        lblVarOrderNummer.setText(order);
-    }
-
-    //Skapar "nästa" KundID baserat på det högsta ID:t som finns i databasen.
-    private int skapaKundnummer() {
-        int kundNummer = taFramMaxKundId() + 1;
-        String kundNr = Integer.toString(kundNummer);
-
-        return kundNummer;
-    }
-
-    //Skapar "nästa" HattID baserat på det högsta värdet som finns i databasen.
-    private int skapaHattId() {
-        int hattId = taFramMaxHattId() + 1;
-        String kundNr = Integer.toString(hattId);
-
-        return hattId;
-    }
-    // Hämtar det högsta HattID:t som finns i databasen
-
-    public int taFramMaxHattId() {
-        int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(HattID) FROM hatt"));
-        return maxId;
-    }
-
-    //Hämtar och returnerar högsta BestID som finns i databasen
-    public int taFramMaxBestId() {
-        int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(BestID) FROM Bestallning"));
-        return maxId;
-    }
-
-    //Hämtar och returnerar högsta KundID som finns i databasen
-    public int taFramMaxKundId() {
-        int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(KundID) FROM Kund"));
-        return maxId;
     }
 
     /**
@@ -148,7 +41,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField3 = new javax.swing.JTextField();
         lblNyOrder = new javax.swing.JLabel();
         lblAntal = new javax.swing.JLabel();
         lblArtikelnummer = new javax.swing.JLabel();
@@ -187,12 +79,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         hattTbl = new javax.swing.JTable();
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblNyOrder.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -211,18 +97,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         lblAdress.setText("Adress");
 
         lblTelefon.setText("Telefonnummer");
-
-        txtangivetFornamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtangivetFornamnActionPerformed(evt);
-            }
-        });
-
-        txtangivetEfternamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtangivetEfternamnActionPerformed(evt);
-            }
-        });
 
         lblOrdernummer.setText("Ordernummer");
 
@@ -296,7 +170,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             }
         ));
         hattTbl.setDropMode(javax.swing.DropMode.INSERT);
-        hattTbl.setRowSorter(null);
         jScrollPane2.setViewportView(hattTbl);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -429,13 +302,14 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(lblSpecialartikel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSpecialartikelFarg)
-                    .addComponent(lblSpecialartikelTyg)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSpecialartikelTyg, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSpecialartikelFarg)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4)))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -462,14 +336,12 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLaggTillKundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillKundActionPerformed
-
         if (valideringMetod() == false) {
             laggTillNyKund();
         }
     }//GEN-LAST:event_btnLaggTillKundActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
@@ -477,6 +349,25 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         laggTillSpecial();
 
     }//GEN-LAST:event_btnLaggTillSpHattActionPerformed
+
+    private void btnLaggTillHattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillHattActionPerformed
+        Object hatt = standardHattCmb.getSelectedItem();
+        DefaultTableModel model = (DefaultTableModel) hattTbl.getModel();
+        model.addRow(new Object[]{hatt});
+    }//GEN-LAST:event_btnLaggTillHattActionPerformed
+
+    private void laggTillNyKund() {
+        String fornamn = txtangivetFornamn.getText();
+        String efternamn = txtangivetEfternamn.getText();
+        String adress = txtangivetAdress.getText();
+        String telefonnummer = txtangivetTelefonnummer.getText();
+        int kNr = skapaKundnummer();
+
+        String fraga = "INSERT INTO kund (KundID, Fornamn, Efternamn, Adress, Tel) VALUES ('" + kNr + "', '" + fornamn + "', '" + efternamn + "', '" + adress + "', '" + telefonnummer + "');";
+        SqlFragor.addToDatabasen(fraga);
+
+        JOptionPane.showMessageDialog(null, "Ny kund tillagd!");
+    }
 
     private void laggTillSpecial() {
         String hattID = SqlFragor.nyID("hatt", "HattID");
@@ -529,40 +420,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
     }
 
-    private void txtangivetFornamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtangivetFornamnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtangivetFornamnActionPerformed
-
-    private void txtangivetEfternamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtangivetEfternamnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtangivetEfternamnActionPerformed
-
-    private void btnLaggTillHattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillHattActionPerformed
-        // TODO add your handling code here:
-        Object hatt = standardHattCmb.getSelectedItem();
-        DefaultTableModel model = (DefaultTableModel) hattTbl.getModel();
-        model.addRow(new Object[]{hatt});
-
-    }//GEN-LAST:event_btnLaggTillHattActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void laggTillNyKund() {
-        String fornamn = txtangivetFornamn.getText();
-        String efternamn = txtangivetEfternamn.getText();
-        String adress = txtangivetAdress.getText();
-        String telefonnummer = txtangivetTelefonnummer.getText();
-        int kNr = skapaKundnummer();
-
-        String fraga = "INSERT INTO kund (KundID, Fornamn, Efternamn, Adress, Tel) VALUES ('" + kNr + "', '" + fornamn + "', '" + efternamn + "', '" + adress + "', '" + telefonnummer + "');";
-        SqlFragor.addToDatabasen(fraga);
-
-        JOptionPane.showMessageDialog(null, "Ny kund tillagd!");
-    }
-    //
-
     private boolean valideringMetod() {
         boolean ok = false;
         if (ValideringsKlass.stringHarVarde(txtangivetFornamn.getText()) == false) {
@@ -590,6 +447,111 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         return ok;
     }
 
+    public String getNuvarandeOrderNummer() {
+        String nuvarandeOrderNummer = lblVarOrderNummer.getText();
+
+        return nuvarandeOrderNummer;
+    }
+
+    public void fillFargCmb() {
+        String query = "SELECT farg FROM farg";
+        ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
+        for (String farg : fargLista) {
+            CBoxSpecialartikelFarg.addItem(farg);
+        }
+    }
+
+    public void fillDekList() {
+
+        dekList.setSelectionModel(new DefaultListSelectionModel() {
+            public void setSelectionInterval(int index0, int index1) {
+                if (isSelectedIndex(index0)) {
+                    super.removeSelectionInterval(index0, index1);
+                } else {
+                    super.addSelectionInterval(index0, index1);
+                }
+            }
+        });
+        String query = "SELECT Dekoration FROM dekorationer";
+        ArrayList<String> dekLista = SqlFragor.getEnKolumn(query);
+        DefaultListModel model = new DefaultListModel();
+        for (String dek : dekLista) {
+            model.addElement(dek);
+
+            dekList.setModel(model);
+        }
+
+    }
+
+    public void fillStandardHattCmb() {
+
+        String query = "SELECT HattID FROM standardhatt";
+        ArrayList<String> hattIdLista = SqlFragor.getEnKolumn(query);
+        for (String hatt : hattIdLista) {
+            String beskrivningQuery = "SELECT beskrivning from Hatt inner join StandardHatt SH on Hatt.HattID = SH.HattID where SH.HattID = '" + hatt + "'";
+            String hattBes = SqlFragor.getEttVarde(beskrivningQuery);
+            standardHattCmb.addItem(hattBes);
+        }
+    }
+
+    public void fillGenreCmb() {
+        String query = "SELECT Genre FROM genre";
+        ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
+        for (String genre : genreLista) {
+            genreCmb.addItem(genre);
+
+        }
+    }
+
+    public void fillTygCmb() {
+        String query = "SELECT tyg FROM tyg";
+        ArrayList<String> tygLista = SqlFragor.getEnKolumn(query);
+        for (String tyg : tygLista) {
+            tygCmb.addItem(tyg);
+        }
+    }
+
+    //Skapar "nästa" ordernummer (BestID) baserat på det högsta ID:t som finns i databasen.
+    private void skapaOrderNummer() {
+        int ordernummer = taFramMaxBestId() + 1;
+        String order = Integer.toString(ordernummer);
+        lblVarOrderNummer.setText(order);
+    }
+
+    //Skapar "nästa" KundID baserat på det högsta ID:t som finns i databasen.
+    private int skapaKundnummer() {
+        int kundNummer = taFramMaxKundId() + 1;
+        String kundNr = Integer.toString(kundNummer);
+
+        return kundNummer;
+    }
+
+    //Skapar "nästa" HattID baserat på det högsta värdet som finns i databasen.
+    private int skapaHattId() {
+        int hattId = taFramMaxHattId() + 1;
+        String kundNr = Integer.toString(hattId);
+
+        return hattId;
+    }
+    // Hämtar det högsta HattID:t som finns i databasen
+
+    public int taFramMaxHattId() {
+        int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(HattID) FROM hatt"));
+        return maxId;
+    }
+
+    //Hämtar och returnerar högsta BestID som finns i databasen
+    public int taFramMaxBestId() {
+        int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(BestID) FROM Bestallning"));
+        return maxId;
+    }
+
+    //Hämtar och returnerar högsta KundID som finns i databasen
+    public int taFramMaxKundId() {
+        int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(KundID) FROM Kund"));
+        return maxId;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -609,7 +571,6 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblAdress;
     private javax.swing.JLabel lblAntal;
