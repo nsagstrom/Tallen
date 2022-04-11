@@ -176,6 +176,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
         storlekCmb.setBackground(new java.awt.Color(255, 255, 255));
         storlekCmb.setForeground(new java.awt.Color(0, 0, 0));
 <<<<<<< HEAD
+<<<<<<< HEAD
         storlekCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S", "M", "L", "XL" }));
 =======
         storlekCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V�lj storlek:", "S", "M", "L", "XL" }));
@@ -185,6 +186,9 @@ public class LaggTillHatt extends javax.swing.JFrame {
             }
         });
 >>>>>>> Stashed changes
+=======
+        storlekCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V�lj storlek:", "S", "M", "L", "XL" }));
+>>>>>>> parent of 08f4295 (Ändringar i lägg till hatt och sök hatt)
 =======
         storlekCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V�lj storlek:", "S", "M", "L", "XL" }));
 >>>>>>> parent of 08f4295 (Ändringar i lägg till hatt och sök hatt)
@@ -221,6 +225,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
         fargCmb.setForeground(new java.awt.Color(0, 0, 0));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         tillbakaButton.setBackground(new java.awt.Color(255, 255, 255));
         tillbakaButton.setForeground(new java.awt.Color(0, 0, 0));
         tillbakaButton.setText("Tillbaka");
@@ -235,6 +240,8 @@ public class LaggTillHatt extends javax.swing.JFrame {
             }
         });
 
+=======
+>>>>>>> parent of 08f4295 (Ändringar i lägg till hatt och sök hatt)
 =======
 >>>>>>> parent of 08f4295 (Ändringar i lägg till hatt och sök hatt)
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -318,6 +325,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private void tillbakaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tillbakaButtonActionPerformed
         // TODO add your handling code here:
         dispose();
@@ -327,6 +335,8 @@ public class LaggTillHatt extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_storlekCmbActionPerformed
 
+=======
+>>>>>>> parent of 08f4295 (Ändringar i lägg till hatt och sök hatt)
 =======
 >>>>>>> parent of 08f4295 (Ändringar i lägg till hatt och sök hatt)
     /**
