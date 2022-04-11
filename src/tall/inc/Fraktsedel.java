@@ -87,22 +87,22 @@ public class Fraktsedel {
             tillKund.add(new Paragraph());
             document.add(tillKund);
 
-            Paragraph portKod = new Paragraph("Portkod:", litenFont);
+            Paragraph portKod = new Paragraph("Portkod:                    ", litenFont);
             portKod.setAlignment(Element.ALIGN_RIGHT);
             portKod.add(new Paragraph());
             document.add(portKod);
 
-            Paragraph kundKontakt = new Paragraph("Kontakt:", litenFont);
+            Paragraph kundKontakt = new Paragraph("Kontakt:                    ", litenFont);
             kundKontakt.setAlignment(Element.ALIGN_RIGHT);
             kundKontakt.add(new Paragraph());
             document.add(kundKontakt);
 
-            Paragraph inneHall = new Paragraph("Innehåll:", litenFont);
+            Paragraph inneHall = new Paragraph("Innehåll:                    ", litenFont);
             inneHall.setAlignment(Element.ALIGN_RIGHT);
             inneHall.add(new Paragraph());
             document.add(inneHall);
 
-            Paragraph kundTelNr = new Paragraph("Tel:", litenFont);
+            Paragraph kundTelNr = new Paragraph("Tel:                    ", litenFont);
             kundTelNr.setAlignment(Element.ALIGN_RIGHT);
             kundTelNr.add(new Paragraph());
             document.add(kundTelNr);
