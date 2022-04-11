@@ -285,7 +285,6 @@ public class SokHatt extends javax.swing.JFrame {
             Object dekObject = dek;
             dekList.setSelectedValue(dekObject, rootPaneCheckingEnabled);
         }
-
         storlekCmb.setSelectedItem(hattMap.get("storlek"));
         fargCmb.setSelectedItem(hattMap.get("Farg"));
         genreCmb.setSelectedItem(hattMap.get("Genre"));

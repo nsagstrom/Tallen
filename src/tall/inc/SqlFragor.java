@@ -1,6 +1,5 @@
 package tall.inc;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -12,13 +11,15 @@ import oru.inf.InfException;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 /**
- * Den här klassen innehåller metoder för olika SQL-frågor.
- * Alla metoder är klassmetoder vilket anges med nyckelordet static.
- * Detta innebeär att vi kommer åt metoderna från alla andra klasser i projektet utan att instansiera ett objekt av den här klassen.
+ * Den här klassen innehåller metoder för olika SQL-frågor. Alla metoder är
+ * klassmetoder vilket anges med nyckelordet static. Detta innebeär att vi
+ * kommer åt metoderna från alla andra klasser i projektet utan att
+ * instansiera ett objekt av den här klassen.
+ *
  * @author Markus
  */
 public class SqlFragor {
-    
+
     private static InfDB idb;
 
     //Metod för att ge klassvariabeln idb rätt referensvärde utan att behöva instansiera ett objekt av klassen
@@ -114,8 +115,8 @@ public class SqlFragor {
     }
 
     /**
-     * Uppdaterar värden i databasen. Kanske finns ett bättre namn på metoden?
-     * Dålig fantasi här :)
+     * Uppdaterar värden i databasen. Kanske finns ett bättre namn på
+     * metoden? Dålig fantasi här :)
      *
      * @param fraga En SQL-fråga
      * @return True om frågan fungerade
@@ -156,15 +157,19 @@ public class SqlFragor {
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Databasfel");
             System.out.println(ex.getMessage());
+            System.out.println("addToDatabas");
+
             lyckades = false;
         }
         return lyckades;
     }
+
     /**
      * H�mtar n�sta tillg�ngliga ID
+     *
      * @param tabell
      * @param kolumn
-     * @return 
+     * @return
      */
     public static String nyID(String tabell, String kolumn) {
 
@@ -176,5 +181,5 @@ public class SqlFragor {
         }
         return svar;
     }
-    
+
 }
