@@ -20,6 +20,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
         initComponents();
         fyllOrderLista();
         fyllCmbStatus();
+        fyllCmbUser();
     }
 
     /**
@@ -35,7 +36,9 @@ public class SeOrderStatus extends javax.swing.JFrame {
         txtOrderLista = new javax.swing.JTextArea();
         btnTillbaka = new javax.swing.JButton();
         cmbStatus = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
+        cmbUser = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,7 +60,16 @@ public class SeOrderStatus extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Status");
+        lblStatus.setText("Status");
+
+        lblUser.setText("Användare");
+
+        cmbUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla" }));
+        cmbUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUserActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,24 +78,32 @@ public class SeOrderStatus extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(77, 77, 77)
+                            .addComponent(cmbUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnTillbaka))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblStatus)
+                        .addGap(112, 112, 112)
+                        .addComponent(lblUser)))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblStatus)
+                    .addComponent(lblUser))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTillbaka)
-                    .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75))
@@ -100,6 +120,10 @@ public class SeOrderStatus extends javax.swing.JFrame {
     private void cmbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStatusActionPerformed
         knapp();
     }//GEN-LAST:event_cmbStatusActionPerformed
+
+    private void cmbUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUserActionPerformed
+        knapp2();
+    }//GEN-LAST:event_cmbUserActionPerformed
 
     private void knapp() {
         switch (cmbStatus.getSelectedIndex()) {
@@ -120,13 +144,53 @@ public class SeOrderStatus extends javax.swing.JFrame {
                 break;
         }
     }
+    
+    private void knapp2() {
+        switch (cmbUser.getSelectedIndex()){
+            case 0:
+                txtOrderLista.setText("");
+                fyllOrderLista();
+                break;
+            case 1:
+                fyllAnvUrval();
+                break;
+            case 2:
+                fyllAnvUrval();
+                break;
+            default:
+                break;
+        }
+    }
+    
+    private void fyllAnvUrval() {
+        ArrayList<HashMap<String, String>> filterAnv;
+        String user = cmbUser.getSelectedItem().toString();
+        String fraga5 = "Select BestID, Status, KundID, TullID, Prio FROM bestallning join Anvandare on Anvandare.AnvandarID like bestallning.AnvandareID where ForNamn = '" + user + "'";
+        filterAnv = SqlFragor.getFleraRader(fraga5);
+        
+        txtOrderLista.setText("");
+        
+        String rubrik3 = " BeställningsID:"
+                + "\t" + "Status:"
+                + "\t" + "Kund ID"
+                + "\t" + "TullID:"
+                + "\t" + "Prio:" + "\n";
+        txtOrderLista.append(rubrik3);
+
+        for (HashMap<String, String> info : filterAnv) {
+            txtOrderLista.append(info.get("BestID")
+                    + "\t" + info.get("Status")
+                    + "\t" + info.get("KundID")
+                    + "\t" + info.get("TullID")
+                    + "\t" + info.get("Prio") + "\n");
+    }
+    }
 
     private void fyllListaUrval() {
         ArrayList<HashMap<String, String>> filter;
         String status = cmbStatus.getSelectedItem().toString();
         String fraga3 = "Select BestID, Status, KundID, TullID, Prio FROM bestallning where Status like '" + status + "'";
         filter = SqlFragor.getFleraRader(fraga3);
-        int i = cmbStatus.getSelectedIndex();
 
         txtOrderLista.setText("");
         String rubrik2 = " BeställningsID:"
@@ -180,13 +244,26 @@ public class SeOrderStatus extends javax.swing.JFrame {
             cmbStatus.addItem(info);
         }
     }
+    
+    private void fyllCmbUser(){
+        String fraga4 = "SELECT ForNamn FROM anvandare";
+        ArrayList<String> user;
+        
+        user = SqlFragor.getEnKolumn(fraga4);
+        
+        for (String info : user) {
+            cmbUser.addItem(info);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cmbStatus;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> cmbUser;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JTextArea txtOrderLista;
     // End of variables declaration//GEN-END:variables
 }
