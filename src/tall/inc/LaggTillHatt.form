@@ -286,7 +286,6 @@
       </AuxValues>
     </Component>
 <<<<<<< HEAD
-<<<<<<< HEAD
     <Component class="javax.swing.JButton" name="tillbakaButton">
       <Properties>
 <<<<<<< Updated upstream
@@ -307,8 +306,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tillbakaButtonActionPerformed"/>
       </Events>
     </Component>
-=======
->>>>>>> parent of 08f4295 (Ändringar i lägg till hatt och sök hatt)
 =======
 >>>>>>> parent of 08f4295 (Ändringar i lägg till hatt och sök hatt)
   </SubComponents>
