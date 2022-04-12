@@ -39,8 +39,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
         lblStatus = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
         cmbUser = new javax.swing.JComboBox<>();
-        btnStatFilt = new javax.swing.JButton();
-        btnUserFilt = new javax.swing.JButton();
+        btnUppdatera = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,17 +72,10 @@ public class SeOrderStatus extends javax.swing.JFrame {
             }
         });
 
-        btnStatFilt.setText("Filtrera status");
-        btnStatFilt.addActionListener(new java.awt.event.ActionListener() {
+        btnUppdatera.setText("Uppdatera");
+        btnUppdatera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStatFiltActionPerformed(evt);
-            }
-        });
-
-        btnUserFilt.setText("Filtrera användare");
-        btnUserFilt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUserFiltActionPerformed(evt);
+                btnUppdateraActionPerformed(evt);
             }
         });
 
@@ -97,22 +89,17 @@ public class SeOrderStatus extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblStatus))
-                                .addGap(112, 112, 112))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnStatFilt)
-                                .addGap(75, 75, 75)))
+                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblStatus))
+                        .addGap(112, 112, 112)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUserFilt)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblUser)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(cmbUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnTillbaka))))))
+                            .addComponent(lblUser)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnUppdatera)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnTillbaka)))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -126,12 +113,9 @@ public class SeOrderStatus extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTillbaka)
                     .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnStatFilt)
-                    .addComponent(btnUserFilt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                    .addComponent(cmbUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUppdatera))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75))
         );
@@ -152,13 +136,20 @@ public class SeOrderStatus extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cmbUserActionPerformed
 
-    private void btnUserFiltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserFiltActionPerformed
-        knapp2();
-    }//GEN-LAST:event_btnUserFiltActionPerformed
-
-    private void btnStatFiltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatFiltActionPerformed
-        knapp();
-    }//GEN-LAST:event_btnStatFiltActionPerformed
+    private void btnUppdateraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppdateraActionPerformed
+        if(cmbStatus.getSelectedIndex() == 0 && cmbUser.getSelectedIndex() == 0){
+            knapp();
+        }
+        else if(cmbStatus.getSelectedIndex() >= 1 && cmbUser.getSelectedIndex() == 0){
+            knapp();
+        }
+        else if(cmbUser.getSelectedIndex() >= 1 && cmbStatus.getSelectedIndex() == 0){
+            fyllUrval();
+        }
+        else if(cmbUser.getSelectedIndex() >= 1 && cmbStatus.getSelectedIndex() >= 1){
+            knapp2();
+        }
+    }//GEN-LAST:event_btnUppdateraActionPerformed
 
     private void knapp() {
         switch (cmbStatus.getSelectedIndex()) {
@@ -195,14 +186,41 @@ public class SeOrderStatus extends javax.swing.JFrame {
             default:
                 break;
         }
+    }    
+    
+    private void fyllUrval(){
+        ArrayList<HashMap<String, String>> filterHej;
+        String user = cmbUser.getSelectedItem().toString();
+        String fraga = "Select BestID, Status, KundID, TullID, Prio FROM bestallning\n" +
+                        "join Anvandare on Anvandare.AnvandarID like bestallning.AnvandareID where ForNamn ='" + user + "'";
+        filterHej = SqlFragor.getFleraRader(fraga);
+        txtOrderLista.setText("");
+        
+        String rubrik3 = " BeställningsID:"
+                + "\t" + "Status:"
+                + "\t" + "Kund ID"
+                + "\t" + "TullID:"
+                + "\t" + "Prio:" + "\n";
+        txtOrderLista.append(rubrik3);
+
+        for (HashMap<String, String> info : filterHej) {
+            txtOrderLista.append(info.get("BestID")
+                    + "\t" + info.get("Status")
+                    + "\t" + info.get("KundID")
+                    + "\t" + info.get("TullID")
+                    + "\t" + info.get("Prio") + "\n");
     }
+}
+    
     
     private void fyllAnvUrval() {
         ArrayList<HashMap<String, String>> filterAnv;
         String user = cmbUser.getSelectedItem().toString();
-        String fraga5 = "Select BestID, Status, KundID, TullID, Prio FROM bestallning join Anvandare on Anvandare.AnvandarID like bestallning.AnvandareID where ForNamn = '" + user + "'";
+        String stat = cmbStatus.getSelectedItem().toString();
+        String fraga5 = "Select BestID, Status, KundID, TullID, Prio FROM bestallning\n" +
+                        "join Anvandare on Anvandare.AnvandarID like bestallning.AnvandareID where ForNamn ='" + user +"'\n" +
+                        "and Status ='" + stat + "'";
         filterAnv = SqlFragor.getFleraRader(fraga5);
-        
         txtOrderLista.setText("");
         
         String rubrik3 = " BeställningsID:"
@@ -218,7 +236,8 @@ public class SeOrderStatus extends javax.swing.JFrame {
                     + "\t" + info.get("KundID")
                     + "\t" + info.get("TullID")
                     + "\t" + info.get("Prio") + "\n");
-    }
+                
+                }
     }
 
     private void fyllListaUrval() {
@@ -293,9 +312,8 @@ public class SeOrderStatus extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnStatFilt;
     private javax.swing.JButton btnTillbaka;
-    private javax.swing.JButton btnUserFilt;
+    private javax.swing.JButton btnUppdatera;
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JComboBox<String> cmbUser;
     private javax.swing.JScrollPane jScrollPane1;
