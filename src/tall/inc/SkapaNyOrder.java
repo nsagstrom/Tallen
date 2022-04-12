@@ -429,7 +429,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         String tullID = tullTextbox.getText();
         boolean prio = tullCheckbox.isSelected();
         int prioValue = 0;
-        if(prio == true){
+        if(prio = true){
             prioValue = 1;
         }
         String insertBestallningQuery = "INSERT INTO bestallning (BestID, KundID, Status, TullID, Prio) VALUES ('"+besID+"', '"+kundID+"', 'Öppen', '"+tullID+"', '"+prioValue+"' )";
