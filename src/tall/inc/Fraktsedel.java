@@ -83,7 +83,7 @@ public class Fraktsedel {
             foretagsTelNr.add(new Paragraph());
             document.add(foretagsTelNr);
 
-            Paragraph tillKund = new Paragraph("Till: \n", litenFont);
+            Paragraph tillKund = new Paragraph("Till: ",litenFont);
             tillKund.add(new Paragraph());
             document.add(tillKund);
 

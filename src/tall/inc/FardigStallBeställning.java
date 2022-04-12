@@ -108,6 +108,12 @@ public class FardigStallBeställning extends javax.swing.JFrame {
 
         jLabel1.setText("Färdigställ order");
 
+        txtVikt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtViktActionPerformed(evt);
+            }
+        });
+
         btnValjBest.setText("Väl order");
         btnValjBest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,12 +196,18 @@ public class FardigStallBeställning extends javax.swing.JFrame {
 
     private void btnKlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKlarActionPerformed
         // TODO add your handling code here:
+        Fraktsedel fraktsedel = new Fraktsedel();
+        fraktsedel.visaFraktsedel();
     }//GEN-LAST:event_btnKlarActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         new Startsida().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void txtViktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtViktActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtViktActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
