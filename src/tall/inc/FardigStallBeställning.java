@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public class FardigStallBeställning extends javax.swing.JFrame {
 
-    String bestNummer;
+    private static String bestNummer;
     String fNamn;
     String eNamn;
     String adress;
@@ -128,6 +128,10 @@ public class FardigStallBeställning extends javax.swing.JFrame {
         double moms3 = Math.floor(moms2);
         
         moms = moms3; 
+    }
+    
+    public static String getBestID(){
+        return bestNummer;
     }
 
     /**
