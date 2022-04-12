@@ -13,6 +13,14 @@ import java.util.HashMap;
  */
 public class FardigStallBeställning extends javax.swing.JFrame {
 
+    String bestNummer;
+    String fNamn;
+    String eNamn;
+    String adress;
+    double moms;
+    String tull;
+    String vikt;
+    
     /**
      * Creates new form FardigStallBeställning
      */
@@ -71,6 +79,55 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                     + "\t" + info.get("pris")
                     + "\t" + info.get("Prio") + "\n");
         }
+    }
+
+    private void infoBest() {
+        bestNummer = txtBestNummer.getText();
+
+        String fraga2 = "SELECT * FROM (\n"
+                + "    SELECT o.BestID , k.KundID, k.ForNamn, Efternamn, Adress,  vikt, sum(Pris)*1.2 AS pris, Prio,TullID\n"
+                + "    FROM bestallning\n"
+                + "    JOIN orderrad o on bestallning.BestID = o.BestID\n"
+                + "    JOIN hatt h on o.HattID = h.HattID\n"
+                + "    JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
+                + "    JOIN kund k on k.KundID = bestallning.KundID\n"
+                + "    WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
+                + "    GROUP BY o.BestID\n"
+                + "    UNION\n"
+                + "    SELECT  o.BestID , k.KundID, k.ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio, TullID\n"
+                + "    FROM bestallning\n"
+                + "    JOIN orderrad o on bestallning.BestID = o.BestID\n"
+                + "    JOIN hatt h on o.HattID = h.HattID\n"
+                + "    JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
+                + "    JOIN kund k on k.KundID = bestallning.KundID\n"
+                + "    JOIN (\n"
+                + "        SELECT o.BestID FROM bestallning\n"
+                + "        JOIN orderrad o on bestallning.BestID = o.BestID\n"
+                + "        WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
+                + "        GROUP BY o.BestID) t2\n"
+                + "        on o.BestID != t2.BestID\n"
+                + "    WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 0\n"
+                + "    GROUP BY o.BestID) t3\n"
+                + "WHERE BestID =" +  bestNummer +  ";";
+
+        System.out.println(fraga2);
+
+        HashMap<String, String> allInfoEnBest;
+        allInfoEnBest = SqlFragor.getEnRad(fraga2);
+
+        fNamn = allInfoEnBest.get("ForNamn");
+        eNamn = allInfoEnBest.get("Efternamn");
+        adress = allInfoEnBest.get("Adress");
+        vikt = allInfoEnBest.get("vikt");
+        tull = allInfoEnBest.get("TullID");
+        
+        String moms1 = allInfoEnBest.get("pris");
+        
+        double pris = Double.parseDouble(moms1);
+        double moms2 = (pris*0.25);
+        double moms3 = Math.floor(moms2);
+        
+        moms = moms3; 
     }
 
     /**
@@ -187,7 +244,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnValjBestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjBestActionPerformed
-        // TODO add your handling code here:
+       infoBest();
     }//GEN-LAST:event_btnValjBestActionPerformed
 
     private void btnAndraViktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraViktActionPerformed
