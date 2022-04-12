@@ -50,6 +50,7 @@ public class Startsida extends javax.swing.JFrame {
         btnSokArtikel = new javax.swing.JButton();
         btnSkapaNyArtikel = new javax.swing.JButton();
         btnAndraPris = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +99,13 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,7 +120,8 @@ public class Startsida extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnLoggaUt))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnSeOrderStatus)
@@ -138,18 +147,21 @@ public class Startsida extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSkapaNyOrder)
                     .addComponent(btnSkapaNyArtikel))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(126, 126, 126)
-                        .addComponent(btnLoggaUt))
+                        .addComponent(btnLoggaUt)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSeOrderStatus)
                             .addComponent(btnSokArtikel))
                         .addGap(29, 29, 29)
-                        .addComponent(btnAndraPris)))
-                .addContainerGap())
+                        .addComponent(btnAndraPris)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(15, 15, 15))))
         );
 
         pack();
@@ -186,6 +198,11 @@ public class Startsida extends javax.swing.JFrame {
         new SokHatt().setVisible(true);
     }//GEN-LAST:event_btnSokArtikelActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new FardigStallBeställning().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -199,6 +216,7 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton btnSkapaNyArtikel;
     private javax.swing.JButton btnSkapaNyOrder;
     private javax.swing.JButton btnSokArtikel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblValkommen;
     // End of variables declaration//GEN-END:variables
 }
