@@ -37,6 +37,7 @@ private static String hamtaUser;
         btnLoggaIn = new javax.swing.JButton();
         lblAnvandarnamn = new javax.swing.JLabel();
         lblLosenord = new javax.swing.JLabel();
+        lblFel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,31 +88,32 @@ private static String hamtaUser;
         lblLosenord.setForeground(new java.awt.Color(153, 153, 153));
         lblLosenord.setText("Lösenord:");
 
+        lblFel.setForeground(new java.awt.Color(204, 204, 204));
+        lblFel.setToolTipText("");
+        lblFel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(111, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblRubrik)
                     .addComponent(lblLosenord)
                     .addComponent(lblAnvandarnamn)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnLoggaIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                        .addComponent(pswInloggLosen)
-                        .addComponent(txtInloggAnvandare, javax.swing.GroupLayout.Alignment.TRAILING)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addComponent(lblRubrik)
-                .addContainerGap(163, Short.MAX_VALUE))
+                    .addComponent(txtInloggAnvandare)
+                    .addComponent(pswInloggLosen)
+                    .addComponent(lblFel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLoggaIn, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(40, 40, 40)
                 .addComponent(lblRubrik)
-                .addGap(38, 38, 38)
+                .addGap(52, 52, 52)
                 .addComponent(lblAnvandarnamn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtInloggAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -119,7 +121,9 @@ private static String hamtaUser;
                 .addComponent(lblLosenord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pswInloggLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(lblFel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(btnLoggaIn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
         );
@@ -128,7 +132,9 @@ private static String hamtaUser;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +155,7 @@ private static String hamtaUser;
             new Startsida().setVisible(true);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Användarnamn eller lösenord stämmer inte");
+            lblFel.setText("Fel användarnamn eller lösenord");
         }
         }
     }
@@ -183,11 +189,11 @@ private static String hamtaUser;
         boolean ok = true;
         if (!ValideringsKlass.txtFaltHarVarde(txtInloggAnvandare)) {
             ok = false;
-            JOptionPane.showMessageDialog(null, "Ange användarnamn");
+            lblFel.setText("Ange användarnamn");
             txtInloggAnvandare.requestFocus();
         } else if (!ValideringsKlass.txtFaltHarVarde(pswInloggLosen)) {
             ok = false;
-            JOptionPane.showMessageDialog(null, "Ange lösenord");
+            lblFel.setText("Ange lösenord");
             pswInloggLosen.requestFocus();
         }
 
@@ -202,6 +208,7 @@ private static String hamtaUser;
     private javax.swing.JButton btnLoggaIn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAnvandarnamn;
+    private javax.swing.JLabel lblFel;
     private javax.swing.JLabel lblLosenord;
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JPasswordField pswInloggLosen;

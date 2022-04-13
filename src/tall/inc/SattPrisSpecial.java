@@ -47,6 +47,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
         txtHattLista.setEditable(false);
         txtHattLista.setColumns(20);
         txtHattLista.setRows(5);
+        txtHattLista.setTabSize(12);
         jScrollPane1.setViewportView(txtHattLista);
 
         btnTillbaka.setText("Tillbaka");
@@ -137,7 +138,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
     private void fyllHattLista() {
 
         ArrayList<HashMap<String, String>> allInfo;
-        String fraga = "SELECT s.HattID, Farg, Tyg, pris, AnvandarID FROM hatt\n"
+        String fraga = "SELECT s.HattID, Beskrivning, Farg, Tyg, pris, AnvandarID FROM hatt\n"
                 + "JOIN specialhatt s on hatt.HattID = s.HattID\n"
                 + "JOIN farg f on hatt.FargID = f.FargID\n"
                 + "JOIN genre g on g.GenreID = hatt.GenreID\n"
@@ -149,6 +150,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
         allInfo = SqlFragor.getFleraRader(fraga);
         
         String rubrik = " Hatt ID:"
+                + "\t" + "Namn:"
                 + "\t" + "Färg:"
                 + "\t" + "Tyg:"
                 + "\t" + "Pris:"
@@ -158,6 +160,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
 
         for (HashMap<String, String> info : allInfo) {
             txtHattLista.append(info.get("HattID")
+                    + "\t" + info.get("Beskrivning")
                     + "\t" + info.get("Farg")
                     + "\t" + info.get("Tyg")
                     + "\t" + info.get("pris")
