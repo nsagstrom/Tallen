@@ -46,6 +46,13 @@ public class Fraktsedel {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
+            
+            // TullID tullid = new TullID();
+            //if(tullid.equals(Saknad)){
+            //
+            //} else{
+            // getTullID();
+            //}
 
             Paragraph fran = new Paragraph("Från", litenFont);
             fran.add(new Paragraph());
@@ -83,7 +90,7 @@ public class Fraktsedel {
             foretagsTelNr.add(new Paragraph());
             document.add(foretagsTelNr);
 
-            Paragraph tillKund = new Paragraph("Till: ",litenFont);
+            Paragraph tillKund = new Paragraph("Till:", litenFont);
             tillKund.add(new Paragraph());
             document.add(tillKund);
 
