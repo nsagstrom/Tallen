@@ -94,6 +94,9 @@ public class Startsida extends javax.swing.JFrame {
         listAllaHattar = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         listValdaHattar = new javax.swing.JList<>();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,6 +180,14 @@ public class Startsida extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(listValdaHattar);
 
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -257,7 +268,7 @@ public class Startsida extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 74, Short.MAX_VALUE))))
+                        .addGap(0, 51, Short.MAX_VALUE))))
         );
 
         pack();
@@ -336,6 +347,9 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton btnSkapaNyOrder;
     private javax.swing.JButton btnSokArtikel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblValkommen;
