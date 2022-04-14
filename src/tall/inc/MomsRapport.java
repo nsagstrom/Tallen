@@ -28,7 +28,9 @@ import org.w3c.dom.Element;
  */
 public class MomsRapport extends javax.swing.JFrame {
 
-    public static final String xmlFilePath = "hittaMig.xml";
+    public static final String xmlFilePath = "momsDeklaration.xml";
+    
+    
 
     /**
      * Creates new form MomsRapport
@@ -38,8 +40,36 @@ public class MomsRapport extends javax.swing.JFrame {
     }
 
     
+    private void berakningUt(){
+        
+        int forsalj = Integer.parseInt(txtForsalj.getText());
+        int utMoms = Integer.parseInt(txtUtMoms.getText());
+        int inMoms = Integer.parseInt(txtInMoms.getText());
+        int betala;
+        
+       int ututmoms = (int) (forsalj*0.25);
+        
+        betala = utMoms - inMoms;
+        
+        txtUtMoms.setText(String.valueOf(ututmoms));
+    }
+    
+    private void betala(){
+                int forsalj = Integer.parseInt(txtForsalj.getText());
+        int utMoms = Integer.parseInt(txtUtMoms.getText());
+        int inMoms = Integer.parseInt(txtInMoms.getText());
+        int betala;
+        
+        utMoms = (int) (forsalj*0.25);
+        
+        betala = utMoms - inMoms;
+        
+        txtBetala.setText(String.valueOf(betala));
+    }
+    
+    
 
-    private void rapport2() throws ParserConfigurationException, TransformerException {
+    private void momsRapport() throws ParserConfigurationException, TransformerException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         factory.setValidating(true);
@@ -77,7 +107,7 @@ public class MomsRapport extends javax.swing.JFrame {
         moms.appendChild(period);
 
         Element forsmomsejannan = doc.createElement("ForsMomsEjAnnan");
-        forsmomsejannan.appendChild(doc.createTextNode("40000"));
+        forsmomsejannan.appendChild(doc.createTextNode(txtForsalj.getText()));
         moms.appendChild(forsmomsejannan);
 
 //        Element uttagmoms = doc.createElement("UttagMoms");
@@ -121,7 +151,7 @@ public class MomsRapport extends javax.swing.JFrame {
 //        moms.appendChild(forsvaruannateg);
 
         Element forsvaruutomeg = doc.createElement("ForsVaruUtomEg");
-        forsvaruutomeg.appendChild(doc.createTextNode("0"));
+        forsvaruutomeg.appendChild(doc.createTextNode(txtForsaljEU.getText()));
         moms.appendChild(forsvaruutomeg);
 //
 //        Element inkopvarumellan3p = doc.createElement("InkopVaruMellan3p");
@@ -149,7 +179,7 @@ public class MomsRapport extends javax.swing.JFrame {
 //        moms.appendChild(forsovrigt);
 //
         Element momsutghog = doc.createElement("MomsUtgHog");
-        momsutghog.appendChild(doc.createTextNode("10000"));
+        momsutghog.appendChild(doc.createTextNode(txtUtMoms.getText()));
         moms.appendChild(momsutghog);
 //
 //        Element momsutgmedel = doc.createElement("MomsUtgMedel");
@@ -185,11 +215,11 @@ public class MomsRapport extends javax.swing.JFrame {
 //        moms.appendChild(momsimportutglag);
 
         Element momsingavdr = doc.createElement("MomsIngAvdr");
-        momsingavdr.appendChild(doc.createTextNode("5000"));
+        momsingavdr.appendChild(doc.createTextNode(txtInMoms.getText()));
         moms.appendChild(momsingavdr);
 
         Element momsbetala = doc.createElement("MomsBetala");
-        momsbetala.appendChild(doc.createTextNode("5000"));
+        momsbetala.appendChild(doc.createTextNode(txtBetala.getText()));
         moms.appendChild(momsbetala);
 
         Element textupplysningmoms = doc.createElement("TextUpplysningMoms");
@@ -215,24 +245,33 @@ public class MomsRapport extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtUtMoms = new javax.swing.JTextField();
+        txtForsaljEU = new javax.swing.JTextField();
+        txtForsalj = new javax.swing.JTextField();
+        txtInMoms = new javax.swing.JTextField();
+        txtBetala = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setText("jTextField1");
+        txtForsalj.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtForsaljCaretUpdate(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField1");
+        txtInMoms.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtInMomsCaretUpdate(evt);
+            }
+        });
 
-        jTextField3.setText("jTextField1");
-
-        jTextField4.setText("jTextField1");
-
-        jTextField5.setText("jTextField1");
+        txtBetala.setEditable(false);
 
         jButton1.setText("Skapa deklaration");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -241,37 +280,70 @@ public class MomsRapport extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Momspliktig försäljning");
+
+        jLabel2.setText("Utgående moms på försäljning");
+
+        jLabel3.setText("Försäljning utanför EU");
+
+        jLabel4.setText("Ingående moms");
+
+        jLabel5.setText("Moms att betala eller få tillbaka");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(344, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(132, 132, 132))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(txtForsalj, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtForsaljEU, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
+                    .addComponent(txtUtMoms, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtInMoms, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBetala, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(87, 87, 87)
+                .addComponent(jButton1)
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(jButton1)
-                .addGap(66, 66, 66)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtForsalj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtUtMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtForsaljEU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtInMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBetala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         pack();
@@ -279,11 +351,19 @@ public class MomsRapport extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            rapport2();
+            momsRapport();
         } catch (ParserConfigurationException | TransformerException ex) {
             Logger.getLogger(MomsRapport.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtForsaljCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtForsaljCaretUpdate
+        berakningUt();
+    }//GEN-LAST:event_txtForsaljCaretUpdate
+
+    private void txtInMomsCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtInMomsCaretUpdate
+        betala();
+    }//GEN-LAST:event_txtInMomsCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -322,10 +402,15 @@ public class MomsRapport extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtBetala;
+    private javax.swing.JTextField txtForsalj;
+    private javax.swing.JTextField txtForsaljEU;
+    private javax.swing.JTextField txtInMoms;
+    private javax.swing.JTextField txtUtMoms;
     // End of variables declaration//GEN-END:variables
 }
