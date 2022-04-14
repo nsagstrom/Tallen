@@ -28,7 +28,7 @@ import org.w3c.dom.Element;
  */
 public class MomsRapport extends javax.swing.JFrame {
 
-    public static final String xmlFilePath = "C:\\Users\\nsags\\OneDrive\\Skrivbord\\New folder\\momsDeklaration.xml";
+    public static final String xmlFilePath = "hittaMig.xml";
 
     /**
      * Creates new form MomsRapport
@@ -37,74 +37,7 @@ public class MomsRapport extends javax.swing.JFrame {
         initComponents();
     }
 
-    public static void rapport() {
-
-        try {
-
-            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
-
-            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
-
-            Document document = documentBuilder.newDocument();
-
-            DOMImplementation domImpl = document.getImplementation();
-            DocumentType doctype = domImpl.createDocumentType("eSKDUpload", "-//Skatteverket, Sweden//DTD Skatteverket eSKDUpload-DTD Version 6.0//SV", "https://www1.skatteverket.se/demoeskd/eSKDUpload_6p0.dtd");
-
-            document.appendChild(doctype);
-
-            // root element
-            Element root = document.createElement("company");
-            document.appendChild(root);
-
-            // employee element
-            Element employee = document.createElement("employee");
-
-            root.appendChild(employee);
-
-            // set an attribute to staff element
-            Attr attr = document.createAttribute("id");
-            attr.setValue("10");
-            employee.setAttributeNode(attr);
-
-            //you can also use staff.setAttribute("id", "1") for this
-            // firstname element
-            Element firstName = document.createElement("firstname");
-            firstName.appendChild(document.createTextNode("James"));
-            employee.appendChild(firstName);
-
-            // lastname element
-            Element lastname = document.createElement("lastname");
-            lastname.appendChild(document.createTextNode("Harley"));
-            employee.appendChild(lastname);
-
-            // email element
-            Element email = document.createElement("email");
-            email.appendChild(document.createTextNode("james@example.org"));
-            employee.appendChild(email);
-
-            // department elements
-            Element department = document.createElement("department");
-            department.appendChild(document.createTextNode("Human Resources"));
-            employee.appendChild(department);
-
-            // create the xml file
-            //transform the DOM Object to an XML File
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(xmlFilePath));
-
-            // If you use
-            // StreamResult result = new StreamResult(System.out);
-            // the output will be pushed to the standard output ...
-            // You can use that for debugging 
-            transformer.transform(domSource, streamResult);
-
-            System.out.println("Done creating XML File");
-
-        } catch (ParserConfigurationException | TransformerException pce) {
-        }
-    }
+    
 
     private void rapport2() throws ParserConfigurationException, TransformerException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -215,9 +148,9 @@ public class MomsRapport extends javax.swing.JFrame {
 //        forsovrigt.appendChild(doc.createTextNode("0"));
 //        moms.appendChild(forsovrigt);
 //
-//        Element momsutghog = doc.createElement("MomsUtgHog");
-//        momsutghog.appendChild(doc.createTextNode("10000"));
-//        moms.appendChild(momsutghog);
+        Element momsutghog = doc.createElement("MomsUtgHog");
+        momsutghog.appendChild(doc.createTextNode("10000"));
+        moms.appendChild(momsutghog);
 //
 //        Element momsutgmedel = doc.createElement("MomsUtgMedel");
 //        momsutgmedel.appendChild(doc.createTextNode("0"));
@@ -347,9 +280,7 @@ public class MomsRapport extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             rapport2();
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(MomsRapport.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
+        } catch (ParserConfigurationException | TransformerException ex) {
             Logger.getLogger(MomsRapport.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
