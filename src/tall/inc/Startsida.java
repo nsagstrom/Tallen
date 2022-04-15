@@ -95,6 +95,7 @@ public class Startsida extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         listValdaHattar = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
+        btnPrisHatt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -185,6 +186,13 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
+        btnPrisHatt.setText("Ändra pris standardhatt");
+        btnPrisHatt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrisHattActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,7 +227,9 @@ public class Startsida extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(jButton2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPrisHatt, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
@@ -260,6 +270,8 @@ public class Startsida extends javax.swing.JFrame {
                             .addComponent(startHattBtn))
                         .addGap(29, 29, 29)
                         .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPrisHatt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -344,6 +356,13 @@ public class Startsida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnPrisHattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrisHattActionPerformed
+
+        // TODO add your handling code here:
+        new AndraPrisStandardHatt().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnPrisHattActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -352,6 +371,7 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton btnAndraPris;
     private javax.swing.JButton btnKundUppgift;
     private javax.swing.JButton btnLoggaUt;
+    private javax.swing.JButton btnPrisHatt;
     private javax.swing.JButton btnSeOrderStatus;
     private javax.swing.JButton btnSkapaNyArtikel;
     private javax.swing.JButton btnSkapaNyOrder;

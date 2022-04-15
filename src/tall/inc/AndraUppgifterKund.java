@@ -75,6 +75,12 @@ public class AndraUppgifterKund extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        namnCmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namnCmbActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Välj namn");
 
         kundTbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -231,6 +237,10 @@ public class AndraUppgifterKund extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void namnCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namnCmbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_namnCmbActionPerformed
     private void visaKunder() {
         String namnet = namnCmb.getSelectedItem().toString();
 
