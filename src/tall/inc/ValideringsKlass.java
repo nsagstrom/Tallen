@@ -40,9 +40,10 @@ public class ValideringsKlass {
         if (!idid.matches("\\d+")) {
             arTal = false;
 
-        } else {
-            taltest.requestFocus();
         }
+//        else {
+//            taltest.requestFocus();
+//        }
         return arTal;
     }
 //Validera så att combobox har korrekt position, inte index position noll

@@ -11,10 +11,7 @@ import oru.inf.InfException;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 /**
- * Den här klassen innehåller metoder för olika SQL-frågor. Alla metoder är
- * klassmetoder vilket anges med nyckelordet static. Detta innebeär att vi
- * kommer åt metoderna från alla andra klasser i projektet utan att
- * instansiera ett objekt av den här klassen.
+ * Den här klassen innehåller metoder för olika SQL-frågor. Alla metoder är klassmetoder vilket anges med nyckelordet static. Detta innebeär att vi kommer åt metoderna från alla andra klasser i projektet utan att instansiera ett objekt av den här klassen.
  *
  * @author Markus
  */
@@ -31,8 +28,7 @@ public class SqlFragor {
      * Ställer en SQL-fråga och returnerar ett värde i form av en String
      *
      * @param fraga En SQL-fråga
-     * @return Svaret på SQL-frågan. Om frågan inte resulterar i ett svar
-     * returneras en sträng med värdet null.
+     * @return Svaret på SQL-frågan. Om frågan inte resulterar i ett svar returneras en sträng med värdet null.
      */
     public static String getEttVarde(String fraga) {
         String returString = null;
@@ -41,18 +37,19 @@ public class SqlFragor {
             returString = idb.fetchSingle(fraga);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Databasfel");
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Något gick fel");
         }
         return returString;
+
     }
 
     /**
      * Ställer en SQL-fråga och returnerar en rad i form av en Hashmap
      *
      * @param fraga En SQL-fråga
-     * @return Svaret på SQL-frågan. Om frågan inte resulterar i ett svar
-     * returneras en tom HashMap.
+     * @return Svaret på SQL-frågan. Om frågan inte resulterar i ett svar returneras en tom HashMap.
      */
     public static HashMap getEnRad(String fraga) {
         HashMap<String, String> returMap;
@@ -71,12 +68,10 @@ public class SqlFragor {
     }
 
     /**
-     * Ställer en SQL-fråga och returnerar flera rad i form av en ArrayList of
-     * HashMap
+     * Ställer en SQL-fråga och returnerar flera rad i form av en ArrayList of HashMap
      *
      * @param fraga En SQL-fråga
-     * @return Svaret på SQL-frågan. Om frågan inte resulterar i ett svar
-     * returneras en tom ArrayList of HashMap.
+     * @return Svaret på SQL-frågan. Om frågan inte resulterar i ett svar returneras en tom ArrayList of HashMap.
      */
     public static ArrayList<HashMap<String, String>> getFleraRader(String fraga) {
         ArrayList<HashMap<String, String>> returArrayList = new ArrayList<>();
@@ -97,8 +92,7 @@ public class SqlFragor {
      * Ställer en SQL-fråga och returnerar en kolumn i form av en ArrayList
      *
      * @param fraga En SQL-fråga
-     * @return Svaret på SQL-frågan. Om frågan inte resulterar i ett svar
-     * returneras en tom ArrayList.
+     * @return Svaret på SQL-frågan. Om frågan inte resulterar i ett svar returneras en tom ArrayList.
      */
     public static ArrayList<String> getEnKolumn(String fraga) {
         ArrayList<String> returArrayList = new ArrayList<>();
@@ -115,8 +109,7 @@ public class SqlFragor {
     }
 
     /**
-     * Uppdaterar värden i databasen. Kanske finns ett bättre namn på
-     * metoden? Dålig fantasi här :)
+     * Uppdaterar värden i databasen. Kanske finns ett bättre namn på metoden? Dålig fantasi här :)
      *
      * @param fraga En SQL-fråga
      * @return True om frågan fungerade

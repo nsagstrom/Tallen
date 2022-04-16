@@ -5,6 +5,9 @@
 package tall.inc;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -27,58 +30,148 @@ import org.w3c.dom.Element;
  * @author nsags
  */
 public class MomsRapport extends javax.swing.JFrame {
-
+    
     public static final String xmlFilePath = "momsDeklaration.xml";
     
-    
+    int momspforsalj;
+    int export;
+    int utgaendeMoms;
+    int attbetala;
+    int inMoms;
 
     /**
      * Creates new form MomsRapport
      */
     public MomsRapport() {
         initComponents();
+        lblSkapad.setVisible(false);
     }
+    
+    private void attBetala() {
+        
+        if (ValideringsKlass.taltest(txtInMoms)) {
+            inMoms = Integer.parseInt(txtInMoms.getText());
+            
+            attbetala = utgaendeMoms - inMoms;
+            
+            txtBetala.setText(String.valueOf(attbetala));
+            
+        }
+    }
+    
+    private void varden() {
+        String stardate = "";
+        String slutdate = "";
 
-    
-    private void berakningUt(){
+        // momspliktig försäljning 
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = dateStart.getDate();
         
-        int forsalj = Integer.parseInt(txtForsalj.getText());
-        int utMoms = Integer.parseInt(txtUtMoms.getText());
-        int inMoms = Integer.parseInt(txtInMoms.getText());
-        int betala;
+        Date slut = dateEnd.getDate();
         
-       int ututmoms = (int) (forsalj*0.25);
+        stardate = dateFormat.format(start);
+        slutdate = dateFormat.format(slut);
         
-        betala = utMoms - inMoms;
+        String fragaForsaljMoms = "SELECT pris FROM (\n"
+                + "SELECT SUM(pris) AS pris , LevDatum\n"
+                + "FROM bestallning\n"
+                + "JOIN kund k on k.KundID = bestallning.KundID\n"
+                + "JOIN orderrad o on bestallning.BestID = o.BestID\n"
+                + "JOIN hatt h on o.HattID = h.HattID\n"
+                + "JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
+                + "WHERE Status = 'Stängd' AND Prio = 0 AND TullID= 'Saknas') t2\n"
+                + "WHERE LevDatum BETWEEN '" + stardate + "' AND '" + slutdate + "';";
         
-        txtUtMoms.setText(String.valueOf(ututmoms));
-    }
-    
-    private void betala(){
-                int forsalj = Integer.parseInt(txtForsalj.getText());
-        int utMoms = Integer.parseInt(txtUtMoms.getText());
-        int inMoms = Integer.parseInt(txtInMoms.getText());
-        int betala;
-        
-        utMoms = (int) (forsalj*0.25);
-        
-        betala = utMoms - inMoms;
-        
-        txtBetala.setText(String.valueOf(betala));
-    }
-    
-    
+        String forsaljMoms = SqlFragor.getEttVarde(fragaForsaljMoms);
 
+        // Momspliktig sörsäljning med ett 20% + För prio
+        String fragaForsaljMomsPrio = "SELECT pris FROM (\n"
+                + "SELECT  FLOOR(SUM(pris)*1.2) AS pris , LevDatum, TullID\n"
+                + "FROM bestallning\n"
+                + "JOIN kund k on k.KundID = bestallning.KundID\n"
+                + "JOIN orderrad o on bestallning.BestID = o.BestID\n"
+                + "JOIN hatt h on o.HattID = h.HattID\n"
+                + "JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
+                + "WHERE Status = 'Stängd' AND Prio = 1 AND TullID= 'Saknas') t2\n"
+                + "WHERE LevDatum BETWEEN '" + stardate + "' AND '" + slutdate + "';";
+        
+        String forsaljMomsPrio = SqlFragor.getEttVarde(fragaForsaljMomsPrio);
+
+        // försäljning på export 
+        String fragaForsaljExport = "SELECT pris FROM (\n"
+                + "SELECT  SUM(pris) AS pris , LevDatum, TullID\n"
+                + "FROM bestallning\n"
+                + "JOIN kund k on k.KundID = bestallning.KundID\n"
+                + "JOIN orderrad o on bestallning.BestID = o.BestID\n"
+                + "JOIN hatt h on o.HattID = h.HattID\n"
+                + "JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
+                + "WHERE Status = 'Stängd' AND Prio = 0 AND TullID != 'Saknas') t2\n"
+                + "WHERE LevDatum BETWEEN '" + stardate + "' AND '" + slutdate + "';";
+        
+        String forsaljMomsExport = SqlFragor.getEttVarde(fragaForsaljExport);
+
+        // forsäljning export prio
+        String fragaForsaljExportPrio = "SELECT pris FROM (\n"
+                + "SELECT  FLOOR(SUM(pris)*1.2) AS pris , LevDatum, TullID\n"
+                + "FROM bestallning\n"
+                + "JOIN kund k on k.KundID = bestallning.KundID\n"
+                + "JOIN orderrad o on bestallning.BestID = o.BestID\n"
+                + "JOIN hatt h on o.HattID = h.HattID\n"
+                + "JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
+                + "WHERE Status = 'Stängd' AND Prio = 1 AND TullID != 'Saknas') t2\n"
+                + "WHERE LevDatum BETWEEN '" + stardate + "' AND '" + slutdate + "';";
+        
+        String forsaljExportPrio = SqlFragor.getEttVarde(fragaForsaljExportPrio);
+        
+        int momsForsalj = 0;
+        int prioMomsForsalj = 0;
+        int exportMomsForsalj = 0;
+        int prioExportForsalj = 0;
+        
+        if (forsaljMoms != null) {
+            momsForsalj = Integer.parseInt(forsaljMoms);
+        }
+        
+        if (forsaljMomsPrio != null) {
+            prioMomsForsalj = Integer.parseInt(forsaljMomsPrio);
+        }
+        
+        if (forsaljMomsExport != null) {
+            exportMomsForsalj = Integer.parseInt(forsaljMomsExport);
+            
+        }
+        if (forsaljExportPrio != null) {
+            prioExportForsalj = Integer.parseInt(forsaljExportPrio);
+            
+        }
+
+//        inMoms = Integer.parseInt(txtInMoms.getText());
+        momspforsalj = momsForsalj + prioMomsForsalj;
+        export = exportMomsForsalj + prioExportForsalj;
+        utgaendeMoms = (int) (momspforsalj * 0.25);
+        attbetala = utgaendeMoms - inMoms;
+        
+        String momsforsaljforsalj = String.valueOf(momspforsalj);
+        String exportexport = String.valueOf(export);
+        String ututgaende = String.valueOf(utgaendeMoms);
+        String attattbetala = String.valueOf(attbetala);
+        
+        txtForsalj.setText(momsforsaljforsalj);
+        txtForsaljEU.setText(exportexport);
+        txtUtMoms.setText(ututgaende);
+        txtBetala.setText(attattbetala);
+    }
+    
     private void momsRapport() throws ParserConfigurationException, TransformerException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         factory.setValidating(true);
-
+        
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
-
+        
         transformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
-
+        
         Document doc = builder.newDocument();
         //Create doc type
         DOMImplementation domImpl = doc.getImplementation();
@@ -90,22 +183,22 @@ public class MomsRapport extends javax.swing.JFrame {
         // Add root element
         Element rootElement = doc.createElement("eSKDUpload");
         doc.appendChild(rootElement);
-
+        
         Attr attr = doc.createAttribute("Version");
         attr.setValue("6.0");
         rootElement.setAttributeNode(attr);
-
+        
         Element orgnummer = doc.createElement("OrgNr");
         orgnummer.appendChild(doc.createTextNode("599900-0465"));
         rootElement.appendChild(orgnummer);
-
+        
         Element moms = doc.createElement("Moms");
         rootElement.appendChild(moms);
-
+        
         Element period = doc.createElement("Period");
         period.appendChild(doc.createTextNode("202202"));
         moms.appendChild(period);
-
+        
         Element forsmomsejannan = doc.createElement("ForsMomsEjAnnan");
         forsmomsejannan.appendChild(doc.createTextNode(txtForsalj.getText()));
         moms.appendChild(forsmomsejannan);
@@ -149,7 +242,6 @@ public class MomsRapport extends javax.swing.JFrame {
 //        Element forsvaruannateg = doc.createElement("ForsVaruAnnatEg");
 //        forsvaruannateg.appendChild(doc.createTextNode("0"));
 //        moms.appendChild(forsvaruannateg);
-
         Element forsvaruutomeg = doc.createElement("ForsVaruUtomEg");
         forsvaruutomeg.appendChild(doc.createTextNode(txtForsaljEU.getText()));
         moms.appendChild(forsvaruutomeg);
@@ -217,25 +309,25 @@ public class MomsRapport extends javax.swing.JFrame {
         Element momsingavdr = doc.createElement("MomsIngAvdr");
         momsingavdr.appendChild(doc.createTextNode(txtInMoms.getText()));
         moms.appendChild(momsingavdr);
-
+        
         Element momsbetala = doc.createElement("MomsBetala");
         momsbetala.appendChild(doc.createTextNode(txtBetala.getText()));
         moms.appendChild(momsbetala);
-
+        
         Element textupplysningmoms = doc.createElement("TextUpplysningMoms");
-        textupplysningmoms.appendChild(doc.createTextNode("Bla bla bla bla"));
+        textupplysningmoms.appendChild(doc.createTextNode(txtOvrigUpplys.getText()));
         moms.appendChild(textupplysningmoms);
-
+        
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
         transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
-
+        
         DOMSource domSource = new DOMSource(doc);
         StreamResult streamResult = new StreamResult(new File(xmlFilePath));
         transformer.transform(domSource, streamResult);
-
+        
         System.out.println("Done creating XML File");
-
+        
     }
 
     /**
@@ -250,36 +342,45 @@ public class MomsRapport extends javax.swing.JFrame {
         txtForsalj = new javax.swing.JTextField();
         txtInMoms = new javax.swing.JTextField();
         txtBetala = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnSkapaRapport = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        dateStart = new com.toedter.calendar.JDateChooser();
+        dateEnd = new com.toedter.calendar.JDateChooser();
+        btnSok = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtOvrigUpplys = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        lblSkapad = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtForsalj.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtForsaljCaretUpdate(evt);
-            }
-        });
+        txtUtMoms.setEditable(false);
+
+        txtForsaljEU.setEditable(false);
+
+        txtForsalj.setEditable(false);
 
         txtInMoms.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txtInMomsCaretUpdate(evt);
             }
         });
+        txtInMoms.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtInMomsFocusLost(evt);
+            }
+        });
 
         txtBetala.setEditable(false);
 
-        jButton1.setText("Skapa deklaration");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSkapaRapport.setText("Skapa deklaration");
+        btnSkapaRapport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSkapaRapportActionPerformed(evt);
             }
         });
 
@@ -293,146 +394,146 @@ public class MomsRapport extends javax.swing.JFrame {
 
         jLabel5.setText("Moms att betala eller få tillbaka");
 
+        dateStart.setDateFormatString("yyyy-MM-dd");
+        dateStart.setOpaque(false);
+
+        dateEnd.setDateFormatString("yyyy-MM-dd");
+
+        btnSok.setText("Sök");
+        btnSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokActionPerformed(evt);
+            }
+        });
+
+        txtOvrigUpplys.setColumns(20);
+        txtOvrigUpplys.setRows(5);
+        jScrollPane1.setViewportView(txtOvrigUpplys);
+
+        jLabel6.setText("Överig upplysning till Skatteverket ");
+
+        lblSkapad.setText("Deklaration skapad");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtForsalj, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtForsaljEU, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtForsalj, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtForsaljEU, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(txtUtMoms, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtInMoms, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBetala, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(jButton1)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105))))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(txtUtMoms, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtInMoms, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBetala, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSkapad)
+                            .addComponent(btnSkapaRapport)
+                            .addComponent(btnSok, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel5))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dateStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSok)
+                            .addComponent(dateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtForsalj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtUtMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtForsalj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(txtForsaljEU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtForsaljEU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtInMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBetala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(147, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(263, 263, 263)
+                                .addComponent(btnSkapaRapport))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtUtMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtInMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBetala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblSkapad)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSkapaRapportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaRapportActionPerformed
         try {
             momsRapport();
         } catch (ParserConfigurationException | TransformerException ex) {
             Logger.getLogger(MomsRapport.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void txtForsaljCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtForsaljCaretUpdate
-        berakningUt();
-    }//GEN-LAST:event_txtForsaljCaretUpdate
+        
+        lblSkapad.setVisible(true);
+    }//GEN-LAST:event_btnSkapaRapportActionPerformed
 
     private void txtInMomsCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtInMomsCaretUpdate
-        betala();
+        attBetala();
     }//GEN-LAST:event_txtInMomsCaretUpdate
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MomsRapport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MomsRapport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MomsRapport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MomsRapport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
+        varden();
+    }//GEN-LAST:event_btnSokActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MomsRapport().setVisible(true);
-            }
-        });
-    }
+    private void txtInMomsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInMomsFocusLost
+        attBetala();
+    }//GEN-LAST:event_txtInMomsFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
+    private javax.swing.JButton btnSkapaRapport;
+    private javax.swing.JButton btnSok;
+    private com.toedter.calendar.JDateChooser dateEnd;
+    private com.toedter.calendar.JDateChooser dateStart;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblSkapad;
     private javax.swing.JTextField txtBetala;
     private javax.swing.JTextField txtForsalj;
     private javax.swing.JTextField txtForsaljEU;
     private javax.swing.JTextField txtInMoms;
+    private javax.swing.JTextArea txtOvrigUpplys;
     private javax.swing.JTextField txtUtMoms;
     // End of variables declaration//GEN-END:variables
 }
