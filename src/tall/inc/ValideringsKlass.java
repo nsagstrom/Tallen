@@ -41,6 +41,7 @@ public class ValideringsKlass {
             arTal = false;
 
         }
+        // Fuckar upp Momsrapporten, behövds den i annan så kan jag fixa momsen /Sagström
 //        else {
 //            taltest.requestFocus();
 //        }
