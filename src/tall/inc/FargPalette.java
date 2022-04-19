@@ -119,7 +119,9 @@ public class FargPalette extends javax.swing.JFrame {
             jLabel2.setText(farg.toString());
         }
         jPanel1.setBackground(farg);
-        jLabel2.setText(farg.toString());
+        int hashColor = farg.hashCode();
+        jLabel2.setText(Integer.toString(hashColor));
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
