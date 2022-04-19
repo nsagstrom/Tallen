@@ -257,7 +257,9 @@ public class FardigStallBeställning extends javax.swing.JFrame {
 
     private void btnKlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKlarActionPerformed
         // TODO add your handling code here:
+        
         Fraktsedel fraktsedel = new Fraktsedel();
+        fraktsedel.nyFraktsedel(bestNummer, fNamn, eNamn, adress, vikt, moms, tull);
         fraktsedel.visaFraktsedel();
     }//GEN-LAST:event_btnKlarActionPerformed
 

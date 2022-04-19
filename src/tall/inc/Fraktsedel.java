@@ -28,17 +28,19 @@ public class Fraktsedel {
     Document document;
     PdfWriter writer;
 
-    private int orderNummer;
+    private String orderNummer;
     private String forNamn;
     private String efterNamn;
     private String kundAdress;
     private String telefonNummer;
-    private int artikelNummer;
+    private String hattVikt;
+    private double momsNr;
+    private String tullID;
 
     private String file = "Fraktsedel.pdf";
 
     public Fraktsedel() {
-        skapaFraktsedel();
+        
     }
 
     public void skapaFraktsedel() {
@@ -90,7 +92,7 @@ public class Fraktsedel {
             foretagsTelNr.add(new Paragraph());
             document.add(foretagsTelNr);
 
-            Paragraph tillKund = new Paragraph("Till:", litenFont);
+            Paragraph tillKund = new Paragraph("Till:" + "\n" + forNamn + "\n" + efterNamn + "\n" + kundAdress + "\n" ,  litenFont);
             tillKund.add(new Paragraph());
             document.add(tillKund);
 
@@ -109,10 +111,7 @@ public class Fraktsedel {
             inneHall.add(new Paragraph());
             document.add(inneHall);
 
-            Paragraph kundTelNr = new Paragraph("Tel:                    ", litenFont);
-            kundTelNr.setAlignment(Element.ALIGN_RIGHT);
-            kundTelNr.add(new Paragraph());
-            document.add(kundTelNr);
+            
             
             Paragraph testLinje2 = new Paragraph("__________________________________________________________", storFont);
             testLinje2.add(new Paragraph());
@@ -127,16 +126,16 @@ public class Fraktsedel {
             varuKod.add(new Paragraph());
             document.add(varuKod);
 
-            Paragraph moms = new Paragraph("Moms: ", litenFont);
-            moms.add(new Paragraph());
-            document.add(moms);
+            //Paragraph moms = new Paragraph("Moms: " + momsNr , litenFont);
+            //moms.add(new Paragraph());
+            //document.add(moms);
 
-            Paragraph attaSiffrig = new Paragraph("Varudeklaration: ", litenFont);
+            Paragraph attaSiffrig = new Paragraph("Varudeklaration: " + tullID, litenFont);
             addEmptyLine(attaSiffrig, 1);
             attaSiffrig.add(new Paragraph());
             document.add(attaSiffrig);
             
-            Paragraph vikt = new Paragraph("Vikt:", litenFont);
+            Paragraph vikt = new Paragraph("Vikt:" + hattVikt, litenFont);
             vikt.add(new Paragraph());
             document.add(vikt);
             
@@ -159,13 +158,14 @@ public class Fraktsedel {
         }
     }
 
-    public void nyFraktsedel(int orderNummer, String forNamn, String efterNamn, String kundAdress, String telefonNummer, int artikelNummer) {
+    public void nyFraktsedel(String orderNummer, String forNamn, String efterNamn, String kundAdress, String hattVikt, double momsNr, String tullID) {
         this.orderNummer = orderNummer;
         this.forNamn = forNamn;
         this.efterNamn = efterNamn;
         this.kundAdress = kundAdress;
-        this.telefonNummer = telefonNummer;
-        this.artikelNummer = artikelNummer;
+        this.hattVikt = hattVikt;
+        this.momsNr = momsNr;
+        this.tullID = tullID;
         skapaFraktsedel();
     }
 
@@ -180,9 +180,7 @@ public class Fraktsedel {
         }
     }
 
-    private void test() {
-        nyFraktsedel(12345678, "Förnamn", "Efternamn", "Gatan 7", "073-123456", 11111111);
-    }
+    
 
     private static Font storFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
 
