@@ -599,11 +599,11 @@ public class MomsRapport extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void txtmonthPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtmonthPropertyChange
-       // varden();
+        varden();
     }//GEN-LAST:event_txtmonthPropertyChange
 
     private void txtyearPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtyearPropertyChange
-        //varden();
+        varden();
     }//GEN-LAST:event_txtyearPropertyChange
 
 

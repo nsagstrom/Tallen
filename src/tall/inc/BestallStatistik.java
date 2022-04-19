@@ -4,7 +4,12 @@
  */
 package tall.inc;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Month;
+import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -13,6 +18,19 @@ import java.util.HashMap;
  * @author isakw
  */
 public class BestallStatistik extends javax.swing.JFrame {
+
+    int momspforsalj;
+    int export;
+    int utgaendeMoms;
+    int attbetala;
+    int inMoms;
+    String perioden;
+
+    String totForsalj;
+    String momsforsaljforsalj;
+    String exportexport;
+    String ututgaende;
+    String attattbetala;
 
     /**
      * Creates new form BestallStatistik
@@ -31,6 +49,11 @@ public class BestallStatistik extends javax.swing.JFrame {
     private void initComponents() {
 
         btnTillbaka = new javax.swing.JButton();
+        dateStart = new com.toedter.calendar.JDateChooser();
+        dateEnd = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtStat = new javax.swing.JTextArea();
+        btnOk = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,21 +64,53 @@ public class BestallStatistik extends javax.swing.JFrame {
             }
         });
 
+        txtStat.setColumns(20);
+        txtStat.setRows(5);
+        jScrollPane1.setViewportView(txtStat);
+
+        btnOk.setText("Test");
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(dateStart, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81)
+                .addComponent(dateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addComponent(btnOk)
+                .addGap(83, 83, 83))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(322, Short.MAX_VALUE)
-                .addComponent(btnTillbaka)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnTillbaka)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(157, 157, 157))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(btnTillbaka)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnTillbaka)
+                        .addGap(59, 59, 59)
+                        .addComponent(dateStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnOk))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         pack();
@@ -66,44 +121,136 @@ public class BestallStatistik extends javax.swing.JFrame {
         dispose();                                     
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        varden();
+        sattVarden();
+    }//GEN-LAST:event_btnOkActionPerformed
+
+    private void sattVarden() {
+        txtStat.setText("Försäljning"
+                + "\t" + totForsalj + "\n"
+                + "Varav export" + "\t" + exportexport);
+    }
+
+    private void varden() {
+        String stardate = "";
+        String slutdate = "";
+
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = dateStart.getDate();
+
+        Date slut = dateEnd.getDate();
+
+        stardate = dateFormat.format(start);
+        slutdate = dateFormat.format(slut);
+        
+        
+        // momspliktig försäljning 
+        String fragaForsaljMoms = """
+                                  SELECT pris FROM (
+                                  SELECT SUM(pris) AS pris , LevDatum
+                                  FROM bestallning
+                                  JOIN kund k on k.KundID = bestallning.KundID
+                                  JOIN orderrad o on bestallning.BestID = o.BestID
+                                  JOIN hatt h on o.HattID = h.HattID
+                                  JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID
+                                  WHERE Status = 'St\u00e4ngd' AND Prio = 0 AND TullID= 'Saknas') t2
+                                  WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
+
+        String forsaljMoms = SqlFragor.getEttVarde(fragaForsaljMoms);
+
+        // Momspliktig sörsäljning med ett 20% + För prio
+        String fragaForsaljMomsPrio = """
+                                      SELECT pris FROM (
+                                      SELECT  FLOOR(SUM(pris)*1.2) AS pris , LevDatum, TullID
+                                      FROM bestallning
+                                      JOIN kund k on k.KundID = bestallning.KundID
+                                      JOIN orderrad o on bestallning.BestID = o.BestID
+                                      JOIN hatt h on o.HattID = h.HattID
+                                      JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID
+                                      WHERE Status = 'St\u00e4ngd' AND Prio = 1 AND TullID= 'Saknas') t2
+                                      WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
+
+        String forsaljMomsPrio = SqlFragor.getEttVarde(fragaForsaljMomsPrio);
+
+        // försäljning på export 
+        String fragaForsaljExport = """
+                                    SELECT pris FROM (
+                                    SELECT  SUM(pris) AS pris , LevDatum, TullID
+                                    FROM bestallning
+                                    JOIN kund k on k.KundID = bestallning.KundID
+                                    JOIN orderrad o on bestallning.BestID = o.BestID
+                                    JOIN hatt h on o.HattID = h.HattID
+                                    JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID
+                                    WHERE Status = 'St\u00e4ngd' AND Prio = 0 AND TullID != 'Saknas') t2
+                                    WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
+
+        String forsaljMomsExport = SqlFragor.getEttVarde(fragaForsaljExport);
+
+        // forsäljning export prio
+        String fragaForsaljExportPrio = """
+                                        SELECT pris FROM (
+                                        SELECT  FLOOR(SUM(pris)*1.2) AS pris , LevDatum, TullID
+                                        FROM bestallning
+                                        JOIN kund k on k.KundID = bestallning.KundID
+                                        JOIN orderrad o on bestallning.BestID = o.BestID
+                                        JOIN hatt h on o.HattID = h.HattID
+                                        JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID
+                                        WHERE Status = 'St\u00e4ngd' AND Prio = 1 AND TullID != 'Saknas') t2
+                                        WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
+
+        String forsaljExportPrio = SqlFragor.getEttVarde(fragaForsaljExportPrio);
+
+        int momsForsalj = 0;
+        int prioMomsForsalj = 0;
+        int exportMomsForsalj = 0;
+        int prioExportForsalj = 0;
+
+        if (forsaljMoms != null) {
+            momsForsalj = Integer.parseInt(forsaljMoms);
+        }
+
+        if (forsaljMomsPrio != null) {
+            prioMomsForsalj = Integer.parseInt(forsaljMomsPrio);
+        }
+
+        if (forsaljMomsExport != null) {
+            exportMomsForsalj = Integer.parseInt(forsaljMomsExport);
+
+        }
+        if (forsaljExportPrio != null) {
+            prioExportForsalj = Integer.parseInt(forsaljExportPrio);
+
+        }
+
+//        inMoms = Integer.parseInt(txtInMoms.getText());
+        momspforsalj = momsForsalj + prioMomsForsalj;
+        export = exportMomsForsalj + prioExportForsalj;
+
+
+        momsforsaljforsalj = String.valueOf(momspforsalj);
+        exportexport = String.valueOf(export);
+        ututgaende = String.valueOf(utgaendeMoms);
+        attattbetala = String.valueOf(attbetala);
+        
+        int saljTot = momspforsalj + export;
+        totForsalj = String.valueOf(saljTot);
+    }
+    
     
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BestallStatistik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BestallStatistik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BestallStatistik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BestallStatistik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new BestallStatistik().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnOk;
     private javax.swing.JButton btnTillbaka;
+    private com.toedter.calendar.JDateChooser dateEnd;
+    private com.toedter.calendar.JDateChooser dateStart;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txtStat;
     // End of variables declaration//GEN-END:variables
 }
