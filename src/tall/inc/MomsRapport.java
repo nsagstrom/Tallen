@@ -345,7 +345,7 @@ public class MomsRapport extends javax.swing.JFrame {
         transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
 
         DOMSource domSource = new DOMSource(doc);
-        StreamResult streamResult = new StreamResult(new File("momsDeklaration"+perioden+".xml"));
+        StreamResult streamResult = new StreamResult(new File("MomsDeklaration"+perioden+".xml"));
         transformer.transform(domSource, streamResult);
 
         System.out.println("Done creating XML File");
@@ -461,8 +461,18 @@ public class MomsRapport extends javax.swing.JFrame {
         });
 
         txtmonth.setAutoscrolls(true);
-        txtmonth.setMonth(1);
         txtmonth.setYearChooser(txtyear);
+        txtmonth.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtmonthPropertyChange(evt);
+            }
+        });
+
+        txtyear.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtyearPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -587,6 +597,14 @@ public class MomsRapport extends javax.swing.JFrame {
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         new Startsida().setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void txtmonthPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtmonthPropertyChange
+        varden();
+    }//GEN-LAST:event_txtmonthPropertyChange
+
+    private void txtyearPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtyearPropertyChange
+        varden();
+    }//GEN-LAST:event_txtyearPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
