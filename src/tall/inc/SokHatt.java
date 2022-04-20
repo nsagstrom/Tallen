@@ -108,7 +108,6 @@ public class SokHatt extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         uppdateraButton = new javax.swing.JButton();
         fargCmb = new javax.swing.JComboBox<>();
-        storlekCmb = new javax.swing.JComboBox<>();
         genreCmb = new javax.swing.JComboBox<>();
         tygCmb = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -117,6 +116,7 @@ public class SokHatt extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         hattIDTextfield = new javax.swing.JTextField();
         BtnTillbaka = new javax.swing.JButton();
+        storlekTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,7 +133,7 @@ public class SokHatt extends javax.swing.JFrame {
 
         jLabel2.setText("Färg:");
 
-        jLabel3.setText("Storlek:");
+        jLabel3.setText("Storlek/cm:");
 
         jLabel5.setText("Genre:");
 
@@ -147,9 +147,6 @@ public class SokHatt extends javax.swing.JFrame {
         });
 
         fargCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Färg" }));
-
-        storlekCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Storlek", "S", "M", "L", "XL" }));
-        storlekCmb.setToolTipText("");
 
         genreCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Genre" }));
 
@@ -197,11 +194,10 @@ public class SokHatt extends javax.swing.JFrame {
                                         .addComponent(jLabel6))
                                     .addGap(19, 19, 19)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel3)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel3))
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
                     .addGroup(layout.createSequentialGroup()
@@ -213,12 +209,12 @@ public class SokHatt extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
                     .addComponent(uppdateraButton)
-                    .addComponent(genreCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(storlekCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(genreCmb, 0, 100, Short.MAX_VALUE)
                     .addComponent(fargCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tygCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(prisTextfield)
-                    .addComponent(namnTextfield))
+                    .addComponent(namnTextfield)
+                    .addComponent(storlekTxt))
                 .addGap(30, 30, 30)
                 .addComponent(hattIDTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
@@ -240,7 +236,7 @@ public class SokHatt extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(storlekCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(storlekTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -292,7 +288,7 @@ public class SokHatt extends javax.swing.JFrame {
             Object dekObject = dek;
             dekList.setSelectedValue(dekObject, rootPaneCheckingEnabled);
         }
-        storlekCmb.setSelectedItem(hattMap.get("storlek"));
+        storlekTxt.setText(hattMap.get("storlek"));
         fargCmb.setSelectedItem(hattMap.get("Farg"));
         genreCmb.setSelectedItem(hattMap.get("Genre"));
         tygCmb.setSelectedItem(hattMap.get("Tyg"));
@@ -336,7 +332,7 @@ public class SokHatt extends javax.swing.JFrame {
             String updateTygQuery = "update hatt set TygID = '" + tygID + "' where HattID = '" + hattID + "'";
             SqlFragor.uppdatera(updateTygQuery);
             //
-            String storlek = storlekCmb.getSelectedItem().toString();
+            String storlek = storlekTxt.getText();
             String updateStorlekQuery = "update hatt set storlek = '" + storlek + "' where HattID = '" + hattID + "'";
             SqlFragor.uppdatera(updateStorlekQuery);
             //
@@ -394,7 +390,7 @@ public class SokHatt extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField namnTextfield;
     private javax.swing.JTextField prisTextfield;
-    private javax.swing.JComboBox<String> storlekCmb;
+    private javax.swing.JTextField storlekTxt;
     private javax.swing.JComboBox<String> tygCmb;
     private javax.swing.JButton uppdateraButton;
     private javax.swing.JButton valjButton;
