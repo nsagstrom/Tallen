@@ -34,7 +34,7 @@ public class Startsida extends javax.swing.JFrame {
     }
 
     public void fillEgnaHattarList() {
-        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID = '" + anvandarID + "'";
+        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID = '" + anvandarID + "' AND Hattstatus = 'null'";
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
@@ -55,10 +55,10 @@ public class Startsida extends javax.swing.JFrame {
                 }
             }
         });
-        String query = "Select B.BestID, Beskrivning from Hatt\n" +
-                        "join Orderrad O on Hatt.HattID = O.HattID\n" +
-                        "join mibdb.Bestallning B on O.BestID = B.BestID\n" +
-                        "where AnvandarID != '" + anvandarID + "'";
+        String query = "Select B.BestID, Beskrivning from Hatt\n"
+                + "join Orderrad O on Hatt.HattID = O.HattID\n"
+                + "join mibdb.Bestallning B on O.BestID = B.BestID\n"
+                + "where AnvandarID != '" + anvandarID + "'";
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
@@ -100,6 +100,10 @@ public class Startsida extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         btnPrisHatt = new javax.swing.JButton();
         btnMoms = new javax.swing.JButton();
+        klarHattBtn = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        antalBesLabel = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -203,6 +207,24 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
+        klarHattBtn.setText("Tillverkning klar");
+        klarHattBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                klarHattBtnActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Klara för färdigställning");
+
+        antalBesLabel.setText("0");
+
+        jButton4.setText("Se lista material");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -264,102 +286,113 @@ public class Startsida extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAndraPris))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnMoms, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnAndraPris)
-                                .addGap(18, 18, 18))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnSeOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(btnSkapaNyOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addGap(4, 4, 4)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(btnSkapaNyArtikel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(btnKundUppgift, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                    .addComponent(btnSokArtikel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(btnMoms, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addGap(0, 0, Short.MAX_VALUE)))))
-                                .addGap(42, 42, 42)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(4, 4, 4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnKundUppgift, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnSokArtikel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnSkapaNyArtikel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnPrisHatt, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(klarHattBtn)
+                .addGap(148, 148, 148)
+                .addComponent(startHattBtn)
+                .addGap(36, 36, 36)
+                .addComponent(btnLoggaUt)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblValkommen)
+                .addGap(406, 406, 406))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(jButton2))
+                                .addGap(89, 89, 89)
+                                .addComponent(btnSeOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnPrisHatt, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62)
+                                .addComponent(btnSkapaNyOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(348, 348, 348))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(antalBesLabel)
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblValkommen)
-                        .addGap(176, 176, 176)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLoggaUt, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(startHattBtn, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(30, 30, 30))
+                        .addGap(65, 65, 65)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lblValkommen)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblValkommen)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(btnSkapaNyArtikel)
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnLoggaUt)
+                                    .addComponent(startHattBtn)))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(btnKundUppgift)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSokArtikel)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSkapaNyOrder)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSeOrderStatus)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAndraPris))
-                            .addComponent(startHattBtn))
+                                .addComponent(klarHattBtn))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jButton4)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSkapaNyArtikel)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnKundUppgift)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSokArtikel)
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(antalBesLabel))
+                        .addGap(1, 1, 1)
+                        .addComponent(btnSkapaNyOrder)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSeOrderStatus)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAndraPris)
                         .addGap(29, 29, 29)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
                         .addComponent(btnPrisHatt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                                .addComponent(btnLoggaUt)
-                                .addContainerGap())
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(btnMoms)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)
-                                .addGap(15, 15, 15))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 51, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMoms)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -466,11 +499,46 @@ public class Startsida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void klarHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klarHattBtnActionPerformed
+        // TODO add your handling code here:
+        String valdHatt = listValdaHattar.getSelectedValue();
+        String hattIdQuery = "SELECT hattID FROM hatt WHERE beskrivning = '" + valdHatt + "'";
+        String hattID = SqlFragor.getEttVarde(hattIdQuery);
+        String insertStatusQuery = "INSERT INTO orderrad (Hattstatus) VALUES ('Klar') WHERE HattID = '" + hattID + "'";
+        SqlFragor.addToDatabasen(insertStatusQuery);
+        ///
+        String hattStatusQuery = "SELECT Hattstatus FROM orderrad WHERE hattID = '" + hattID + "'";
+        ArrayList<String> hattStatusLista = SqlFragor.getEnKolumn(hattStatusQuery);
+        int i = 0;
+        int antalKlara = 0;
+        for (String status : hattStatusLista) {
+            if (status.equals("Klar")) {
+                i++;
+            }
+
+        }
+        if (i == hattStatusLista.size()) { 
+            
+            antalKlara++;
+            antalBesLabel.setText(String.valueOf(antalKlara));
+
+        }
+        
+
+    }//GEN-LAST:event_klarHattBtnActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        new SeListaMaterial().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel antalBesLabel;
     private javax.swing.JButton btnAndraPris;
     private javax.swing.JButton btnKundUppgift;
     private javax.swing.JButton btnLoggaUt;
@@ -482,6 +550,8 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton btnSokArtikel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -493,6 +563,7 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton klarHattBtn;
     private javax.swing.JLabel lblValkommen;
     private javax.swing.JList<String> listAllaHattar;
     private javax.swing.JList<String> listValdaHattar;
