@@ -490,7 +490,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         String fragaSpecial = "INSERT INTO SpecialHatt(HattID) VALUES (" + hattID + ");";
         SqlFragor.addToDatabasen(fragaSpecial);
 
-        String fraga = "INSERT INTO hatt (HattID, Beskrivning, FargID,pris, storlek, GenreID, TygID, AnvandarID) VALUES (" + hattID + ",'" + benamning + "'," + fargID + ",0,'" + storlek + "'," + genreID + "," + tygID + ",'3')";
+        String fraga = "INSERT INTO hatt (HattID, Beskrivning, FargID,pris, storlek, GenreID, TygID, AnvandarID) VALUES (" + hattID + ",'" + benamning + "'," + fargID + ",0,'" + storlek + "'," + genreID + "," + tygID + "," + anvandare + ")";
         SqlFragor.addToDatabasen(fraga);
 
         List<String> dek = dekList.getSelectedValuesList();
@@ -507,6 +507,16 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         Object hattIDTbl = SqlFragor.getEttVarde(addToTableQuery);
         DefaultTableModel model = (DefaultTableModel) hattTbl.getModel();
         model.addRow(new Object[]{hattIDTbl});
+        /*String query = "SELECT HattID FROM specialhatt";
+        ArrayList<String> hattIdLista = SqlFragor.getEnKolumn(query);
+        for (String hatt : hattIdLista) {
+            String beskrivningQuery = "SELECT beskrivning from Hatt inner join StandardHatt SH on Hatt.HattID = SH.HattID where SH.HattID = '" + hatt + "'";
+            String hattBes = SqlFragor.getEttVarde(beskrivningQuery);
+            standardHattCmb.addItem(hattBes);
+        }
+         */
+        JOptionPane.showMessageDialog(null, "Ny specialhatt!");
+
     }
 
     private boolean valideringMetod() {
