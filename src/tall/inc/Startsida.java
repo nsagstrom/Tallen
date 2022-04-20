@@ -34,7 +34,7 @@ public class Startsida extends javax.swing.JFrame {
     }
 
     public void fillEgnaHattarList() {
-        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID = '"+anvandarID+"'";
+        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID = '" + anvandarID + "'";
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
@@ -55,7 +55,10 @@ public class Startsida extends javax.swing.JFrame {
                 }
             }
         });
-        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID != '"+anvandarID+"'";
+        String query = "Select B.BestID, Beskrivning from Hatt\n" +
+                        "join Orderrad O on Hatt.HattID = O.HattID\n" +
+                        "join mibdb.Bestallning B on O.BestID = B.BestID\n" +
+                        "where AnvandarID != '" + anvandarID + "'";
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
@@ -97,7 +100,6 @@ public class Startsida extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         btnPrisHatt = new javax.swing.JButton();
         btnMoms = new javax.swing.JButton();
-        btnSeMaterial = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -106,6 +108,7 @@ public class Startsida extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,18 +178,8 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
-        listAllaHattar.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(listAllaHattar);
 
-        listValdaHattar.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane3.setViewportView(listValdaHattar);
 
         jButton2.setText("Färg palette");
@@ -207,13 +200,6 @@ public class Startsida extends javax.swing.JFrame {
         btnMoms.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMomsActionPerformed(evt);
-            }
-        });
-
-        btnSeMaterial.setText("Se information om material");
-        btnSeMaterial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeMaterialActionPerformed(evt);
             }
         });
 
@@ -259,6 +245,14 @@ public class Startsida extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem1);
 
+        jMenuItem5.setText("Statistik");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -289,13 +283,10 @@ public class Startsida extends javax.swing.JFrame {
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                                 .addGap(4, 4, 4)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(btnSkapaNyArtikel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(btnKundUppgift, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(btnSokArtikel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(btnSeMaterial))
-                                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(btnSkapaNyArtikel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(btnKundUppgift, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                    .addComponent(btnSokArtikel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -313,7 +304,7 @@ public class Startsida extends javax.swing.JFrame {
                                 .addComponent(btnPrisHatt, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,10 +326,8 @@ public class Startsida extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(startHattBtn)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSeMaterial)
-                                .addGap(18, 18, 18)
+                                .addGap(22, 22, 22)
                                 .addComponent(btnSkapaNyArtikel)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnKundUppgift)
@@ -349,14 +338,15 @@ public class Startsida extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSeOrderStatus)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnAndraPris)))
+                                .addComponent(btnAndraPris))
+                            .addComponent(startHattBtn))
                         .addGap(29, 29, 29)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
                         .addComponent(btnPrisHatt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                                 .addComponent(btnLoggaUt)
                                 .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
@@ -369,7 +359,7 @@ public class Startsida extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 51, Short.MAX_VALUE))))
         );
 
         pack();
@@ -419,18 +409,16 @@ public class Startsida extends javax.swing.JFrame {
 
     private void startHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startHattBtnActionPerformed
         // TODO add your handling code here:
-        
+
         List<String> hattar = listAllaHattar.getSelectedValuesList();
-        for(String hatt: hattar)        {
-            String hattIdQuery = "SELECT hattID FROM hatt WHERE beskrivning = '"+hatt+"'";
+        for (String hatt : hattar) {
+            String hattIdQuery = "SELECT hattID FROM hatt WHERE beskrivning = '" + hatt + "'";
             String hattID = SqlFragor.getEttVarde(hattIdQuery);
-            String updateQuery = "UPDATE hatt SET anvandarID = '"+anvandarID+"' where hattID = '"+hattID+"'";
+            String updateQuery = "UPDATE hatt SET anvandarID = '" + anvandarID + "' where hattID = '" + hattID + "'";
             SqlFragor.uppdatera(updateQuery);
             fillOppenHattTbl();
         }
         fillEgnaHattarList();
-        
-        
 
 
     }//GEN-LAST:event_startHattBtnActionPerformed
@@ -473,11 +461,10 @@ public class Startsida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void btnSeMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeMaterialActionPerformed
-        // TODO add your handling code here:
-        new SeListaMaterial().setVisible(true);
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        new BestallStatistik().setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnSeMaterialActionPerformed
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -489,7 +476,6 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnMoms;
     private javax.swing.JButton btnPrisHatt;
-    private javax.swing.JButton btnSeMaterial;
     private javax.swing.JButton btnSeOrderStatus;
     private javax.swing.JButton btnSkapaNyArtikel;
     private javax.swing.JButton btnSkapaNyOrder;
@@ -504,6 +490,7 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblValkommen;

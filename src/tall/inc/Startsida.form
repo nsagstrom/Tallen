@@ -56,6 +56,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Statistik"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>
@@ -109,15 +117,11 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="btnSkapaNyArtikel" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="btnKundUppgift" alignment="1" max="32767" attributes="0"/>
-                                                  <Group type="102" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="btnSokArtikel" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
-                                                          <Component id="btnSeMaterial" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                      <Component id="btnSkapaNyArtikel" max="32767" attributes="0"/>
+                                                      <Component id="btnKundUppgift" max="32767" attributes="0"/>
                                                   </Group>
+                                                  <Component id="btnSokArtikel" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
@@ -150,7 +154,7 @@
                   </Group>
               </Group>
               <Component id="jScrollPane3" min="-2" pref="248" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane2" min="-2" pref="215" max="-2" attributes="0"/>
@@ -178,10 +182,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="startHattBtn" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnSeMaterial" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               <Component id="btnSkapaNyArtikel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnKundUppgift" min="-2" max="-2" attributes="0"/>
@@ -194,6 +196,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnAndraPris" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="startHattBtn" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
@@ -201,7 +204,7 @@
                       <Component id="btnPrisHatt" min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="57" max="32767" attributes="0"/>
                               <Component id="btnLoggaUt" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -219,7 +222,7 @@
                           <Component id="jScrollPane2" min="-2" pref="380" max="-2" attributes="0"/>
                           <Component id="jScrollPane3" min="-2" pref="380" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -317,13 +320,7 @@
         <Component class="javax.swing.JList" name="listAllaHattar">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-                <StringItem index="4" value="Item 5"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -342,13 +339,7 @@
         <Component class="javax.swing.JList" name="listValdaHattar">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-                <StringItem index="4" value="Item 5"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -379,14 +370,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMomsActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnSeMaterial">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Se information om material"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeMaterialActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
