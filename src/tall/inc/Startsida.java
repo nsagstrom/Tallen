@@ -34,7 +34,10 @@ public class Startsida extends javax.swing.JFrame {
     }
 
     public void fillEgnaHattarList() {
-        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID = '" + anvandarID + "'";
+        String query = "Select Beskrivning from Hatt\n"
+                + "join Orderrad O on Hatt.HattID = O.HattID\n"
+                + "join mibdb.Bestallning B on O.BestID = B.BestID\n"
+                + "where O.AnvandarID = '" + anvandarID + "'";
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
@@ -58,7 +61,7 @@ public class Startsida extends javax.swing.JFrame {
         String query = "Select Beskrivning from Hatt\n"
                 + "join Orderrad O on Hatt.HattID = O.HattID\n"
                 + "join mibdb.Bestallning B on O.BestID = B.BestID\n"
-                + "where AnvandarID != '" + anvandarID + "'";
+                + "where O.AnvandarID is null";
         System.out.println(query);
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
@@ -442,9 +445,9 @@ public class Startsida extends javax.swing.JFrame {
 
         List<String> hattar = listAllaHattar.getSelectedValuesList();
         for (String hatt : hattar) {
-            String hattIdQuery = "SELECT hattID FROM hatt WHERE beskrivning = '" + hatt + "'";
+            String hattIdQuery = "SELECT hattID FROM Hatt WHERE beskrivning = '" + hatt + "'";
             String hattID = SqlFragor.getEttVarde(hattIdQuery);
-            String updateQuery = "UPDATE hatt SET anvandarID = '" + anvandarID + "' where hattID = '" + hattID + "'";
+            String updateQuery = "UPDATE Orderrad SET anvandarID = '" + anvandarID + "' where hattID = '" + hattID + "'";
             SqlFragor.uppdatera(updateQuery);
             fillOppenHattTbl();
         }
