@@ -54,7 +54,14 @@ public class Startsida extends javax.swing.JFrame {
                 }
             }
         });
+<<<<<<< Updated upstream
         String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID = '3'";
+=======
+        String query = "Select Beskrivning from Hatt\n" +
+                        "join Orderrad O on Hatt.HattID = O.HattID\n" +
+                        "join mibdb.Bestallning B on O.BestID = B.BestID\n" +
+                        "where AnvandarID != '" + anvandarID + "'";
+>>>>>>> Stashed changes
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
@@ -512,6 +519,10 @@ public class Startsida extends javax.swing.JFrame {
 
     private void startHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startHattBtnActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         List<String> hattar = listAllaHattar.getSelectedValuesList();
         for (String hatt : hattar) {
             String hattIdQuery = "SELECT hattID FROM hatt WHERE beskrivning = '" + hatt + "'";
@@ -522,6 +533,10 @@ public class Startsida extends javax.swing.JFrame {
             fillEgnaHattarList();
 
         }
+<<<<<<< Updated upstream
+=======
+        fillEgnaHattarList();
+>>>>>>> Stashed changes
 
 
     }//GEN-LAST:event_startHattBtnActionPerformed
