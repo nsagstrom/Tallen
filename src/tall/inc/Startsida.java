@@ -34,7 +34,7 @@ public class Startsida extends javax.swing.JFrame {
     }
 
     public void fillEgnaHattarList() {
-        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID = '" + anvandarID + "' AND Hattstatus = 'null'";
+        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID = '" + anvandarID + "'";
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
@@ -59,6 +59,7 @@ public class Startsida extends javax.swing.JFrame {
                 + "join Orderrad O on Hatt.HattID = O.HattID\n"
                 + "join mibdb.Bestallning B on O.BestID = B.BestID\n"
                 + "where AnvandarID != '" + anvandarID + "'";
+        System.out.println(query);
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
@@ -103,7 +104,6 @@ public class Startsida extends javax.swing.JFrame {
         klarHattBtn = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         antalBesLabel = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -218,13 +218,6 @@ public class Startsida extends javax.swing.JFrame {
 
         antalBesLabel.setText("0");
 
-        jButton4.setText("Se lista material");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -335,11 +328,7 @@ public class Startsida extends javax.swing.JFrame {
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(antalBesLabel)
-                        .addGap(38, 38, 38))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(38, 38, 38)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,9 +355,7 @@ public class Startsida extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(klarHattBtn))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
+                        .addGap(83, 83, 83)
                         .addComponent(btnSkapaNyArtikel)
                         .addGap(18, 18, 18)
                         .addComponent(btnKundUppgift)
@@ -517,21 +504,15 @@ public class Startsida extends javax.swing.JFrame {
             }
 
         }
-        if (i == hattStatusLista.size()) { 
-            
+        if (i == hattStatusLista.size()) {
+
             antalKlara++;
             antalBesLabel.setText(String.valueOf(antalKlara));
 
         }
-        
+
 
     }//GEN-LAST:event_klarHattBtnActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        new SeListaMaterial().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -551,7 +532,6 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
