@@ -7,6 +7,7 @@ package tall.inc;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
 
 /**
  *
@@ -19,19 +20,9 @@ public class HanteraBestallning extends javax.swing.JFrame {
      */
     public HanteraBestallning() {
         initComponents();
-        fillKundList();
+
     }
 
-    
-    public void fillKundList() {
-        String query = "SELECT Fornamn, Efternamn FROM kund";
-        HashMap<String, String> kunder = SqlFragor.getEnRad(query);
-        DefaultListModel model = new DefaultListModel();
-        for(String kund : kunder.values()) {
-            model.addElement(kund);
-            kundList.setModel(model);
-        }
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,44 +34,62 @@ public class HanteraBestallning extends javax.swing.JFrame {
 
         lblInfo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        orderLista = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        hattLista = new javax.swing.JList<>();
         valjBtn = new javax.swing.JButton();
         lblValjOrder = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        kundList = new javax.swing.JList<>();
+        lblValjKund = new javax.swing.JLabel();
+        lblTaBortHatt = new javax.swing.JLabel();
+        lblFornamn = new javax.swing.JLabel();
+        lblEfternamn = new javax.swing.JLabel();
+        valjKundBtn = new javax.swing.JButton();
+        uppdateraBtn = new javax.swing.JButton();
+        fornamnTxt = new javax.swing.JTextField();
+        efternamnTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblInfo.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lblInfo.setText("Ändra en beställning");
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(orderLista);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(hattLista);
 
         valjBtn.setText("Välj");
+        valjBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valjBtnActionPerformed(evt);
+            }
+        });
 
+        lblValjOrder.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         lblValjOrder.setText("Välj ordernummer:");
 
-        jLabel4.setText("Välj kund:");
+        lblValjKund.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        lblValjKund.setText("Välj kund:");
 
-        jLabel5.setText("Ta bort hatt från order:");
+        lblTaBortHatt.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        lblTaBortHatt.setText("Ta bort hatt från order:");
 
-        kundList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        lblFornamn.setText("Förnamn:");
+
+        lblEfternamn.setText("Efternamn:");
+
+        valjKundBtn.setText("Välj");
+        valjKundBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valjKundBtnActionPerformed(evt);
+            }
         });
-        jScrollPane3.setViewportView(kundList);
+
+        uppdateraBtn.setText("Uppdatera");
+        uppdateraBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uppdateraBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,22 +100,26 @@ public class HanteraBestallning extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(lblInfo))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblValjOrder)
+                            .addComponent(valjBtn))
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(uppdateraBtn)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTaBortHatt))
+                        .addContainerGap(29, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(valjBtn)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblValjOrder))
-                                .addGap(58, 58, 58)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))))
-                        .addContainerGap(42, Short.MAX_VALUE))))
+                            .addComponent(valjKundBtn)
+                            .addComponent(lblEfternamn)
+                            .addComponent(lblFornamn)
+                            .addComponent(lblValjKund)
+                            .addComponent(lblInfo)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(efternamnTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                                .addComponent(fornamnTxt, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,16 +127,27 @@ public class HanteraBestallning extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(lblInfo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
+                .addComponent(lblValjKund)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(lblFornamn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fornamnTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEfternamn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(efternamnTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(valjKundBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValjOrder)
-                    .addComponent(jLabel5))
+                    .addComponent(lblTaBortHatt))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(uppdateraBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -133,6 +157,62 @@ public class HanteraBestallning extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void valjKundBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valjKundBtnActionPerformed
+        // TODO add your handling code here:
+        String fornamn = fornamnTxt.getText();
+        String efternamn = efternamnTxt.getText();
+        String query = "Select BestID from Bestallning\n"
+                + "join Kund on Kund.KundID = Bestallning.KundID\n"
+                + "where Fornamn = '" + fornamn + "' and Efternamn = '" + efternamn + "'";
+
+        ArrayList<String> orderListan = SqlFragor.getEnKolumn(query);
+
+        DefaultListModel model = new DefaultListModel();
+        for (String order : orderListan) {
+            model.addElement(order);
+
+            orderLista.setModel(model);
+        }
+
+    }//GEN-LAST:event_valjKundBtnActionPerformed
+
+    private void valjBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valjBtnActionPerformed
+        // TODO add your handling code here:
+        String valdOrder = orderLista.getSelectedValue();
+        String query = "select Beskrivning from Hatt\n"
+                + "join orderrad on Hatt.HattID = Orderrad.HattID\n"
+                + "join bestallning on Orderrad.BestID = Bestallning.BestID\n"
+                + "where Bestallning.BestID = '" + valdOrder + "'";
+
+        ArrayList<String> hattListan = SqlFragor.getEnKolumn(query);
+        DefaultListModel model = new DefaultListModel();
+        for (String hattar : hattListan) {
+            model.addElement(hattar);
+
+            hattLista.setModel(model);
+
+    }//GEN-LAST:event_valjBtnActionPerformed
+    }
+    private void uppdateraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uppdateraBtnActionPerformed
+        // TODO add your handling code here:
+        String fornamn = fornamnTxt.getText();
+        String efternamn = efternamnTxt.getText();
+        String valdOrder = orderLista.getSelectedValue();
+        String valdHatt = hattLista.getSelectedValue();
+        String query = "select RadID from Bestallning\n"
+                + "join kund on Kund.KundID = Bestallning.KundID\n"
+                + "join Orderrad on Bestallning.BestID = Orderrad.BestID\n"
+                + "join Hatt on Hatt.HattID = Orderrad.HattID\n"
+                + "where Fornamn = '" + fornamn + "'\n"
+                + "and Efternamn = '" + efternamn + "'\n"
+                + "and Bestallning.BestID = '" + valdOrder + "'\n"
+                + "and Beskrivning = '" + valdHatt + "'";
+        String radID = SqlFragor.getEttVarde(query);
+        
+        String deleteHatt = "DELETE FROM orderrad WHERE RadID = '" + radID + "'";
+        SqlFragor.deleteFranDatabasen(deleteHatt);
+    }//GEN-LAST:event_uppdateraBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,16 +250,20 @@ public class HanteraBestallning extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JTextField efternamnTxt;
+    private javax.swing.JTextField fornamnTxt;
+    private javax.swing.JList<String> hattLista;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JList<String> kundList;
+    private javax.swing.JLabel lblEfternamn;
+    private javax.swing.JLabel lblFornamn;
     private javax.swing.JLabel lblInfo;
+    private javax.swing.JLabel lblTaBortHatt;
+    private javax.swing.JLabel lblValjKund;
     private javax.swing.JLabel lblValjOrder;
+    private javax.swing.JList<String> orderLista;
+    private javax.swing.JButton uppdateraBtn;
     private javax.swing.JButton valjBtn;
+    private javax.swing.JButton valjKundBtn;
     // End of variables declaration//GEN-END:variables
 }
