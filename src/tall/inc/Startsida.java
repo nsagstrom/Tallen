@@ -37,7 +37,7 @@ public class Startsida extends javax.swing.JFrame {
         String query = "Select Beskrivning from Hatt\n"
                 + "join Orderrad O on Hatt.HattID = O.HattID\n"
                 + "join mibdb.Bestallning B on O.BestID = B.BestID\n"
-                + "where O.AnvandarID = '" + anvandarID + "'";
+                + "where O.AnvandarID = '" + anvandarID + "' and hattstatus IS null";
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
@@ -62,7 +62,6 @@ public class Startsida extends javax.swing.JFrame {
                 + "join Orderrad O on Hatt.HattID = O.HattID\n"
                 + "join mibdb.Bestallning B on O.BestID = B.BestID\n"
                 + "where O.AnvandarID is null";
-        System.out.println(query);
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
@@ -502,10 +501,15 @@ public class Startsida extends javax.swing.JFrame {
     private void klarHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klarHattBtnActionPerformed
         // TODO add your handling code here:
         String valdHatt = listValdaHattar.getSelectedValue();
-        String hattIdQuery = "SELECT hattID FROM hatt WHERE beskrivning = '" + valdHatt + "'";
+        String hattIdQuery = "SELECT DISTINCT o.hattID from Hatt\n"
+                + "join orderrad o on Hatt.HattID = o.HattID\n"
+                + "where Beskrivning like '" + valdHatt + "' ORDER BY RadID LIMIT 1";
         String hattID = SqlFragor.getEttVarde(hattIdQuery);
-        String insertStatusQuery = "INSERT INTO orderrad (Hattstatus) VALUES ('Klar') WHERE HattID = '" + hattID + "'";
-        SqlFragor.addToDatabasen(insertStatusQuery);
+        String radIdQuery = "SELECT RadID from orderrad where HattID = '"+hattID+"' ORDER BY RadID asc LIMIT 1;";
+        String radID = SqlFragor.getEttVarde(radIdQuery);
+        String updateStatusQuery = "update Orderrad\n"
+                + "set orderrad.Hattstatus = 'Klar' where HattID = '"+hattID+"' AND RadID = '"+radID+"'";
+        SqlFragor.uppdatera(updateStatusQuery);
         ///
         String hattStatusQuery = "SELECT Hattstatus FROM orderrad WHERE hattID = '" + hattID + "'";
         ArrayList<String> hattStatusLista = SqlFragor.getEnKolumn(hattStatusQuery);
