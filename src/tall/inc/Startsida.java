@@ -108,6 +108,7 @@ public class Startsida extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         antalBesLabel = new javax.swing.JLabel();
         btnSeListaMaterial = new javax.swing.JButton();
+        hanteraBestallningBtn = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -229,6 +230,13 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
+        hanteraBestallningBtn.setText("Hantera beställning");
+        hanteraBestallningBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hanteraBestallningBtnActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -305,7 +313,8 @@ public class Startsida extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(btnKundUppgift, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnSokArtikel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnSkapaNyArtikel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(btnSkapaNyArtikel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(hanteraBestallningBtn)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jButton2))
@@ -366,7 +375,9 @@ public class Startsida extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(klarHattBtn))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addGap(13, 13, 13)
+                        .addComponent(hanteraBestallningBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSeListaMaterial)
                         .addGap(18, 18, 18)
                         .addComponent(btnSkapaNyArtikel)
@@ -533,6 +544,12 @@ public class Startsida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnSeListaMaterialActionPerformed
 
+    private void hanteraBestallningBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hanteraBestallningBtnActionPerformed
+        // TODO add your handling code here:
+        new HanteraBestallning().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_hanteraBestallningBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -549,6 +566,7 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton btnSkapaNyArtikel;
     private javax.swing.JButton btnSkapaNyOrder;
     private javax.swing.JButton btnSokArtikel;
+    private javax.swing.JButton hanteraBestallningBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

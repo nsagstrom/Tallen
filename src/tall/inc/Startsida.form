@@ -114,6 +114,7 @@
                                       <Component id="btnSokArtikel" alignment="0" max="32767" attributes="0"/>
                                       <Component id="btnSkapaNyArtikel" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="hanteraBestallningBtn" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -197,7 +198,9 @@
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Component id="hanteraBestallningBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSeListaMaterial" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnSkapaNyArtikel" min="-2" max="-2" attributes="0"/>
@@ -398,6 +401,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeListaMaterialActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="hanteraBestallningBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hantera best&#xe4;llning"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hanteraBestallningBtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
