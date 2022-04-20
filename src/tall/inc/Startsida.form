@@ -107,10 +107,13 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="btnKundUppgift" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnSokArtikel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnSkapaNyArtikel" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnSeListaMaterial" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="btnKundUppgift" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btnSokArtikel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btnSkapaNyArtikel" alignment="0" min="-2" pref="175" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -194,7 +197,9 @@
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="btnSeListaMaterial" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnSkapaNyArtikel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnKundUppgift" min="-2" max="-2" attributes="0"/>
@@ -386,6 +391,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSeListaMaterial">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Se lista material"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeListaMaterialActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
