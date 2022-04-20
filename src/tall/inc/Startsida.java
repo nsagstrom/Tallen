@@ -34,12 +34,11 @@ public class Startsida extends javax.swing.JFrame {
     }
 
     public void fillEgnaHattarList() {
-        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID = '"+anvandarID+"'";
+        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID = '" + anvandarID + "'";
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
             model.addElement(hatt);
-
             listValdaHattar.setModel(model);
         }
 
@@ -55,12 +54,11 @@ public class Startsida extends javax.swing.JFrame {
                 }
             }
         });
-        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID != '"+anvandarID+"'";
+        String query = "SELECT Beskrivning FROM Hatt WHERE anvandarID = '3'";
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
         DefaultListModel model = new DefaultListModel();
         for (String hatt : hattLista) {
             model.addElement(hatt);
-
             listAllaHattar.setModel(model);
         }
 
@@ -97,7 +95,13 @@ public class Startsida extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         btnPrisHatt = new javax.swing.JButton();
         btnMoms = new javax.swing.JButton();
+<<<<<<< Updated upstream
         btnSeMaterial = new javax.swing.JButton();
+=======
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+>>>>>>> Stashed changes
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -176,17 +180,13 @@ public class Startsida extends javax.swing.JFrame {
         });
 
         listAllaHattar.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "..." };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane2.setViewportView(listAllaHattar);
 
-        listValdaHattar.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listValdaHattar.setBorder(listAllaHattar.getBorder());
         jScrollPane3.setViewportView(listValdaHattar);
 
         jButton2.setText("Färg palette");
@@ -210,10 +210,21 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< Updated upstream
         btnSeMaterial.setText("Se information om material");
         btnSeMaterial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeMaterialActionPerformed(evt);
+=======
+        jLabel1.setText("Tillgängliga hattar");
+
+        jLabel2.setText("Mina valda hattar");
+
+        jButton3.setText("Färdigtillverkad");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+>>>>>>> Stashed changes
             }
         });
 
@@ -270,7 +281,9 @@ public class Startsida extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(btnAndraPris)
@@ -303,9 +316,36 @@ public class Startsida extends javax.swing.JFrame {
                                                 .addGap(0, 0, Short.MAX_VALUE)))))
                                 .addGap(42, 42, 42)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSkapaNyArtikel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnKundUppgift, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSokArtikel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSkapaNyOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSeOrderStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAndraPris, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPrisHatt, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                            .addComponent(btnMoms, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(232, 232, 232))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addGap(164, 164, 164)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+>>>>>>> Stashed changes
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
+<<<<<<< Updated upstream
                                 .addGap(41, 41, 41)
                                 .addComponent(jButton2))
                             .addGroup(layout.createSequentialGroup()
@@ -325,15 +365,37 @@ public class Startsida extends javax.swing.JFrame {
                     .addComponent(btnLoggaUt, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(startHattBtn, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(30, 30, 30))
+=======
+                                .addGap(26, 26, 26)
+                                .addComponent(startHattBtn)))
+                        .addGap(121, 121, 121)
+                        .addComponent(btnLoggaUt))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblValkommen)
+                .addGap(570, 570, 570))
+>>>>>>> Stashed changes
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lblValkommen)
+                .addGap(71, 71, 71)
+                .addComponent(btnSkapaNyArtikel)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(btnKundUppgift)
+                .addGap(18, 18, 18)
+                .addComponent(btnSokArtikel)
+                .addGap(18, 18, 18)
+                .addComponent(btnSkapaNyOrder)
+                .addGap(18, 18, 18)
+                .addComponent(btnSeOrderStatus)
+                .addGap(18, 18, 18)
+                .addComponent(btnAndraPris)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+<<<<<<< Updated upstream
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(startHattBtn)
                             .addGroup(layout.createSequentialGroup()
@@ -370,6 +432,37 @@ public class Startsida extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
+=======
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLoggaUt)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPrisHatt)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMoms)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblValkommen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(startHattBtn)
+                    .addComponent(jButton3))
+                .addContainerGap())
+>>>>>>> Stashed changes
         );
 
         pack();
@@ -419,18 +512,16 @@ public class Startsida extends javax.swing.JFrame {
 
     private void startHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startHattBtnActionPerformed
         // TODO add your handling code here:
-        
         List<String> hattar = listAllaHattar.getSelectedValuesList();
-        for(String hatt: hattar)        {
-            String hattIdQuery = "SELECT hattID FROM hatt WHERE beskrivning = '"+hatt+"'";
+        for (String hatt : hattar) {
+            String hattIdQuery = "SELECT hattID FROM hatt WHERE beskrivning = '" + hatt + "'";
             String hattID = SqlFragor.getEttVarde(hattIdQuery);
-            String updateQuery = "UPDATE hatt SET anvandarID = '"+anvandarID+"' where hattID = '"+hattID+"'";
+            String updateQuery = "UPDATE hatt SET anvandarID = '" + anvandarID + "' where hattID = '" + hattID + "'";
             SqlFragor.uppdatera(updateQuery);
             fillOppenHattTbl();
+            fillEgnaHattarList();
+
         }
-        fillEgnaHattarList();
-        
-        
 
 
     }//GEN-LAST:event_startHattBtnActionPerformed
@@ -473,11 +564,17 @@ public class Startsida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+<<<<<<< Updated upstream
     private void btnSeMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeMaterialActionPerformed
         // TODO add your handling code here:
         new SeListaMaterial().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnSeMaterialActionPerformed
+=======
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+>>>>>>> Stashed changes
 
     /**
      * @param args the command line arguments
@@ -496,6 +593,9 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton btnSokArtikel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
