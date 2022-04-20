@@ -21,7 +21,7 @@ public class SeListaMaterial extends javax.swing.JFrame {
         initComponents();
         fyllLista();
     }
-    
+
     private void fyllLista() {
         String query = "select Beskrivning, Tyg, Farg from Hatt\n"
                 + "join Farg on Farg.FargID = Hatt.FargID\n"
@@ -56,7 +56,7 @@ public class SeListaMaterial extends javax.swing.JFrame {
         for (int i = 0; i < orderrad.length; i++) {
             model.addRow(orderrad[i]);
         }
-    }                  
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,6 +70,8 @@ public class SeListaMaterial extends javax.swing.JFrame {
         lblSeInfo = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblLista = new javax.swing.JTable();
+        lblInfo = new javax.swing.JLabel();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,6 +92,15 @@ public class SeListaMaterial extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblLista);
 
+        lblInfo.setText("Hattar från pågående och öppna beställningar:");
+
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,8 +108,10 @@ public class SeListaMaterial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblInfo)
                     .addComponent(lblSeInfo)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -106,20 +119,32 @@ public class SeListaMaterial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(lblSeInfo)
-                .addGap(63, 63, 63)
+                .addGap(14, 14, 14)
+                .addComponent(lblInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        // TODO add your handling code here:
+        new Startsida().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblSeInfo;
     private javax.swing.JTable tblLista;
     // End of variables declaration//GEN-END:variables
