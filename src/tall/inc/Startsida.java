@@ -55,7 +55,7 @@ public class Startsida extends javax.swing.JFrame {
                 }
             }
         });
-        String query = "Select B.BestID, Beskrivning from Hatt\n"
+        String query = "Select Beskrivning from Hatt\n"
                 + "join Orderrad O on Hatt.HattID = O.HattID\n"
                 + "join mibdb.Bestallning B on O.BestID = B.BestID\n"
                 + "where AnvandarID != '" + anvandarID + "'";
