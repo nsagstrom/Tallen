@@ -73,11 +73,13 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblArtikelnummer" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="CBoxSpecialartikelFarg" min="-2" pref="61" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Component id="lblFarg" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                                       <Component id="txtSpecialBenamning" min="-2" pref="69" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="standardHattCmb" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
+                                  <Component id="btnValjFarg" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="CBoxSpecialartikelFarg" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
@@ -230,15 +232,26 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" min="-2" pref="108" max="-2" attributes="0"/>
                   <Component id="btnLaggTillSpHatt" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="CBoxSpecialartikelFarg" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtSpecialBenamning" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="genreCmb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tygCmb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="storlekCmb" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtSpecialBenamning" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="genreCmb" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tygCmb" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="storlekCmb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                              <Component id="lblFarg" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnValjFarg" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="37" max="32767" attributes="0"/>
+                      <Component id="CBoxSpecialartikelFarg" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -544,6 +557,16 @@
     <Component class="javax.swing.JLabel" name="tullLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tull:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnValjFarg">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="V&#xe4;lj f&#xe4;rg"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblFarg">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel6"/>
       </Properties>
     </Component>
   </SubComponents>
