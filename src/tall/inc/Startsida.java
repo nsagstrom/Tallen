@@ -480,14 +480,19 @@ public class Startsida extends javax.swing.JFrame {
 
         List<String> hattar = listAllaHattar.getSelectedValuesList();
         for (String hatt : hattar) {
-            String hattIdQuery = "SELECT hattID FROM Hatt WHERE beskrivning = '" + hatt + "'";
+            String hattIdQuery = "SELECT hattID FROM hatt where beskrivning = '" + hatt + "'";
             String hattID = SqlFragor.getEttVarde(hattIdQuery);
-            String updateQuery = "UPDATE Orderrad SET anvandarID = '" + anvandarID + "' where hattID = '" + hattID + "'";
+
+            String radIdQuery = "SELECT DISTINCT radID FROM orderrad inner join hatt h on Orderrad.HattID = h.HattID\n"
+                    + "WHERE h.HattID = '" + hattID + "' AND orderrad.anvandarID IS NULL LIMIT 1";
+            String radID = SqlFragor.getEttVarde(radIdQuery);
+            String updateQuery = "UPDATE Orderrad SET anvandarID = '" + anvandarID + "' where hattID = '" + hattID + "' AND radID = '" + radID + "'";
             SqlFragor.uppdatera(updateQuery);
             fillOppenHattTbl();
         }
         fillEgnaHattarList();
-
+        dispose();
+        new Startsida().setVisible(true);
 
 
     }//GEN-LAST:event_startHattBtnActionPerformed
@@ -537,23 +542,18 @@ public class Startsida extends javax.swing.JFrame {
 
     private void seKlaraOrdrar() {
 
-        String hattListaQuery = "SELECT DISTINCT HattID FROM orderrad ;";
+        String hattListaQuery = "SELECT DISTINCT HattID, orderrad.bestID FROM orderrad ;";
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(hattListaQuery);
         int i = 0;
         for (String hatt : hattLista) {
 
-            String klaraQuery = "Select Hatt.HattID from Hatt join Orderrad O on Hatt.HattID = O.HattID\n"
-                    + "where Hatt.HattID = '" + hatt + "' and hattstatus = 'klar';";
-            ArrayList<String> klaraHattLista = SqlFragor.getEnKolumn(klaraQuery);
-            int klaraHattar = klaraHattLista.size();
-
-            String inteKlaraQuery = "Select Hatt.HattID from Hatt join Orderrad O on Hatt.HattID = O.HattID\n"
-                    + "where Hatt.HattID = '" + hatt + "'";
+            String inteKlaraQuery = "SELECT hatt.hattID FROM hatt inner join orderrad o on Hatt.HattID = o.HattID\n"
+                    + "where o.HattID = '"+hatt+"' AND Hattstatus is null;";
             ArrayList<String> inteKlaraHattLista = SqlFragor.getEnKolumn(inteKlaraQuery);
 
             int inteKlaraHattar = inteKlaraHattLista.size();
 
-            if (klaraHattar == inteKlaraHattar) {
+            if (inteKlaraHattar == 0) {
                 antalBesLabel.setText(String.valueOf(i++));
 
             }
@@ -564,9 +564,9 @@ public class Startsida extends javax.swing.JFrame {
     private void klarHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klarHattBtnActionPerformed
         // TODO add your handling code here:
         String valdHatt = listValdaHattar.getSelectedValue();
-        String radIdQuery = "SELECT DISTINCT o.RadID from Hatt\n" +
-"                join orderrad o on Hatt.HattID = o.HattID\n" +
-"                where Beskrivning like '"+valdHatt+"' AND Hattstatus is null ORDER BY RadID LIMIT 1;";
+        String radIdQuery = "SELECT DISTINCT o.RadID from Hatt\n"
+                + "                join orderrad o on Hatt.HattID = o.HattID\n"
+                + "                where Beskrivning like '" + valdHatt + "' AND Hattstatus is null ORDER BY RadID LIMIT 1;";
         String radID = SqlFragor.getEttVarde(radIdQuery);
         String updateStatusQuery = "update Orderrad\n"
                 + "set orderrad.Hattstatus = 'Klar' where RadID = '" + radID + "'";
@@ -574,6 +574,8 @@ public class Startsida extends javax.swing.JFrame {
         ///
         seKlaraOrdrar();
         fillEgnaHattarList();
+        dispose();
+        new Startsida().setVisible(true);
 
 
     }//GEN-LAST:event_klarHattBtnActionPerformed
