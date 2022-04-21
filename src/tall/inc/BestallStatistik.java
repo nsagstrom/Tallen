@@ -87,15 +87,18 @@ public class BestallStatistik extends javax.swing.JFrame {
             }
         });
 
+        txtStat.setEditable(false);
         txtStat.setColumns(20);
         txtStat.setRows(5);
         jScrollPane1.setViewportView(txtStat);
 
+        txtAntal.setEditable(false);
         txtAntal.setColumns(20);
         txtAntal.setRows(5);
         txtAntal.setTabSize(10);
         jScrollPane2.setViewportView(txtAntal);
 
+        txtStangd.setEditable(false);
         txtStangd.setColumns(20);
         txtStangd.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         txtStangd.setRows(5);

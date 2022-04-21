@@ -71,7 +71,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblSkapad" min="-2" max="-2" attributes="0"/>
                           <Component id="btnSkapaRapport" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnTillbaka" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
+                          <Component id="btnTillbaka" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
