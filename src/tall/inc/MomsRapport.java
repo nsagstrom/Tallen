@@ -91,22 +91,23 @@ public class MomsRapport extends javax.swing.JFrame {
         
         // momspliktig försäljning 
         String fragaForsaljMoms = """
-                                  SELECT pris FROM (
-                                  SELECT SUM(pris) AS pris , LevDatum
+                                  SELECT SUM(pris) FROM (
+                                  SELECT pris , LevDatum
                                   FROM bestallning
                                   JOIN kund k on k.KundID = bestallning.KundID
                                   JOIN orderrad o on bestallning.BestID = o.BestID
                                   JOIN hatt h on o.HattID = h.HattID
                                   JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID
-                                  WHERE Status = 'St\u00e4ngd' AND Prio = 0 AND TullID= 'Saknas') t2
+                                  WHERE Status = 'Stängd' AND Prio = 0 AND TullID= 'Saknas') t2
                                   WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
 
         String forsaljMoms = SqlFragor.getEttVarde(fragaForsaljMoms);
+        
 
         // Momspliktig sörsäljning med ett 20% + För prio
         String fragaForsaljMomsPrio = """
-                                      SELECT pris FROM (
-                                      SELECT  FLOOR(SUM(pris)*1.2) AS pris , LevDatum, TullID
+                                      SELECT FLOOR(SUM(pris*1.2)) FROM (
+                                      SELECT pris , LevDatum, TullID
                                       FROM bestallning
                                       JOIN kund k on k.KundID = bestallning.KundID
                                       JOIN orderrad o on bestallning.BestID = o.BestID
@@ -116,11 +117,13 @@ public class MomsRapport extends javax.swing.JFrame {
                                       WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
 
         String forsaljMomsPrio = SqlFragor.getEttVarde(fragaForsaljMomsPrio);
+        
+        
 
         // försäljning på export 
         String fragaForsaljExport = """
-                                    SELECT pris FROM (
-                                    SELECT  SUM(pris) AS pris , LevDatum, TullID
+                                    SELECT SUM(pris) FROM (
+                                    SELECT pris , LevDatum, TullID
                                     FROM bestallning
                                     JOIN kund k on k.KundID = bestallning.KundID
                                     JOIN orderrad o on bestallning.BestID = o.BestID
@@ -131,10 +134,11 @@ public class MomsRapport extends javax.swing.JFrame {
 
         String forsaljMomsExport = SqlFragor.getEttVarde(fragaForsaljExport);
 
+
         // forsäljning export prio
         String fragaForsaljExportPrio = """
-                                        SELECT pris FROM (
-                                        SELECT  FLOOR(SUM(pris)*1.2) AS pris , LevDatum, TullID
+                                        SELECT FLOOR(SUM(pris*1.2)) FROM (
+                                        SELECT pris , LevDatum, TullID
                                         FROM bestallning
                                         JOIN kund k on k.KundID = bestallning.KundID
                                         JOIN orderrad o on bestallning.BestID = o.BestID
@@ -144,6 +148,7 @@ public class MomsRapport extends javax.swing.JFrame {
                                         WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
 
         String forsaljExportPrio = SqlFragor.getEttVarde(fragaForsaljExportPrio);
+        
 
         int momsForsalj = 0;
         int prioMomsForsalj = 0;
@@ -599,11 +604,11 @@ public class MomsRapport extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void txtmonthPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtmonthPropertyChange
-//        varden();
+        varden();
     }//GEN-LAST:event_txtmonthPropertyChange
 
     private void txtyearPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtyearPropertyChange
-//        varden();
+        varden();
     }//GEN-LAST:event_txtyearPropertyChange
 
 
