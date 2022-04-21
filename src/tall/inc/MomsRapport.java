@@ -65,30 +65,17 @@ public class MomsRapport extends javax.swing.JFrame {
     private void varden() {
         String stardate = "";
         String slutdate = "";
-         
-        int valdManad = txtmonth.getMonth() + 1;
-        YearMonth yearMonth = YearMonth.of(txtyear.getValue(), Month.of(valdManad));
 
-        String manadSlut = yearMonth.toString()+"-"+yearMonth.lengthOfMonth();
-        String formatManad = String.format("%02d", valdManad);
-        
-        perioden = txtyear.getValue()+formatManad;
-        
-        String manadStart  = String.valueOf(yearMonth);
-        
-        stardate = manadStart+"-01";
-        slutdate = manadSlut;
-        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = dateStart.getDate();
 
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        Date start = dateStart.getDate();
-//
-//        Date slut = dateEnd.getDate();
+        Date slut = dateEnd.getDate();
 
-//        stardate = dateFormat.format(start);
-//        slutdate = dateFormat.format(slut);
+        stardate = dateFormat.format(start);
+        slutdate = dateFormat.format(slut);
         
-        
+        perioden = stardate +"-" + slutdate;
+
         // momspliktig försäljning 
         String fragaForsaljMoms = """
                                   SELECT SUM(pris) FROM (
@@ -102,7 +89,6 @@ public class MomsRapport extends javax.swing.JFrame {
                                   WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
 
         String forsaljMoms = SqlFragor.getEttVarde(fragaForsaljMoms);
-        
 
         // Momspliktig sörsäljning med ett 20% + För prio
         String fragaForsaljMomsPrio = """
@@ -117,8 +103,6 @@ public class MomsRapport extends javax.swing.JFrame {
                                       WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
 
         String forsaljMomsPrio = SqlFragor.getEttVarde(fragaForsaljMomsPrio);
-        
-        
 
         // försäljning på export 
         String fragaForsaljExport = """
@@ -134,7 +118,6 @@ public class MomsRapport extends javax.swing.JFrame {
 
         String forsaljMomsExport = SqlFragor.getEttVarde(fragaForsaljExport);
 
-
         // forsäljning export prio
         String fragaForsaljExportPrio = """
                                         SELECT FLOOR(SUM(pris*1.2)) FROM (
@@ -148,7 +131,6 @@ public class MomsRapport extends javax.swing.JFrame {
                                         WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
 
         String forsaljExportPrio = SqlFragor.getEttVarde(fragaForsaljExportPrio);
-        
 
         int momsForsalj = 0;
         int prioMomsForsalj = 0;
@@ -350,10 +332,10 @@ public class MomsRapport extends javax.swing.JFrame {
         transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
 
         DOMSource domSource = new DOMSource(doc);
-        StreamResult streamResult = new StreamResult(new File("MomsDeklaration"+perioden+".xml"));
+        StreamResult streamResult = new StreamResult(new File("MomsDeklaration" + perioden + ".xml"));
         transformer.transform(domSource, streamResult);
 
-        System.out.println("Done creating XML File");
+//        System.out.println("Done creating XML File");
 
     }
 
@@ -378,14 +360,11 @@ public class MomsRapport extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         dateStart = new com.toedter.calendar.JDateChooser();
         dateEnd = new com.toedter.calendar.JDateChooser();
-        btnSok = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtOvrigUpplys = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         lblSkapad = new javax.swing.JLabel();
         btnTillbaka = new javax.swing.JButton();
-        txtmonth = new com.toedter.calendar.JMonthChooser();
-        txtyear = new com.toedter.calendar.JYearChooser();
 
         jInternalFrame1.setVisible(true);
 
@@ -440,13 +419,16 @@ public class MomsRapport extends javax.swing.JFrame {
 
         dateStart.setDateFormatString("yyyy-MM-dd");
         dateStart.setOpaque(false);
+        dateStart.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateStartPropertyChange(evt);
+            }
+        });
 
         dateEnd.setDateFormatString("yyyy-MM-dd");
-
-        btnSok.setText("Sök");
-        btnSok.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSokActionPerformed(evt);
+        dateEnd.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateEndPropertyChange(evt);
             }
         });
 
@@ -454,7 +436,7 @@ public class MomsRapport extends javax.swing.JFrame {
         txtOvrigUpplys.setRows(5);
         jScrollPane1.setViewportView(txtOvrigUpplys);
 
-        jLabel6.setText("Överig upplysning till Skatteverket ");
+        jLabel6.setText("Meddelande till revisor ");
 
         lblSkapad.setText("Deklaration skapad");
 
@@ -465,42 +447,22 @@ public class MomsRapport extends javax.swing.JFrame {
             }
         });
 
-        txtmonth.setAutoscrolls(true);
-        txtmonth.setYearChooser(txtyear);
-        txtmonth.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtmonthPropertyChange(evt);
-            }
-        });
-
-        txtyear.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtyearPropertyChange(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtForsalj, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtForsaljEU, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(txtyear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(29, 29, 29)
-                        .addComponent(txtmonth, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtForsalj, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtForsaljEU, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(dateStart, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -509,35 +471,25 @@ public class MomsRapport extends javax.swing.JFrame {
                             .addComponent(txtUtMoms, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtInMoms, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtBetala, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSkapad)
                             .addComponent(btnSkapaRapport)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnTillbaka, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                                .addComponent(btnSok, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel5))
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(btnTillbaka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtyear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtmonth, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(30, 30, 30)
+                .addComponent(btnTillbaka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(dateStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSok)
                             .addComponent(dateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addComponent(jLabel1)
@@ -591,10 +543,6 @@ public class MomsRapport extends javax.swing.JFrame {
         attBetala();
     }//GEN-LAST:event_txtInMomsCaretUpdate
 
-    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
-        varden();
-    }//GEN-LAST:event_btnSokActionPerformed
-
     private void txtInMomsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtInMomsFocusLost
         attBetala();
     }//GEN-LAST:event_txtInMomsFocusLost
@@ -603,18 +551,21 @@ public class MomsRapport extends javax.swing.JFrame {
         new Startsida().setVisible(true);
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
-    private void txtmonthPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtmonthPropertyChange
-        varden();
-    }//GEN-LAST:event_txtmonthPropertyChange
+    private void dateStartPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateStartPropertyChange
+          if (dateStart.getDate()!= null && dateEnd.getDate() != null) {
+            varden();
+        }
+    }//GEN-LAST:event_dateStartPropertyChange
 
-    private void txtyearPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtyearPropertyChange
-        varden();
-    }//GEN-LAST:event_txtyearPropertyChange
+    private void dateEndPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateEndPropertyChange
+          if (dateStart.getDate()!= null && dateEnd.getDate() != null) {
+            varden();
+        }
+    }//GEN-LAST:event_dateEndPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSkapaRapport;
-    private javax.swing.JButton btnSok;
     private javax.swing.JButton btnTillbaka;
     private com.toedter.calendar.JDateChooser dateEnd;
     private com.toedter.calendar.JDateChooser dateStart;
@@ -633,7 +584,5 @@ public class MomsRapport extends javax.swing.JFrame {
     private javax.swing.JTextField txtInMoms;
     private javax.swing.JTextArea txtOvrigUpplys;
     private javax.swing.JTextField txtUtMoms;
-    private com.toedter.calendar.JMonthChooser txtmonth;
-    private com.toedter.calendar.JYearChooser txtyear;
     // End of variables declaration//GEN-END:variables
 }
