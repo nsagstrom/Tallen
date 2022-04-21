@@ -509,6 +509,32 @@ public class Startsida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void seKlaraOrdrar() {
+
+        String hattListaQuery = "SELECT DISTINCT HattID FROM orderrad ;";
+        ArrayList<String> hattLista = SqlFragor.getEnKolumn(hattListaQuery);
+        int i = 0;
+        for (String hatt : hattLista) {
+
+            String klaraQuery = "Select Hatt.HattID from Hatt join Orderrad O on Hatt.HattID = O.HattID\n"
+                    + "where Hatt.HattID = '" + hatt + "' and hattstatus = 'klar';";
+            ArrayList<String> klaraHattLista = SqlFragor.getEnKolumn(klaraQuery);
+            int klaraHattar = klaraHattLista.size();
+
+            String inteKlaraQuery = "Select Hatt.HattID from Hatt join Orderrad O on Hatt.HattID = O.HattID\n"
+                    + "where Hatt.HattID = '" + hatt + "'";
+            ArrayList<String> inteKlaraHattLista = SqlFragor.getEnKolumn(inteKlaraQuery);
+
+            int inteKlaraHattar = inteKlaraHattLista.size();
+
+            if (klaraHattar == inteKlaraHattar) {
+                antalBesLabel.setText(String.valueOf(i++));
+
+            }
+        }
+
+    }
+
     private void klarHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klarHattBtnActionPerformed
         // TODO add your handling code here:
         String valdHatt = listValdaHattar.getSelectedValue();
@@ -516,28 +542,14 @@ public class Startsida extends javax.swing.JFrame {
                 + "join orderrad o on Hatt.HattID = o.HattID\n"
                 + "where Beskrivning like '" + valdHatt + "' ORDER BY RadID LIMIT 1";
         String hattID = SqlFragor.getEttVarde(hattIdQuery);
-        String radIdQuery = "SELECT RadID from orderrad where HattID = '"+hattID+"' ORDER BY RadID asc LIMIT 1;";
+        String radIdQuery = "SELECT RadID from orderrad where HattID = '" + hattID + "' ORDER BY RadID asc LIMIT 1;";
         String radID = SqlFragor.getEttVarde(radIdQuery);
         String updateStatusQuery = "update Orderrad\n"
-                + "set orderrad.Hattstatus = 'Klar' where HattID = '"+hattID+"' AND RadID = '"+radID+"'";
+                + "set orderrad.Hattstatus = 'Klar' where HattID = '" + hattID + "' AND RadID = '" + radID + "'";
         SqlFragor.uppdatera(updateStatusQuery);
         ///
-        String hattStatusQuery = "SELECT Hattstatus FROM orderrad WHERE hattID = '" + hattID + "'";
-        ArrayList<String> hattStatusLista = SqlFragor.getEnKolumn(hattStatusQuery);
-        int i = 0;
-        int antalKlara = 0;
-        for (String status : hattStatusLista) {
-            if (status.equals("Klar")) {
-                i++;
-            }
+        seKlaraOrdrar();
 
-        }
-        if (i == hattStatusLista.size()) {
-
-            antalKlara++;
-            antalBesLabel.setText(String.valueOf(antalKlara));
-
-        }
 
 
     }//GEN-LAST:event_klarHattBtnActionPerformed
