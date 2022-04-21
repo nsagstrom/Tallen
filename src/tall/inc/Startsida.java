@@ -126,7 +126,7 @@ public class Startsida extends javax.swing.JFrame {
         lblValkommen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblValkommen.setText("Välkommen!");
 
-        btnSkapaNyOrder.setText("Skapa ny order");
+        btnSkapaNyOrder.setText("Skapa ny beställning");
         btnSkapaNyOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSkapaNyOrderActionPerformed(evt);
@@ -140,7 +140,7 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
-        btnSeOrderStatus.setText("Se orderstatus");
+        btnSeOrderStatus.setText("Se beställningsstatus");
         btnSeOrderStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeOrderStatusActionPerformed(evt);
@@ -168,7 +168,7 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Färdigställ order");
+        jButton1.setText("Färdigställ beställning");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
