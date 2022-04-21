@@ -198,7 +198,7 @@ public class BestallStatistik extends javax.swing.JFrame {
 
         String fragaInt = SqlFragor.getEttVarde(fraga);
 
-        fraga = "SELECT FLOOR(SUM(Pris)*1.2) FROM (\n"
+        fraga = "SELECT FLOOR(SUM(pris*1.2)) FROM (\n"
                 + "    SELECT * FROM (\n"
                 + "        SELECT * FROM (\n"
                 + "            SELECT Pris , LevDatum, TullID, Prio, BestDatum, Status\n"
