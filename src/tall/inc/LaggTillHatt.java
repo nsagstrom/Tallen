@@ -157,6 +157,11 @@ public class LaggTillHatt extends javax.swing.JFrame {
         storlekTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel7.setText("Skapa hatt");
@@ -198,6 +203,11 @@ public class LaggTillHatt extends javax.swing.JFrame {
             }
         });
 
+        fargCmb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fargCmbMouseClicked(evt);
+            }
+        });
         fargCmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fargCmbActionPerformed(evt);
@@ -316,6 +326,14 @@ public class LaggTillHatt extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_fargCmbActionPerformed
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        
+    }//GEN-LAST:event_formFocusGained
+
+    private void fargCmbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fargCmbMouseClicked
+
+    }//GEN-LAST:event_fargCmbMouseClicked
 
     /**
      * @param args the command line arguments
