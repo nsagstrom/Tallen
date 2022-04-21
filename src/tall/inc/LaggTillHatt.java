@@ -40,6 +40,8 @@ public class LaggTillHatt extends javax.swing.JFrame {
     }
 
     public void fillFargCmb() {
+        fargCmb.addItem("");
+        fargCmb.addItem("Skapa ny färg");
         String query = "SELECT Farg FROM farg";
         ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
         for (String farg : fargLista) {
@@ -157,52 +159,30 @@ public class LaggTillHatt extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Skapa hatt");
 
         jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Namn:");
-
-        namnTextField.setBackground(new java.awt.Color(255, 255, 255));
-        namnTextField.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Tyg:");
 
-        tygCmb.setBackground(new java.awt.Color(255, 255, 255));
-        tygCmb.setForeground(new java.awt.Color(0, 0, 0));
-
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Storlek/cm:");
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Genre:");
 
-        genreCmb.setBackground(new java.awt.Color(255, 255, 255));
-        genreCmb.setForeground(new java.awt.Color(0, 0, 0));
-
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Pris:");
 
-        prisTextField.setBackground(new java.awt.Color(255, 255, 255));
-        prisTextField.setForeground(new java.awt.Color(0, 0, 0));
-
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Färg:");
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Dekorationer:");
 
-        dekList.setBackground(new java.awt.Color(255, 255, 255));
-        dekList.setForeground(new java.awt.Color(0, 0, 0));
         dekList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -211,7 +191,6 @@ public class LaggTillHatt extends javax.swing.JFrame {
         jScrollPane1.setViewportView(dekList);
 
         skapaHattBtn.setBackground(new java.awt.Color(255, 255, 255));
-        skapaHattBtn.setForeground(new java.awt.Color(0, 0, 0));
         skapaHattBtn.setText("Skapa hatt");
         skapaHattBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,20 +198,19 @@ public class LaggTillHatt extends javax.swing.JFrame {
             }
         });
 
-        fargCmb.setBackground(new java.awt.Color(255, 255, 255));
-        fargCmb.setForeground(new java.awt.Color(0, 0, 0));
+        fargCmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fargCmbActionPerformed(evt);
+            }
+        });
 
         tillbakaButton.setBackground(new java.awt.Color(255, 255, 255));
-        tillbakaButton.setForeground(new java.awt.Color(0, 0, 0));
         tillbakaButton.setText("Tillbaka");
         tillbakaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tillbakaButtonActionPerformed(evt);
             }
         });
-
-        storlekTxt.setBackground(new java.awt.Color(255, 255, 255));
-        storlekTxt.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -262,11 +240,10 @@ public class LaggTillHatt extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel6)
-                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGap(0, 0, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(45, 45, 45)
@@ -295,7 +272,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(namnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tygCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
@@ -303,7 +280,6 @@ public class LaggTillHatt extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(storlekTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(genreCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -320,7 +296,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(skapaHattBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tillbakaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
@@ -333,6 +309,13 @@ public class LaggTillHatt extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_tillbakaButtonActionPerformed
+
+    private void fargCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fargCmbActionPerformed
+        if(fargCmb.getSelectedItem().toString().equals("Skapa ny färg")){
+            new FargPalette().setVisible(true);
+        }
+        
+    }//GEN-LAST:event_fargCmbActionPerformed
 
     /**
      * @param args the command line arguments
