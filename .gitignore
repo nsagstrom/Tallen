@@ -57,3 +57,5 @@ build/built-jar.properties
 Fraktsedel.pdf
 nbproject/private/private.xml
 *.xml
+src/tall/inc/HattOrderInfo.form
+src/tall/inc/HattOrderInfo.java
