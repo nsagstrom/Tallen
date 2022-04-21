@@ -156,10 +156,10 @@ public class BestallStatistik extends javax.swing.JFrame {
 
     private void pagandeForsalj() {
 
-        String fraga = "SELECT Pris FROM (\n"
+        String fraga = "SELECT FLOOR(SUM(pris*1.2)) FROM (\n"
                 + "    SELECT * FROM (\n"
                 + "        SELECT * FROM (\n"
-                + "            SELECT FLOOR(SUM(pris)*1.2) AS Pris , LevDatum, TullID, Prio, BestDatum, Status\n"
+                + "            SELECT pris , LevDatum, TullID, Prio, BestDatum, Status\n"
                 + "            FROM bestallning\n"
                 + "            JOIN orderrad o on bestallning.BestID = o.BestID\n"
                 + "            JOIN hatt h on o.HattID = h.HattID\n"
@@ -198,7 +198,7 @@ public class BestallStatistik extends javax.swing.JFrame {
 
         String fragaInt = SqlFragor.getEttVarde(fraga);
 
-        fraga = "SELECT FLOOR(SUM(Pris)*1.2) FROM (\n"
+        fraga = "SELECT FLOOR(SUM(pris*1.2)) FROM (\n"
                 + "    SELECT * FROM (\n"
                 + "        SELECT * FROM (\n"
                 + "            SELECT Pris , LevDatum, TullID, Prio, BestDatum, Status\n"
