@@ -499,7 +499,6 @@ public class Startsida extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new FargPalette().setVisible(true);
-        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnPrisHattActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrisHattActionPerformed
@@ -542,19 +541,19 @@ public class Startsida extends javax.swing.JFrame {
 
     private void seKlaraOrdrar() {
 
-        String hattListaQuery = "SELECT DISTINCT HattID, orderrad.bestID FROM orderrad ;";
+        String hattListaQuery = "SELECT DISTINCT bestID FROM orderrad;";
         ArrayList<String> hattLista = SqlFragor.getEnKolumn(hattListaQuery);
         int i = 0;
         for (String hatt : hattLista) {
 
-            String inteKlaraQuery = "SELECT hatt.hattID FROM hatt inner join orderrad o on Hatt.HattID = o.HattID\n"
-                    + "where o.HattID = '"+hatt+"' AND Hattstatus is null;";
+            String inteKlaraQuery = "SELECT hattID FROM orderrad\n"
+                    + "where BestID = '"+hatt+"' AND Hattstatus is null;";
             ArrayList<String> inteKlaraHattLista = SqlFragor.getEnKolumn(inteKlaraQuery);
 
-            int inteKlaraHattar = inteKlaraHattLista.size();
-
-            if (inteKlaraHattar == 0) {
-                antalBesLabel.setText(String.valueOf(i++));
+            if (inteKlaraHattLista.isEmpty()) {
+                i++;
+                antalBesLabel.setText(String.valueOf(i));
+                
 
             }
         }
