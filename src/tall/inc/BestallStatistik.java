@@ -38,6 +38,11 @@ public class BestallStatistik extends javax.swing.JFrame {
     String stardate = "";
     String slutdate = "";
 
+    String antalOppnaExport;
+    String antalOppna;
+    String totAntalOppna;
+    String antalFardigaHattar;
+
     /**
      * Creates new form BestallStatistik
      */
@@ -58,6 +63,8 @@ public class BestallStatistik extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtStat = new javax.swing.JTextArea();
         btnOk = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAntal = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,27 +86,34 @@ public class BestallStatistik extends javax.swing.JFrame {
             }
         });
 
+        txtAntal.setColumns(20);
+        txtAntal.setRows(5);
+        txtAntal.setTabSize(10);
+        jScrollPane2.setViewportView(txtAntal);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(dateStart, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(dateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
-                .addComponent(btnOk)
-                .addGap(83, 83, 83))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnTillbaka)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(157, 157, 157))))
+                .addContainerGap(573, Short.MAX_VALUE)
+                .addComponent(btnTillbaka)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(dateStart, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(dateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addComponent(btnOk))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,9 +126,11 @@ public class BestallStatistik extends javax.swing.JFrame {
                         .addGap(59, 59, 59)
                         .addComponent(dateStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnOk))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addGap(45, 45, 45))
         );
 
         pack();
@@ -130,15 +146,26 @@ public class BestallStatistik extends javax.swing.JFrame {
         forsalj();
         pagandeForsalj();
         sattVarden();
+        antalHattar();
+        sattAntal();
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void sattVarden() {
         txtStat.setText("Försäljning"
                 + "\t" + totForsalj + "\n"
                 + "Varav export" + "\t" + exportexport + "\n"
-                + "Pågående" + "\t" + totPagande+"\n"
-                + "Inhemsk" + "\t" + inhemskPagande +"\n"
-                + "Export" + "\t"+ exportPagaende);
+                + "Pågående" + "\t" + totPagande + "\n"
+                + "Inhemsk" + "\t" + inhemskPagande + "\n"
+                + "Export" + "\t" + exportPagaende);
+    }
+    
+    private void sattAntal(){
+        txtAntal.setText("Under tillverkning"
+                + "\t" + totAntalOppna + "\n"
+                + "Varav export" + "\t" + antalOppnaExport + "\n"
+                + "Varav Inhemsk" + "\t" + antalOppna + "\n"
+                + "Färdigställda" + "\t" + antalFardigaHattar + "\n");
+                
     }
 
     private void datum() {
@@ -152,6 +179,43 @@ public class BestallStatistik extends javax.swing.JFrame {
 
         stardate = dateFormat.format(start);
         slutdate = dateFormat.format(slut);
+    }
+
+    private void antalHattar() {
+
+        String fraga = "SELECT COUNT(*) FROM (\n"
+                + "    SELECT  tullid FROM orderrad\n"
+                + "    JOIN bestallning b on orderrad.BestID = b.BestID\n"
+                + "    WHERE BestDatum BETWEEN '" + stardate + "' AND '" + slutdate + "') t2\n"
+                + "WHERE TullID != 'Saknas' AND TullID != '';";
+
+        antalOppnaExport = SqlFragor.getEttVarde(fraga);
+     
+
+        fraga = "SELECT COUNT(*) FROM (\n"
+                + "    SELECT  tullid FROM orderrad\n"
+                + "    JOIN bestallning b on orderrad.BestID = b.BestID\n"
+                + "    WHERE BestDatum BETWEEN '" + stardate + "' AND '" + slutdate + "') t2\n"
+                + "WHERE TullID = 'Saknas' OR TullID = '';";
+
+        antalOppna = SqlFragor.getEttVarde(fraga);
+
+        fraga = "SELECT COUNT(*) FROM (\n"
+                + "    SELECT  tullid FROM orderrad\n"
+                + "    JOIN bestallning b on orderrad.BestID = b.BestID\n"
+                + "    WHERE BestDatum BETWEEN '" + stardate + "' AND '" + slutdate + "') t2;";
+
+        totAntalOppna = SqlFragor.getEttVarde(fraga);
+
+        fraga = "SELECT COUNT(*) FROM (\n"
+                + "SELECT  pris , LevDatum, TullID\n"
+                + "FROM bestallning\n"
+                + "JOIN orderrad o on bestallning.BestID = o.BestID\n"
+                + "JOIN hatt h on o.HattID = h.HattID\n"
+                + "WHERE Status = 'Stängd') t2\n"
+                + "WHERE LevDatum BETWEEN '" + stardate + "' AND '" + slutdate + "';";
+
+        antalFardigaHattar = SqlFragor.getEttVarde(fraga);
     }
 
     private void pagandeForsalj() {
@@ -343,6 +407,8 @@ public class BestallStatistik extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dateEnd;
     private com.toedter.calendar.JDateChooser dateStart;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea txtAntal;
     private javax.swing.JTextArea txtStat;
     // End of variables declaration//GEN-END:variables
 }
