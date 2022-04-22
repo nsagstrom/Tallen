@@ -31,13 +31,6 @@ public class LaggTillHatt extends javax.swing.JFrame {
 
     }
 
-    public void fillGenreCmb() {
-        String query = "SELECT Genre FROM genre";
-        ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
-        for (String genre : genreLista) {
-            genreCmb.addItem(genre);
-        }
-    }
 
     public void fillFargCmb() {
         fargCmb.addItem("");
@@ -48,9 +41,24 @@ public class LaggTillHatt extends javax.swing.JFrame {
             fargCmb.addItem(farg);
         }
     }
+    
+    public void fillGenreCmb() {
+        genreCmb.removeAllItems();
+        genreCmb.addItem("");
+        genreCmb.addItem("Skapa ny");
+        String query = "SELECT Genre FROM genre";
+        ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
+        for (String genre : genreLista) {
+            genreCmb.addItem(genre);
+
+        }
+    }
 
     public void fillTygCmb() {
-        String query = "SELECT Tyg FROM tyg";
+        tygCmb.removeAllItems();
+        tygCmb.addItem("");
+        tygCmb.addItem("Skapa nytt");
+        String query = "SELECT tyg FROM tyg";
         ArrayList<String> tygLista = SqlFragor.getEnKolumn(query);
         for (String tyg : tygLista) {
             tygCmb.addItem(tyg);
@@ -174,11 +182,23 @@ public class LaggTillHatt extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel5.setText("Tyg:");
 
+        tygCmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tygCmbActionPerformed(evt);
+            }
+        });
+
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel6.setText("Storlek/cm:");
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel3.setText("Genre:");
+
+        genreCmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genreCmbActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel2.setText("Pris:");
@@ -348,11 +368,39 @@ public class LaggTillHatt extends javax.swing.JFrame {
         skapaDekoration();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void tygCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tygCmbActionPerformed
+        if (tygCmb.getSelectedIndex() == 1){
+            skapaTyg();
+        }
+       
+    }//GEN-LAST:event_tygCmbActionPerformed
+
+    private void genreCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreCmbActionPerformed
+
+        if (genreCmb.getSelectedIndex() == 1){
+            skapaGenre();
+        }
+    }//GEN-LAST:event_genreCmbActionPerformed
+
     private void skapaDekoration(){
         String nyDekoration = JOptionPane.showInputDialog(null);
         String nyid = SqlFragor.nyID("dekorationer", "DekorationID");
         SqlFragor.addToDatabasen("INSERT INTO dekorationer (DekorationID, Dekoration) VALUES ('" + nyid + "','" + nyDekoration + "')");
         fillDekList1();
+    }
+    
+    private void skapaTyg() {
+        String nyTyg = JOptionPane.showInputDialog(null);
+        String nyid = SqlFragor.nyID("tyg", "TygID");
+        SqlFragor.addToDatabasen("INSERT INTO tyg (TygID, Tyg) VALUES ('" + nyid + "','" + nyTyg + "')");
+        fillTygCmb();
+    }
+    
+    private void skapaGenre() {
+        String nyGenre = JOptionPane.showInputDialog(null);
+        String nyid = SqlFragor.nyID("genre", "GenreID");
+        SqlFragor.addToDatabasen("INSERT INTO genre (GenreID, Genre) VALUES ('" + nyid + "','" + nyGenre + "')");
+        fillGenreCmb();
     }
     
     /**
