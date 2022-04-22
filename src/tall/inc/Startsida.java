@@ -4,6 +4,7 @@
  */
 package tall.inc;
 
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -59,16 +60,28 @@ public class Startsida extends javax.swing.JFrame {
                 }
             }
         });
-        String query = "Select Beskrivning from Hatt\n"
-                + "join Orderrad O on Hatt.HattID = O.HattID\n"
-                + "join mibdb.Bestallning B on O.BestID = B.BestID\n"
-                + "where O.AnvandarID is null";
-        ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
+
+        
+        
+        
+        String bestIdQuery = "SELECT DISTINCT bestID from orderrad where Orderrad.Hattstatus IS NULL AND Orderrad.AnvandarID IS NULL";
+        ArrayList<String> bestIDLista = SqlFragor.getEnKolumn(bestIdQuery);
         DefaultListModel model = new DefaultListModel();
-        for (String hatt : hattLista) {
-            model.addElement(hatt);
+        for (String bestID : bestIDLista) {
+            model.addElement("<html><b><u>Order " + bestID + "<u><b><html>");
 
             listAllaHattar.setModel(model);
+            String query = "Select Beskrivning from Hatt\n"
+                    + "join Orderrad O on Hatt.HattID = O.HattID\n"
+                    + "join mibdb.Bestallning B on O.BestID = B.BestID\n"
+                    + "where O.AnvandarID is null AND o.BestID = '" + bestID + "'";
+            ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
+            for (String hatt : hattLista) {
+                model.addElement(hatt);
+                listAllaHattar.setFont(listAllaHattar.getFont().deriveFont(Font.PLAIN));
+                listAllaHattar.setModel(model);
+            }
+
         }
 
     }
@@ -442,8 +455,7 @@ public class Startsida extends javax.swing.JFrame {
             fillOppenHattTbl();
         }
         fillEgnaHattarList();
-        dispose();
-        new Startsida().setVisible(true);
+
 
 
     }//GEN-LAST:event_startHattBtnActionPerformed
@@ -485,13 +497,12 @@ public class Startsida extends javax.swing.JFrame {
         for (String hatt : hattLista) {
 
             String inteKlaraQuery = "SELECT hattID FROM orderrad\n"
-                    + "where BestID = '"+hatt+"' AND Hattstatus is null;";
+                    + "where BestID = '" + hatt + "' AND Hattstatus is null;";
             ArrayList<String> inteKlaraHattLista = SqlFragor.getEnKolumn(inteKlaraQuery);
 
             if (inteKlaraHattLista.isEmpty()) {
                 i++;
                 antalBesLabel.setText(String.valueOf(i));
-                
 
             }
         }
@@ -511,8 +522,7 @@ public class Startsida extends javax.swing.JFrame {
         ///
         seKlaraOrdrar();
         fillEgnaHattarList();
-        dispose();
-        new Startsida().setVisible(true);
+
 
 
     }//GEN-LAST:event_klarHattBtnActionPerformed
