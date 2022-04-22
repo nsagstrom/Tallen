@@ -4,14 +4,19 @@
  */
 package tall.inc;
 
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import oru.inf.InfException;
+
+
+
 
 /**
  *
@@ -35,16 +40,23 @@ public class Startsida extends javax.swing.JFrame {
     }
 
     public void fillEgnaHattarList() {
-        String query = "Select Beskrivning from Hatt\n"
-                + "join Orderrad O on Hatt.HattID = O.HattID\n"
-                + "join mibdb.Bestallning B on O.BestID = B.BestID\n"
-                + "where O.AnvandarID = '" + anvandarID + "' and hattstatus IS null";
-        ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
+
+        String bestIdQuery = "SELECT DISTINCT BestID FROM orderrad where Orderrad.AnvandarID = " + anvandarID + " AND Orderrad.Hattstatus IS NULL";
+        ArrayList<String> bestIDLista = SqlFragor.getEnKolumn(bestIdQuery);
         DefaultListModel model = new DefaultListModel();
-        for (String hatt : hattLista) {
-            model.addElement(hatt);
+
+        for (String bestID : bestIDLista) {
+            model.addElement("<html><b><u>Order " + bestID + "<u><b><html>");
 
             listValdaHattar.setModel(model);
+            String query = "SELECT Beskrivning FROM hatt inner join orderrad o on Hatt.HattID = o.HattID WHERE Hattstatus IS NULL AND o.Hattstatus IS NULL AND o.AnvandarID = " + anvandarID + " AND o.BestID = " + bestID + "";
+            ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
+            for (String hatt : hattLista) {
+                model.addElement(hatt);
+                listValdaHattar.setFont(listValdaHattar.getFont().deriveFont(Font.PLAIN));
+
+                listValdaHattar.setModel(model);
+            }
         }
 
     }
@@ -59,16 +71,22 @@ public class Startsida extends javax.swing.JFrame {
                 }
             }
         });
-        String query = "Select Beskrivning from Hatt\n"
-                + "join Orderrad O on Hatt.HattID = O.HattID\n"
-                + "join mibdb.Bestallning B on O.BestID = B.BestID\n"
-                + "where O.AnvandarID is null";
-        ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
+
+        String bestIdQuery = "SELECT DISTINCT bestID from orderrad where Orderrad.Hattstatus IS NULL AND Orderrad.AnvandarID IS NULL";
+        ArrayList<String> bestIDLista = SqlFragor.getEnKolumn(bestIdQuery);
         DefaultListModel model = new DefaultListModel();
-        for (String hatt : hattLista) {
-            model.addElement(hatt);
+        for (String bestID : bestIDLista) {
+            model.addElement("<html><b><u>Order " + bestID + "<u><b><html>");
 
             listAllaHattar.setModel(model);
+            String query = "SELECT Beskrivning FROM Hatt inner join orderrad o on Hatt.HattID = o.HattID where BestID = " + bestID + " AND o.Hattstatus IS NULL AND o.AnvandarID IS NULL";
+            ArrayList<String> hattLista = SqlFragor.getEnKolumn(query);
+            for (String hatt : hattLista) {
+                model.addElement(hatt);
+                listAllaHattar.setFont(listAllaHattar.getFont().deriveFont(Font.PLAIN));
+                listAllaHattar.setModel(model);
+            }
+
         }
 
     }
@@ -113,7 +131,6 @@ public class Startsida extends javax.swing.JFrame {
         hanteraBestallningBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnTestPDF = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -233,13 +250,6 @@ public class Startsida extends javax.swing.JFrame {
 
         jLabel2.setText("ordrar klara för färdigställning");
 
-        btnTestPDF.setText("Test PDF");
-        btnTestPDF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTestPDFActionPerformed(evt);
-            }
-        });
-
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -329,90 +339,81 @@ public class Startsida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton3)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(antalBesLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2)))
-                                .addGap(52, 52, 52))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnTestPDF, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109))
+                    .addComponent(btnSeListaMaterial)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSeListaMaterial)
-                            .addComponent(hanteraBestallningBtn)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSeOrderStatus)
                             .addComponent(btnSkapaNyOrder))
-                        .addGap(0, 445, Short.MAX_VALUE)
-                        .addComponent(klarHattBtn)
-                        .addGap(148, 148, 148)
-                        .addComponent(startHattBtn)
-                        .addGap(36, 36, 36)
-                        .addComponent(btnLoggaUt)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(antalBesLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)))
+                        .addGap(74, 74, 74))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hanteraBestallningBtn)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(316, 316, 316)
+                                .addComponent(startHattBtn)
+                                .addGap(168, 168, 168)
+                                .addComponent(klarHattBtn)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLoggaUt)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(lblValkommen)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(klarHattBtn)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(21, Short.MAX_VALUE)
-                        .addComponent(lblValkommen)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(hanteraBestallningBtn)
-                        .addGap(18, 18, 18)
+                        .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSeListaMaterial)
-                                .addGap(16, 16, 16)
-                                .addComponent(btnSkapaNyOrder)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSeOrderStatus)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)
-                                .addGap(17, 17, 17)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(antalBesLabel)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton3)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnTestPDF)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnLoggaUt)
-                            .addComponent(startHattBtn)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(klarHattBtn)))
-                .addGap(15, 15, 15))
+                                .addGap(330, 330, 330)
+                                .addComponent(btnLoggaUt))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(startHattBtn))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addComponent(hanteraBestallningBtn)
+                .addGap(18, 18, 18)
+                .addComponent(btnSeListaMaterial)
+                .addGap(16, 16, 16)
+                .addComponent(btnSkapaNyOrder)
+                .addGap(18, 18, 18)
+                .addComponent(btnSeOrderStatus)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(69, 263, Short.MAX_VALUE))
         );
 
         pack();
@@ -427,6 +428,7 @@ public class Startsida extends javax.swing.JFrame {
 
     private void btnSkapaNyOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaNyOrderActionPerformed
         // TODO add your handling code here:
+        dispose();
         new SkapaNyOrder().setVisible(true);
     }//GEN-LAST:event_btnSkapaNyOrderActionPerformed
 
@@ -442,22 +444,26 @@ public class Startsida extends javax.swing.JFrame {
 
     private void startHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startHattBtnActionPerformed
         // TODO add your handling code here:
+        String bestIdQuery = "SELECT DISTINCT bestID from orderrad where Orderrad.Hattstatus IS NULL AND Orderrad.AnvandarID IS NULL";
+        ArrayList<String> bestIDLista = SqlFragor.getEnKolumn(bestIdQuery);
+        if (bestIDLista.isEmpty()) {
+            dispose();
+            new Startsida().setVisible(true);
+        } else if (!bestIDLista.isEmpty()) {
+            List<String> hattar = listAllaHattar.getSelectedValuesList();
+            for (String hatt : hattar) {
+                String hattIdQuery = "SELECT hattID FROM hatt where beskrivning = '" + hatt + "'";
+                String hattID = SqlFragor.getEttVarde(hattIdQuery);
 
-        List<String> hattar = listAllaHattar.getSelectedValuesList();
-        for (String hatt : hattar) {
-            String hattIdQuery = "SELECT hattID FROM hatt where beskrivning = '" + hatt + "'";
-            String hattID = SqlFragor.getEttVarde(hattIdQuery);
-
-            String radIdQuery = "SELECT DISTINCT radID FROM orderrad inner join hatt h on Orderrad.HattID = h.HattID\n"
-                    + "WHERE h.HattID = '" + hattID + "' AND orderrad.anvandarID IS NULL LIMIT 1";
-            String radID = SqlFragor.getEttVarde(radIdQuery);
-            String updateQuery = "UPDATE Orderrad SET anvandarID = '" + anvandarID + "' where hattID = '" + hattID + "' AND radID = '" + radID + "'";
-            SqlFragor.uppdatera(updateQuery);
-            fillOppenHattTbl();
+                String radIdQuery = "SELECT DISTINCT radID FROM orderrad inner join hatt h on Orderrad.HattID = h.HattID\n"
+                        + "WHERE h.HattID = '" + hattID + "' AND orderrad.anvandarID IS NULL LIMIT 1";
+                String radID = SqlFragor.getEttVarde(radIdQuery);
+                String updateQuery = "UPDATE Orderrad SET anvandarID = '" + anvandarID + "' where hattID = '" + hattID + "' AND radID = '" + radID + "'";
+                SqlFragor.uppdatera(updateQuery);
+                fillOppenHattTbl();
+            }
+            fillEgnaHattarList();
         }
-        fillEgnaHattarList();
-        dispose();
-        new Startsida().setVisible(true);
 
 
     }//GEN-LAST:event_startHattBtnActionPerformed
@@ -499,35 +505,41 @@ public class Startsida extends javax.swing.JFrame {
         for (String hatt : hattLista) {
 
             String inteKlaraQuery = "SELECT hattID FROM orderrad\n"
-                    + "where BestID = '"+hatt+"' AND Hattstatus is null;";
+                    + "where BestID = '" + hatt + "' AND Hattstatus is null;";
             ArrayList<String> inteKlaraHattLista = SqlFragor.getEnKolumn(inteKlaraQuery);
 
             if (inteKlaraHattLista.isEmpty()) {
                 i++;
                 antalBesLabel.setText(String.valueOf(i));
-                
 
             }
         }
 
     }
 
-    private void klarHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klarHattBtnActionPerformed
-        // TODO add your handling code here:
+    private void klarHattBtn() {
         String valdHatt = listValdaHattar.getSelectedValue();
         String radIdQuery = "SELECT DISTINCT o.RadID from Hatt\n"
                 + "                join orderrad o on Hatt.HattID = o.HattID\n"
                 + "                where Beskrivning like '" + valdHatt + "' AND Hattstatus is null ORDER BY RadID LIMIT 1;";
         String radID = SqlFragor.getEttVarde(radIdQuery);
-        String updateStatusQuery = "update Orderrad\n"
-                + "set orderrad.Hattstatus = 'Klar' where RadID = '" + radID + "'";
-        SqlFragor.uppdatera(updateStatusQuery);
-        ///
-        seKlaraOrdrar();
-        fillEgnaHattarList();
-        dispose();
-        new Startsida().setVisible(true);
+        if (radID == null) {
+            dispose();
+            new Startsida().setVisible(true);
+        } else if (radID != null) {
+            String updateStatusQuery = "update Orderrad\n"
+                    + "set orderrad.Hattstatus = 'Klar' where RadID = '" + radID + "'";
+            SqlFragor.uppdatera(updateStatusQuery);
+            ///
 
+            seKlaraOrdrar();
+            fillEgnaHattarList();
+        }
+    }
+    private void klarHattBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klarHattBtnActionPerformed
+        // TODO add your handling code here:
+        klarHattBtn();
+        fillOppenHattTbl();
 
     }//GEN-LAST:event_klarHattBtnActionPerformed
 
@@ -544,23 +556,17 @@ public class Startsida extends javax.swing.JFrame {
     }//GEN-LAST:event_hanteraBestallningBtnActionPerformed
 
     private void menSokArtikelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menSokArtikelMouseClicked
-      new SokHatt().setVisible(true);
+        new SokHatt().setVisible(true);
     }//GEN-LAST:event_menSokArtikelMouseClicked
 
     private void menSkapaNyArtikelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menSkapaNyArtikelMouseClicked
-         new LaggTillHatt().setVisible(true);
+        new LaggTillHatt().setVisible(true);
     }//GEN-LAST:event_menSkapaNyArtikelMouseClicked
 
     private void menKundfrekvensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menKundfrekvensActionPerformed
         new Kundfrekvens().setVisible(true);
         dispose();
     }//GEN-LAST:event_menKundfrekvensActionPerformed
-
-    private void btnTestPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestPDFActionPerformed
-        PDFUtskrift pdf = new PDFUtskrift();
-        pdf.nyPDF();
-        pdf.visaPDF();
-    }//GEN-LAST:event_btnTestPDFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -572,7 +578,6 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton btnSeListaMaterial;
     private javax.swing.JButton btnSeOrderStatus;
     private javax.swing.JButton btnSkapaNyOrder;
-    private javax.swing.JButton btnTestPDF;
     private javax.swing.JButton hanteraBestallningBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
