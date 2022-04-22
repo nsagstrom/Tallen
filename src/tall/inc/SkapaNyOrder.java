@@ -26,7 +26,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     public SkapaNyOrder() {
         initComponents();
         skapaOrderNummer();
-        fillFargCmb();
+     //   fillFargCmb();
         fillTygCmb();
         fillStandardHattCmb();
         fillDekList();
@@ -535,10 +535,11 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     private void laggTillSpecial() {
         String hattID = SqlFragor.nyID("hatt", "HattID");
         String benamning = txtSpecialBenamning.getText();
-        String farg = CBoxSpecialartikelFarg.getSelectedItem().toString();
+        
+        /*String farg = CBoxSpecialartikelFarg.getSelectedItem().toString();
         String fargQuery = "Select fargID From farg where farg = '" + farg + "'";
 
-        String fargID = SqlFragor.getEttVarde(fargQuery);
+        String fargID = SqlFragor.getEttVarde(fargQuery);*/
         //
         String genre = genreCmb.getSelectedItem().toString();
         String genreQuery = "Select genreID From genre where genre = '" + genre + "'";
@@ -554,7 +555,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         String fragaSpecial = "INSERT INTO SpecialHatt(HattID) VALUES (" + hattID + ");";
         SqlFragor.addToDatabasen(fragaSpecial);
 
-        String fraga = "INSERT INTO hatt (HattID, Beskrivning, FargID,pris, storlek, GenreID, TygID, AnvandarID) VALUES (" + hattID + ",'" + benamning + "'," + fargID + ",0,'" + storlek + "'," + genreID + "," + tygID + "," + anvandare + ")";
+        String fraga = "INSERT INTO hatt (HattID, Beskrivning, FargID,pris, storlek, GenreID, TygID, AnvandarID) VALUES (" + hattID + ",'" + benamning + "'," + farg + ",0,'" + storlek + "'," + genreID + "," + tygID + "," + anvandare + ")";
         SqlFragor.addToDatabasen(fraga);
 
         List<String> dek = dekList.getSelectedValuesList();
@@ -616,13 +617,13 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         return nuvarandeOrderNummer;
     }
 
-    public void fillFargCmb() {
+    /*public void fillFargCmb() {
         String query = "SELECT farg FROM farg";
         ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
         for (String farg : fargLista) {
             CBoxSpecialartikelFarg.addItem(farg);
         }
-    }
+    }*/
 
     public void fillDekList() {
 
