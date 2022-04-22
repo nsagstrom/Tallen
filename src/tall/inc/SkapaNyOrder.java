@@ -32,6 +32,8 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         fillDekList();
         fillGenreCmb();
 
+        visaFarg(Color.WHITE);
+        
         DefaultTableModel model = (DefaultTableModel) hattTbl.getModel();
         for (int i = hattTbl.getRowCount() - 1; i >= 0; i--) {
             model.removeRow(i);
@@ -496,23 +498,26 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         valjFarg();
     }//GEN-LAST:event_btnValjFargActionPerformed
 
+    //Färgmetoder---------------------------------------------------------
     private void valjFarg(){
         farg = JColorChooser.showDialog(this, "Välj färg", Color.BLACK);
         if(farg == null){
             farg = Color.WHITE;
         }
-        
+        visaFarg(farg);
+    }
+    
+    private void visaFarg(Color farg){
         pnlColorSample.setBackground(farg);
         lblFarg.setText(colorToHex(farg));
     }
     
     private String colorToHex(Color farg){
         String hex;
-        
         hex = Integer.toHexString(farg.getRGB()).substring(2);
-        
         return hex;
     }
+    //Slut på färgmetoder-----------------------------------------------------
     
     private void laggTillNyKund() {
         String fornamn = txtangivetFornamn.getText();
