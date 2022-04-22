@@ -98,16 +98,16 @@
                                               </Group>
                                           </Group>
                                       </Group>
-<<<<<<< Updated upstream
+
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="txtStorlek" min="-2" pref="39" max="-2" attributes="0"/>
                                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-=======
+
                                       <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
->>>>>>> Stashed changes
+
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jScrollPane1" min="-2" pref="76" max="-2" attributes="0"/>
                                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
