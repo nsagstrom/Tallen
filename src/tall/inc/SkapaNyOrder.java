@@ -518,6 +518,8 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             System.out.println(hattID + orderradID);
             SqlFragor.addToDatabasen(orderradQuery);
         }
+        dispose();
+        new Startsida().setVisible(true);
 
 
     }//GEN-LAST:event_orderBtnActionPerformed
