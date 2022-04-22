@@ -289,7 +289,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
     }
 
     private void fyllCmbStatus() {
-        String fraga2 = "SELECT Status FROM bestallning";
+        String fraga2 = "SELECT distinct Status FROM bestallning";
         ArrayList<String> status;
 
         status = SqlFragor.getEnKolumn(fraga2);

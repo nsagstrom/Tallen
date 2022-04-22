@@ -1,9 +1,11 @@
 package tall.inc;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
@@ -18,6 +20,7 @@ import javax.swing.ListSelectionModel;
  */
 public class LaggTillHatt extends javax.swing.JFrame {
 
+    private Color farg;
     /**
      * Creates new form LaggTillHatt
      */
@@ -27,19 +30,14 @@ public class LaggTillHatt extends javax.swing.JFrame {
         fillGenreCmb();
         fillTygCmb();
         fillDekList1();
-        fillFargCmb();
+        //fillFargCmb();
 
+        visaFarg(Color.WHITE);
+        
     }
 
-    public void fillGenreCmb() {
-        String query = "SELECT Genre FROM genre";
-        ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
-        for (String genre : genreLista) {
-            genreCmb.addItem(genre);
-        }
-    }
 
-    public void fillFargCmb() {
+   /* public void fillFargCmb() {
         fargCmb.addItem("");
         fargCmb.addItem("Skapa ny färg");
         String query = "SELECT Farg FROM farg";
@@ -47,10 +45,46 @@ public class LaggTillHatt extends javax.swing.JFrame {
         for (String farg : fargLista) {
             fargCmb.addItem(farg);
         }
+    }*/
+    
+        //Färgmetoder---------------------------------------------------------
+    private void valjFarg() {
+        farg = JColorChooser.showDialog(this, "Välj färg", Color.BLACK);
+        if (farg == null) {
+            farg = Color.WHITE;
+        }
+        visaFarg(farg);
+    }
+
+    private void visaFarg(Color farg) {
+        pnlColorSample.setBackground(farg);
+        lblFarg.setText(colorToHex(farg));
+    }
+
+    private String colorToHex(Color farg) {
+        String hex;
+        hex = Integer.toHexString(farg.getRGB()).substring(2);
+        return hex;
+    }
+    //Slut på färgmetoder-----------------------------------------------------
+    
+    public void fillGenreCmb() {
+        genreCmb.removeAllItems();
+        genreCmb.addItem("");
+        genreCmb.addItem("Skapa ny");
+        String query = "SELECT Genre FROM genre";
+        ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
+        for (String genre : genreLista) {
+            genreCmb.addItem(genre);
+
+        }
     }
 
     public void fillTygCmb() {
-        String query = "SELECT Tyg FROM tyg";
+        tygCmb.removeAllItems();
+        tygCmb.addItem("");
+        tygCmb.addItem("Skapa nytt");
+        String query = "SELECT tyg FROM tyg";
         ArrayList<String> tygLista = SqlFragor.getEnKolumn(query);
         for (String tyg : tygLista) {
             tygCmb.addItem(tyg);
@@ -100,11 +134,11 @@ public class LaggTillHatt extends javax.swing.JFrame {
         String pris = prisTextField.getText();
         String storlek = storlekTxt.getText();
 
-        String farg = fargCmb.getSelectedItem().toString();
+        //String farg = fargCmb.getSelectedItem().toString();
         String fargQuery = "Select fargID From farg where farg = '" + farg + "'";
         
         String fargID = SqlFragor.getEttVarde(fargQuery);        
-        String query = "INSERT INTO hatt (hattID, beskrivning, FargID,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','"+anvandarID+"', '" + storlek + "')";
+        String query = "INSERT INTO hatt (hattID, beskrivning, Farg,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','"+anvandarID+"', '" + storlek + "')";
         SqlFragor.addToDatabasen(query);
         
         String hattQuery = "INSERT INTO standardhatt (HattID) VALUES ('"+hattID+"')";
@@ -152,9 +186,12 @@ public class LaggTillHatt extends javax.swing.JFrame {
         dekList = new javax.swing.JList<>();
         dekList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         skapaHattBtn = new javax.swing.JButton();
-        fargCmb = new javax.swing.JComboBox<>();
         tillbakaButton = new javax.swing.JButton();
         storlekTxt = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        lblFarg = new javax.swing.JLabel();
+        pnlColorSample = new javax.swing.JPanel();
+        btnValjFarg = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -173,11 +210,23 @@ public class LaggTillHatt extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel5.setText("Tyg:");
 
+        tygCmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tygCmbActionPerformed(evt);
+            }
+        });
+
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel6.setText("Storlek/cm:");
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel3.setText("Genre:");
+
+        genreCmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genreCmbActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel2.setText("Pris:");
@@ -203,22 +252,38 @@ public class LaggTillHatt extends javax.swing.JFrame {
             }
         });
 
-        fargCmb.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                fargCmbMouseClicked(evt);
-            }
-        });
-        fargCmb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fargCmbActionPerformed(evt);
-            }
-        });
-
         tillbakaButton.setBackground(new java.awt.Color(255, 255, 255));
         tillbakaButton.setText("Tillbaka");
         tillbakaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tillbakaButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Ny dekoration");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        lblFarg.setText("jLabel6");
+
+        javax.swing.GroupLayout pnlColorSampleLayout = new javax.swing.GroupLayout(pnlColorSample);
+        pnlColorSample.setLayout(pnlColorSampleLayout);
+        pnlColorSampleLayout.setHorizontalGroup(
+            pnlColorSampleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 18, Short.MAX_VALUE)
+        );
+        pnlColorSampleLayout.setVerticalGroup(
+            pnlColorSampleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+
+        btnValjFarg.setText("Välj färg");
+        btnValjFarg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValjFargActionPerformed(evt);
             }
         });
 
@@ -228,46 +293,48 @@ public class LaggTillHatt extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7)
+                                .addContainerGap(110, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tygCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(namnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(storlekTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(genreCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(pnlColorSample, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblFarg)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(skapaHattBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tillbakaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(skapaHattBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(38, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(tillbakaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(45, 45, 45)
-                                                .addComponent(jLabel7))
-                                            .addComponent(tygCmb, 0, 200, Short.MAX_VALUE)
-                                            .addComponent(namnTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                            .addComponent(storlekTxt)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(fargCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(genreCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(prisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(12, 12, 12)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnValjFarg)
+                                .addComponent(prisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -275,41 +342,52 @@ public class LaggTillHatt extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(namnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tygCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(storlekTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(genreCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel5))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(namnTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tygCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 3, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(fargCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(prisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6)
+                    .addComponent(storlekTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(genreCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnValjFarg)
+                                .addComponent(lblFarg)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(prisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pnlColorSample, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(skapaHattBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tillbakaButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+                .addContainerGap())
         );
 
         pack();
@@ -320,29 +398,63 @@ public class LaggTillHatt extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_tillbakaButtonActionPerformed
 
-    private void fargCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fargCmbActionPerformed
-        if(fargCmb.getSelectedItem().toString().equals("Skapa ny färg")){
-            new FargPalette().setVisible(true);
-        }
-        
-    }//GEN-LAST:event_fargCmbActionPerformed
-
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         
     }//GEN-LAST:event_formFocusGained
 
-    private void fargCmbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fargCmbMouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        skapaDekoration();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    }//GEN-LAST:event_fargCmbMouseClicked
+    private void tygCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tygCmbActionPerformed
+        if (tygCmb.getSelectedIndex() == 1){
+            skapaTyg();
+        }
+       
+    }//GEN-LAST:event_tygCmbActionPerformed
 
+    private void genreCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreCmbActionPerformed
+
+        if (genreCmb.getSelectedIndex() == 1){
+            skapaGenre();
+        }
+    }//GEN-LAST:event_genreCmbActionPerformed
+
+    private void btnValjFargActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjFargActionPerformed
+
+        valjFarg();
+    }//GEN-LAST:event_btnValjFargActionPerformed
+
+    private void skapaDekoration(){
+        String nyDekoration = JOptionPane.showInputDialog(null);
+        String nyid = SqlFragor.nyID("dekorationer", "DekorationID");
+        SqlFragor.addToDatabasen("INSERT INTO dekorationer (DekorationID, Dekoration) VALUES ('" + nyid + "','" + nyDekoration + "')");
+        fillDekList1();
+    }
+    
+    private void skapaTyg() {
+        String nyTyg = JOptionPane.showInputDialog(null);
+        String nyid = SqlFragor.nyID("tyg", "TygID");
+        SqlFragor.addToDatabasen("INSERT INTO tyg (TygID, Tyg) VALUES ('" + nyid + "','" + nyTyg + "')");
+        fillTygCmb();
+    }
+    
+    private void skapaGenre() {
+        String nyGenre = JOptionPane.showInputDialog(null);
+        String nyid = SqlFragor.nyID("genre", "GenreID");
+        SqlFragor.addToDatabasen("INSERT INTO genre (GenreID, Genre) VALUES ('" + nyid + "','" + nyGenre + "')");
+        fillGenreCmb();
+    }
+    
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnValjFarg;
     private javax.swing.JList<String> dekList;
-    private javax.swing.JComboBox<String> fargCmb;
     private javax.swing.JComboBox<String> genreCmb;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -352,7 +464,9 @@ public class LaggTillHatt extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblFarg;
     private javax.swing.JTextField namnTextField;
+    private javax.swing.JPanel pnlColorSample;
     private javax.swing.JTextField prisTextField;
     private javax.swing.JButton skapaHattBtn;
     private javax.swing.JTextField storlekTxt;
