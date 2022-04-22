@@ -4,6 +4,10 @@
  */
 package tall.inc;
 
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
+
+
 /**
  *
  * @author isakw
@@ -15,6 +19,8 @@ public class AutoComplete extends javax.swing.JFrame {
      */
     public AutoComplete() {
         initComponents();
+        AutoCompleteDecorator.decorate(cmbTest);
+                
     }
 
     /**
@@ -26,21 +32,40 @@ public class AutoComplete extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cmbTest = new javax.swing.JComboBox<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        cmbTest.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Isak", "Arvid", "Noah", "Niklasarna", "Viktor", "Markus", "William", "Oliver", "Patrik" }));
+        cmbTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTestActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addComponent(cmbTest, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(cmbTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmbTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTestActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTestActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +103,6 @@ public class AutoComplete extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbTest;
     // End of variables declaration//GEN-END:variables
 }
