@@ -126,6 +126,7 @@ public class Startsida extends javax.swing.JFrame {
         hanteraBestallningBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnTESTKNAPP = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -245,6 +246,13 @@ public class Startsida extends javax.swing.JFrame {
 
         jLabel2.setText("ordrar klara för färdigställning");
 
+        btnTESTKNAPP.setText("TESTKNAPP");
+        btnTESTKNAPP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTESTKNAPPActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -337,7 +345,8 @@ public class Startsida extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnTESTKNAPP)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton3)
                                     .addGroup(layout.createSequentialGroup()
@@ -347,7 +356,7 @@ public class Startsida extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel2)))
                                 .addGap(52, 52, 52))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -408,7 +417,9 @@ public class Startsida extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(btnTESTKNAPP))
                 .addGap(69, 202, Short.MAX_VALUE))
         );
 
@@ -550,6 +561,12 @@ public class Startsida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_menKundfrekvensActionPerformed
 
+    
+    //OBS NEDAN ÄR ENDAST FÖR TEST!! / VICKE
+    private void btnTESTKNAPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTESTKNAPPActionPerformed
+        new HamtaHattRitning().setVisible(true);
+    }//GEN-LAST:event_btnTESTKNAPPActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -560,6 +577,7 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton btnSeListaMaterial;
     private javax.swing.JButton btnSeOrderStatus;
     private javax.swing.JButton btnSkapaNyOrder;
+    private javax.swing.JButton btnTESTKNAPP;
     private javax.swing.JButton hanteraBestallningBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
