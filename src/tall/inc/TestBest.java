@@ -22,17 +22,44 @@ public class TestBest extends javax.swing.JFrame {
      */
     public TestBest() {
         initComponents();
-
-        testtest();
+        fillStandardHattCmb();
+//        testtest();
     }
 
     private void testtest() {
 //        ImageIcon iconLogo = new ImageIcon("Images/victoriantophat.jpg");
 //        
 //       jLabel3.setIcon(iconLogo);
+    String hatt ="";
 
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("Images/victoriantophat.jpg").getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+        switch (jComboBox1.getSelectedIndex()) {
+            case 0:
+                hatt = "Images/shelock.jpg";
+                break;
+            case 1:
+                hatt = "Images/Fez.jpg";
+                break;
+            case 2:
+                hatt = "Images/victoriantophat.jpg";
+                break;
+            default:
+                break;
+        }
+
+System.out.println("aaaa");
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(hatt).getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
         jLabel3.setIcon(imageIcon);
+    }
+
+    public void fillStandardHattCmb() {
+
+        String query = "SELECT HattID FROM standardhatt";
+        ArrayList<String> hattIdLista = SqlFragor.getEnKolumn(query);
+        for (String hatt : hattIdLista) {
+            String beskrivningQuery = "SELECT beskrivning from Hatt inner join StandardHatt SH on Hatt.HattID = SH.HattID where SH.HattID = '" + hatt + "'";
+            String hattBes = SqlFragor.getEttVarde(beskrivningQuery);
+            jComboBox1.addItem(hattBes);
+        }
     }
 
     /**
@@ -48,6 +75,7 @@ public class TestBest extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -107,6 +135,12 @@ public class TestBest extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -125,8 +159,13 @@ public class TestBest extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addComponent(jButton1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(244, 244, 244)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(204, 204, 204)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(198, 198, 198)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(76, Short.MAX_VALUE))
@@ -136,13 +175,15 @@ public class TestBest extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 163, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(40, 40, 40))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(40, 40, 40)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -160,6 +201,10 @@ public class TestBest extends javax.swing.JFrame {
         testdata();
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        testtest();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void fyllRader(ArrayList<HashMap> hattlista) {
         Object[][] orderrad = new Object[hattlista.size()][4];
@@ -193,6 +238,7 @@ public class TestBest extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
