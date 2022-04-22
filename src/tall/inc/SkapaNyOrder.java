@@ -166,6 +166,12 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             }
         });
 
+        genreCmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genreCmbActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Benämning:");
 
         jLabel2.setText("Genre:");
@@ -551,6 +557,12 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tygCmbActionPerformed
 
+    private void genreCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreCmbActionPerformed
+        if (genreCmb.getSelectedIndex() == 1){
+            skapaGenre();
+        }
+    }//GEN-LAST:event_genreCmbActionPerformed
+
     
     
     private void skapaDekoration() {
@@ -589,6 +601,13 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         String nyid = SqlFragor.nyID("tyg", "TygID");
         SqlFragor.addToDatabasen("INSERT INTO tyg (TygID, Tyg) VALUES ('" + nyid + "','" + nyTyg + "')");
         fillTygCmb();
+    }
+    
+    private void skapaGenre() {
+        String nyGenre = JOptionPane.showInputDialog(null);
+        String nyid = SqlFragor.nyID("genre", "GenreID");
+        SqlFragor.addToDatabasen("INSERT INTO genre (GenreID, Genre) VALUES ('" + nyid + "','" + nyGenre + "')");
+        fillGenreCmb();
     }
 
     //Färgmetoder---------------------------------------------------------
@@ -752,6 +771,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     }
 
     public void fillGenreCmb() {
+        genreCmb.removeAllItems();
+        genreCmb.addItem("");
+        genreCmb.addItem("Skapa ny");
         String query = "SELECT Genre FROM genre";
         ArrayList<String> genreLista = SqlFragor.getEnKolumn(query);
         for (String genre : genreLista) {
