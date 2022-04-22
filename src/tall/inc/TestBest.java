@@ -30,7 +30,7 @@ public class TestBest extends javax.swing.JFrame {
 //        ImageIcon iconLogo = new ImageIcon("Images/victoriantophat.jpg");
 //        
 //       jLabel3.setIcon(iconLogo);
-    String hatt ="no.png";
+    String hatt ="Images/no.png";
 
         switch (jComboBox1.getSelectedIndex()) {
             case 0:
@@ -43,7 +43,7 @@ public class TestBest extends javax.swing.JFrame {
                 hatt = "Images/victoriantophat.jpg";
                 break;
             default:
-                 hatt ="no.png";
+                 hatt ="Images/no.png";
                 break;
         }
 
