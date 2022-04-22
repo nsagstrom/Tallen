@@ -68,7 +68,7 @@ public class PDFUtskrift {
             String query = "Select BestID from Bestallning\n"
                     + "where Status = 'Öppen' or Status = 'Pågående'";
             ArrayList<String> bestIDLista = SqlFragor.getEnKolumn(query);
-            System.out.println(bestIDLista);
+        
 
             for (String bestID : bestIDLista) {
                 String query2 = "select Beskrivning, Tyg, Farg from Hatt\n"
@@ -87,7 +87,7 @@ public class PDFUtskrift {
                 document.add(beskrivning);
 
                 ArrayList<HashMap<String, String>> hattLista = SqlFragor.getFleraRader(query2);
-                System.out.println(hattLista);
+                
                 for (HashMap<String, String> hattar : hattLista) {
                     String hattNamn = hattar.get("Beskrivning");
                     String tygNamn = hattar.get("Tyg");
