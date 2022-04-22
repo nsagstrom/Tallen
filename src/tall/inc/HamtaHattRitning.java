@@ -4,7 +4,10 @@
  */
 package tall.inc;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -47,6 +50,11 @@ public class HamtaHattRitning extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnHamtaRitning.setText("Hämta ritning");
+        btnHamtaRitning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHamtaRitningActionPerformed(evt);
+            }
+        });
 
         JListHattlista.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -81,6 +89,19 @@ public class HamtaHattRitning extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHamtaRitningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamtaRitningActionPerformed
+            
+        String hattNamn = JListHattlista.getSelectedValue();
+        
+        Runtime rt=Runtime.getRuntime();
+        String file="C:\\Users\\gewe_\\OneDrive\\Dokument\\Hattritning\\" + hattNamn;
+        try {
+            Process p=rt.exec("notepad "+file);
+        } catch (IOException ex) {
+            Logger.getLogger(HamtaHattRitning.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnHamtaRitningActionPerformed
 
     /**
      * @param args the command line arguments
