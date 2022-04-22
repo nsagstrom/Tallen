@@ -138,7 +138,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
         String fargQuery = "Select fargID From farg where farg = '" + farg + "'";
         
         String fargID = SqlFragor.getEttVarde(fargQuery);        
-        String query = "INSERT INTO hatt (hattID, beskrivning, FargID,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','"+anvandarID+"', '" + storlek + "')";
+        String query = "INSERT INTO hatt (hattID, beskrivning, Farg,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','"+anvandarID+"', '" + storlek + "')";
         SqlFragor.addToDatabasen(query);
         
         String hattQuery = "INSERT INTO standardhatt (HattID) VALUES ('"+hattID+"')";
