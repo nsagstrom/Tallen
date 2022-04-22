@@ -21,7 +21,7 @@ public class HamtaHattRitning extends javax.swing.JFrame {
      */
     public HamtaHattRitning() {
         initComponents();
-        fillHattList();
+        //fillHattList();
     }
     
     public void fillHattList() {
@@ -57,7 +57,7 @@ public class HamtaHattRitning extends javax.swing.JFrame {
         });
 
         JListHattlista.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Fes", "Sherlock Holmes", " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
