@@ -26,10 +26,8 @@ public class TestBest extends javax.swing.JFrame {
 //        testtest();
     }
 
-    private void testtest() {
-//        ImageIcon iconLogo = new ImageIcon("Images/victoriantophat.jpg");
-//        
-//       jLabel3.setIcon(iconLogo);
+    private void valjBild() {
+
     String hatt ="Images/no.png";
 
         switch (jComboBox1.getSelectedIndex()) {
@@ -134,7 +132,6 @@ System.out.println("aaaa");
         });
 
         jLabel3.setLabelFor(jPanel1);
-        jLabel3.setText("jLabel3");
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -204,7 +201,7 @@ System.out.println("aaaa");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        testtest();
+        valjBild();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void fyllRader(ArrayList<HashMap> hattlista) {
