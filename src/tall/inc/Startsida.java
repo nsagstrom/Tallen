@@ -113,6 +113,7 @@ public class Startsida extends javax.swing.JFrame {
         hanteraBestallningBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnTestPDF = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -232,6 +233,13 @@ public class Startsida extends javax.swing.JFrame {
 
         jLabel2.setText("ordrar klara för färdigställning");
 
+        btnTestPDF.setText("Test PDF");
+        btnTestPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTestPDFActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -337,7 +345,8 @@ public class Startsida extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnTestPDF, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
@@ -367,37 +376,42 @@ public class Startsida extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnLoggaUt)
-                                    .addComponent(startHattBtn)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(klarHattBtn))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(hanteraBestallningBtn)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSeListaMaterial)
-                        .addGap(16, 16, 16)
-                        .addComponent(btnSkapaNyOrder)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSeOrderStatus)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSeListaMaterial)
+                                .addGap(16, 16, 16)
+                                .addComponent(btnSkapaNyOrder)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSeOrderStatus)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addGap(17, 17, 17)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(antalBesLabel)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnTestPDF)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(antalBesLabel)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(btnLoggaUt)
+                            .addComponent(startHattBtn)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(klarHattBtn)))
                 .addGap(15, 15, 15))
         );
 
@@ -542,6 +556,12 @@ public class Startsida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_menKundfrekvensActionPerformed
 
+    private void btnTestPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestPDFActionPerformed
+        PDFUtskrift pdf = new PDFUtskrift();
+        pdf.nyPDF();
+        pdf.visaPDF();
+    }//GEN-LAST:event_btnTestPDFActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -552,6 +572,7 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton btnSeListaMaterial;
     private javax.swing.JButton btnSeOrderStatus;
     private javax.swing.JButton btnSkapaNyOrder;
+    private javax.swing.JButton btnTestPDF;
     private javax.swing.JButton hanteraBestallningBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
