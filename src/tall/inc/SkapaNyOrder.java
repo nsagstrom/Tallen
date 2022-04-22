@@ -4,10 +4,12 @@
  */
 package tall.inc;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SkapaNyOrder extends javax.swing.JFrame {
 
+    private Color farg;
     /**
      * Creates new form SkapaNyOrder
      */
@@ -28,6 +31,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         fillStandardHattCmb();
         fillDekList();
         fillGenreCmb();
+
         DefaultTableModel model = (DefaultTableModel) hattTbl.getModel();
         for (int i = hattTbl.getRowCount() - 1; i >= 0; i--) {
             model.removeRow(i);
@@ -90,6 +94,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         tullLabel = new javax.swing.JLabel();
         btnValjFarg = new javax.swing.JButton();
         lblFarg = new javax.swing.JLabel();
+        pnlColorSample = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -203,8 +208,24 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         tullLabel.setText("Tull:");
 
         btnValjFarg.setText("Välj färg");
+        btnValjFarg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValjFargActionPerformed(evt);
+            }
+        });
 
         lblFarg.setText("jLabel6");
+
+        javax.swing.GroupLayout pnlColorSampleLayout = new javax.swing.GroupLayout(pnlColorSample);
+        pnlColorSample.setLayout(pnlColorSampleLayout);
+        pnlColorSampleLayout.setHorizontalGroup(
+            pnlColorSampleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 18, Short.MAX_VALUE)
+        );
+        pnlColorSampleLayout.setVerticalGroup(
+            pnlColorSampleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,50 +245,27 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                             .addComponent(lblOrdernummer)
                             .addComponent(lblVarOrderNummer))
                         .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtangivetFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFornamn))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtangivetEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEfternamn))
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtangivetAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAdress))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtangivetTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(btnLaggTillKund))
-                            .addComponent(lblTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblArtikelnummer)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblFarg)
-                                        .addGap(56, 56, 56)
-                                        .addComponent(txtSpecialBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(standardHattCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnValjFarg)
-                                    .addComponent(CBoxSpecialartikelFarg, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(CBoxSpecialartikelFarg, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(pnlColorSample, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblFarg)
+                                        .addGap(36, 36, 36)
+                                        .addComponent(txtSpecialBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(66, 66, 66)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAntal)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(46, 46, 46)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblAntal)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(78, 78, 78)
-                                                .addComponent(btnLaggTillHatt))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(280, 280, 280)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(78, 78, 78)
+                                        .addComponent(btnLaggTillHatt))))
                             .addComponent(lblLagerartikel)
                             .addComponent(lblSpecialartikel)
                             .addGroup(layout.createSequentialGroup()
@@ -283,7 +281,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                                     .addComponent(storlekCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,22 +302,40 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                                             .addComponent(tullLabel)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(tullCheckbox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)))))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(tullCheckbox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))))))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtangivetFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblFornamn))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtangivetEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEfternamn))
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtangivetAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblAdress))
+                                .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnLaggTillSpHatt)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(btnTillbaka)
-                                        .addGap(433, 433, 433))))
+                                        .addComponent(txtangivetTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(btnLaggTillKund))
+                                    .addComponent(lblTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnLaggTillSpHatt)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(orderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(303, 303, 303))))))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnTillbaka)
+                                        .addGap(433, 433, 433))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(orderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(303, 303, 303))))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,7 +363,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                     .addComponent(btnLaggTillKund))
                 .addGap(33, 33, 33)
                 .addComponent(lblLagerartikel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAntal)
                     .addComponent(lblArtikelnummer))
@@ -379,10 +397,12 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                                 .addComponent(storlekCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
-                                .addComponent(lblFarg)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(pnlColorSample, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblFarg, javax.swing.GroupLayout.Alignment.LEADING))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnValjFarg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addComponent(CBoxSpecialartikelFarg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,6 +491,29 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tullCheckboxActionPerformed
 
+    private void btnValjFargActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjFargActionPerformed
+        
+        valjFarg();
+    }//GEN-LAST:event_btnValjFargActionPerformed
+
+    private void valjFarg(){
+        farg = JColorChooser.showDialog(this, "Välj färg", Color.BLACK);
+        if(farg == null){
+            farg = Color.WHITE;
+        }
+        
+        pnlColorSample.setBackground(farg);
+        lblFarg.setText(colorToHex(farg));
+    }
+    
+    private String colorToHex(Color farg){
+        String hex;
+        
+        hex = Integer.toHexString(farg.getRGB()).substring(2);
+        
+        return hex;
+    }
+    
     private void laggTillNyKund() {
         String fornamn = txtangivetFornamn.getText();
         String efternamn = txtangivetEfternamn.getText();
@@ -706,6 +749,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JLabel lblVarOrderNummer;
     private javax.swing.JButton orderBtn;
+    private javax.swing.JPanel pnlColorSample;
     private javax.swing.JComboBox<String> standardHattCmb;
     private javax.swing.JComboBox<String> storlekCmb;
     private javax.swing.JCheckBox tullCheckbox;
