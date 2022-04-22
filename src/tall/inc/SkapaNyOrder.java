@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -43,6 +44,8 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         }
         tullTextbox.setVisible(false);
         tullLabel.setVisible(false);
+        
+        AutoCompleteDecorator.decorate(standardHattCmb);
     }
 
     /**
