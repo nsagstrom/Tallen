@@ -126,6 +126,7 @@ public class Startsida extends javax.swing.JFrame {
         hanteraBestallningBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnTEST = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -246,6 +247,13 @@ public class Startsida extends javax.swing.JFrame {
 
         jLabel2.setText("ordrar klara för färdigställning");
 
+        btnTEST.setText("TEST");
+        btnTEST.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTESTActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -349,7 +357,8 @@ public class Startsida extends javax.swing.JFrame {
                             .addComponent(jButton2)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSeOrderStatus)
-                            .addComponent(btnSkapaNyOrder))
+                            .addComponent(btnSkapaNyOrder)
+                            .addComponent(btnTEST))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -379,7 +388,7 @@ public class Startsida extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addComponent(lblValkommen)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -417,7 +426,9 @@ public class Startsida extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(69, 263, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(btnTEST)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -578,6 +589,10 @@ public class Startsida extends javax.swing.JFrame {
         pdf.visaPDF();
     }//GEN-LAST:event_menMateriallistaActionPerformed
 
+    private void btnTESTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTESTActionPerformed
+        new HamtaHattRitning().setVisible(true);
+    }//GEN-LAST:event_btnTESTActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -588,6 +603,7 @@ public class Startsida extends javax.swing.JFrame {
     private javax.swing.JButton btnSeListaMaterial;
     private javax.swing.JButton btnSeOrderStatus;
     private javax.swing.JButton btnSkapaNyOrder;
+    private javax.swing.JButton btnTEST;
     private javax.swing.JButton hanteraBestallningBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

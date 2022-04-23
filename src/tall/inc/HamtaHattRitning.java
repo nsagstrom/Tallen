@@ -21,7 +21,7 @@ public class HamtaHattRitning extends javax.swing.JFrame {
      */
     public HamtaHattRitning() {
         initComponents();
-        //fillHattList();
+        fillHattList();
     }
     
     public void fillHattList() {
@@ -33,12 +33,14 @@ public class HamtaHattRitning extends javax.swing.JFrame {
             JListHattlista.setModel(model);
         }
     }
+    
+    //Hämtar filnamnet på den ritning som man har valt i JListen.
+    //Här behöver alltså sökvägen till filmappen stämma med den dator som ska använda funktionen.
     public void hamtaRitning()
     {
         String hattNamn = JListHattlista.getSelectedValue();
-        
         Runtime rt=Runtime.getRuntime();
-        String file="C:\\Users\\gewe_\\OneDrive\\Dokument\\Hattritning\\" + hattNamn;
+        String file="Ritningar/" + hattNamn;
         try {
             Process p=rt.exec("notepad "+file);
         } catch (IOException ex) {
@@ -68,11 +70,6 @@ public class HamtaHattRitning extends javax.swing.JFrame {
             }
         });
 
-        JListHattlista.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Fes", "Sherlock Holmes", " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(JListHattlista);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -96,7 +93,7 @@ public class HamtaHattRitning extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         pack();
@@ -104,7 +101,6 @@ public class HamtaHattRitning extends javax.swing.JFrame {
 
     private void btnHamtaRitningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamtaRitningActionPerformed
             hamtaRitning();
-
     }//GEN-LAST:event_btnHamtaRitningActionPerformed
 
     /**
