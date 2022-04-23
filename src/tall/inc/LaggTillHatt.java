@@ -135,9 +135,9 @@ public class LaggTillHatt extends javax.swing.JFrame {
         String storlek = storlekTxt.getText();
 
         //String farg = fargCmb.getSelectedItem().toString();
-        String fargQuery = "Select fargID From farg where farg = '" + farg + "'";
+        //String fargQuery = "Select fargID From farg where farg = '" + farg + "'";
         
-        String fargID = SqlFragor.getEttVarde(fargQuery);        
+        String fargID = lblFarg.getText();        
         String query = "INSERT INTO hatt (hattID, beskrivning, Farg,Pris, GenreID, TygID, AnvandarID, Storlek) VALUES ('" + hattID + "','"+namn+"', '" + fargID + "', '" + pris + "', '" + genreID + "', '" + tygID + "','"+anvandarID+"', '" + storlek + "')";
         SqlFragor.addToDatabasen(query);
         
