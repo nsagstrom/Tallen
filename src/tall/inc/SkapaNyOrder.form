@@ -119,22 +119,27 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtangivetEfternamn" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
-                                  <Component id="lblEfternamn" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtangivetAdress" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
-                                  <Component id="lblAdress" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtangivetTelefonnummer" min="-2" pref="101" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                      <Component id="btnLaggTillKund" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtangivetEfternamn" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
+                                          <Component id="lblEfternamn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtangivetAdress" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
+                                          <Component id="lblAdress" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="txtangivetTelefonnummer" min="-2" pref="101" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                              <Component id="btnLaggTillKund" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="lblTelefon" min="-2" pref="92" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <Component id="lblTelefon" min="-2" pref="92" max="-2" attributes="0"/>
+                                  <Component id="cmbValjKund" min="-2" pref="190" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -174,7 +179,10 @@
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblKundinfo" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="lblKundinfo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbValjKund" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblVarOrderNummer" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnTillbaka" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -306,7 +314,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblKundinfo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ny kund"/>
+        <Property name="text" type="java.lang.String" value="Kund"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblFornamn">
@@ -400,7 +408,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnLaggTillKund">
       <Properties>
-        <Property name="text" type="java.lang.String" value="L&#xe4;gg till"/>
+        <Property name="text" type="java.lang.String" value="L&#xe4;gg till ny kund"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLaggTillKundActionPerformed"/>
@@ -585,6 +593,16 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lBild">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbValjKund">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

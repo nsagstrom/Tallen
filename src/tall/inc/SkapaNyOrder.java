@@ -35,6 +35,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         fillStandardHattCmb();
         fillDekList();
         fillGenreCmb();
+        fillNamn();
 
         visaFarg(Color.WHITE);
 
@@ -102,6 +103,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         txtStorlek = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         lBild = new javax.swing.JLabel();
+        cmbValjKund = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -114,7 +116,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
         lblEfternamn.setText("Efternamn");
 
-        lblKundinfo.setText("Ny kund");
+        lblKundinfo.setText("Kund");
 
         lblFornamn.setText("Förnamn");
 
@@ -155,7 +157,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             }
         });
 
-        btnLaggTillKund.setText("Lägg till");
+        btnLaggTillKund.setText("Lägg till ny kund");
         btnLaggTillKund.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLaggTillKundActionPerformed(evt);
@@ -337,7 +339,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(txtStorlek, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel4))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(76, 76, 76)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel3)
@@ -348,19 +350,22 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                                     .addComponent(lblFornamn))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtangivetEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblEfternamn))
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtangivetAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblAdress))
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtangivetTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(btnLaggTillKund))
-                                    .addComponent(lblTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtangivetEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblEfternamn))
+                                        .addGap(37, 37, 37)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtangivetAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblAdress))
+                                        .addGap(31, 31, 31)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(txtangivetTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(26, 26, 26)
+                                                .addComponent(btnLaggTillKund))
+                                            .addComponent(lblTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cmbValjKund, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(139, 139, 139)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -387,7 +392,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                     .addComponent(lblOrdernummer))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblKundinfo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblKundinfo)
+                        .addComponent(cmbValjKund, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblVarOrderNummer)
                         .addComponent(btnTillbaka)))
@@ -635,6 +642,14 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         return hex;
     }
     //Slut på färgmetoder-----------------------------------------------------
+    
+    public void fillNamn() {
+        String query = "SELECT distinct fornamn FROM kund";
+        ArrayList<String> namn = SqlFragor.getEnKolumn(query);
+        for (String namnen : namn) {
+            cmbValjKund.addItem(namnen);
+        }
+    }
 
     private void laggTillNyKund() {
         String fornamn = txtangivetFornamn.getText();
@@ -849,6 +864,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
     private javax.swing.JButton btnLaggTillSpHatt;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton btnValjFarg;
+    private javax.swing.JComboBox<String> cmbValjKund;
     private javax.swing.JList<String> dekList;
     private javax.swing.JComboBox<String> genreCmb;
     private javax.swing.JTable hattTbl;
