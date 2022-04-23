@@ -22,7 +22,7 @@ public class SokHatt extends javax.swing.JFrame {
      */
     public SokHatt() {
         initComponents();
-        fillFargCmb();
+        //fillFargCmb();
         fillHattList();
         fillGenreCmb();
         fillTygCmb();
@@ -48,13 +48,13 @@ public class SokHatt extends javax.swing.JFrame {
         }
     }
 
-    public void fillFargCmb() {
+    /*public void fillFargCmb() {
         String query = "SELECT farg FROM farg";
         ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
         for (String farg : fargLista) {
             fargCmb.addItem(farg);
         }
-    }
+    }*/
 
     public void fillTygCmb() {
         String query = "SELECT tyg FROM tyg";
@@ -107,7 +107,6 @@ public class SokHatt extends javax.swing.JFrame {
         prisTextfield = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         uppdateraButton = new javax.swing.JButton();
-        fargCmb = new javax.swing.JComboBox<>();
         genreCmb = new javax.swing.JComboBox<>();
         tygCmb = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -117,6 +116,7 @@ public class SokHatt extends javax.swing.JFrame {
         hattIDTextfield = new javax.swing.JTextField();
         BtnTillbaka = new javax.swing.JButton();
         storlekTxt = new javax.swing.JTextField();
+        fargTextfield = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,8 +145,6 @@ public class SokHatt extends javax.swing.JFrame {
                 uppdateraButtonActionPerformed(evt);
             }
         });
-
-        fargCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Färg" }));
 
         genreCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Genre" }));
 
@@ -210,11 +208,11 @@ public class SokHatt extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(uppdateraButton)
                     .addComponent(genreCmb, 0, 100, Short.MAX_VALUE)
-                    .addComponent(fargCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tygCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(prisTextfield)
                     .addComponent(namnTextfield)
-                    .addComponent(storlekTxt))
+                    .addComponent(storlekTxt)
+                    .addComponent(fargTextfield))
                 .addGap(30, 30, 30)
                 .addComponent(hattIDTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
@@ -232,7 +230,7 @@ public class SokHatt extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(fargCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(fargTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -278,7 +276,7 @@ public class SokHatt extends javax.swing.JFrame {
         String hattID = SqlFragor.getEttVarde(hattQuery);
         hattIDTextfield.setText(hattID);
 
-        String query = "SELECT beskrivning, Pris, storlek, Farg, Genre, Tyg FROM hatt inner join Farg on hatt.FargID = Farg.FargID inner join Genre on hatt.GenreID = Genre.GenreID inner join Tyg on hatt.TygID = Tyg.TygID WHERE hatt.HattID = '" + hattID + "'";
+        String query = "SELECT beskrivning, Pris, storlek, Farg, Genre, Tyg FROM hatt inner join Genre on hatt.GenreID = Genre.GenreID inner join Tyg on hatt.TygID = Tyg.TygID WHERE hatt.HattID = '" + hattID + "'";
         String dekorationQuery = "SELECT d.Dekoration FROM dekorationerstandardhatt inner join dekorationer d on dekorationerstandardhatt.dekorationID = d.DekorationID where dekorationerstandardhatt.HattID = '" + hattID + "';";
         HashMap<String, String> hattMap = SqlFragor.getEnRad(query);
         ArrayList<String> dekorationList = SqlFragor.getEnKolumn(dekorationQuery);
@@ -289,7 +287,7 @@ public class SokHatt extends javax.swing.JFrame {
             dekList.setSelectedValue(dekObject, rootPaneCheckingEnabled);
         }
         storlekTxt.setText(hattMap.get("storlek"));
-        fargCmb.setSelectedItem(hattMap.get("Farg"));
+        fargTextfield.setText(hattMap.get("Farg"));
         genreCmb.setSelectedItem(hattMap.get("Genre"));
         tygCmb.setSelectedItem(hattMap.get("Tyg"));
         prisTextfield.setText(hattMap.get("Pris"));
@@ -314,10 +312,10 @@ public class SokHatt extends javax.swing.JFrame {
 
             //
             //
-            String farg = fargCmb.getSelectedItem().toString();
-            String fargQuery = "SELECT fargID FROM farg where farg = '" + farg + "'";
-            String fargID = SqlFragor.getEttVarde(fargQuery);
-            String updateFargQuery = "update Hatt set FargID = '" + fargID + "' where HattID = '" + hattID + "'";
+            String farg = fargTextfield.getText();
+            //String fargQuery = "SELECT farg FROM hatt where farg = '" + farg + "'";
+            //String fargID = SqlFragor.getEttVarde(fargQuery);
+            String updateFargQuery = "update Hatt set Farg = '" + farg + "' where HattID = '" + hattID + "'";
             SqlFragor.uppdatera(updateFargQuery);
             //
             String genre = genreCmb.getSelectedItem().toString();
@@ -374,7 +372,7 @@ public class SokHatt extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnTillbaka;
     private javax.swing.JList<String> dekList;
-    private javax.swing.JComboBox<String> fargCmb;
+    private javax.swing.JTextField fargTextfield;
     private javax.swing.JComboBox<String> genreCmb;
     private javax.swing.JTextField hattIDTextfield;
     private javax.swing.JList<String> hattList;
