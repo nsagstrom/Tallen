@@ -33,6 +33,18 @@ public class HamtaHattRitning extends javax.swing.JFrame {
             JListHattlista.setModel(model);
         }
     }
+    public void hamtaRitning()
+    {
+        String hattNamn = JListHattlista.getSelectedValue();
+        
+        Runtime rt=Runtime.getRuntime();
+        String file="C:\\Users\\gewe_\\OneDrive\\Dokument\\Hattritning\\" + hattNamn;
+        try {
+            Process p=rt.exec("notepad "+file);
+        } catch (IOException ex) {
+            Logger.getLogger(HamtaHattRitning.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,16 +103,8 @@ public class HamtaHattRitning extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHamtaRitningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamtaRitningActionPerformed
-            
-        String hattNamn = JListHattlista.getSelectedValue();
-        
-        Runtime rt=Runtime.getRuntime();
-        String file="C:\\Users\\gewe_\\OneDrive\\Dokument\\Hattritning\\" + hattNamn;
-        try {
-            Process p=rt.exec("notepad "+file);
-        } catch (IOException ex) {
-            Logger.getLogger(HamtaHattRitning.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            hamtaRitning();
+
     }//GEN-LAST:event_btnHamtaRitningActionPerformed
 
     /**
