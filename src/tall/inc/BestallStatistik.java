@@ -104,11 +104,11 @@ public class BestallStatistik extends javax.swing.JFrame {
         txtStangd.setRows(5);
         jScrollPane3.setViewportView(txtStangd);
 
-        jLabel1.setText("St‰ngda best‰llningar");
+        jLabel1.setText("St√§ngda best√§llningar");
 
         jLabel2.setText("Antal hattar");
 
-        jLabel3.setText("V‰rden ");
+        jLabel3.setText("V√§rden ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,10 +181,10 @@ public class BestallStatistik extends javax.swing.JFrame {
     }//GEN-LAST:event_dateEndPropertyChange
 
     private void sattVarden() {
-        txtStat.setText("Fˆrs‰ljning"
+        txtStat.setText("F√∂rs√§ljning"
                 + "\t" + totForsalj + "\n"
                 + "Varav export" + "\t" + exportexport + "\n"
-                + "PÂgÂende" + "\t" + totPagande + "\n"
+                + "P√•g√•ende" + "\t" + totPagande + "\n"
                 + "Inhemsk" + "\t" + inhemskPagande + "\n"
                 + "Export" + "\t" + exportPagaende);
     }
@@ -194,7 +194,7 @@ public class BestallStatistik extends javax.swing.JFrame {
                 + "\t" + totAntalOppna + "\n"
                 + "Varav export" + "\t" + antalOppnaExport + "\n"
                 + "Varav Inhemsk" + "\t" + antalOppna + "\n"
-                + "F‰rdigst‰llda" + "\t" + antalFardigaHattar + "\n");
+                + "F√§rdigst√§llda" + "\t" + antalFardigaHattar + "\n");
 
     }
 
@@ -221,7 +221,7 @@ public class BestallStatistik extends javax.swing.JFrame {
                 + "    JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
                 + "    JOIN kund k on k.KundID = bestallning.KundID\n"
                 + "    WHERE BestDatum BETWEEN '" + stardate + "' AND '" + slutdate + "') t2\n"
-                + "WHERE Status = 'St‰ngd';";
+                + "WHERE Status = 'St√§ngd';";
 
         allaStangda = SqlFragor.getFleraRader(fraga);
 
@@ -232,7 +232,7 @@ public class BestallStatistik extends javax.swing.JFrame {
                 + "\t" + "TullID:"
                 + "\t" + "Prio:"
                 + "\t" + "Vikt:"
-                + "\t" + "F‰rdigst‰llare:"
+                + "\t" + "F√§rdigst√§llare:"
                 + "\t" + "Best Datum:"
                 + "\t" + "Lev Datum:" + "\n";
 
@@ -281,7 +281,7 @@ public class BestallStatistik extends javax.swing.JFrame {
                 + "FROM bestallning\n"
                 + "JOIN orderrad o on bestallning.BestID = o.BestID\n"
                 + "JOIN hatt h on o.HattID = h.HattID\n"
-                + "WHERE Status = 'St‰ngd') t2\n"
+                + "WHERE Status = 'St√§ngd') t2\n"
                 + "WHERE LevDatum BETWEEN '" + stardate + "' AND '" + slutdate + "';";
 
         antalFardigaHattar = SqlFragor.getEttVarde(fraga);
@@ -296,7 +296,7 @@ public class BestallStatistik extends javax.swing.JFrame {
                 + "            FROM bestallning\n"
                 + "            JOIN orderrad o on bestallning.BestID = o.BestID\n"
                 + "            JOIN hatt h on o.HattID = h.HattID\n"
-                + "            WHERE LevDatum IS NULL AND Status = 'PÂgÂende' OR Status = '÷ppen') t2\n"
+                + "            WHERE LevDatum IS NULL AND Status = 'P√•g√•ende' OR Status = '√ñppen') t2\n"
                 + "        WHERE BestDatum BETWEEN '" + stardate + "' AND '" + slutdate + "') t3\n"
                 + "    WHERE TullID = 'Saknas' OR TullID = '') t4\n"
                 + "WHERE Prio = 1;";
@@ -310,7 +310,7 @@ public class BestallStatistik extends javax.swing.JFrame {
                 + "            FROM bestallning\n"
                 + "            JOIN orderrad o on bestallning.BestID = o.BestID\n"
                 + "            JOIN hatt h on o.HattID = h.HattID\n"
-                + "            WHERE LevDatum IS NULL AND Status = 'PÂgÂende' OR Status = '÷ppen') t2\n"
+                + "            WHERE LevDatum IS NULL AND Status = 'P√•g√•ende' OR Status = '√ñppen') t2\n"
                 + "        WHERE BestDatum BETWEEN '" + stardate + "' AND '" + slutdate + "') t3\n"
                 + "    WHERE TullID = 'Saknas' OR TullID = '') t4\n"
                 + "WHERE Prio = 0;";
@@ -324,7 +324,7 @@ public class BestallStatistik extends javax.swing.JFrame {
                 + "            FROM bestallning\n"
                 + "            JOIN orderrad o on bestallning.BestID = o.BestID\n"
                 + "            JOIN hatt h on o.HattID = h.HattID\n"
-                + "            WHERE LevDatum IS NULL AND Status = 'PÂgÂende' OR Status = '÷ppen') t2\n"
+                + "            WHERE LevDatum IS NULL AND Status = 'P√•g√•ende' OR Status = '√ñppen') t2\n"
                 + "        WHERE BestDatum BETWEEN '" + stardate + "' AND '" + slutdate + "') t3\n"
                 + "    WHERE TullID != 'Saknas' AND TullID != '') t4\n"
                 + "WHERE Prio = 0;";
@@ -338,7 +338,7 @@ public class BestallStatistik extends javax.swing.JFrame {
                 + "            FROM bestallning\n"
                 + "            JOIN orderrad o on bestallning.BestID = o.BestID\n"
                 + "            JOIN hatt h on o.HattID = h.HattID\n"
-                + "            WHERE LevDatum IS NULL AND Status = 'PÂgÂende' OR Status = '÷ppen') t2\n"
+                + "            WHERE LevDatum IS NULL AND Status = 'P√•g√•ende' OR Status = '√ñppen') t2\n"
                 + "        WHERE BestDatum BETWEEN '" + stardate + "' AND '" + slutdate + "') t3\n"
                 + "    WHERE TullID != 'Saknas' AND TullID != '') t4\n"
                 + "WHERE Prio = 1;";
@@ -375,7 +375,7 @@ public class BestallStatistik extends javax.swing.JFrame {
 
     private void forsalj() {
 
-        // momspliktig fˆrs‰ljning 
+        // momspliktig f√∂rs√§ljning 
         String fragaForsaljMoms = """
                                   SELECT SUM(pris) FROM (
                                   SELECT pris , LevDatum
@@ -389,7 +389,7 @@ public class BestallStatistik extends javax.swing.JFrame {
 
         String forsaljMoms = SqlFragor.getEttVarde(fragaForsaljMoms);
 
-        // Momspliktig sˆrs‰ljning med ett 20% + Fˆr prio
+        // Momspliktig f√∂rs√§ljning med ett 20% + F√∂r prio
         String fragaForsaljMomsPrio = """
                                       SELECT FLOOR(SUM(pris*1.2)) FROM (
                                       SELECT pris , LevDatum, TullID
@@ -403,7 +403,7 @@ public class BestallStatistik extends javax.swing.JFrame {
 
         String forsaljMomsPrio = SqlFragor.getEttVarde(fragaForsaljMomsPrio);
 
-        // fˆrs‰ljning pÂ export 
+        // f√∂rs√§ljning p√• export 
         String fragaForsaljExport = """
                                     SELECT SUM(pris) FROM (
                                     SELECT pris , LevDatum, TullID
@@ -417,7 +417,7 @@ public class BestallStatistik extends javax.swing.JFrame {
 
         String forsaljMomsExport = SqlFragor.getEttVarde(fragaForsaljExport);
 
-        // fors‰ljning export prio
+        // f√∂rs√§ljning export prio
         String fragaForsaljExportPrio = """
                                         SELECT FLOOR(SUM(pris*1.2)) FROM (
                                         SELECT pris , LevDatum, TullID

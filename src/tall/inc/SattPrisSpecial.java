@@ -36,7 +36,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Ändra Pris ");
+        jLabel1.setText("Ã„ndra Pris ");
 
         txtPris.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -57,7 +57,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
             }
         });
 
-        btnAndra.setText("Ändra");
+        btnAndra.setText("Ã„ndra");
         btnAndra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAndraActionPerformed(evt);
@@ -151,10 +151,10 @@ public class SattPrisSpecial extends javax.swing.JFrame {
         
         String rubrik = " Hatt ID:"
                 + "\t" + "Namn:"
-                + "\t" + "Färg:"
+                + "\t" + "FÃ¤rg:"
                 + "\t" + "Tyg:"
                 + "\t" + "Pris:"
-                + "\t" + "Användare:" + "\n";
+                + "\t" + "AnvÃ¤ndare:" + "\n";
 
         txtHattLista.append(rubrik);
 

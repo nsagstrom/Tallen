@@ -48,7 +48,7 @@ public class AndraPrisStandardHatt extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BtnOk.setText("Bekräfta");
+        BtnOk.setText("Bekrfta");
         BtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnOkActionPerformed(evt);
@@ -66,7 +66,7 @@ public class AndraPrisStandardHatt extends javax.swing.JFrame {
         TxtNuvarandePris.setTabSize(1);
         jScrollPane2.setViewportView(TxtNuvarandePris);
 
-        jLabel1.setText("Välj hatt");
+        jLabel1.setText("VÃ¤lj hatt");
 
         jLabel2.setText("Nuvarande pris");
 

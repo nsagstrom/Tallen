@@ -76,13 +76,13 @@ public class HanteraBestallning extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblInfo.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        lblInfo.setText("Ändra en beställning");
+        lblInfo.setText("Ã„ndra en bestÃ¤llning");
 
         jScrollPane1.setViewportView(orderLista);
 
         jScrollPane2.setViewportView(hattLista);
 
-        valjBtn.setText("Välj");
+        valjBtn.setText("VÃ¤lj");
         valjBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valjBtnActionPerformed(evt);
@@ -90,17 +90,17 @@ public class HanteraBestallning extends javax.swing.JFrame {
         });
 
         lblValjOrder.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        lblValjOrder.setText("Välj ordernummer:");
+        lblValjOrder.setText("VÃ¤lj ordernummer:");
 
         lblValjKund.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        lblValjKund.setText("Välj kund:");
+        lblValjKund.setText("VÃ¤lj kund:");
 
         lblTaBortHatt.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        lblTaBortHatt.setText("Ta bort hatt från order:");
+        lblTaBortHatt.setText("Ta bort hatt frÃ¥n order:");
 
-        lblFornamn.setText("Förnamn:");
+        lblFornamn.setText("FÃ¶rnamn:");
 
-        valjKundBtn.setText("Välj");
+        valjKundBtn.setText("VÃ¤lj");
         valjKundBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valjKundBtnActionPerformed(evt);
@@ -135,7 +135,7 @@ public class HanteraBestallning extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Förnamn", "Efternamn", "Gata", "Tele"
+                "FÃ¶rnamn", "Efternamn", "Gata", "Tele"
             }
         ));
         jScrollPane3.setViewportView(kundTbl);
@@ -206,9 +206,9 @@ public class HanteraBestallning extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(valjKundBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblValjOrder)
-                    .addComponent(lblTaBortHatt))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTaBortHatt, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblValjOrder))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -282,16 +282,12 @@ public class HanteraBestallning extends javax.swing.JFrame {
     }
     private void uppdateraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uppdateraBtnActionPerformed
         // TODO add your handling code here:
-        String fornamn = fornamnTxt.getText();
-        String efternamn = efternamnTxt.getText();
         String valdOrder = orderLista.getSelectedValue();
         String valdHatt = hattLista.getSelectedValue();
         String query = "select RadID from Bestallning\n"
                 + "join kund on Kund.KundID = Bestallning.KundID\n"
                 + "join Orderrad on Bestallning.BestID = Orderrad.BestID\n"
                 + "join Hatt on Hatt.HattID = Orderrad.HattID\n"
-                + "where Fornamn = '" + fornamn + "'\n"
-                + "and Efternamn = '" + efternamn + "'\n"
                 + "and Bestallning.BestID = '" + valdOrder + "'\n"
                 + "and Beskrivning = '" + valdHatt + "'";
         String radID = SqlFragor.getEttVarde(query);

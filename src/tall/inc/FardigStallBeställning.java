@@ -6,12 +6,14 @@ package tall.inc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  *
  * @author nsags
  */
-public class FardigStallBest‰llning extends javax.swing.JFrame {
+public class FardigStallBest√§llning extends javax.swing.JFrame {
 
     private static String bestNummer;
     String fNamn;
@@ -20,11 +22,15 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
     double moms;
     String tull;
     String vikt;
-    
+
+    private static String sp = "sv";
+
+    static Map<String, String> map = new HashMap<String, String>();
+
     /**
-     * Creates new form FardigStallBest‰llning
+     * Creates new form FardigStallBest√É¬É√Ç¬§llning
      */
-    public FardigStallBest‰llning() {
+    public FardigStallBest√§llning() {
         initComponents();
         fyllBestallning();
     }
@@ -38,7 +44,7 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
                 + "JOIN hatt h on o.HattID = h.HattID\n"
                 + "JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
                 + "JOIN kund k on k.KundID = bestallning.KundID\n"
-                + "WHERE Status = '÷ppen' OR Status = 'PÂgÂende' AND prio = 1\n"
+                + "WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
                 + "GROUP BY o.BestID\n"
                 + "UNION\n"
                 + "SELECT  o.BestID , k.KundID, k.ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio\n"
@@ -50,17 +56,17 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
                 + "JOIN (\n"
                 + "    SELECT o.BestID FROM bestallning\n"
                 + "    JOIN orderrad o on bestallning.BestID = o.BestID\n"
-                + "    WHERE Status = '÷ppen' OR Status = 'PÂgÂende' AND prio = 1\n"
+                + "    WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
                 + "    GROUP BY o.BestID) t2\n"
                 + "    on o.BestID != t2.BestID\n"
-                + "WHERE Status = '÷ppen' OR Status = 'PÂgÂende' AND prio = 0\n"
+                + "WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 0\n"
                 + "GROUP BY o.BestID;";
 
         allInfo = SqlFragor.getFleraRader(fraga);
 
         String rubrik = "Order ID:"
                 + "\t" + "Kund ID:"
-                + "\t" + "Fˆrnamn:"
+                + "\t" + "F?rnamn:"
                 + "\t" + "Efternamn:"
                 + "\t" + "Adress:"
                 + "\t" + "Vikt:"
@@ -91,7 +97,7 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
                 + "    JOIN hatt h on o.HattID = h.HattID\n"
                 + "    JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
                 + "    JOIN kund k on k.KundID = bestallning.KundID\n"
-                + "    WHERE Status = '÷ppen' OR Status = 'PÂgÂende' AND prio = 1\n"
+                + "    WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
                 + "    GROUP BY o.BestID\n"
                 + "    UNION\n"
                 + "    SELECT  o.BestID , k.KundID, k.ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio, TullID\n"
@@ -103,12 +109,12 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
                 + "    JOIN (\n"
                 + "        SELECT o.BestID FROM bestallning\n"
                 + "        JOIN orderrad o on bestallning.BestID = o.BestID\n"
-                + "        WHERE Status = '÷ppen' OR Status = 'PÂgÂende' AND prio = 1\n"
+                + "        WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
                 + "        GROUP BY o.BestID) t2\n"
                 + "        on o.BestID != t2.BestID\n"
-                + "    WHERE Status = '÷ppen' OR Status = 'PÂgÂende' AND prio = 0\n"
+                + "    WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 0\n"
                 + "    GROUP BY o.BestID) t3\n"
-                + "WHERE BestID =" +  bestNummer +  ";";
+                + "WHERE BestID =" + bestNummer + ";";
 
         System.out.println(fraga2);
 
@@ -120,18 +126,63 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
         adress = allInfoEnBest.get("Adress");
         vikt = allInfoEnBest.get("vikt");
         tull = allInfoEnBest.get("TullID");
-        
+
         String moms1 = allInfoEnBest.get("pris");
-        
+
         double pris = Double.parseDouble(moms1);
-        double moms2 = (pris*0.25);
+        double moms2 = (pris * 0.25);
         double moms3 = Math.floor(moms2);
-        
-        moms = moms3; 
+
+        moms = moms3;
     }
-    
-    public static String getBestID(){
+
+    public static String getBestID() {
         return bestNummer;
+    }
+
+    private void sprak() {
+        switch (cbSprak.getSelectedIndex()) {
+            case 0 ->
+                sp = "sv";
+            case 1 ->
+                sp = "en";
+            case 2 ->
+                sp = "et";
+            default -> {
+            }
+        }
+
+    }
+
+    public static void ddd() {
+
+        String[] languages = Locale.getISOLanguages();
+
+        for (int i = 0; i < languages.length; i++) {
+
+            Locale loc = new Locale(languages[i]);
+
+            map.put(loc.getLanguage().toUpperCase(), loc.getDisplayLanguage());
+
+        }
+
+        System.out.println("print language codes and names:");
+
+        System.out.println();
+
+//
+//        System.out.println("print only language codes:");
+//
+//        map.keySet().forEach(langCode -> {
+//
+//            System.out.println(langCode);
+//           
+//
+//        });
+    }
+
+    public static String getSprak() {
+        return sp;
     }
 
     /**
@@ -151,6 +202,7 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
         btnValjBest = new javax.swing.JButton();
         btnAndraVikt = new javax.swing.JButton();
         btnKlar = new javax.swing.JButton();
+        cbSprak = new javax.swing.JComboBox<>();
 
         jTextField1.setText("jTextField1");
 
@@ -167,7 +219,7 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("F‰rdigst‰ll order");
+        jLabel1.setText("F√§rdigst√§ll order");
 
         txtVikt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,14 +227,14 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
             }
         });
 
-        btnValjBest.setText("V‰l order");
+        btnValjBest.setText("V√§l order");
         btnValjBest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnValjBestActionPerformed(evt);
             }
         });
 
-        btnAndraVikt.setText("L‰gg till Vikt ");
+        btnAndraVikt.setText("L√§gg till Vikt ");
         btnAndraVikt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAndraViktActionPerformed(evt);
@@ -193,6 +245,14 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
         btnKlar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKlarActionPerformed(evt);
+            }
+        });
+
+        cbSprak.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svenska", "Engelska", "Estniska" }));
+        cbSprak.setToolTipText("");
+        cbSprak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSprakActionPerformed(evt);
             }
         });
 
@@ -222,6 +282,10 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
                         .addContainerGap(31, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(cbSprak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(192, 192, 192))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +298,9 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBestNummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnValjBest))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(cbSprak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtVikt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAndraVikt)
@@ -248,7 +314,7 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnValjBestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjBestActionPerformed
-       infoBest();
+        infoBest();
     }//GEN-LAST:event_btnValjBestActionPerformed
 
     private void btnAndraViktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraViktActionPerformed
@@ -257,8 +323,8 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
 
     private void btnKlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKlarActionPerformed
         // TODO add your handling code here:
-        
-        Fraktsedel fraktsedel = new Fraktsedel();
+
+        Fraktsedel2 fraktsedel = new Fraktsedel2();
         fraktsedel.nyFraktsedel(bestNummer, fNamn, eNamn, adress, vikt, moms, tull);
         fraktsedel.visaFraktsedel();
     }//GEN-LAST:event_btnKlarActionPerformed
@@ -272,12 +338,17 @@ public class FardigStallBest‰llning extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtViktActionPerformed
 
+    private void cbSprakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSprakActionPerformed
+        sprak();
+    }//GEN-LAST:event_cbSprakActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAndraVikt;
     private javax.swing.JButton btnKlar;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton btnValjBest;
+    private javax.swing.JComboBox<String> cbSprak;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;

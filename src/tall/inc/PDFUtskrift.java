@@ -44,7 +44,7 @@ public class PDFUtskrift {
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
 
-            Paragraph materialbestallning = new Paragraph("Materialbest‰llning", titleFont);
+            Paragraph materialbestallning = new Paragraph("Materialbest√§llning", titleFont);
             materialbestallning.add(new Paragraph());
             document.add(materialbestallning);
 
@@ -52,11 +52,11 @@ public class PDFUtskrift {
             foretagsNamn.add(new Paragraph());
             document.add(foretagsNamn);
 
-            Paragraph foretagsAdress = new Paragraph("≈stadalsv‰gen 1E", titleFont);
+            Paragraph foretagsAdress = new Paragraph("√Östadalsv√§gen 1E", titleFont);
             foretagsAdress.add(new Paragraph());
             document.add(foretagsAdress);
 
-            Paragraph foretagsOrt = new Paragraph("SE - 702 81 ÷rebro", titleFont);
+            Paragraph foretagsOrt = new Paragraph("SE - 702 81 √ñrebro", titleFont);
             addEmptyLine(foretagsOrt, 1);
             foretagsOrt.add(new Paragraph());
             document.add(foretagsOrt);
@@ -66,7 +66,7 @@ public class PDFUtskrift {
             document.add(testLinje);
 
             String query = "Select BestID from Bestallning\n"
-                    + "where Status = '÷ppen' or Status = 'PÂgÂende'";
+                    + "where Status = '√ñppen' or Status = 'P√•g√•ende'";
             ArrayList<String> bestIDLista = SqlFragor.getEnKolumn(query);
         
 
@@ -83,7 +83,7 @@ public class PDFUtskrift {
                 beskrivning.setWidthPercentage(100);
                 beskrivning.addCell(getCell("Namn", PdfPCell.ALIGN_LEFT));
                 beskrivning.addCell(getCell("Tyg", PdfPCell.ALIGN_CENTER));
-                beskrivning.addCell(getCell("F‰rgkod", PdfPCell.ALIGN_RIGHT));
+                beskrivning.addCell(getCell("F√§rgkod", PdfPCell.ALIGN_RIGHT));
                 document.add(beskrivning);
 
                 ArrayList<HashMap<String, String>> hattLista = SqlFragor.getFleraRader(query2);

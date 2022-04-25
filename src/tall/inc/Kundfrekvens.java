@@ -37,11 +37,11 @@ public class Kundfrekvens extends javax.swing.JFrame {
 
         allaStangda = SqlFragor.getFleraRader(fraga);
 
-        String rubrik = "Förnamn:"
+        String rubrik = "FÃ¶rnamn:"
                 + "\t" + "Efternamn"
                 + "\t" + "Adress:"
                 + "\t" + "Telefon:"
-                + "\t" + "Beställningar:"
+                + "\t" + "BestÃ¤llningar:"
                 + "\t" + "Hattar:" + "\n";
 
         txtKunder.append(rubrik);
@@ -75,7 +75,7 @@ public class Kundfrekvens extends javax.swing.JFrame {
         txtKunder.setRows(5);
         jScrollPane1.setViewportView(txtKunder);
 
-        jLabel1.setText("Antal beställningar per kund");
+        jLabel1.setText("Antal bestÃ¤llningar per kund");
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {

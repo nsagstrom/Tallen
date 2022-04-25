@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  * @author isakw
  */
 public class ValideringsKlass {
-//Validera så att textruta innehåller värde
+//Validera sÃ¥ att textruta innehÃ¥ller vÃ¤rde
     public static boolean txtFaltHarVarde(JTextField ruta) {
         boolean rutaHarVarde = true;
         if (ruta.getText().isEmpty()) {
@@ -24,7 +24,7 @@ public class ValideringsKlass {
         }
         return rutaHarVarde;
     }
-//Validera så att string input innehåller värde
+//Validera sÃ¥ att string input innehÃ¥ller vÃ¤rde
     public static boolean stringHarVarde(String instring) {
         boolean stringFinns = true;
         if (instring.isEmpty()) {
@@ -32,7 +32,7 @@ public class ValideringsKlass {
         }
         return stringFinns;
     }
-//Validera så att textruta innehåller tal
+//Validera sÃ¥ att textruta innehÃ¥ller tal
     public static boolean taltest(JTextField taltest) {
         boolean arTal = true;
         String idid = taltest.getText();
@@ -41,13 +41,13 @@ public class ValideringsKlass {
             arTal = false;
 
         }
-        // Fuckar upp Momsrapporten, behövds den i annan så kan jag fixa momsen /Sagström
+        // Fuckar upp Momsrapporten, behÃ¶vds den i annan sÃ¥ kan jag fixa momsen /SagstrÃ¶m
 //        else {
 //            taltest.requestFocus();
 //        }
         return arTal;
     }
-//Validera så att combobox har korrekt position, inte index position noll
+//Validera sÃ¥ att combobox har korrekt position, inte index position noll
     public static boolean testaIndexPos(JComboBox position) {
         boolean indexOk = true;
 
@@ -57,7 +57,7 @@ public class ValideringsKlass {
 
         return indexOk;
     }
-//Testa så att textruta telefonnummer innehåller korrekta tecken
+//Testa sÃ¥ att textruta telefonnummer innehÃ¥ller korrekta tecken
     public static boolean testaTeleNmr(JTextField teleNmr) {
         boolean nmrOk = true;
         String nmr = teleNmr.getText();
@@ -68,7 +68,7 @@ public class ValideringsKlass {
 
         return nmrOk;
     }
-//Testa så att string innehåller korrekta tecken i telefonnumret
+//Testa sÃ¥ att string innehÃ¥ller korrekta tecken i telefonnumret
     public static boolean testaTeleNmrString(String teleNmr) {
         boolean nmrOk = true;
 
@@ -78,7 +78,7 @@ public class ValideringsKlass {
 
         return nmrOk;
     }
-//Testa så att datum är angett i korrekt format
+//Testa sÃ¥ att datum Ã¤r angett i korrekt format
     public static boolean kollaDatumCheck(String datum) {
         boolean resultat = false;
 
