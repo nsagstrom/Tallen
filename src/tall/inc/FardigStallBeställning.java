@@ -38,7 +38,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "JOIN hatt h on o.HattID = h.HattID\n"
                 + "JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
                 + "JOIN kund k on k.KundID = bestallning.KundID\n"
-                + "WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
+                + "WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
                 + "GROUP BY o.BestID\n"
                 + "UNION\n"
                 + "SELECT  o.BestID , k.KundID, k.ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio\n"
@@ -50,17 +50,17 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "JOIN (\n"
                 + "    SELECT o.BestID FROM bestallning\n"
                 + "    JOIN orderrad o on bestallning.BestID = o.BestID\n"
-                + "    WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
+                + "    WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
                 + "    GROUP BY o.BestID) t2\n"
                 + "    on o.BestID != t2.BestID\n"
-                + "WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 0\n"
+                + "WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 0\n"
                 + "GROUP BY o.BestID;";
 
         allInfo = SqlFragor.getFleraRader(fraga);
 
         String rubrik = "Order ID:"
                 + "\t" + "Kund ID:"
-                + "\t" + "Förnamn:"
+                + "\t" + "F?rnamn:"
                 + "\t" + "Efternamn:"
                 + "\t" + "Adress:"
                 + "\t" + "Vikt:"
@@ -91,7 +91,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "    JOIN hatt h on o.HattID = h.HattID\n"
                 + "    JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
                 + "    JOIN kund k on k.KundID = bestallning.KundID\n"
-                + "    WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
+                + "    WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
                 + "    GROUP BY o.BestID\n"
                 + "    UNION\n"
                 + "    SELECT  o.BestID , k.KundID, k.ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio, TullID\n"
@@ -103,10 +103,10 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "    JOIN (\n"
                 + "        SELECT o.BestID FROM bestallning\n"
                 + "        JOIN orderrad o on bestallning.BestID = o.BestID\n"
-                + "        WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
+                + "        WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
                 + "        GROUP BY o.BestID) t2\n"
                 + "        on o.BestID != t2.BestID\n"
-                + "    WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 0\n"
+                + "    WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 0\n"
                 + "    GROUP BY o.BestID) t3\n"
                 + "WHERE BestID =" +  bestNummer +  ";";
 
@@ -167,7 +167,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Färdigställ order");
+        jLabel1.setText("F?rdigst?ll order");
 
         txtVikt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,14 +175,14 @@ public class FardigStallBeställning extends javax.swing.JFrame {
             }
         });
 
-        btnValjBest.setText("Väl order");
+        btnValjBest.setText("V?l order");
         btnValjBest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnValjBestActionPerformed(evt);
             }
         });
 
-        btnAndraVikt.setText("Lägg till Vikt ");
+        btnAndraVikt.setText("L?gg till Vikt ");
         btnAndraVikt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAndraViktActionPerformed(evt);
