@@ -4,9 +4,11 @@
  */
 package tall.inc;
 
+import com.mysql.cj.util.StringUtils;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
@@ -413,9 +415,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)))))
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lBild, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblVarOrderNummer))
@@ -468,11 +470,12 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(lblOrdernummer)))
                                 .addGap(5, 5, 5)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtangivetFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtangivetAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtangivetTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtangivetEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtangivetAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtangivetTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtangivetEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblLagerartikel)
                         .addGap(10, 10, 10)
@@ -589,7 +592,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
     }//GEN-LAST:event_orderBtnActionPerformed
  private void visaKunder() {
-        String namnet = cmbValjKund.getSelectedItem().toString();
+        String forNamnet = cmbValjKund.getSelectedItem().toString();
+        int i = forNamnet.indexOf(" ");
+        String namnet = forNamnet.substring(0,i);
 
         String testLista = "select kundid from kund where fornamn = '" + namnet + "'";
         ArrayList<String> lista = SqlFragor.getEnKolumn(testLista);
@@ -733,11 +738,18 @@ visaKunder();
     //Slut på färgmetoder-----------------------------------------------------
     
     public void fillNamn() {
-        String query = "SELECT distinct fornamn FROM kund";
-        ArrayList<String> namn = SqlFragor.getEnKolumn(query);
-        for (String namnen : namn) {
-            cmbValjKund.addItem(namnen);
+        String query = "SELECT distinct fornamn, efternamn FROM kund";
+        //ArrayList<String> namn = SqlFragor.getEnKolumn(query);
+        ArrayList<HashMap<String,String>>namnlistan = SqlFragor.getFleraRader(query);
+        for (HashMap<String,String> namnen : namnlistan) {
+            String fornamnet = namnen.get("fornamn");
+            String efternamnet = namnen.get("efternamn");
+            String namnet = fornamnet + " " + efternamnet;
+            cmbValjKund.addItem(namnet);
         }
+        //for (String namnen : namn) {
+        //    cmbValjKund.addItem(namnen);
+        //}
     }
 
     private void laggTillNyKund() {
