@@ -47,25 +47,26 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "FROM bestallning\n"
                 + "JOIN orderrad o on bestallning.BestID = o.BestID\n"
                 + "JOIN hatt h on o.HattID = h.HattID\n"
-                + "JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
                 + "JOIN kund k on k.KundID = bestallning.KundID\n"
                 + "WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
                 + "GROUP BY o.BestID\n"
                 + "UNION\n"
-                + "SELECT  o.BestID , k.KundID, k.ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio\n"
-                + "FROM bestallning\n"
-                + "JOIN orderrad o on bestallning.BestID = o.BestID\n"
-                + "JOIN hatt h on o.HattID = h.HattID\n"
-                + "JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
-                + "JOIN kund k on k.KundID = bestallning.KundID\n"
-                + "JOIN (\n"
-                + "    SELECT o.BestID FROM bestallning\n"
+                + "SELECT  BestID , KundID, ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio FROM(\n"
+                + "    SELECT status, o.BestID , k.KundID, k.ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio\n"
+                + "    FROM bestallning\n"
                 + "    JOIN orderrad o on bestallning.BestID = o.BestID\n"
-                + "    WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
-                + "    GROUP BY o.BestID) t2\n"
-                + "    on o.BestID != t2.BestID\n"
+                + "    JOIN hatt h on o.HattID = h.HattID\n"
+                + "    JOIN kund k on k.KundID = bestallning.KundID\n"
+                + "    WHERE o.BestID not in (\n"
+                + "        SELECT o.BestID FROM bestallning\n"
+                + "        JOIN orderrad o on bestallning.BestID = o.BestID\n"
+                + "        WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
+                + "        GROUP BY o.BestID)) as t2\n"
                 + "WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 0\n"
-                + "GROUP BY o.BestID;";
+                + "GROUP BY BestID\n"
+                + "ORDER BY BestID;";
+
+
 
         allInfo = SqlFragor.getFleraRader(fraga);
 
@@ -121,8 +122,6 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "    GROUP BY o.BestID) t3\n"
                 + "WHERE BestID =" + bestNummer + ";";
 
-        System.out.println(fraga2);
-
         HashMap<String, String> allInfoEnBest;
         allInfoEnBest = SqlFragor.getEnRad(fraga2);
 
@@ -144,7 +143,6 @@ public class FardigStallBeställning extends javax.swing.JFrame {
     public static String getBestID() {
         return bestNummer;
     }
-
 
     private void fyllCB() {
 
@@ -314,7 +312,6 @@ public class FardigStallBeställning extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAndraViktActionPerformed
 
     private void btnKlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKlarActionPerformed
-        // TODO add your handling code here:
 
         Fraktsedel2 fraktsedel = new Fraktsedel2();
         fraktsedel.nyFraktsedel(bestNummer, fNamn, eNamn, adress, vikt, moms, tull);
