@@ -44,15 +44,18 @@ public class Fraktsedel2 {
 
     private String file = "Fraktsedel.pdf";
 
+    
     String frann = "Från";
-
-    
-    
-    
     String spraket;
     String kont ="Kontakt";
     String tel = "Telefon";
     String till ="Till";
+    String vark ="Varukod";
+    String varkod = "Varudeklaration";
+    String vik = "Vikt";
+    String pk = "Portkod";
+    String kont2 = "Kontakt";
+    String in = "Innehåll";
 
     public Fraktsedel2() {
 
@@ -93,6 +96,12 @@ public class Fraktsedel2 {
         kont = translate("sv", spraket, kont);
         tel = translate("sv", spraket, tel);
         till = translate("sv", spraket, till);
+        vark = translate("sv", spraket, vark);
+        varkod = translate("sv", spraket, varkod);
+        vik = translate("sv", spraket, vik);
+        pk = translate("sv", spraket, pk);
+        kont2 = translate("sv", spraket, kont2);
+        in = translate("sv", spraket, in);
     }
     
     public void skapaFraktsedel() {
@@ -152,17 +161,17 @@ public class Fraktsedel2 {
             tillKund.add(new Paragraph());
             document.add(tillKund);
 
-            Paragraph portKod = new Paragraph("Portkod:                    ", litenFont);
+            Paragraph portKod = new Paragraph(pk+":                    ", litenFont);
             portKod.setAlignment(Element.ALIGN_RIGHT);
             portKod.add(new Paragraph());
             document.add(portKod);
 
-            Paragraph kundKontakt = new Paragraph("Kontakt:                    ", litenFont);
+            Paragraph kundKontakt = new Paragraph(kont2+":                    ", litenFont);
             kundKontakt.setAlignment(Element.ALIGN_RIGHT);
             kundKontakt.add(new Paragraph());
             document.add(kundKontakt);
 
-            Paragraph inneHall = new Paragraph("Innehåll:                    ", litenFont);
+            Paragraph inneHall = new Paragraph(in+":                    ", litenFont);
             inneHall.setAlignment(Element.ALIGN_RIGHT);
             inneHall.add(new Paragraph());
             document.add(inneHall);
@@ -176,19 +185,19 @@ public class Fraktsedel2 {
             posten.add(new Paragraph());
             document.add(posten);
 
-            Paragraph varuKod = new Paragraph("Varukod: ", litenFont);
+            Paragraph varuKod = new Paragraph( vark + ": ", litenFont);
             varuKod.add(new Paragraph());
             document.add(varuKod);
 
             //Paragraph moms = new Paragraph("Moms: " + momsNr , litenFont);
             //moms.add(new Paragraph());
             //document.add(moms);
-            Paragraph attaSiffrig = new Paragraph("Varudeklaration: " + tullID, litenFont);
+            Paragraph attaSiffrig = new Paragraph(varkod + ": " + tullID, litenFont);
             addEmptyLine(attaSiffrig, 1);
             attaSiffrig.add(new Paragraph());
             document.add(attaSiffrig);
 
-            Paragraph vikt = new Paragraph("Vikt:" + hattVikt, litenFont);
+            Paragraph vikt = new Paragraph(vik+":" + hattVikt, litenFont);
             vikt.add(new Paragraph());
             document.add(vikt);
 

@@ -145,7 +145,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
         lblKundinfo.setText("Kund");
 
-        lblFornamn.setText("Förnamn");
+        lblFornamn.setText("FÃ¶rnamn");
 
         lblAdress.setText("Adress");
 
@@ -166,25 +166,25 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             }
         });
 
-        lblSpecialartikelFarg.setText("Färg");
+        lblSpecialartikelFarg.setText("FÃ¤rg");
 
         lblSpecialartikelTyg.setText("Tyg");
 
-        btnLaggTillHatt.setText("Lägg till i order");
+        btnLaggTillHatt.setText("LÃ¤gg till i order");
         btnLaggTillHatt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLaggTillHattActionPerformed(evt);
             }
         });
 
-        btnLaggTillSpHatt.setText("Lägg till i order");
+        btnLaggTillSpHatt.setText("LÃ¤gg till i order");
         btnLaggTillSpHatt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLaggTillSpHattActionPerformed(evt);
             }
         });
 
-        btnLaggTillKund.setText("Lägg till ny kund");
+        btnLaggTillKund.setText("LÃ¤gg till ny kund");
         btnLaggTillKund.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLaggTillKundActionPerformed(evt);
@@ -204,7 +204,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Benämning:");
+        jLabel1.setText("BenÃ¤mning:");
 
         jLabel2.setText("Genre:");
 
@@ -269,7 +269,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
 
         tullLabel.setText("Tull:");
 
-        btnValjFarg.setText("Välj färg");
+        btnValjFarg.setText("VÃ¤lj fÃ¤rg");
         btnValjFarg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnValjFargActionPerformed(evt);
@@ -317,7 +317,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Förnamn", "Eftenamn", "Adress", "Telefonnummer"
+                "FÃ¶rnamn", "Eftenamn", "Adress", "Telefonnummer"
             }
         ));
         jScrollPane3.setViewportView(kundTbl);
@@ -625,7 +625,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         if (prio = true) {
             prioValue = 1;
         }
-        String insertBestallningQuery = "INSERT INTO bestallning (BestID, KundID, Status, TullID, Prio) VALUES ('" + besID + "', '" + kundID + "', 'Öppen', '" + tullID + "', '" + prioValue + "' )";
+        String insertBestallningQuery = "INSERT INTO bestallning (BestID, KundID, Status, TullID, Prio) VALUES ('" + besID + "', '" + kundID + "', 'Ã–ppen', '" + tullID + "', '" + prioValue + "' )";
         SqlFragor.addToDatabasen(insertBestallningQuery);
 
         for (String hatt : hattar) {
@@ -796,9 +796,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         fillGenreCmb();
     }
 
-    //Färgmetoder---------------------------------------------------------
+    //FÃ¤rgmetoder---------------------------------------------------------
     private void valjFarg() {
-        farg = JColorChooser.showDialog(this, "Välj färg", Color.BLACK);
+        farg = JColorChooser.showDialog(this, "VÃ¤lj fÃ¤rg", Color.BLACK);
         if (farg == null) {
             farg = Color.WHITE;
         }
@@ -815,7 +815,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         hex = Integer.toHexString(farg.getRGB()).substring(2);
         return hex;
     }
-    //Slut på färgmetoder-----------------------------------------------------
+    //Slut pÃ¥ fÃ¤rgmetoder-----------------------------------------------------
 
     public void fillNamn() {
         /*String query = "SELECT distinct fornamn FROM kund";
@@ -905,24 +905,24 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         boolean ok = false;
         if (ValideringsKlass.stringHarVarde(txtangivetFornamn.getText()) == false) {
             ok = true;
-            JOptionPane.showMessageDialog(null, "Vänligen ange förnamn i rutan");
+            JOptionPane.showMessageDialog(null, "VÃ¤nligen ange fÃ¶rnamn i rutan");
         }
 
         if (ValideringsKlass.stringHarVarde(txtangivetEfternamn.getText()) == false) {
             ok = true;
-            JOptionPane.showMessageDialog(null, "Vänligen ange efternamn i rutan");
+            JOptionPane.showMessageDialog(null, "VÃ¤nligen ange efternamn i rutan");
         }
         if (ValideringsKlass.stringHarVarde(txtangivetAdress.getText()) == false) {
             ok = true;
-            JOptionPane.showMessageDialog(null, "Vänligen ange adress i rutan");
+            JOptionPane.showMessageDialog(null, "VÃ¤nligen ange adress i rutan");
         }
         if (ValideringsKlass.stringHarVarde(txtangivetTelefonnummer.getText()) == false) {
             ok = true;
-            JOptionPane.showMessageDialog(null, "Vänligen ange telefonnummer i rutan");
+            JOptionPane.showMessageDialog(null, "VÃ¤nligen ange telefonnummer i rutan");
         }
         if (ValideringsKlass.testaTeleNmrString(txtangivetTelefonnummer.getText()) == false) {
             ok = true;
-            JOptionPane.showMessageDialog(null, "Telefonnummer kan inte innehålla bokstäver");
+            JOptionPane.showMessageDialog(null, "Telefonnummer kan inte innehÃ¥lla bokstÃ¤ver");
         }
 
         return ok;
@@ -997,14 +997,14 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         }
     }
 
-    //Skapar "nästa" ordernummer (BestID) baserat på det högsta ID:t som finns i databasen.
+    //Skapar "nÃ¤sta" ordernummer (BestID) baserat pÃ¥ det hÃ¶gsta ID:t som finns i databasen.
     private void skapaOrderNummer() {
         int ordernummer = taFramMaxBestId() + 1;
         String order = Integer.toString(ordernummer);
         lblVarOrderNummer.setText(order);
     }
 
-    //Skapar "nästa" KundID baserat på det högsta ID:t som finns i databasen.
+    //Skapar "nÃ¤sta" KundID baserat pÃ¥ det hÃ¶gsta ID:t som finns i databasen.
     private int skapaKundnummer() {
         int kundNummer = taFramMaxKundId() + 1;
         String kundNr = Integer.toString(kundNummer);
@@ -1012,27 +1012,27 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         return kundNummer;
     }
 
-    //Skapar "nästa" HattID baserat på det högsta värdet som finns i databasen.
+    //Skapar "nÃ¤sta" HattID baserat pÃ¥ det hÃ¶gsta vÃ¤rdet som finns i databasen.
     private int skapaHattId() {
         int hattId = taFramMaxHattId() + 1;
         String kundNr = Integer.toString(hattId);
 
         return hattId;
     }
-    // Hämtar det högsta HattID:t som finns i databasen
+    // HÃ¤mtar det hÃ¶gsta HattID:t som finns i databasen
 
     public int taFramMaxHattId() {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(HattID) FROM hatt"));
         return maxId;
     }
 
-    //Hämtar och returnerar högsta BestID som finns i databasen
+    //HÃ¤mtar och returnerar hÃ¶gsta BestID som finns i databasen
     public int taFramMaxBestId() {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(BestID) FROM Bestallning"));
         return maxId;
     }
 
-    //Hämtar och returnerar högsta KundID som finns i databasen
+    //HÃ¤mtar och returnerar hÃ¶gsta KundID som finns i databasen
     public int taFramMaxKundId() {
         int maxId = Integer.parseInt(SqlFragor.getEttVarde("SELECT MAX(KundID) FROM Kund"));
         return maxId;
