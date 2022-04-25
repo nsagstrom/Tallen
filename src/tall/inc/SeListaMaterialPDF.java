@@ -23,7 +23,7 @@ public class SeListaMaterialPDF {
     
 private void skrivUtMaterialLista(){
 String query = "Select BestID from Bestallning\n" +
-"where Status = 'Öppen' or Status = 'Pågående'";
+"where Status = 'Ã–ppen' or Status = 'PÃ¥gÃ¥ende'";
 ArrayList<String> bestIDLista = SqlFragor.getEnKolumn(query);
 
 for(String bestID : bestIDLista){

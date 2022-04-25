@@ -10,12 +10,27 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import static java.util.Locale.getISOLanguages;
+
+import java.util.HashMap;
+
+import java.util.Locale;
+
+import java.util.Map;
 
 /**
  *
  * @author Andreas
  */
 public class TestBest extends javax.swing.JFrame {
+
+    
 
     /**
      * Creates new form TestBest
@@ -24,11 +39,15 @@ public class TestBest extends javax.swing.JFrame {
         initComponents();
         fillStandardHattCmb();
 //        testtest();
+        
+
     }
+
+
 
     private void valjBild() {
 
-    String hatt ="Images/no.png";
+        String hatt = "Images/no.png";
 
         switch (jComboBox1.getSelectedIndex()) {
             case 0:
@@ -41,12 +60,12 @@ public class TestBest extends javax.swing.JFrame {
                 hatt = "Images/victoriantophat.jpg";
                 break;
             default:
-                 hatt ="Images/no.png";
+                hatt = "Images/no.png";
                 break;
         }
 
-System.out.println("aaaa");
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon(hatt).getImage().getScaledInstance(120,120, Image.SCALE_DEFAULT));
+        System.out.println("aaaa");
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(hatt).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT));
         jLabel3.setIcon(imageIcon);
     }
 
@@ -233,6 +252,34 @@ System.out.println("aaaa");
 
         fyllRader(hattLista);
     }
+
+    public static void main(String[] args) throws IOException {
+        String text = "Från";
+        //Translated text: Hallo Welt!
+        System.out.println("Translated text: " + translate("sv", "en", text));
+
+        getISOLanguages();
+    }
+
+    private static String translate(String langFrom, String langTo, String text) throws IOException {
+        // INSERT YOU URL HERE
+        String urlStr = "https://script.google.com/macros/s/AKfycbzTZIvZiwWUApoqSu2NYmctZrdnKUXWnLdAYyZHtq90b72J2dw/exec"
+                + "?q=" + URLEncoder.encode(text, "UTF-8")
+                + "&target=" + langTo
+                + "&source=" + langFrom;
+        URL url = new URL(urlStr);
+        StringBuilder response = new StringBuilder();
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestProperty("User-Agent", "Mozilla/5.0");
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+        return response.toString();
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

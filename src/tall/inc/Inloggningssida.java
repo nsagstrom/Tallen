@@ -82,11 +82,11 @@ private static String hamtaUser;
 
         lblAnvandarnamn.setBackground(new java.awt.Color(153, 153, 153));
         lblAnvandarnamn.setForeground(new java.awt.Color(153, 153, 153));
-        lblAnvandarnamn.setText("Användarnamn:");
+        lblAnvandarnamn.setText("AnvÃ¤ndarnamn:");
 
         lblLosenord.setBackground(new java.awt.Color(153, 153, 153));
         lblLosenord.setForeground(new java.awt.Color(153, 153, 153));
-        lblLosenord.setText("Lösenord:");
+        lblLosenord.setText("LÃ¶senord:");
 
         lblFel.setForeground(new java.awt.Color(204, 204, 204));
         lblFel.setToolTipText("");
@@ -155,7 +155,7 @@ private static String hamtaUser;
             new Startsida().setVisible(true);
             dispose();
         } else {
-            lblFel.setText("Fel användarnamn eller lösenord");
+            lblFel.setText("Fel anvÃ¤ndarnamn eller lÃ¶senord");
         }
         }
     }
@@ -169,7 +169,7 @@ private static String hamtaUser;
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
     private void pswInloggLosenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswInloggLosenKeyPressed
-        //Gör att man kan klicka på enter för att logga in
+        //GÃ¶r att man kan klicka pÃ¥ enter fÃ¶r att logga in
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
             btnLoggaIn.doClick();
@@ -178,22 +178,22 @@ private static String hamtaUser;
     }//GEN-LAST:event_pswInloggLosenKeyPressed
 
     private void txtInloggAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInloggAnvandareActionPerformed
-        // Textruta för användare
+        // Textruta fÃ¶r anvÃ¤ndare
     }//GEN-LAST:event_txtInloggAnvandareActionPerformed
 
     private void pswInloggLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswInloggLosenActionPerformed
-        // Textruta för lösenord
+        // Textruta fÃ¶r lÃ¶senord
     }//GEN-LAST:event_pswInloggLosenActionPerformed
 
     private boolean okUppgifter() {
         boolean ok = true;
         if (!ValideringsKlass.txtFaltHarVarde(txtInloggAnvandare)) {
             ok = false;
-            lblFel.setText("Ange användarnamn");
+            lblFel.setText("Ange anvÃ¤ndarnamn");
             txtInloggAnvandare.requestFocus();
         } else if (!ValideringsKlass.txtFaltHarVarde(pswInloggLosen)) {
             ok = false;
-            lblFel.setText("Ange lösenord");
+            lblFel.setText("Ange lÃ¶senord");
             pswInloggLosen.requestFocus();
         }
 

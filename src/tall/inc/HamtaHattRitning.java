@@ -34,8 +34,7 @@ public class HamtaHattRitning extends javax.swing.JFrame {
         }
     }
     
-    //Hämtar filnamnet på den ritning som man har valt i JListen.
-    //Här behöver alltså sökvägen till filmappen stämma med den dator som ska använda funktionen.
+
     public void hamtaRitning()
     {
         String hattNamn = JListHattlista.getSelectedValue();
@@ -64,7 +63,7 @@ public class HamtaHattRitning extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnHamtaRitning.setText("Hämta ritning");
+        btnHamtaRitning.setText("HÃ¤mta ritning");
         btnHamtaRitning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHamtaRitningActionPerformed(evt);

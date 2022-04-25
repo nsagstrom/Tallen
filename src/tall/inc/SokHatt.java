@@ -126,7 +126,7 @@ public class SokHatt extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(hattList);
 
-        valjButton.setText("Välj Hatt");
+        valjButton.setText("VÃ¤lj Hatt");
         valjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valjButtonActionPerformed(evt);
@@ -135,7 +135,7 @@ public class SokHatt extends javax.swing.JFrame {
 
         jLabel1.setText("Namn:");
 
-        jLabel2.setText("Färg:");
+        jLabel2.setText("FÃ¤rg:");
 
         jLabel3.setText("Storlek/cm:");
 
@@ -150,9 +150,9 @@ public class SokHatt extends javax.swing.JFrame {
             }
         });
 
-        genreCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Genre" }));
+        genreCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VÃ¤lj Genre" }));
 
-        tygCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Tyg" }));
+        tygCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VÃ¤lj Tyg" }));
 
         jLabel7.setText("Tyg:");
 
@@ -172,14 +172,14 @@ public class SokHatt extends javax.swing.JFrame {
             }
         });
 
-        cmbGenreHatt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Genre" }));
+        cmbGenreHatt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VÃ¤lj Genre" }));
         cmbGenreHatt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbGenreHattActionPerformed(evt);
             }
         });
 
-        lblKat.setText("Sök efter kategori");
+        lblKat.setText("SÃ¶k efter kategori");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,9 +195,7 @@ public class SokHatt extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(18, 18, 18))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel7)
                             .addGap(35, 35, 35))
@@ -361,10 +359,10 @@ public class SokHatt extends javax.swing.JFrame {
             dispose();
             
         } else if (prisIntTest == false) {
-            JOptionPane.showMessageDialog(null, "Priset kan endast bestå av siffror!");
+            JOptionPane.showMessageDialog(null, "Priset kan endast bestÃ¥ av siffror!");
 
         } else {
-            JOptionPane.showMessageDialog(null, "Du måste fylla i alla fält!");
+            JOptionPane.showMessageDialog(null, "Du mÃ¥ste fylla i alla fÃ¤lt!");
 
         }
 

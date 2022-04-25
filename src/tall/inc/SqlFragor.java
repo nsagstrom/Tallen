@@ -118,7 +118,7 @@ public class SqlFragor {
         try {
             idb.update(fraga);
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "JÄVLA PAPPSKALLE6");
+            JOptionPane.showMessageDialog(null, "JÃ„VLA PAPPSKALLE6");
         }
     }
 
@@ -158,7 +158,7 @@ public class SqlFragor {
     }
 
     /**
-     * Hämtar nästa tillgängliga ID
+     
      *
      * @param tabell
      * @param kolumn
@@ -170,7 +170,7 @@ public class SqlFragor {
         try {
             svar = idb.getAutoIncrement(tabell, kolumn);
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "JÄVLA PAPPSKALLE8");
+            JOptionPane.showMessageDialog(null, "JÃ„VLA PAPPSKALLE8");
         }
         return svar;
     }

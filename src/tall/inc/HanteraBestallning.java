@@ -76,13 +76,13 @@ public class HanteraBestallning extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblInfo.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        lblInfo.setText("Ändra en beställning");
+        lblInfo.setText("Ã„ndra en bestÃ¤llning");
 
         jScrollPane1.setViewportView(orderLista);
 
         jScrollPane2.setViewportView(hattLista);
 
-        valjBtn.setText("Välj");
+        valjBtn.setText("VÃ¤lj");
         valjBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valjBtnActionPerformed(evt);
@@ -90,17 +90,17 @@ public class HanteraBestallning extends javax.swing.JFrame {
         });
 
         lblValjOrder.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        lblValjOrder.setText("Välj ordernummer:");
+        lblValjOrder.setText("VÃ¤lj ordernummer:");
 
         lblValjKund.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        lblValjKund.setText("Välj kund:");
+        lblValjKund.setText("VÃ¤lj kund:");
 
         lblTaBortHatt.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        lblTaBortHatt.setText("Ta bort hatt från order:");
+        lblTaBortHatt.setText("Ta bort hatt frÃ¥n order:");
 
-        lblFornamn.setText("Förnamn:");
+        lblFornamn.setText("FÃ¶rnamn:");
 
-        valjKundBtn.setText("Välj");
+        valjKundBtn.setText("VÃ¤lj");
         valjKundBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valjKundBtnActionPerformed(evt);
@@ -135,7 +135,7 @@ public class HanteraBestallning extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Förnamn", "Efternamn", "Gata", "Tele"
+                "FÃ¶rnamn", "Efternamn", "Gata", "Tele"
             }
         ));
         jScrollPane3.setViewportView(kundTbl);
