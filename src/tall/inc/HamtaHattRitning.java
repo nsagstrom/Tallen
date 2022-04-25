@@ -60,6 +60,7 @@ public class HamtaHattRitning extends javax.swing.JFrame {
         btnHamtaRitning = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JListHattlista = new javax.swing.JList<>();
+        btntTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +73,13 @@ public class HamtaHattRitning extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(JListHattlista);
 
+        btntTillbaka.setText("Tillbaka");
+        btntTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,21 +87,28 @@ public class HamtaHattRitning extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(btnHamtaRitning)
-                .addGap(71, 71, 71))
+                .addGap(70, 70, 70))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btntTillbaka)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(btnHamtaRitning))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnHamtaRitning)
+                        .addGap(109, 109, 109)))
+                .addComponent(btntTillbaka)
+                .addContainerGap())
         );
 
         pack();
@@ -102,6 +117,10 @@ public class HamtaHattRitning extends javax.swing.JFrame {
     private void btnHamtaRitningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamtaRitningActionPerformed
             hamtaRitning();
     }//GEN-LAST:event_btnHamtaRitningActionPerformed
+
+    private void btntTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntTillbakaActionPerformed
+        dispose();
+    }//GEN-LAST:event_btntTillbakaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,6 +160,7 @@ public class HamtaHattRitning extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> JListHattlista;
     private javax.swing.JButton btnHamtaRitning;
+    private javax.swing.JButton btntTillbaka;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
