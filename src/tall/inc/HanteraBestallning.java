@@ -206,9 +206,9 @@ public class HanteraBestallning extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(valjKundBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblValjOrder)
-                    .addComponent(lblTaBortHatt))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTaBortHatt, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblValjOrder))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -282,16 +282,12 @@ public class HanteraBestallning extends javax.swing.JFrame {
     }
     private void uppdateraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uppdateraBtnActionPerformed
         // TODO add your handling code here:
-        String fornamn = fornamnTxt.getText();
-        String efternamn = efternamnTxt.getText();
         String valdOrder = orderLista.getSelectedValue();
         String valdHatt = hattLista.getSelectedValue();
         String query = "select RadID from Bestallning\n"
                 + "join kund on Kund.KundID = Bestallning.KundID\n"
                 + "join Orderrad on Bestallning.BestID = Orderrad.BestID\n"
                 + "join Hatt on Hatt.HattID = Orderrad.HattID\n"
-                + "where Fornamn = '" + fornamn + "'\n"
-                + "and Efternamn = '" + efternamn + "'\n"
                 + "and Bestallning.BestID = '" + valdOrder + "'\n"
                 + "and Beskrivning = '" + valdHatt + "'";
         String radID = SqlFragor.getEttVarde(query);
