@@ -6,8 +6,10 @@ package tall.inc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -25,14 +27,17 @@ public class FardigStallBeställning extends javax.swing.JFrame {
 
     private static String sp = "sv";
 
-    static Map<String, String> map = new HashMap<String, String>();
+    static Map<String, String> map = new LinkedHashMap<String, String>();
 
     /**
-     * Creates new form FardigStallBestÃÂ¤llning
+     * Creates new form FardigStallBeställning
      */
     public FardigStallBeställning() {
         initComponents();
         fyllBestallning();
+        fyllCB();
+        AutoCompleteDecorator.decorate(cbAlla);
+
     }
 
     private void fyllBestallning() {
@@ -44,7 +49,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "JOIN hatt h on o.HattID = h.HattID\n"
                 + "JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
                 + "JOIN kund k on k.KundID = bestallning.KundID\n"
-                + "WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
+                + "WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
                 + "GROUP BY o.BestID\n"
                 + "UNION\n"
                 + "SELECT  o.BestID , k.KundID, k.ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio\n"
@@ -56,17 +61,17 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "JOIN (\n"
                 + "    SELECT o.BestID FROM bestallning\n"
                 + "    JOIN orderrad o on bestallning.BestID = o.BestID\n"
-                + "    WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
+                + "    WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
                 + "    GROUP BY o.BestID) t2\n"
                 + "    on o.BestID != t2.BestID\n"
-                + "WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 0\n"
+                + "WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 0\n"
                 + "GROUP BY o.BestID;";
 
         allInfo = SqlFragor.getFleraRader(fraga);
 
         String rubrik = "Order ID:"
                 + "\t" + "Kund ID:"
-                + "\t" + "F?rnamn:"
+                + "\t" + "Förnamn:"
                 + "\t" + "Efternamn:"
                 + "\t" + "Adress:"
                 + "\t" + "Vikt:"
@@ -97,7 +102,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "    JOIN hatt h on o.HattID = h.HattID\n"
                 + "    JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
                 + "    JOIN kund k on k.KundID = bestallning.KundID\n"
-                + "    WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
+                + "    WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
                 + "    GROUP BY o.BestID\n"
                 + "    UNION\n"
                 + "    SELECT  o.BestID , k.KundID, k.ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio, TullID\n"
@@ -109,10 +114,10 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "    JOIN (\n"
                 + "        SELECT o.BestID FROM bestallning\n"
                 + "        JOIN orderrad o on bestallning.BestID = o.BestID\n"
-                + "        WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 1\n"
+                + "        WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
                 + "        GROUP BY o.BestID) t2\n"
                 + "        on o.BestID != t2.BestID\n"
-                + "    WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 0\n"
+                + "    WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 0\n"
                 + "    GROUP BY o.BestID) t3\n"
                 + "WHERE BestID =" + bestNummer + ";";
 
@@ -140,45 +145,30 @@ public class FardigStallBeställning extends javax.swing.JFrame {
         return bestNummer;
     }
 
-    private void sprak() {
-        switch (cbSprak.getSelectedIndex()) {
-            case 0 ->
-                sp = "sv";
-            case 1 ->
-                sp = "en";
-            case 2 ->
-                sp = "et";
-            default -> {
-            }
+
+    private void fyllCB() {
+
+//                String[] languages = Locale.getISOLanguages();
+//
+//        for (int i = 0; i < languages.length; i++) {
+//
+//            Locale loc = new Locale(languages[i]);
+//
+//            map.put(loc.getDisplayLanguage(),loc.getLanguage());
+//
+//        }
+        map.put("Svenska", "sv");
+        map.put("Engelska", "en");
+        map.put("Estniska", "et");
+        map.put("Spanska", "es");
+        map.put("Tyska", "de");
+        map.put("Franska", "fr");
+
+        for (Map.Entry entry : map.entrySet()) {
+            Object Items = entry.getKey();
+            cbAlla.addItem((String) Items);
+
         }
-
-    }
-
-    public static void ddd() {
-
-        String[] languages = Locale.getISOLanguages();
-
-        for (int i = 0; i < languages.length; i++) {
-
-            Locale loc = new Locale(languages[i]);
-
-            map.put(loc.getLanguage().toUpperCase(), loc.getDisplayLanguage());
-
-        }
-
-        System.out.println("print language codes and names:");
-
-        System.out.println();
-
-//
-//        System.out.println("print only language codes:");
-//
-//        map.keySet().forEach(langCode -> {
-//
-//            System.out.println(langCode);
-//           
-//
-//        });
     }
 
     public static String getSprak() {
@@ -202,7 +192,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
         btnValjBest = new javax.swing.JButton();
         btnAndraVikt = new javax.swing.JButton();
         btnKlar = new javax.swing.JButton();
-        cbSprak = new javax.swing.JComboBox<>();
+        cbAlla = new javax.swing.JComboBox<>();
 
         jTextField1.setText("jTextField1");
 
@@ -248,11 +238,9 @@ public class FardigStallBeställning extends javax.swing.JFrame {
             }
         });
 
-        cbSprak.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svenska", "Engelska", "Estniska" }));
-        cbSprak.setToolTipText("");
-        cbSprak.addActionListener(new java.awt.event.ActionListener() {
+        cbAlla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSprakActionPerformed(evt);
+                cbAllaActionPerformed(evt);
             }
         });
 
@@ -265,7 +253,12 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnKlar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnTillbaka, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtBestNummer, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,19 +266,14 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                                 .addGap(57, 57, 57)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnAndraVikt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnValjBest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnKlar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnTillbaka, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addComponent(btnValjBest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(132, 132, 132)
+                                .addComponent(cbAlla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(31, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(59, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(cbSprak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(192, 192, 192))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,13 +282,17 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnTillbaka))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBestNummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnValjBest))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(cbSprak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtBestNummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnValjBest))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbAlla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtVikt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAndraVikt)
@@ -338,9 +330,11 @@ public class FardigStallBeställning extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtViktActionPerformed
 
-    private void cbSprakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSprakActionPerformed
-        sprak();
-    }//GEN-LAST:event_cbSprakActionPerformed
+    private void cbAllaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAllaActionPerformed
+        String ItemName = (String) cbAlla.getSelectedItem();
+
+        sp = (String.valueOf(map.get(ItemName)));
+    }//GEN-LAST:event_cbAllaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -348,7 +342,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
     private javax.swing.JButton btnKlar;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton btnValjBest;
-    private javax.swing.JComboBox<String> cbSprak;
+    private javax.swing.JComboBox<String> cbAlla;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
