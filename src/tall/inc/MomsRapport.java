@@ -76,7 +76,7 @@ public class MomsRapport extends javax.swing.JFrame {
         
         perioden = stardate +"-" + slutdate;
 
-        // momspliktig försäljning 
+        // momspliktig fÃ¶rsÃ¤ljning 
         String fragaForsaljMoms = """
                                   SELECT SUM(pris) FROM (
                                   SELECT pris , LevDatum
@@ -85,12 +85,12 @@ public class MomsRapport extends javax.swing.JFrame {
                                   JOIN orderrad o on bestallning.BestID = o.BestID
                                   JOIN hatt h on o.HattID = h.HattID
                                   JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID
-                                  WHERE Status = 'Stängd' AND Prio = 0 AND TullID= 'Saknas') t2
+                                  WHERE Status = 'StÃ¤ngd' AND Prio = 0 AND TullID= 'Saknas') t2
                                   WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
 
         String forsaljMoms = SqlFragor.getEttVarde(fragaForsaljMoms);
 
-        // Momspliktig sörsäljning med ett 20% + För prio
+        // Momspliktig fÃ¶rsÃ¤ljning med ett 20% + FÃ¶r prio
         String fragaForsaljMomsPrio = """
                                       SELECT FLOOR(SUM(pris*1.2)) FROM (
                                       SELECT pris , LevDatum, TullID
@@ -104,7 +104,7 @@ public class MomsRapport extends javax.swing.JFrame {
 
         String forsaljMomsPrio = SqlFragor.getEttVarde(fragaForsaljMomsPrio);
 
-        // försäljning på export 
+        // fÃ¶rsÃ¶ljning pÃ¥ export 
         String fragaForsaljExport = """
                                     SELECT SUM(pris) FROM (
                                     SELECT pris , LevDatum, TullID
@@ -118,7 +118,7 @@ public class MomsRapport extends javax.swing.JFrame {
 
         String forsaljMomsExport = SqlFragor.getEttVarde(fragaForsaljExport);
 
-        // forsäljning export prio
+        // forsÃ¤ljning export prio
         String fragaForsaljExportPrio = """
                                         SELECT FLOOR(SUM(pris*1.2)) FROM (
                                         SELECT pris , LevDatum, TullID
@@ -407,15 +407,15 @@ public class MomsRapport extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Momspliktig försäljning");
+        jLabel1.setText("Momspliktig fÃ¶rsÃ¤ljning");
 
-        jLabel2.setText("Utgående moms på försäljning");
+        jLabel2.setText("UtgÃ¥ende moms pÃ¥ fÃ¶rsÃ¤ljning");
 
-        jLabel3.setText("Försäljning utanför EU");
+        jLabel3.setText("FÃ¶rsÃ¤ljning utanfÃ¶r EU");
 
-        jLabel4.setText("Ingående moms");
+        jLabel4.setText("IngÃ¥ende moms");
 
-        jLabel5.setText("Moms att betala eller få tillbaka");
+        jLabel5.setText("Moms att betala eller fÃ¥ tillbaka");
 
         dateStart.setDateFormatString("yyyy-MM-dd");
         dateStart.setOpaque(false);

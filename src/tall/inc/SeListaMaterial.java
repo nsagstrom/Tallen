@@ -28,8 +28,8 @@ public class SeListaMaterial extends javax.swing.JFrame {
                 + "join Tyg on Tyg.TygID = Hatt.TygID\n"
                 + "join Orderrad on Orderrad.HattID = Hatt.HattID\n"
                 + "join Bestallning on Bestallning.BestID = Orderrad.BestID\n"
-                + "where Status = 'Pågående'\n"
-                + "or Status = 'Öppen'";
+                + "where Status = 'PÃ¥gÃ¥ende'\n"
+                + "or Status = 'Ã–ppen'";
         ArrayList<HashMap<String, String>> hattLista = SqlFragor.getFleraRader(query);
         System.out.println(hattLista);
         fyllRader(hattLista);
@@ -76,7 +76,7 @@ public class SeListaMaterial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblSeInfo.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        lblSeInfo.setText("Se information om material för hattar");
+        lblSeInfo.setText("Se information om material fÃ¶r hattar");
 
         tblLista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,12 +87,12 @@ public class SeListaMaterial extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Hatt ", "Tyg", "Färg"
+                "Hatt ", "Tyg", "FÃ¤rg"
             }
         ));
         jScrollPane2.setViewportView(tblLista);
 
-        lblInfo.setText("Hattar från pågående och öppna beställningar:");
+        lblInfo.setText("Hattar frÃ¥n pÃ¥gÃ¥ende och Ã¶ppna bestÃ¤llningar:");
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {

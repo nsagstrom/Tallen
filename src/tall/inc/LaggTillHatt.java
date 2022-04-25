@@ -39,7 +39,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
 
    /* public void fillFargCmb() {
         fargCmb.addItem("");
-        fargCmb.addItem("Skapa ny f‰rg");
+        fargCmb.addItem("Skapa ny f√§rg");
         String query = "SELECT Farg FROM farg";
         ArrayList<String> fargLista = SqlFragor.getEnKolumn(query);
         for (String farg : fargLista) {
@@ -47,9 +47,9 @@ public class LaggTillHatt extends javax.swing.JFrame {
         }
     }*/
     
-        //F‰rgmetoder---------------------------------------------------------
+        //F√§rgmetoder---------------------------------------------------------
     private void valjFarg() {
-        farg = JColorChooser.showDialog(this, "V‰lj f‰rg", Color.BLACK);
+        farg = JColorChooser.showDialog(this, "V√§lj f√§rg", Color.BLACK);
         if (farg == null) {
             farg = Color.WHITE;
         }
@@ -66,7 +66,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
         hex = Integer.toHexString(farg.getRGB()).substring(2);
         return hex;
     }
-    //Slut pÂ f‰rgmetoder-----------------------------------------------------
+    //Slut p√• f√§rgmetoder-----------------------------------------------------
     
     public void fillGenreCmb() {
         genreCmb.removeAllItems();
@@ -232,7 +232,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
         jLabel2.setText("Pris:");
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel1.setText("F‰rg:");
+        jLabel1.setText("F√§rg:");
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel4.setText("Dekorationer:");
@@ -280,7 +280,7 @@ public class LaggTillHatt extends javax.swing.JFrame {
             .addGap(0, 16, Short.MAX_VALUE)
         );
 
-        btnValjFarg.setText("V‰lj f‰rg");
+        btnValjFarg.setText("V√§lj f√§rg");
         btnValjFarg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnValjFargActionPerformed(evt);
@@ -369,9 +369,8 @@ public class LaggTillHatt extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnValjFarg)
-                                .addComponent(lblFarg)))
+                            .addComponent(btnValjFarg)
+                            .addComponent(lblFarg))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)

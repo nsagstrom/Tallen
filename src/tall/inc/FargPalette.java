@@ -44,7 +44,7 @@ public class FargPalette extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton1.setText("Välj färg");
+        jButton1.setText("VÃ¤lj fÃ¤rg");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -73,14 +73,14 @@ public class FargPalette extends javax.swing.JFrame {
             }
         });
 
-        txtNamn.setText("VÄLJ NAMN");
+        txtNamn.setText("VÃ„LJ NAMN");
         txtNamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNamnActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Färgnamn");
+        jLabel3.setText("FÃ¤rgnamn");
 
         jButton3.setText("Spara");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +153,7 @@ public class FargPalette extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         farg = Color.BLACK;
         
-        farg = JColorChooser.showDialog(this, "Välj färg", farg);
+        farg = JColorChooser.showDialog(this, "VÃ¤lj fÃ¤rg", farg);
         
         if(farg == null){
             farg = Color.WHITE;
@@ -170,7 +170,7 @@ public class FargPalette extends javax.swing.JFrame {
         namn = txtNamn.getText();
         String id = SqlFragor.nyID("Farg", "FargID");
         SqlFragor.addToDatabasen("INSERT INTO farg (FargID, Farg, Kod) VALUES ('" + id + "','" + namn + "','" + hashkod + "')");
-        Status.setText("Färg tillagd!");
+        Status.setText("FÃ¤rg tillagd!");
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

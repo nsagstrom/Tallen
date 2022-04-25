@@ -11,10 +11,15 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import javax.swing.JOptionPane;
 import javax.swing.text.StyleConstants.FontConstants;
 
@@ -22,7 +27,7 @@ import javax.swing.text.StyleConstants.FontConstants;
  *
  * @author timme
  */
-public class Fraktsedel {
+public class Fraktsedel2 {
 
     OutputStream outPut;
     Document document;
@@ -39,24 +44,75 @@ public class Fraktsedel {
 
     private String file = "Fraktsedel.pdf";
 
-    public Fraktsedel() {
-        
+    String frann = "Från";
+
+    
+    
+    
+    String spraket;
+    String kont ="Kontakt";
+    String tel = "Telefon";
+    String till ="Till";
+
+    public Fraktsedel2() {
+
     }
 
+    private static String translate(String langFrom, String langTo, String text) throws IOException {
+        // INSERT YOU URL HERE
+        String urlStr = "https://script.google.com/macros/s/AKfycbzTZIvZiwWUApoqSu2NYmctZrdnKUXWnLdAYyZHtq90b72J2dw/exec"
+                + "?q=" + URLEncoder.encode(text,"UTF-8")
+                + "&target=" + langTo
+                + "&source=" + langFrom;
+        URL url = new URL(urlStr);
+        StringBuilder response = new StringBuilder();
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestProperty("User-Agent", "Mozilla/5.0");
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+        return response.toString();
+    }
+
+    private void getSprak(){
+        spraket = FardigStallBeställning.getSprak();
+    }
+    
+    public void oversatt() throws IOException{
+//        String text = "Från";
+        //Translated text: Hallo Welt!
+        
+        getSprak();
+//        System.out.println("Translated text: " + translate("sv", spraket, frann));
+        
+        
+        frann = translate("sv", spraket, frann);
+        kont = translate("sv", spraket, kont);
+        tel = translate("sv", spraket, tel);
+        till = translate("sv", spraket, till);
+    }
+    
     public void skapaFraktsedel() {
         try {
+            
+            if(!FardigStallBeställning.getSprak().equals("sv")){
+                oversatt();
+            }
+            
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
-            
+
             // TullID tullid = new TullID();
             //if(tullid.equals(Saknad)){
             //
             //} else{
             // getTullID();
             //}
-
-            Paragraph fran = new Paragraph("Från", litenFont);
+            Paragraph fran = new Paragraph(frann, litenFont);
             fran.add(new Paragraph());
             document.add(fran);
 
@@ -82,17 +138,17 @@ public class Fraktsedel {
             orgNummer.add(new Paragraph());
             document.add(orgNummer);
 
-            Paragraph kontakt = new Paragraph("Kontakt: Otto&Judith@gmail.com", litenFont);
+            Paragraph kontakt = new Paragraph(kont + " : Otto&Judith@gmail.com", litenFont);
             kontakt.setAlignment(Element.ALIGN_RIGHT);
             kontakt.add(new Paragraph());
             document.add(kontakt);
 
-            Paragraph foretagsTelNr = new Paragraph("Tel: +46 76 058 9805", litenFont);
+            Paragraph foretagsTelNr = new Paragraph( tel+" : +46 76 058 9805", litenFont);
             addEmptyLine(foretagsTelNr, 1);
             foretagsTelNr.add(new Paragraph());
             document.add(foretagsTelNr);
 
-            Paragraph tillKund = new Paragraph("Till:" + "\n" + forNamn + "\n" + efterNamn + "\n" + kundAdress + "\n" ,  litenFont);
+            Paragraph tillKund = new Paragraph(till + ":\n" + forNamn + "\n" + efterNamn + "\n" + kundAdress + "\n", litenFont);
             tillKund.add(new Paragraph());
             document.add(tillKund);
 
@@ -111,8 +167,6 @@ public class Fraktsedel {
             inneHall.add(new Paragraph());
             document.add(inneHall);
 
-            
-            
             Paragraph testLinje2 = new Paragraph("__________________________________________________________", storFont);
             testLinje2.add(new Paragraph());
             document.add(testLinje2);
@@ -129,16 +183,15 @@ public class Fraktsedel {
             //Paragraph moms = new Paragraph("Moms: " + momsNr , litenFont);
             //moms.add(new Paragraph());
             //document.add(moms);
-
             Paragraph attaSiffrig = new Paragraph("Varudeklaration: " + tullID, litenFont);
             addEmptyLine(attaSiffrig, 1);
             attaSiffrig.add(new Paragraph());
             document.add(attaSiffrig);
-            
+
             Paragraph vikt = new Paragraph("Vikt:" + hattVikt, litenFont);
             vikt.add(new Paragraph());
             document.add(vikt);
-            
+
             Paragraph testLinje3 = new Paragraph("__________________________________________________________", storFont);
             testLinje3.add(new Paragraph());
             document.add(testLinje3);
@@ -179,8 +232,6 @@ public class Fraktsedel {
             }
         }
     }
-
-    
 
     private static Font storFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
 

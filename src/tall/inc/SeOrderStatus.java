@@ -63,7 +63,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
 
         lblStatus.setText("Status");
 
-        lblUser.setText("Anv‰ndare");
+        lblUser.setText("Anv√§ndare");
 
         cmbUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alla" }));
         cmbUser.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +196,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
         filterHej = SqlFragor.getFleraRader(fraga);
         txtOrderLista.setText("");
         
-        String rubrik3 = " Best‰llningsID:"
+        String rubrik3 = " Best√§llningsID:"
                 + "\t" + "Status:"
                 + "\t" + "Kund ID"
                 + "\t" + "TullID:"
@@ -223,7 +223,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
         filterAnv = SqlFragor.getFleraRader(fraga5);
         txtOrderLista.setText("");
         
-        String rubrik3 = " Best‰llningsID:"
+        String rubrik3 = " Best√§llningsID:"
                 + "\t" + "Status:"
                 + "\t" + "Kund ID"
                 + "\t" + "TullID:"
@@ -247,7 +247,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
         filter = SqlFragor.getFleraRader(fraga3);
 
         txtOrderLista.setText("");
-        String rubrik2 = " Best‰llningsID:"
+        String rubrik2 = " Best√§llningsID:"
                 + "\t" + "Status:"
                 + "\t" + "Kund ID"
                 + "\t" + "TullID:"
@@ -271,7 +271,7 @@ public class SeOrderStatus extends javax.swing.JFrame {
 
         allInfo = SqlFragor.getFleraRader(fraga);
 
-        String rubrik = " Best‰llningsID:"
+        String rubrik = " Best√§llningsID:"
                 + "\t" + "Status:"
                 + "\t" + "Kund ID"
                 + "\t" + "TullID:"

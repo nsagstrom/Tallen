@@ -159,9 +159,9 @@ public class Startsida extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblValkommen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblValkommen.setText("V‰lkommen!");
+        lblValkommen.setText("V√§lkommen!");
 
-        btnSkapaNyOrder.setText("Skapa ny best‰llning");
+        btnSkapaNyOrder.setText("Skapa ny best√§llning");
         btnSkapaNyOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSkapaNyOrderActionPerformed(evt);
@@ -175,21 +175,21 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
-        btnSeOrderStatus.setText("Se best‰llningsstatus");
+        btnSeOrderStatus.setText("Se best√§llningsstatus");
         btnSeOrderStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeOrderStatusActionPerformed(evt);
             }
         });
 
-        jButton1.setText("F‰rdigst‰ll best‰llning");
+        jButton1.setText("F√§rdigst√§ll best√§llning");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        startHattBtn.setText("PÂbˆrja hatt tillverkning");
+        startHattBtn.setText("P√•b√∂rja hatt tillverkning");
         startHattBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startHattBtnActionPerformed(evt);
@@ -204,14 +204,14 @@ public class Startsida extends javax.swing.JFrame {
         jScrollPane2.setViewportView(listAllaHattar);
 
         listValdaHattar.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Du har inte valt nÂgon hatt" };
+            String[] strings = { "Du har inte valt n√•gon hatt" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         listValdaHattar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane3.setViewportView(listValdaHattar);
 
-        jButton2.setText("F‰rg palette");
+        jButton2.setText("F√§rg palette");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -225,7 +225,7 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("F‰rdigst‰ll");
+        jButton3.setText("F√§rdigst√§ll");
 
         antalBesLabel.setText("0");
 
@@ -236,7 +236,7 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
-        hanteraBestallningBtn.setText("Hantera best‰llning");
+        hanteraBestallningBtn.setText("Hantera best√§llning");
         hanteraBestallningBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hanteraBestallningBtnActionPerformed(evt);
@@ -245,7 +245,7 @@ public class Startsida extends javax.swing.JFrame {
 
         jLabel1.setText("Du har ");
 
-        jLabel2.setText("ordrar klara fˆr f‰rdigst‰llning");
+        jLabel2.setText("ordrar klara f√∂r f√§rdigst√§llning");
 
         btnTEST.setText("TEST");
         btnTEST.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +257,7 @@ public class Startsida extends javax.swing.JFrame {
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("ƒndra");
+        jMenu2.setText("√Ñndra");
 
         jMenuItem2.setText("Kunduppgifter");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -330,7 +330,7 @@ public class Startsida extends javax.swing.JFrame {
         });
         jMenuBar1.add(menSkapaNyArtikel);
 
-        menSokArtikel.setText("Sˆk artikel");
+        menSokArtikel.setText("S√∂k artikel");
         menSokArtikel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menSokArtikelMouseClicked(evt);
@@ -453,7 +453,7 @@ public class Startsida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeOrderStatusActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new FardigStallBest‰llning().setVisible(true);
+        new FardigStallBest√§llning().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
