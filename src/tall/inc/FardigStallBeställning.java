@@ -22,11 +22,11 @@ public class FardigStallBeställning extends javax.swing.JFrame {
     double moms;
     String tull;
     String vikt;
-    
-       private static String sp = "sv";
-   
-   static Map<String, String> map = new HashMap<String, String>();
-    
+
+    private static String sp = "sv";
+
+    static Map<String, String> map = new HashMap<String, String>();
+
     /**
      * Creates new form FardigStallBestÃÂ¤llning
      */
@@ -114,7 +114,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "        on o.BestID != t2.BestID\n"
                 + "    WHERE Status = '?ppen' OR Status = 'P?g?ende' AND prio = 0\n"
                 + "    GROUP BY o.BestID) t3\n"
-                + "WHERE BestID =" +  bestNummer +  ";";
+                + "WHERE BestID =" + bestNummer + ";";
 
         System.out.println(fraga2);
 
@@ -126,34 +126,35 @@ public class FardigStallBeställning extends javax.swing.JFrame {
         adress = allInfoEnBest.get("Adress");
         vikt = allInfoEnBest.get("vikt");
         tull = allInfoEnBest.get("TullID");
-        
+
         String moms1 = allInfoEnBest.get("pris");
-        
+
         double pris = Double.parseDouble(moms1);
-        double moms2 = (pris*0.25);
+        double moms2 = (pris * 0.25);
         double moms3 = Math.floor(moms2);
-        
-        moms = moms3; 
+
+        moms = moms3;
     }
-    
-    public static String getBestID(){
+
+    public static String getBestID() {
         return bestNummer;
     }
-    
-        
-    private void sprak(){
+
+    private void sprak() {
         switch (cbSprak.getSelectedIndex()) {
-            case 0 -> sp = "sv";
-            case 1 -> sp = "en";
-            case 2 -> sp = "et";
+            case 0 ->
+                sp = "sv";
+            case 1 ->
+                sp = "en";
+            case 2 ->
+                sp = "et";
             default -> {
             }
         }
-        
-        
+
     }
-    
-        public static void ddd() {
+
+    public static void ddd() {
 
         String[] languages = Locale.getISOLanguages();
 
@@ -168,11 +169,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
         System.out.println("print language codes and names:");
 
         System.out.println();
-        
 
-
-        
-        
 //
 //        System.out.println("print only language codes:");
 //
@@ -182,11 +179,9 @@ public class FardigStallBeställning extends javax.swing.JFrame {
 //           
 //
 //        });
-
     }
-    
-    
-    public static String getSprak(){
+
+    public static String getSprak() {
         return sp;
     }
 
@@ -255,6 +250,11 @@ public class FardigStallBeställning extends javax.swing.JFrame {
 
         cbSprak.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svenska", "Engelska", "Estniska" }));
         cbSprak.setToolTipText("");
+        cbSprak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSprakActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -314,7 +314,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnValjBestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjBestActionPerformed
-       infoBest();
+        infoBest();
     }//GEN-LAST:event_btnValjBestActionPerformed
 
     private void btnAndraViktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraViktActionPerformed
@@ -323,8 +323,8 @@ public class FardigStallBeställning extends javax.swing.JFrame {
 
     private void btnKlarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKlarActionPerformed
         // TODO add your handling code here:
-        
-        Fraktsedel fraktsedel = new Fraktsedel();
+
+        Fraktsedel2 fraktsedel = new Fraktsedel2();
         fraktsedel.nyFraktsedel(bestNummer, fNamn, eNamn, adress, vikt, moms, tull);
         fraktsedel.visaFraktsedel();
     }//GEN-LAST:event_btnKlarActionPerformed
@@ -337,6 +337,10 @@ public class FardigStallBeställning extends javax.swing.JFrame {
     private void txtViktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtViktActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtViktActionPerformed
+
+    private void cbSprakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSprakActionPerformed
+        sprak();
+    }//GEN-LAST:event_cbSprakActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
