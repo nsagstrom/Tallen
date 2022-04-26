@@ -102,6 +102,7 @@ public class BestallStatistik extends javax.swing.JFrame {
         txtStangd.setColumns(20);
         txtStangd.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         txtStangd.setRows(5);
+        txtStangd.setTabSize(9);
         jScrollPane3.setViewportView(txtStangd);
 
         jLabel1.setText("Stängda beställningar");

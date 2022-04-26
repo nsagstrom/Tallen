@@ -144,10 +144,11 @@ public class SattPrisSpecial extends javax.swing.JFrame {
         ArrayList<HashMap<String, String>> allInfo;
         String fraga = "SELECT s.HattID, Beskrivning, Farg, Tyg, pris, AnvandarID FROM hatt\n"
                 + "JOIN specialhatt s on hatt.HattID = s.HattID\n"
-                + "JOIN farg f on hatt.FargID = f.FargID\n"
                 + "JOIN genre g on g.GenreID = hatt.GenreID\n"
                 + "JOIN tyg t on hatt.TygID = t.TygID\n"
                 + "ORDER BY HattID;";
+        
+        System.out.println(fraga);
 
 
         
@@ -157,8 +158,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
                 + "\t" + "Namn:"
                 + "\t" + "Färg:"
                 + "\t" + "Tyg:"
-                + "\t" + "Pris:"
-                + "\t" + "Användare:" + "\n";
+                + "\t" + "Pris:" + "\n";
 
         txtHattLista.append(rubrik);
 
@@ -167,8 +167,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
                     + "\t" + info.get("Beskrivning")
                     + "\t" + info.get("Farg")
                     + "\t" + info.get("Tyg")
-                    + "\t" + info.get("pris")
-                    + "\t" + info.get("AnvandarID") + "\n");
+                    + "\t" + info.get("pris") + "\n");
         }
     }
 
@@ -188,7 +187,6 @@ public class SattPrisSpecial extends javax.swing.JFrame {
 
         ArrayList<String> aktuellaID = SqlFragor.getEnKolumn("SELECT s.HattID, Farg, Tyg, pris, AnvandarID FROM hatt\n"
                 + "JOIN specialhatt s on hatt.HattID = s.HattID\n"
-                + "JOIN farg f on hatt.FargID = f.FargID\n"
                 + "JOIN genre g on g.GenreID = hatt.GenreID\n"
                 + "JOIN tyg t on hatt.TygID = t.TygID;");
 
