@@ -24,7 +24,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 public class SkapaNyOrder extends javax.swing.JFrame {
 
     private Color farg;
-
+    private int kundID = -1;
     /**
      * Creates new form SkapaNyOrder
      */
@@ -41,6 +41,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         for (int i = kundTbl.getRowCount() - 1; i >= 0; i--) {
             mode2.removeRow(i);
         }
+        
 
         visaFarg(Color.WHITE);
 
@@ -609,6 +610,16 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         model.addRow(new Object[]{hatt});
     }//GEN-LAST:event_btnLaggTillHattActionPerformed
 
+    private int hittaID(){
+        int nyttID = kundID;
+        
+        if(kundID<0){
+            //kod för befintlig kund
+        }
+        
+        return nyttID;
+    }
+    
     private void orderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderBtnActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) hattTbl.getModel();
@@ -618,7 +629,8 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             hattar.add(model.getValueAt(count, 0).toString());
         }
         String besID = SqlFragor.nyID("bestallning", "BestID");
-        int kundID = taFramMaxKundId();
+        //int kundID = taFramMaxKundId(); funkar bara med nya kunder
+       // kundID = hittaID();
         String tullID = tullTextbox.getText();
         boolean prio = tullCheckbox.isSelected();
         int prioValue = 0;
@@ -652,6 +664,9 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         String namnet = forNamnet.substring(0, i);
 
         String testLista = "select kundid from kund where fornamn = '" + namnet + "'";
+        
+        
+        
         ArrayList<String> lista = SqlFragor.getEnKolumn(testLista);
         System.out.println(lista);
         for (String listan : lista) {
@@ -670,6 +685,8 @@ public class SkapaNyOrder extends javax.swing.JFrame {
             String data[] = {forNamn, efterNamn, adress, tele};
             DefaultTableModel tblModel = (DefaultTableModel) kundTbl.getModel();
             tblModel.addRow(data);
+            
+            kundID = Integer.parseInt(listan);
         }
 
     }
@@ -841,6 +858,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         String adress = txtangivetAdress.getText();
         String telefonnummer = txtangivetTelefonnummer.getText();
         int kNr = skapaKundnummer();
+        kundID = kNr;
 
         String fraga = "INSERT INTO kund (KundID, Fornamn, Efternamn, Adress, Tel) VALUES ('" + kNr + "', '" + fornamn + "', '" + efternamn + "', '" + adress + "', '" + telefonnummer + "');";
         SqlFragor.addToDatabasen(fraga);
