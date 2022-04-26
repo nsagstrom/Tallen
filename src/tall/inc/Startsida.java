@@ -225,7 +225,16 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< Updated upstream
         jButton3.setText("FÃ¤rdigstÃ¤ll");
+=======
+        jButton3.setText("Färdigställ");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+>>>>>>> Stashed changes
 
         antalBesLabel.setText("0");
 
@@ -592,6 +601,11 @@ public class Startsida extends javax.swing.JFrame {
     private void btnTESTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTESTActionPerformed
         new HamtaHattRitning().setVisible(true);
     }//GEN-LAST:event_btnTESTActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new FardigstallBestallning().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

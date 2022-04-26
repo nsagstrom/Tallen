@@ -453,6 +453,7 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnLaggTillKund)
+<<<<<<< Updated upstream
                                         .addGap(253, 253, 253))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
@@ -462,6 +463,10 @@ public class SkapaNyOrder extends javax.swing.JFrame {
                             .addComponent(nyKundCheckbox)
                             .addComponent(kundCheckbox))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+=======
+                                        .addGap(253, 253, 253)))))))
+                .addGap(0, 0, Short.MAX_VALUE)
+>>>>>>> Stashed changes
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
