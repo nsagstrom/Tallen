@@ -7,10 +7,14 @@ package tall.inc;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import static tall.inc.FardigStallBeställning.map;
 
 /**
  *
@@ -21,10 +25,26 @@ public class FardigstallBestallning extends javax.swing.JFrame {
     /**
      * Creates new form FardigstallBestallning
      */
+    String fNamn = "";
+    String eNamn = "";
+    String adress = "";
+    double moms;
+    String tull = "";
+    String vikt = "";
+    String antalHattar = "";
+    String pris = "";
+    String bestID = "";
+
+    private static String sp = "sv";
+
+    static Map<String, String> map = new LinkedHashMap<String, String>();
+
     public FardigstallBestallning() {
         initComponents();
 
         fillOrderCmb();
+        fyllCB();
+        AutoCompleteDecorator.decorate(cbAlla);
     }
 
     public void fillOrderCmb() {
@@ -43,6 +63,21 @@ public class FardigstallBestallning extends javax.swing.JFrame {
 
             }
             break;
+        }
+    }
+
+    private void fyllCB() {
+        map.put("Svenska", "sv");
+        map.put("Engelska", "en");
+        map.put("Estniska", "et");
+        map.put("Spanska", "es");
+        map.put("Tyska", "de");
+        map.put("Franska", "fr");
+
+        for (Map.Entry entry : map.entrySet()) {
+            Object Items = entry.getKey();
+            cbAlla.addItem((String) Items);
+
         }
     }
 
@@ -95,11 +130,17 @@ public class FardigstallBestallning extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToggleButton1 = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         besTable = new javax.swing.JTable();
         bestCmb = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         fardigstallBtn = new javax.swing.JButton();
+        cbAlla = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+
+        jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,38 +172,65 @@ public class FardigstallBestallning extends javax.swing.JFrame {
             }
         });
 
+        cbAlla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAllaActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Tillbaka");
+
+        jLabel2.setText("Välj språk");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(bestCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(fardigstallBtn)
-                .addGap(30, 30, 30))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(bestCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jButton2)))
+                .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(170, 170, 170))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(74, 74, 74))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(cbAlla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fardigstallBtn)
+                        .addGap(48, 48, 48))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(154, 154, 154))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(85, 85, 85)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bestCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(fardigstallBtn)))
-                .addGap(172, 172, 172))
+                    .addComponent(bestCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbAlla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fardigstallBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -173,17 +241,11 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         fillBesTable();
     }//GEN-LAST:event_bestCmbActionPerformed
 
-    private void fardigstallBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fardigstallBtnActionPerformed
-        // TODO add your handling code here:
+    private void uppdateraBes() {
 
-        String efternamn = "";
-        String fornamn = "";
-        String antalHattar = "";
-        String pris = "";
-        String vikt = "";
         String anvID = Inloggningssida.getAnvandarID();
 
-        String bestID = String.valueOf(bestCmb.getSelectedItem());
+        bestID = String.valueOf(bestCmb.getSelectedItem());
 
         HashMap<Integer, String> valueLista = new HashMap<>();
         for (int i = 0; i < 5; i++) {
@@ -197,9 +259,9 @@ public class FardigstallBestallning extends javax.swing.JFrame {
 
             switch (index) {
                 case 0:
-                    efternamn = value;
+                    eNamn = value;
                 case 1:
-                    fornamn = value;
+                    fNamn = value;
                 case 2:
                     antalHattar = value;
                 case 3:
@@ -212,16 +274,42 @@ public class FardigstallBestallning extends javax.swing.JFrame {
             index++;
         }
         String updateQuery = "UPDATE bestallning SET Status = 'Stängd', vikt = '" + vikt + "', AnvandareID = '" + anvID + "' WHERE bestID = '" + bestID + "'";
-        System.out.println(updateQuery);
+     
         SqlFragor.uppdatera(updateQuery);
+    }
+
+    public static String getSprak() {
+        return sp;
+    }
+
+    private void fardigstallBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fardigstallBtnActionPerformed
+        // TODO add your handling code here:
+        uppdateraBes();
+        Fraktsedel2 fraktsedel = new Fraktsedel2();
+        fraktsedel.nyFraktsedel(bestID, fNamn, eNamn, adress, vikt, moms, tull);
+        fraktsedel.visaFraktsedel();
+        
+
+
     }//GEN-LAST:event_fardigstallBtnActionPerformed
+
+    private void cbAllaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAllaActionPerformed
+        // TODO add your handling code here:
+        String ItemName = (String) cbAlla.getSelectedItem();
+
+        sp = (String.valueOf(map.get(ItemName)));
+    }//GEN-LAST:event_cbAllaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable besTable;
     private javax.swing.JComboBox<String> bestCmb;
+    private javax.swing.JComboBox<String> cbAlla;
     private javax.swing.JButton fardigstallBtn;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
