@@ -97,12 +97,12 @@ public class FardigstallBestallning extends javax.swing.JFrame {
 
         }
 
-        String kundInfoQuery = "SELECT Fornamn,  Efternamn FROM kund\n"
+        String kundInfoQuery = "SELECT Fornamn,  Efternamn, adress FROM kund\n"
                 + "    Inner join bestallning b on Kund.KundID = b.KundID\n"
-                + "WHERE BestID = 1;";
+                + "WHERE BestID = '" + bestId + "'";
 
         HashMap<String, String> kundInfo = SqlFragor.getEnRad(kundInfoQuery);
-
+        System.out.println(kundInfo);
         int i = 0;
         for (String f : kundInfo.values()) {
             besTable.setValueAt(f, NORMAL, i);
@@ -114,6 +114,9 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         i++;
 
         besTable.setValueAt(totalaPriset, NORMAL, i);
+        String tullIDQuery = "SELECT TullID FROM Bestallning WHERE BestID = '"+bestId+"'";
+        tull = SqlFragor.getEttVarde(tullIDQuery);
+        
 
     }
 
@@ -146,10 +149,10 @@ public class FardigstallBestallning extends javax.swing.JFrame {
 
         besTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Efternamn", "Förnamn", "Antal Hattar", "Pris", "Vikt"
+                "Efternamn", "Förnamn", "Adress", "Antal Hattar", "Pris", "Vikt"
             }
         ));
         besTable.setRowHeight(40);
@@ -179,6 +182,11 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         });
 
         jButton2.setText("Tillbaka");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Välj språk");
 
@@ -187,15 +195,10 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(bestCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jButton2)))
+                .addGap(16, 16, 16)
+                .addComponent(bestCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -204,9 +207,12 @@ public class FardigstallBestallning extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(74, 74, 74))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cbAlla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fardigstallBtn)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbAlla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fardigstallBtn)))
                         .addGap(48, 48, 48))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -228,9 +234,9 @@ public class FardigstallBestallning extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbAlla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fardigstallBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(28, 28, 28))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -248,7 +254,7 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         bestID = String.valueOf(bestCmb.getSelectedItem());
 
         HashMap<Integer, String> valueLista = new HashMap<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             Object obj = besTable.getValueAt(NORMAL, i);
             String value = String.valueOf(obj);
             valueLista.put(i, value);
@@ -263,10 +269,12 @@ public class FardigstallBestallning extends javax.swing.JFrame {
                 case 1:
                     fNamn = value;
                 case 2:
-                    antalHattar = value;
+                    adress = value;
                 case 3:
-                    pris = value;
+                    antalHattar = value;
                 case 4:
+                    pris = value;
+                case 5:
                     vikt = value;
                     break;
 
@@ -274,7 +282,7 @@ public class FardigstallBestallning extends javax.swing.JFrame {
             index++;
         }
         String updateQuery = "UPDATE bestallning SET Status = 'Stängd', vikt = '" + vikt + "', AnvandareID = '" + anvID + "' WHERE bestID = '" + bestID + "'";
-     
+
         SqlFragor.uppdatera(updateQuery);
     }
 
@@ -288,7 +296,6 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         Fraktsedel2 fraktsedel = new Fraktsedel2();
         fraktsedel.nyFraktsedel(bestID, fNamn, eNamn, adress, vikt, moms, tull);
         fraktsedel.visaFraktsedel();
-        
 
 
     }//GEN-LAST:event_fardigstallBtnActionPerformed
@@ -299,6 +306,10 @@ public class FardigstallBestallning extends javax.swing.JFrame {
 
         sp = (String.valueOf(map.get(ItemName)));
     }//GEN-LAST:event_cbAllaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new Startsida().setVisible(true);
+        dispose();    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
