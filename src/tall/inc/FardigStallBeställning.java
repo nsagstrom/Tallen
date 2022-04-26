@@ -30,7 +30,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
     static Map<String, String> map = new LinkedHashMap<String, String>();
 
     /**
-     * Creates new form FardigStallBestÃ¤llning
+     * Creates new form FardigStallBeställning
      */
     public FardigStallBeställning() {
         initComponents();
@@ -48,7 +48,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "JOIN orderrad o on bestallning.BestID = o.BestID\n"
                 + "JOIN hatt h on o.HattID = h.HattID\n"
                 + "JOIN kund k on k.KundID = bestallning.KundID\n"
-                + "WHERE Status = 'Ãppen' OR Status = 'PÃ¥gÃ¥ende' AND prio = 1\n"
+                + "WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
                 + "GROUP BY o.BestID\n"
                 + "UNION\n"
                 + "SELECT  BestID , KundID, ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio FROM(\n"
@@ -60,9 +60,9 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "    WHERE o.BestID not in (\n"
                 + "        SELECT o.BestID FROM bestallning\n"
                 + "        JOIN orderrad o on bestallning.BestID = o.BestID\n"
-                + "        WHERE Status = 'Ãppen' OR Status = 'PÃ¥gÃ¥ende' AND prio = 1\n"
+                + "        WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
                 + "        GROUP BY o.BestID)) as t2\n"
-                + "WHERE Status = 'Ãppen' OR Status = 'PÃ¥gÃ¥ende' AND prio = 0\n"
+                + "WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 0\n"
                 + "GROUP BY BestID\n"
                 + "ORDER BY BestID;";
 
@@ -72,7 +72,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
 
         String rubrik = "Order ID:"
                 + "\t" + "Kund ID:"
-                + "\t" + "FÃ¶rnamn:"
+                + "\t" + "Förnamn:"
                 + "\t" + "Efternamn:"
                 + "\t" + "Adress:"
                 + "\t" + "Vikt:"
@@ -103,7 +103,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "    JOIN hatt h on o.HattID = h.HattID\n"
                 + "    JOIN anvandare a on a.AnvandarID = bestallning.AnvandareID\n"
                 + "    JOIN kund k on k.KundID = bestallning.KundID\n"
-                + "    WHERE Status = 'Ãppen' OR Status = 'PÃ¥gÃ¥ende' AND prio = 1\n"
+                + "    WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
                 + "    GROUP BY o.BestID\n"
                 + "    UNION\n"
                 + "    SELECT  o.BestID , k.KundID, k.ForNamn, Efternamn, Adress,  vikt, sum(Pris) AS pris, Prio, TullID\n"
@@ -115,10 +115,10 @@ public class FardigStallBeställning extends javax.swing.JFrame {
                 + "    JOIN (\n"
                 + "        SELECT o.BestID FROM bestallning\n"
                 + "        JOIN orderrad o on bestallning.BestID = o.BestID\n"
-                + "        WHERE Status = 'Ãppen' OR Status = 'PÃ¥gÃ¥ende' AND prio = 1\n"
+                + "        WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 1\n"
                 + "        GROUP BY o.BestID) t2\n"
                 + "        on o.BestID != t2.BestID\n"
-                + "    WHERE Status = 'Ãppen' OR Status = 'PÃ¥gÃ¥ende' AND prio = 0\n"
+                + "    WHERE Status = 'Öppen' OR Status = 'Pågående' AND prio = 0\n"
                 + "    GROUP BY o.BestID) t3\n"
                 + "WHERE BestID =" + bestNummer + ";";
 
