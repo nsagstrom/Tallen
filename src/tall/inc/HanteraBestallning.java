@@ -163,7 +163,7 @@ public class HanteraBestallning extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblTaBortHatt)
-                                .addContainerGap(534, Short.MAX_VALUE))
+                                .addContainerGap(160, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(uppdateraBtn)
                                 .addGap(82, 82, 82)
