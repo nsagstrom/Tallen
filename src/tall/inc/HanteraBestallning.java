@@ -313,7 +313,7 @@ public class HanteraBestallning extends javax.swing.JFrame {
         SqlFragor.deleteFranDatabasen(deleteHatt);
         
         ListModel model = hattLista.getModel();
-        System.out.println(model.getSize());
+        
         if(model.getSize()==1){
            
             String deleteBest = "DELETE FROM BESTALLNING WHERE BESTID = '"  + valdOrder + "'"; 
