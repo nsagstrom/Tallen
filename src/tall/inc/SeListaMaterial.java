@@ -111,7 +111,7 @@ public class SeListaMaterial extends javax.swing.JFrame {
                     .addComponent(lblInfo)
                     .addComponent(lblSeInfo)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTillbaka, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

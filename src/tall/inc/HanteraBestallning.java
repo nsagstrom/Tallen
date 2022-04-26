@@ -157,8 +157,7 @@ public class HanteraBestallning extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblValjOrder)
-                            .addComponent(valjBtn)
-                            .addComponent(btnTillbaka))
+                            .addComponent(valjBtn))
                         .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -166,6 +165,8 @@ public class HanteraBestallning extends javax.swing.JFrame {
                                 .addContainerGap(534, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(uppdateraBtn)
+                                .addGap(82, 82, 82)
+                                .addComponent(btnTillbaka)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,10 +217,10 @@ public class HanteraBestallning extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(valjBtn)
-                    .addComponent(uppdateraBtn))
-                .addGap(18, 18, 18)
-                .addComponent(btnTillbaka)
-                .addGap(0, 35, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(uppdateraBtn)
+                        .addComponent(btnTillbaka)))
+                .addGap(0, 75, Short.MAX_VALUE))
         );
 
         pack();

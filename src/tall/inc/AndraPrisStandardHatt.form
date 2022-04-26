@@ -108,7 +108,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="BtnOk">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Bekrfta"/>
+        <Property name="text" type="java.lang.String" value="Bekr&#xe4;fta"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnOkActionPerformed"/>
