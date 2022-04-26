@@ -225,16 +225,12 @@ public class Startsida extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< Updated upstream
         jButton3.setText("FÃ¤rdigstÃ¤ll");
-=======
-        jButton3.setText("Färdigställ");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
->>>>>>> Stashed changes
 
         antalBesLabel.setText("0");
 
@@ -374,13 +370,13 @@ public class Startsida extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(antalBesLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)))
+                                .addComponent(jLabel2))
+                            .addComponent(jButton3))
                         .addGap(74, 74, 74))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,9 +408,9 @@ public class Startsida extends javax.swing.JFrame {
                                     .addComponent(antalBesLabel)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(32, 32, 32)
                                 .addComponent(jButton3)
-                                .addGap(330, 330, 330)
+                                .addGap(304, 304, 304)
                                 .addComponent(btnLoggaUt))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

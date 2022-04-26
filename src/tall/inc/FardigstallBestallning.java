@@ -100,14 +100,14 @@ public class FardigstallBestallning extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Efternamn", "Förnamn", "Antal Hattar", "Pris", "Vikt"
+                "Efternamn", "FÃ¶rnamn", "Antal Hattar", "Pris", "Vikt"
             }
         ));
         besTable.setRowHeight(40);
         besTable.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(besTable);
 
-        bestCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Ordernummer" }));
+        bestCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VÃ¤lj Ordernummer" }));
         bestCmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bestCmbActionPerformed(evt);
