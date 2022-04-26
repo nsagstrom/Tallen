@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -281,6 +282,21 @@ public class HanteraBestallning extends javax.swing.JFrame {
 
     }//GEN-LAST:event_valjBtnActionPerformed
     }
+//    private void uppdateraListan(String valdOrder){
+//        
+//        String query = "select Beskrivning from Hatt\n"
+//                + "join orderrad on Hatt.HattID = Orderrad.HattID\n"
+//                + "join bestallning on Orderrad.BestID = Bestallning.BestID\n"
+//                + "where Bestallning.BestID = '" + valdOrder + "'";
+//
+//        ArrayList<String> hattListan = SqlFragor.getEnKolumn(query);
+//        DefaultListModel model = new DefaultListModel();
+//        for (String hattar : hattListan) {
+//            model.addElement(hattar);
+//
+//            hattLista.setModel(model);
+//    }
+//    }
     private void uppdateraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uppdateraBtnActionPerformed
         // TODO add your handling code here:
         String valdOrder = orderLista.getSelectedValue();
@@ -295,6 +311,15 @@ public class HanteraBestallning extends javax.swing.JFrame {
 
         String deleteHatt = "DELETE FROM orderrad WHERE RadID = '" + radID + "'";
         SqlFragor.deleteFranDatabasen(deleteHatt);
+        
+        ListModel model = hattLista.getModel();
+        System.out.println(model.getSize());
+        if(model.getSize()==1){
+           
+            String deleteBest = "DELETE FROM BESTALLNING WHERE BESTID = '"  + valdOrder + "'"; 
+            SqlFragor.deleteFranDatabasen(deleteBest);
+        }
+        
         new Startsida().setVisible(true);
         dispose();
     }//GEN-LAST:event_uppdateraBtnActionPerformed
@@ -319,6 +344,11 @@ public class HanteraBestallning extends javax.swing.JFrame {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         fyllInfo();
+        ListModel model = new DefaultListModel();
+        ListModel model1 = new DefaultListModel();
+        orderLista.setModel(model);
+        hattLista.setModel(model1);
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOkActionPerformed
 
