@@ -48,7 +48,7 @@ public class AndraPrisStandardHatt extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BtnOk.setText("Bekrfta");
+        BtnOk.setText("Bekräfta");
         BtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnOkActionPerformed(evt);
