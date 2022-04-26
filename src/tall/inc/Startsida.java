@@ -463,18 +463,17 @@ public class Startsida extends javax.swing.JFrame {
 
     private void seKlaraOrdrar() {
         String hattListaQuery = "SELECT DISTINCT bestID FROM orderrad;";
-        ArrayList<String> hattLista = SqlFragor.getEnKolumn(hattListaQuery);
+        ArrayList<String> bestIDLista = SqlFragor.getEnKolumn(hattListaQuery);
         int i = 0;
-        for (String hatt : hattLista) {
+        for (String bestID : bestIDLista) {
 
             String inteKlaraQuery = "SELECT hattID FROM orderrad\n"
-                    + "where BestID = '" + hatt + "' AND Hattstatus is null;";
+                    + "where BestID = '" + bestID + "' AND Hattstatus is null;";
             ArrayList<String> inteKlaraHattLista = SqlFragor.getEnKolumn(inteKlaraQuery);
 
-            if (inteKlaraHattLista.isEmpty()) {
-
-                antalBesLabel.setText(String.valueOf(i));
+            if (inteKlaraHattLista.size() == 0) {
                 i++;
+                antalBesLabel.setText(String.valueOf(i));
 
             }
         }
@@ -484,7 +483,6 @@ public class Startsida extends javax.swing.JFrame {
 //                + "where Status != 'Stängd' AND o.Hattstatus = 'Klar';";
 //        String antal = SqlFragor.getEttVarde(antalHattarQuery);
 //        antalBesLabel.setText(antal);
-
     }
 
     private void klarHattBtn() {
