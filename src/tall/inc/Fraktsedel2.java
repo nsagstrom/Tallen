@@ -185,9 +185,9 @@ public class Fraktsedel2 {
             posten.add(new Paragraph());
             document.add(posten);
 
-            Paragraph varuKod = new Paragraph( vark + ": ", litenFont);
-            varuKod.add(new Paragraph());
-            document.add(varuKod);
+            //Paragraph varuKod = new Paragraph( vark + ": ", litenFont);
+            //varuKod.add(new Paragraph());
+            //document.add(varuKod);
 
             //Paragraph moms = new Paragraph("Moms: " + momsNr , litenFont);
             //moms.add(new Paragraph());
