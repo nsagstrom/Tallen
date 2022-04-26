@@ -462,27 +462,28 @@ public class Startsida extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void seKlaraOrdrar() {
+        String hattListaQuery = "SELECT DISTINCT bestID FROM orderrad;";
+        ArrayList<String> hattLista = SqlFragor.getEnKolumn(hattListaQuery);
+        int i = 0;
+        for (String hatt : hattLista) {
 
-//        String hattListaQuery = "SELECT DISTINCT bestID FROM orderrad;";
-//        ArrayList<String> hattLista = SqlFragor.getEnKolumn(hattListaQuery);
-//        int i = 0;
-//        for (String hatt : hattLista) {
-//
-//            String inteKlaraQuery = "SELECT hattID FROM orderrad\n"
-//                    + "where BestID = '" + hatt + "' AND Hattstatus is null;";
-//            ArrayList<String> inteKlaraHattLista = SqlFragor.getEnKolumn(inteKlaraQuery);
-//
-//            if (inteKlaraHattLista.isEmpty()) {
-//                i++;
-//                antalBesLabel.setText(String.valueOf(i));
-//
-//            }
-//        }
-        String antalHattarQuery = "SELECT  COUNT(distinct (Bestallning.BestID)) FROM bestallning \n"
-                + "    inner join orderrad o on Bestallning.BestID = o.BestID\n"
-                + "where Status != 'Stängd' AND o.Hattstatus = 'Klar';";
-        String antal = SqlFragor.getEttVarde(antalHattarQuery);
-        antalBesLabel.setText(antal);
+            String inteKlaraQuery = "SELECT hattID FROM orderrad\n"
+                    + "where BestID = '" + hatt + "' AND Hattstatus is null;";
+            ArrayList<String> inteKlaraHattLista = SqlFragor.getEnKolumn(inteKlaraQuery);
+
+            if (inteKlaraHattLista.isEmpty()) {
+
+                antalBesLabel.setText(String.valueOf(i));
+                i++;
+
+            }
+        }
+
+//        String antalHattarQuery = "SELECT  COUNT(distinct (Bestallning.BestID)) FROM bestallning \n"
+//                + "    inner join orderrad o on Bestallning.BestID = o.BestID\n"
+//                + "where Status != 'Stängd' AND o.Hattstatus = 'Klar';";
+//        String antal = SqlFragor.getEttVarde(antalHattarQuery);
+//        antalBesLabel.setText(antal);
 
     }
 

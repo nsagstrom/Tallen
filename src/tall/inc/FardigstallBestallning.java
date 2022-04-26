@@ -4,7 +4,10 @@
  */
 package tall.inc;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -114,9 +117,8 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         i++;
 
         besTable.setValueAt(totalaPriset, NORMAL, i);
-        String tullIDQuery = "SELECT TullID FROM Bestallning WHERE BestID = '"+bestId+"'";
+        String tullIDQuery = "SELECT TullID FROM Bestallning WHERE BestID = '" + bestId + "'";
         tull = SqlFragor.getEttVarde(tullIDQuery);
-        
 
     }
 
@@ -286,7 +288,11 @@ public class FardigstallBestallning extends javax.swing.JFrame {
             }
             index++;
         }
-        String updateQuery = "UPDATE bestallning SET Status = 'Stängd', vikt = '" + vikt + "', AnvandareID = '" + anvID + "' WHERE bestID = '" + bestID + "'";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //LocalDateTime now = LocalDateTime.now();
+        Date date = new Date();
+        String datum = dateFormat.format(date);
+        String updateQuery = "UPDATE bestallning SET Status = 'Stängd', vikt = '" + vikt + "', AnvandareID = '" + anvID + "', LevDatum = '"+datum+"' WHERE bestID = '" + bestID + "'";
 
         SqlFragor.uppdatera(updateQuery);
     }
@@ -317,7 +323,7 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         dispose();    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void besTableFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_besTableFocusLost
-       besTable.putClientProperty("terminateEditOnFocusLost", true);
+        besTable.putClientProperty("terminateEditOnFocusLost", true);
     }//GEN-LAST:event_besTableFocusLost
 
 
