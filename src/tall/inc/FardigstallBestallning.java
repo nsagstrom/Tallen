@@ -157,6 +157,11 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         ));
         besTable.setRowHeight(40);
         besTable.setRowSelectionAllowed(false);
+        besTable.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                besTableFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(besTable);
 
         bestCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Ordernummer" }));
@@ -310,6 +315,10 @@ public class FardigstallBestallning extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new Startsida().setVisible(true);
         dispose();    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void besTableFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_besTableFocusLost
+       besTable.putClientProperty("terminateEditOnFocusLost", true);
+    }//GEN-LAST:event_besTableFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
