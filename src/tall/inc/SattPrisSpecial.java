@@ -148,7 +148,7 @@ public class SattPrisSpecial extends javax.swing.JFrame {
                 + "JOIN tyg t on hatt.TygID = t.TygID\n"
                 + "ORDER BY HattID;";
         
-        System.out.println(fraga);
+
 
 
         
