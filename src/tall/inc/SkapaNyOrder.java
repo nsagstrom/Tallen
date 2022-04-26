@@ -6,7 +6,11 @@ package tall.inc;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -590,6 +594,14 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         return nyttID;
     }
     
+    private String date(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //LocalDateTime now = LocalDateTime.now();
+        Date date = new Date();
+        String datum = dateFormat.format(date);
+        return datum;
+    }
+    
     private void orderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderBtnActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) hattTbl.getModel();
@@ -604,10 +616,12 @@ public class SkapaNyOrder extends javax.swing.JFrame {
         String tullID = tullTextbox.getText();
         boolean prio = tullCheckbox.isSelected();
         int prioValue = 0;
+        
         if (prio = true) {
             prioValue = 1;
         }
-        String insertBestallningQuery = "INSERT INTO bestallning (BestID, KundID, Status, TullID, Prio) VALUES ('" + besID + "', '" + kundID + "', 'Öppen', '" + tullID + "', '" + prioValue + "' )";
+        String datum = date();
+        String insertBestallningQuery = "INSERT INTO bestallning (BestID, KundID, Status, TullID, Prio, BestDatum) VALUES ('" + besID + "', '" + kundID + "', 'Öppen', '" + tullID + "', '" + prioValue + "','" + datum + "')";
         SqlFragor.addToDatabasen(insertBestallningQuery);
 
         for (String hatt : hattar) {
