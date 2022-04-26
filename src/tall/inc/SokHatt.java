@@ -376,7 +376,7 @@ public class SokHatt extends javax.swing.JFrame {
 
     private void BtnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTillbakaActionPerformed
         // TODO add your handling code here:
-        new Startsida().setVisible(true);
+       
         dispose();
     }//GEN-LAST:event_BtnTillbakaActionPerformed
 

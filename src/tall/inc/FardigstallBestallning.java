@@ -105,7 +105,7 @@ public class FardigstallBestallning extends javax.swing.JFrame {
                 + "WHERE BestID = '" + bestId + "'";
 
         HashMap<String, String> kundInfo = SqlFragor.getEnRad(kundInfoQuery);
-        System.out.println(kundInfo);
+        
         int i = 0;
         for (String f : kundInfo.values()) {
             besTable.setValueAt(f, NORMAL, i);
@@ -308,6 +308,8 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         fraktsedel.nyFraktsedel(bestID, fNamn, eNamn, adress, vikt, moms, tull);
         fraktsedel.visaFraktsedel();
 
+        
+
 
     }//GEN-LAST:event_fardigstallBtnActionPerformed
 
@@ -319,7 +321,7 @@ public class FardigstallBestallning extends javax.swing.JFrame {
     }//GEN-LAST:event_cbAllaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new Startsida().setVisible(true);
+        
         dispose();    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void besTableFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_besTableFocusLost
