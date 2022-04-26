@@ -25,15 +25,15 @@ public class FardigstallBestallning extends javax.swing.JFrame {
     /**
      * Creates new form FardigstallBestallning
      */
-    String fNamn;
-    String eNamn;
-    String adress;
+    String fNamn = "";
+    String eNamn = "";
+    String adress = "";
     double moms;
-    String tull;
-    String vikt;
-    String antalHattar;
-    String pris;
-    String bestID;
+    String tull = "";
+    String vikt = "";
+    String antalHattar = "";
+    String pris = "";
+    String bestID = "";
 
     private static String sp = "sv";
 
