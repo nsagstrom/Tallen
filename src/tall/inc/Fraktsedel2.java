@@ -81,7 +81,8 @@ public class Fraktsedel2 {
     }
 
     private void getSprak(){
-        spraket = FardigStallBeställning.getSprak();
+        spraket = FardigstallBestallning.getSprak();
+        System.out.println(spraket);
     }
     
     public void oversatt() throws IOException{
@@ -107,7 +108,7 @@ public class Fraktsedel2 {
     public void skapaFraktsedel() {
         try {
             
-            if(!FardigStallBeställning.getSprak().equals("sv")){
+            if(!FardigstallBestallning.getSprak().equals("sv")){
                 oversatt();
             }
             

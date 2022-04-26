@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import static tall.inc.FardigStallBeställning.map;
 
 /**
@@ -24,15 +25,15 @@ public class FardigstallBestallning extends javax.swing.JFrame {
     /**
      * Creates new form FardigstallBestallning
      */
-    String fNamn;
-    String eNamn;
-    String adress;
+    String fNamn = "";
+    String eNamn = "";
+    String adress = "";
     double moms;
-    String tull;
-    String vikt;
-    String antalHattar;
-    String pris;
-    String bestID;
+    String tull = "";
+    String vikt = "";
+    String antalHattar = "";
+    String pris = "";
+    String bestID = "";
 
     private static String sp = "sv";
 
@@ -43,6 +44,7 @@ public class FardigstallBestallning extends javax.swing.JFrame {
 
         fillOrderCmb();
         fyllCB();
+        AutoCompleteDecorator.decorate(cbAlla);
     }
 
     public void fillOrderCmb() {
@@ -272,7 +274,7 @@ public class FardigstallBestallning extends javax.swing.JFrame {
             index++;
         }
         String updateQuery = "UPDATE bestallning SET Status = 'Stängd', vikt = '" + vikt + "', AnvandareID = '" + anvID + "' WHERE bestID = '" + bestID + "'";
-        System.out.println(updateQuery);
+     
         SqlFragor.uppdatera(updateQuery);
     }
 
@@ -286,6 +288,8 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         Fraktsedel2 fraktsedel = new Fraktsedel2();
         fraktsedel.nyFraktsedel(bestID, fNamn, eNamn, adress, vikt, moms, tull);
         fraktsedel.visaFraktsedel();
+        
+
 
     }//GEN-LAST:event_fardigstallBtnActionPerformed
 
