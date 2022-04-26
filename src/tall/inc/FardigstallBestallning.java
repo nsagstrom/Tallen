@@ -34,9 +34,15 @@ public class FardigstallBestallning extends javax.swing.JFrame {
             String besKlarQuery = "SELECT hattID FROM orderrad where BestID = '" + bestID + "' AND Hattstatus IS NULL";
             ArrayList<String> listaMedOklaraHattar = SqlFragor.getEnKolumn(besKlarQuery);
             if (listaMedOklaraHattar.isEmpty()) {
-                bestCmb.addItem(bestID);
-            }
+                String besStangdQuery = "SELECT DISTINCT Bestallning.BestID FROM bestallning bestallning inner join orderrad o on Bestallning.BestID = o.BestID where Status != 'Stängd' AND o.Hattstatus = 'Klar'";
+                ArrayList<String> besStangdLista = SqlFragor.getEnKolumn(besStangdQuery);
+                for (String oppenBestID : besStangdLista) {
+                    bestCmb.addItem(oppenBestID);
 
+                }
+
+            }
+            break;
         }
     }
 
@@ -75,8 +81,9 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         besTable.setValueAt(totalaPriset, NORMAL, i);
 
     }
-    private void angeVikt(){
-        
+
+    private void angeVikt() {
+
     }
 
     /**
@@ -92,6 +99,7 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         besTable = new javax.swing.JTable();
         bestCmb = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        fardigstallBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +124,13 @@ public class FardigstallBestallning extends javax.swing.JFrame {
 
         jLabel1.setText("Ange Vikt:");
 
+        fardigstallBtn.setText("Färdigställ");
+        fardigstallBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fardigstallBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,7 +140,9 @@ public class FardigstallBestallning extends javax.swing.JFrame {
                 .addComponent(bestCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(fardigstallBtn)
+                .addGap(30, 30, 30))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -136,10 +153,15 @@ public class FardigstallBestallning extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(47, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bestCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bestCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(fardigstallBtn)))
                 .addGap(172, 172, 172))
         );
 
@@ -151,11 +173,54 @@ public class FardigstallBestallning extends javax.swing.JFrame {
         fillBesTable();
     }//GEN-LAST:event_bestCmbActionPerformed
 
+    private void fardigstallBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fardigstallBtnActionPerformed
+        // TODO add your handling code here:
+
+        String efternamn = "";
+        String fornamn = "";
+        String antalHattar = "";
+        String pris = "";
+        String vikt = "";
+        String anvID = Inloggningssida.getAnvandarID();
+
+        String bestID = String.valueOf(bestCmb.getSelectedItem());
+
+        HashMap<Integer, String> valueLista = new HashMap<>();
+        for (int i = 0; i < 5; i++) {
+            Object obj = besTable.getValueAt(NORMAL, i);
+            String value = String.valueOf(obj);
+            valueLista.put(i, value);
+
+        }
+        int index = 0;
+        for (String value : valueLista.values()) {
+
+            switch (index) {
+                case 0:
+                    efternamn = value;
+                case 1:
+                    fornamn = value;
+                case 2:
+                    antalHattar = value;
+                case 3:
+                    pris = value;
+                case 4:
+                    vikt = value;
+                    break;
+
+            }
+            index++;
+        }
+        String updateQuery = "UPDATE bestallning SET Status = 'Stängd', vikt = '" + vikt + "', AnvandareID = '" + anvID + "' WHERE bestID = '" + bestID + "'";
+        System.out.println(updateQuery);
+        SqlFragor.uppdatera(updateQuery);
+    }//GEN-LAST:event_fardigstallBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable besTable;
     private javax.swing.JComboBox<String> bestCmb;
+    private javax.swing.JButton fardigstallBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

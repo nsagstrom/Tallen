@@ -28,7 +28,9 @@
               <Component id="bestCmb" min="-2" pref="180" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="150" max="32767" attributes="0"/>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <Component id="fardigstallBtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -42,10 +44,18 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="47" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="186" max="-2" attributes="0"/>
-                  <Component id="bestCmb" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" min="-2" pref="186" max="-2" attributes="0"/>
+                          <Component id="bestCmb" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                      <Component id="fardigstallBtn" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
           </Group>
@@ -128,6 +138,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ange Vikt:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="fardigstallBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="F&#xe4;rdigst&#xe4;ll"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fardigstallBtnActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
