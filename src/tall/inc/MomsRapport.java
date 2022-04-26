@@ -89,6 +89,8 @@ public class MomsRapport extends javax.swing.JFrame {
                                   WHERE LevDatum BETWEEN '""" + stardate + "' AND '" + slutdate + "';";
 
         String forsaljMoms = SqlFragor.getEttVarde(fragaForsaljMoms);
+        
+
 
         // Momspliktig försäljning med ett 20% + För prio
         String fragaForsaljMomsPrio = """
