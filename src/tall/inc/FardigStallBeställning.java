@@ -207,7 +207,7 @@ public class FardigStallBeställning extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Färdigställ order");
+        jLabel1.setText("FÃ¤rdigstÃ¤ll order");
 
         txtVikt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,14 +215,14 @@ public class FardigStallBeställning extends javax.swing.JFrame {
             }
         });
 
-        btnValjBest.setText("Väl order");
+        btnValjBest.setText("VÃ¤l order");
         btnValjBest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnValjBestActionPerformed(evt);
             }
         });
 
-        btnAndraVikt.setText("Lägg till Vikt ");
+        btnAndraVikt.setText("LÃ¤gg till Vikt ");
         btnAndraVikt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAndraViktActionPerformed(evt);
