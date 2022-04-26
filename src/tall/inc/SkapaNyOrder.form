@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -24,182 +24,150 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel5" min="-2" pref="62" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="210" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="tullTextbox" min="-2" pref="161" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="tullLabel" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblFornamn" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Component id="lblEfternamn" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txtangivetFornamn" min="-2" pref="63" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="txtangivetEfternamn" min="-2" pref="63" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblAdress" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtangivetAdress" min="-2" pref="63" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblTelefon" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                                  <Component id="txtangivetTelefonnummer" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblLagerartikel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSpecialartikel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblArtikelnummer" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="standardHattCmb" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="lBild" min="-2" pref="139" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="btnLaggTillHatt" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblOrdernummer" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lblVarOrderNummer" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="kundCheckbox" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="cmbValjKund" min="-2" pref="190" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane3" min="-2" pref="386" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel5" min="-2" pref="62" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="210" max="-2" attributes="0"/>
+                              <EmptySpace min="49" pref="49" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jCheckBox1" min="-2" pref="144" max="-2" attributes="0"/>
+                                  <Component id="tullCheckbox" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Component id="tullTextbox" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="tullLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="orderBtn" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblNyOrder" min="-2" pref="153" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="lblSpecialartikelFarg" min="-2" pref="78" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
+                                              <Component id="genreCmb" min="-2" pref="101" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="btnValjFarg" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="pnlColorSample" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lblFarg" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="txtSpecialBenamning" min="-2" pref="69" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="495" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane1" min="-2" pref="76" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnLaggTillSpHatt" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="325" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Component id="tygCmb" min="-2" pref="101" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="txtStorlek" min="-2" pref="39" max="-2" attributes="0"/>
                                       </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="lblSpecialartikelTyg" min="-2" pref="63" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jCheckBox1" min="-2" pref="144" max="-2" attributes="0"/>
-                                          <Component id="tullCheckbox" min="-2" pref="153" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lblSpecialartikelTyg" min="-2" pref="63" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="414" max="-2" attributes="0"/>
+                              <Component id="btnLaggTillKund" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblNyKund" min="-2" pref="121" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="lblNyOrder" min="-2" pref="153" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                                              <Component id="kundCheckbox" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="lblKundinfo" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="cmbValjKund" min="-2" pref="190" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jScrollPane3" min="-2" pref="386" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <Component id="lblSpecialartikelFarg" min="-2" pref="78" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                                                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
-                                                  </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
-                                                      <Component id="genreCmb" min="-2" pref="101" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lblLagerartikel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="lblSpecialartikel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="lblArtikelnummer" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="btnValjFarg" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <Component id="pnlColorSample" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="lblFarg" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                                              <Component id="txtSpecialBenamning" min="-2" pref="69" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <Component id="standardHattCmb" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="lblAntal" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jTextField4" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <Component id="lblFornamn" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                                              <Component id="lblEfternamn" min="-2" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <Component id="txtangivetFornamn" min="-2" pref="63" max="-2" attributes="0"/>
-                                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                              <Component id="txtangivetEfternamn" min="-2" pref="63" max="-2" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="lblAdress" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="txtangivetAdress" min="-2" pref="63" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="lblTelefon" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                                          <Component id="txtangivetTelefonnummer" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
-                                              <Component id="lblNyKund" min="-2" pref="121" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace min="-2" pref="495" max="-2" attributes="0"/>
-                                                      <Component id="jScrollPane1" min="-2" pref="76" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="lBild" min="-2" pref="186" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="btnLaggTillHatt" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="btnLaggTillSpHatt" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="btnLaggTillKund" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="orderBtn" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="0" pref="81" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblVarOrderNummer" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblOrdernummer" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="94" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -208,67 +176,58 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                      <Component id="lblOrdernummer" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="lblVarOrderNummer" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" min="-2" pref="72" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="kundCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNyOrder" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblKundinfo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbValjKund" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+              <Component id="lblNyOrder" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblVarOrderNummer" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblOrdernummer" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="kundCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbValjKund" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jScrollPane3" min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblAdress" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtangivetAdress" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtangivetTelefonnummer" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtangivetEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNyKund" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="txtangivetFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLaggTillKund" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lBild" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblAdress" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtangivetAdress" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtangivetTelefonnummer" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtangivetEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblNyKund" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                                  <Component id="txtangivetFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblLagerartikel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblAntal" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblArtikelnummer" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="lblArtikelnummer" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="standardHattCmb" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="standardHattCmb" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="lblSpecialartikel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lBild" min="-2" pref="162" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblSpecialartikelFarg" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -303,7 +262,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane2" min="-2" pref="176" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -314,23 +273,21 @@
                               <Component id="tullLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                               <Component id="tullTextbox" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="orderBtn" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="btnTillbaka" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="btnLaggTillKund" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
                       <Component id="btnLaggTillHatt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="336" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnTillbaka" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="orderBtn" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -339,14 +296,9 @@
     <Component class="javax.swing.JLabel" name="lblNyOrder">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
+          <Font name="Segoe UI" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Skapa ny order"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblAntal">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Antal"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblArtikelnummer">
@@ -357,11 +309,6 @@
     <Component class="javax.swing.JLabel" name="lblEfternamn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Efternamn"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblKundinfo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Kund"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblFornamn">
@@ -379,8 +326,6 @@
         <Property name="text" type="java.lang.String" value="Telefonnummer"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField4">
-    </Component>
     <Component class="javax.swing.JTextField" name="txtangivetFornamn">
     </Component>
     <Component class="javax.swing.JTextField" name="txtangivetEfternamn">
@@ -391,24 +336,33 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblOrdernummer">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="12" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Ordernummer"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblVarOrderNummer">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&quot;ordernr&quot;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblLagerartikel">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="13" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Lagerartikel"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSpecialartikel">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="13" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Specialartikel"/>
       </Properties>
     </Component>
